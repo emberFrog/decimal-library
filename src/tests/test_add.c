@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "./../s21_decimal.h"
+#include "./../my_decimal.h"
 #include "./test.h"
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -11,9 +11,9 @@
 
 START_TEST(test_add_fail_manual1) {
   // 792281625.14264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x140000}};
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x140000}};
-  int code = s21_add(decimal1, decimal2, NULL);
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x140000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x140000}};
+  int code = my_add(decimal1, decimal2, NULL);
 
   ck_assert_int_ne(code, TEST_ARITHMETIC_OK);
 }
@@ -22,10 +22,10 @@ START_TEST(test_add_fail_manual2) {
   // степень 154 (показатель степени должен быть от 0 до 28)
   // биты 0-15 не нули
   // биты 24-30 не нули
-  s21_decimal decimal1 = {{0, 0, 0, 1000000000}};
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x140000}};
-  s21_decimal result;
-  int code = s21_add(decimal1, decimal2, &result);
+  my_decimal decimal1 = {{0, 0, 0, 1000000000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x140000}};
+  my_decimal result;
+  int code = my_add(decimal1, decimal2, &result);
 
   ck_assert_int_ne(code, TEST_ARITHMETIC_OK);
 }
@@ -33,10 +33,10 @@ END_TEST
 
 START_TEST(test_add_fail_manual3) {
   // степень 29 (показатель степени должен быть от 0 до 28)
-  s21_decimal decimal1 = {{-1, 0, 0, 0x1D0000}};
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x140000}};
-  s21_decimal result;
-  int code = s21_add(decimal1, decimal2, &result);
+  my_decimal decimal1 = {{-1, 0, 0, 0x1D0000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x140000}};
+  my_decimal result;
+  int code = my_add(decimal1, decimal2, &result);
 
   ck_assert_int_ne(code, TEST_ARITHMETIC_OK);
 }
@@ -44,10 +44,10 @@ END_TEST
 
 START_TEST(test_add_fail_manual4) {
   // степень 29 (показатель степени должен быть от 0 до 28)
-  s21_decimal decimal1 = {{0, 0, 0, 0x1D0000}};
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x140000}};
-  s21_decimal result;
-  int code = s21_add(decimal1, decimal2, &result);
+  my_decimal decimal1 = {{0, 0, 0, 0x1D0000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x140000}};
+  my_decimal result;
+  int code = my_add(decimal1, decimal2, &result);
 
   ck_assert_int_ne(code, TEST_ARITHMETIC_OK);
 }
@@ -55,10 +55,10 @@ END_TEST
 
 START_TEST(test_add_fail_manual5) {
   // степень 28 (что корректно), но биты 0-15 не нули (младший бит)
-  s21_decimal decimal1 = {{-1, 0, 0, 0x1C0001}};
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x140000}};
-  s21_decimal result;
-  int code = s21_add(decimal1, decimal2, &result);
+  my_decimal decimal1 = {{-1, 0, 0, 0x1C0001}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x140000}};
+  my_decimal result;
+  int code = my_add(decimal1, decimal2, &result);
 
   ck_assert_int_ne(code, TEST_ARITHMETIC_OK);
 }
@@ -66,10 +66,10 @@ END_TEST
 
 START_TEST(test_add_fail_manual6) {
   // степень 28 (что корректно), но биты 0-15 не нули (старший бит)
-  s21_decimal decimal1 = {{-1, 0, 0, 0x1C8000}};
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x140000}};
-  s21_decimal result;
-  int code = s21_add(decimal1, decimal2, &result);
+  my_decimal decimal1 = {{-1, 0, 0, 0x1C8000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x140000}};
+  my_decimal result;
+  int code = my_add(decimal1, decimal2, &result);
 
   ck_assert_int_ne(code, TEST_ARITHMETIC_OK);
 }
@@ -77,10 +77,10 @@ END_TEST
 
 START_TEST(test_add_fail_manual7) {
   // степень 28 (что корректно), но биты 24-30 не нули (младший бит)
-  s21_decimal decimal1 = {{-1, 0, 0, 0x11C0000}};
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x140000}};
-  s21_decimal result;
-  int code = s21_add(decimal1, decimal2, &result);
+  my_decimal decimal1 = {{-1, 0, 0, 0x11C0000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x140000}};
+  my_decimal result;
+  int code = my_add(decimal1, decimal2, &result);
 
   ck_assert_int_ne(code, TEST_ARITHMETIC_OK);
 }
@@ -88,10 +88,10 @@ END_TEST
 
 START_TEST(test_add_fail_manual8) {
   // степень 28 (что корректно), но биты 24-30 не нули (старший бит)
-  s21_decimal decimal1 = {{-1, 0, 0, 0x401C0000}};
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x140000}};
-  s21_decimal result;
-  int code = s21_add(decimal1, decimal2, &result);
+  my_decimal decimal1 = {{-1, 0, 0, 0x401C0000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x140000}};
+  my_decimal result;
+  int code = my_add(decimal1, decimal2, &result);
 
   ck_assert_int_ne(code, TEST_ARITHMETIC_OK);
 }
@@ -99,10 +99,10 @@ END_TEST
 
 START_TEST(test_add_fail_manual9) {
   // Просто все единицы
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF}};
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x140000}};
-  s21_decimal result;
-  int code = s21_add(decimal1, decimal2, &result);
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x140000}};
+  my_decimal result;
+  int code = my_add(decimal1, decimal2, &result);
 
   ck_assert_int_ne(code, TEST_ARITHMETIC_OK);
 }
@@ -112,10 +112,10 @@ START_TEST(test_add_fail_manual10) {
   // степень 154 (показатель степени должен быть от 0 до 28)
   // биты 0-15 не нули
   // биты 24-30 не нули
-  s21_decimal decimal2 = {{0, 0, 0, 1000000000}};
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x140000}};
-  s21_decimal result;
-  int code = s21_add(decimal1, decimal2, &result);
+  my_decimal decimal2 = {{0, 0, 0, 1000000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x140000}};
+  my_decimal result;
+  int code = my_add(decimal1, decimal2, &result);
 
   ck_assert_int_ne(code, TEST_ARITHMETIC_OK);
 }
@@ -123,10 +123,10 @@ END_TEST
 
 START_TEST(test_add_fail_manual11) {
   // степень 29 (показатель степени должен быть от 0 до 28)
-  s21_decimal decimal2 = {{-1, 0, 0, 0x1D0000}};
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x140000}};
-  s21_decimal result;
-  int code = s21_add(decimal1, decimal2, &result);
+  my_decimal decimal2 = {{-1, 0, 0, 0x1D0000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x140000}};
+  my_decimal result;
+  int code = my_add(decimal1, decimal2, &result);
 
   ck_assert_int_ne(code, TEST_ARITHMETIC_OK);
 }
@@ -134,10 +134,10 @@ END_TEST
 
 START_TEST(test_add_fail_manual12) {
   // степень 29 (показатель степени должен быть от 0 до 28)
-  s21_decimal decimal2 = {{0, 0, 0, 0x1D0000}};
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x140000}};
-  s21_decimal result;
-  int code = s21_add(decimal1, decimal2, &result);
+  my_decimal decimal2 = {{0, 0, 0, 0x1D0000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x140000}};
+  my_decimal result;
+  int code = my_add(decimal1, decimal2, &result);
 
   ck_assert_int_ne(code, TEST_ARITHMETIC_OK);
 }
@@ -145,10 +145,10 @@ END_TEST
 
 START_TEST(test_add_fail_manual13) {
   // степень 28 (что корректно), но биты 0-15 не нули (младший бит)
-  s21_decimal decimal2 = {{-1, 0, 0, 0x1C0001}};
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x140000}};
-  s21_decimal result;
-  int code = s21_add(decimal1, decimal2, &result);
+  my_decimal decimal2 = {{-1, 0, 0, 0x1C0001}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x140000}};
+  my_decimal result;
+  int code = my_add(decimal1, decimal2, &result);
 
   ck_assert_int_ne(code, TEST_ARITHMETIC_OK);
 }
@@ -156,10 +156,10 @@ END_TEST
 
 START_TEST(test_add_fail_manual14) {
   // степень 28 (что корректно), но биты 0-15 не нули (старший бит)
-  s21_decimal decimal2 = {{-1, 0, 0, 0x1C8000}};
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x140000}};
-  s21_decimal result;
-  int code = s21_add(decimal1, decimal2, &result);
+  my_decimal decimal2 = {{-1, 0, 0, 0x1C8000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x140000}};
+  my_decimal result;
+  int code = my_add(decimal1, decimal2, &result);
 
   ck_assert_int_ne(code, TEST_ARITHMETIC_OK);
 }
@@ -167,10 +167,10 @@ END_TEST
 
 START_TEST(test_add_fail_manual15) {
   // степень 28 (что корректно), но биты 24-30 не нули (младший бит)
-  s21_decimal decimal2 = {{-1, 0, 0, 0x11C0000}};
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x140000}};
-  s21_decimal result;
-  int code = s21_add(decimal1, decimal2, &result);
+  my_decimal decimal2 = {{-1, 0, 0, 0x11C0000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x140000}};
+  my_decimal result;
+  int code = my_add(decimal1, decimal2, &result);
 
   ck_assert_int_ne(code, TEST_ARITHMETIC_OK);
 }
@@ -178,10 +178,10 @@ END_TEST
 
 START_TEST(test_add_fail_manual16) {
   // степень 28 (что корректно), но биты 24-30 не нули (старший бит)
-  s21_decimal decimal2 = {{-1, 0, 0, 0x401C0000}};
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x140000}};
-  s21_decimal result;
-  int code = s21_add(decimal1, decimal2, &result);
+  my_decimal decimal2 = {{-1, 0, 0, 0x401C0000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x140000}};
+  my_decimal result;
+  int code = my_add(decimal1, decimal2, &result);
 
   ck_assert_int_ne(code, TEST_ARITHMETIC_OK);
 }
@@ -189,10 +189,10 @@ END_TEST
 
 START_TEST(test_add_fail_manual17) {
   // Просто все единицы
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF}};
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x140000}};
-  s21_decimal result;
-  int code = s21_add(decimal1, decimal2, &result);
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x140000}};
+  my_decimal result;
+  int code = my_add(decimal1, decimal2, &result);
 
   ck_assert_int_ne(code, TEST_ARITHMETIC_OK);
 }
@@ -205,11 +205,11 @@ END_TEST
 
 START_TEST(test_add_manual1) {
   // 7.922816251426433759354395034
-  s21_decimal decimal1 = {{0x9999999A, 0x99999999, 0x19999999, 0x1B0000}};
+  my_decimal decimal1 = {{0x9999999A, 0x99999999, 0x19999999, 0x1B0000}};
   // 3.9614081257132168796771975168
-  s21_decimal decimal2 = {{0x0, 0x0, 0x80000000, 0x1C0000}};
+  my_decimal decimal2 = {{0x0, 0x0, 0x80000000, 0x1C0000}};
   // 11.884224377139650639031592551
-  s21_decimal check = {{0x66666667, 0x66666666, 0x26666666, 0x1B0000}};
+  my_decimal check = {{0x66666667, 0x66666666, 0x26666666, 0x1B0000}};
 
   test_add(decimal1, decimal2, check);
 }
@@ -221,9 +221,9 @@ START_TEST(test_add_manual1) {
 
 START_TEST(test_add1) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // overflow
   int check = TEST_ARITHMETIC_BIG;
 
@@ -232,20 +232,20 @@ START_TEST(test_add1) {
 
 START_TEST(test_add2) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 0
-  s21_decimal check = {{0x0, 0x0, 0x0, 0x0}};
+  my_decimal check = {{0x0, 0x0, 0x0, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add3) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 79228162514264337593543950334
-  s21_decimal decimal2 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // overflow
   int check = TEST_ARITHMETIC_BIG;
 
@@ -254,20 +254,20 @@ START_TEST(test_add3) {
 
 START_TEST(test_add4) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -79228162514264337593543950334
-  s21_decimal decimal2 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal2 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 1
-  s21_decimal check = {{0x1, 0x0, 0x0, 0x0}};
+  my_decimal check = {{0x1, 0x0, 0x0, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add5) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 7922816251426433759354395033
-  s21_decimal decimal2 = {{0x99999999, 0x99999999, 0x19999999, 0x0}};
+  my_decimal decimal2 = {{0x99999999, 0x99999999, 0x19999999, 0x0}};
   // overflow
   int check = TEST_ARITHMETIC_BIG;
 
@@ -276,20 +276,20 @@ START_TEST(test_add5) {
 
 START_TEST(test_add6) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -7922816251426433759354395033
-  s21_decimal decimal2 = {{0x99999999, 0x99999999, 0x19999999, 0x80000000}};
+  my_decimal decimal2 = {{0x99999999, 0x99999999, 0x19999999, 0x80000000}};
   // 71305346262837903834189555302
-  s21_decimal check = {{0x66666666, 0x66666666, 0xE6666666, 0x0}};
+  my_decimal check = {{0x66666666, 0x66666666, 0xE6666666, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add7) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 7922816251426433759354395033.5
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x10000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x10000}};
   // overflow
   int check = TEST_ARITHMETIC_BIG;
 
@@ -298,20 +298,20 @@ START_TEST(test_add7) {
 
 START_TEST(test_add8) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -7922816251426433759354395033.5
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80010000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80010000}};
   // 71305346262837903834189555302
-  s21_decimal check = {{0x66666666, 0x66666666, 0xE6666666, 0x0}};
+  my_decimal check = {{0x66666666, 0x66666666, 0xE6666666, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add9) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 7922816251426433759354395034
-  s21_decimal decimal2 = {{0x9999999A, 0x99999999, 0x19999999, 0x0}};
+  my_decimal decimal2 = {{0x9999999A, 0x99999999, 0x19999999, 0x0}};
   // overflow
   int check = TEST_ARITHMETIC_BIG;
 
@@ -320,20 +320,20 @@ START_TEST(test_add9) {
 
 START_TEST(test_add10) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -7922816251426433759354395034
-  s21_decimal decimal2 = {{0x9999999A, 0x99999999, 0x19999999, 0x80000000}};
+  my_decimal decimal2 = {{0x9999999A, 0x99999999, 0x19999999, 0x80000000}};
   // 71305346262837903834189555301
-  s21_decimal check = {{0x66666665, 0x66666666, 0xE6666666, 0x0}};
+  my_decimal check = {{0x66666665, 0x66666666, 0xE6666666, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add11) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 7922816251426433759354395035
-  s21_decimal decimal2 = {{0x9999999B, 0x99999999, 0x19999999, 0x0}};
+  my_decimal decimal2 = {{0x9999999B, 0x99999999, 0x19999999, 0x0}};
   // overflow
   int check = TEST_ARITHMETIC_BIG;
 
@@ -342,20 +342,20 @@ START_TEST(test_add11) {
 
 START_TEST(test_add12) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -7922816251426433759354395035
-  s21_decimal decimal2 = {{0x9999999B, 0x99999999, 0x19999999, 0x80000000}};
+  my_decimal decimal2 = {{0x9999999B, 0x99999999, 0x19999999, 0x80000000}};
   // 71305346262837903834189555300
-  s21_decimal check = {{0x66666664, 0x66666666, 0xE6666666, 0x0}};
+  my_decimal check = {{0x66666664, 0x66666666, 0xE6666666, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add13) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 1
-  s21_decimal decimal2 = {{0x1, 0x0, 0x0, 0x0}};
+  my_decimal decimal2 = {{0x1, 0x0, 0x0, 0x0}};
   // overflow
   int check = TEST_ARITHMETIC_BIG;
 
@@ -364,20 +364,20 @@ START_TEST(test_add13) {
 
 START_TEST(test_add14) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -1
-  s21_decimal decimal2 = {{0x1, 0x0, 0x0, 0x80000000}};
+  my_decimal decimal2 = {{0x1, 0x0, 0x0, 0x80000000}};
   // 79228162514264337593543950334
-  s21_decimal check = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal check = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add15) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 0.5
-  s21_decimal decimal2 = {{0x5, 0x0, 0x0, 0x10000}};
+  my_decimal decimal2 = {{0x5, 0x0, 0x0, 0x10000}};
   // overflow
   int check = TEST_ARITHMETIC_BIG;
 
@@ -386,42 +386,42 @@ START_TEST(test_add15) {
 
 START_TEST(test_add16) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -0.5
-  s21_decimal decimal2 = {{0x5, 0x0, 0x0, 0x80010000}};
+  my_decimal decimal2 = {{0x5, 0x0, 0x0, 0x80010000}};
   // 79228162514264337593543950334
-  s21_decimal check = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal check = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add17) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 0.4999999999999999999999999999
-  s21_decimal decimal2 = {{0x87FFFFFF, 0x1F128130, 0x1027E72F, 0x1C0000}};
+  my_decimal decimal2 = {{0x87FFFFFF, 0x1F128130, 0x1027E72F, 0x1C0000}};
   // 79228162514264337593543950335
-  s21_decimal check = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal check = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add18) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -0.4999999999999999999999999999
-  s21_decimal decimal2 = {{0x87FFFFFF, 0x1F128130, 0x1027E72F, 0x801C0000}};
+  my_decimal decimal2 = {{0x87FFFFFF, 0x1F128130, 0x1027E72F, 0x801C0000}};
   // 79228162514264337593543950335
-  s21_decimal check = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal check = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add19) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 0.5000000000000000000000000001
-  s21_decimal decimal2 = {{0x88000001, 0x1F128130, 0x1027E72F, 0x1C0000}};
+  my_decimal decimal2 = {{0x88000001, 0x1F128130, 0x1027E72F, 0x1C0000}};
   // overflow
   int check = TEST_ARITHMETIC_BIG;
 
@@ -430,20 +430,20 @@ START_TEST(test_add19) {
 
 START_TEST(test_add20) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -0.5000000000000000000000000001
-  s21_decimal decimal2 = {{0x88000001, 0x1F128130, 0x1027E72F, 0x801C0000}};
+  my_decimal decimal2 = {{0x88000001, 0x1F128130, 0x1027E72F, 0x801C0000}};
   // 79228162514264337593543950334
-  s21_decimal check = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal check = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add21) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 1.9999999999999999999999999000
-  s21_decimal decimal2 = {{0x1FFFFC18, 0x7C4A04C2, 0x409F9CBC, 0x1C0000}};
+  my_decimal decimal2 = {{0x1FFFFC18, 0x7C4A04C2, 0x409F9CBC, 0x1C0000}};
   // overflow
   int check = TEST_ARITHMETIC_BIG;
 
@@ -452,20 +452,20 @@ START_TEST(test_add21) {
 
 START_TEST(test_add22) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -1.9999999999999999999999999000
-  s21_decimal decimal2 = {{0x1FFFFC18, 0x7C4A04C2, 0x409F9CBC, 0x801C0000}};
+  my_decimal decimal2 = {{0x1FFFFC18, 0x7C4A04C2, 0x409F9CBC, 0x801C0000}};
   // 79228162514264337593543950333
-  s21_decimal check = {{0xFFFFFFFD, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal check = {{0xFFFFFFFD, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add23) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 1.0000000000000000000000000001
-  s21_decimal decimal2 = {{0x10000001, 0x3E250261, 0x204FCE5E, 0x1C0000}};
+  my_decimal decimal2 = {{0x10000001, 0x3E250261, 0x204FCE5E, 0x1C0000}};
   // overflow
   int check = TEST_ARITHMETIC_BIG;
 
@@ -474,20 +474,20 @@ START_TEST(test_add23) {
 
 START_TEST(test_add24) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -1.0000000000000000000000000001
-  s21_decimal decimal2 = {{0x10000001, 0x3E250261, 0x204FCE5E, 0x801C0000}};
+  my_decimal decimal2 = {{0x10000001, 0x3E250261, 0x204FCE5E, 0x801C0000}};
   // 79228162514264337593543950334
-  s21_decimal check = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal check = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add25) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 26409387504754779197847983445
-  s21_decimal decimal2 = {{0x55555555, 0x55555555, 0x55555555, 0x0}};
+  my_decimal decimal2 = {{0x55555555, 0x55555555, 0x55555555, 0x0}};
   // overflow
   int check = TEST_ARITHMETIC_BIG;
 
@@ -496,20 +496,20 @@ START_TEST(test_add25) {
 
 START_TEST(test_add26) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -26409387504754779197847983445
-  s21_decimal decimal2 = {{0x55555555, 0x55555555, 0x55555555, 0x80000000}};
+  my_decimal decimal2 = {{0x55555555, 0x55555555, 0x55555555, 0x80000000}};
   // 52818775009509558395695966890
-  s21_decimal check = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x0}};
+  my_decimal check = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add27) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 26409387498605864508043122005
-  s21_decimal decimal2 = {{0x55555555, 0x0, 0x55555555, 0x0}};
+  my_decimal decimal2 = {{0x55555555, 0x0, 0x55555555, 0x0}};
   // overflow
   int check = TEST_ARITHMETIC_BIG;
 
@@ -518,20 +518,20 @@ START_TEST(test_add27) {
 
 START_TEST(test_add28) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -26409387498605864508043122005
-  s21_decimal decimal2 = {{0x55555555, 0x0, 0x55555555, 0x80000000}};
+  my_decimal decimal2 = {{0x55555555, 0x0, 0x55555555, 0x80000000}};
   // 52818775015658473085500828330
-  s21_decimal check = {{0xAAAAAAAA, 0xFFFFFFFF, 0xAAAAAAAA, 0x0}};
+  my_decimal check = {{0xAAAAAAAA, 0xFFFFFFFF, 0xAAAAAAAA, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add29) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 6148914691236517205
-  s21_decimal decimal2 = {{0x55555555, 0x55555555, 0x0, 0x0}};
+  my_decimal decimal2 = {{0x55555555, 0x55555555, 0x0, 0x0}};
   // overflow
   int check = TEST_ARITHMETIC_BIG;
 
@@ -540,20 +540,20 @@ START_TEST(test_add29) {
 
 START_TEST(test_add30) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -6148914691236517205
-  s21_decimal decimal2 = {{0x55555555, 0x55555555, 0x0, 0x80000000}};
+  my_decimal decimal2 = {{0x55555555, 0x55555555, 0x0, 0x80000000}};
   // 79228162508115422902307433130
-  s21_decimal check = {{0xAAAAAAAA, 0xAAAAAAAA, 0xFFFFFFFF, 0x0}};
+  my_decimal check = {{0xAAAAAAAA, 0xAAAAAAAA, 0xFFFFFFFF, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add31) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 6148914689804861440
-  s21_decimal decimal2 = {{0x0, 0x55555555, 0x0, 0x0}};
+  my_decimal decimal2 = {{0x0, 0x55555555, 0x0, 0x0}};
   // overflow
   int check = TEST_ARITHMETIC_BIG;
 
@@ -562,20 +562,20 @@ START_TEST(test_add31) {
 
 START_TEST(test_add32) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -6148914689804861440
-  s21_decimal decimal2 = {{0x0, 0x55555555, 0x0, 0x80000000}};
+  my_decimal decimal2 = {{0x0, 0x55555555, 0x0, 0x80000000}};
   // 79228162508115422903739088895
-  s21_decimal check = {{0xFFFFFFFF, 0xAAAAAAAA, 0xFFFFFFFF, 0x0}};
+  my_decimal check = {{0xFFFFFFFF, 0xAAAAAAAA, 0xFFFFFFFF, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add33) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 1431655765
-  s21_decimal decimal2 = {{0x55555555, 0x0, 0x0, 0x0}};
+  my_decimal decimal2 = {{0x55555555, 0x0, 0x0, 0x0}};
   // overflow
   int check = TEST_ARITHMETIC_BIG;
 
@@ -584,20 +584,20 @@ START_TEST(test_add33) {
 
 START_TEST(test_add34) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -1431655765
-  s21_decimal decimal2 = {{0x55555555, 0x0, 0x0, 0x80000000}};
+  my_decimal decimal2 = {{0x55555555, 0x0, 0x0, 0x80000000}};
   // 79228162514264337592112294570
-  s21_decimal check = {{0xAAAAAAAA, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal check = {{0xAAAAAAAA, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add35) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 26409387.704754779197847983445
-  s21_decimal decimal2 = {{0x1B755555, 0x2CE411B0, 0x55555560, 0x150000}};
+  my_decimal decimal2 = {{0x1B755555, 0x2CE411B0, 0x55555560, 0x150000}};
   // overflow
   int check = TEST_ARITHMETIC_BIG;
 
@@ -606,20 +606,20 @@ START_TEST(test_add35) {
 
 START_TEST(test_add36) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -26409387.704754779197847983445
-  s21_decimal decimal2 = {{0x1B755555, 0x2CE411B0, 0x55555560, 0x80150000}};
+  my_decimal decimal2 = {{0x1B755555, 0x2CE411B0, 0x55555560, 0x80150000}};
   // 79228162514264337593517540947
-  s21_decimal check = {{0xFE6D0653, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal check = {{0xFE6D0653, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add37) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 26409387.498605864508043122005
-  s21_decimal decimal2 = {{0x55555555, 0x0, 0x55555555, 0x150000}};
+  my_decimal decimal2 = {{0x55555555, 0x0, 0x55555555, 0x150000}};
   // overflow
   int check = TEST_ARITHMETIC_BIG;
 
@@ -628,20 +628,20 @@ START_TEST(test_add37) {
 
 START_TEST(test_add38) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -26409387.498605864508043122005
-  s21_decimal decimal2 = {{0x55555555, 0x0, 0x55555555, 0x80150000}};
+  my_decimal decimal2 = {{0x55555555, 0x0, 0x55555555, 0x80150000}};
   // 79228162514264337593517540948
-  s21_decimal check = {{0xFE6D0654, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal check = {{0xFE6D0654, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add39) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 26409387
-  s21_decimal decimal2 = {{0x192F9AB, 0x0, 0x0, 0x0}};
+  my_decimal decimal2 = {{0x192F9AB, 0x0, 0x0, 0x0}};
   // overflow
   int check = TEST_ARITHMETIC_BIG;
 
@@ -650,20 +650,20 @@ START_TEST(test_add39) {
 
 START_TEST(test_add40) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -26409387
-  s21_decimal decimal2 = {{0x192F9AB, 0x0, 0x0, 0x80000000}};
+  my_decimal decimal2 = {{0x192F9AB, 0x0, 0x0, 0x80000000}};
   // 79228162514264337593517540948
-  s21_decimal check = {{0xFE6D0654, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal check = {{0xFE6D0654, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add41) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 7.9228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x1C0000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x1C0000}};
   // overflow
   int check = TEST_ARITHMETIC_BIG;
 
@@ -672,20 +672,20 @@ START_TEST(test_add41) {
 
 START_TEST(test_add42) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -7.9228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x801C0000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x801C0000}};
   // 79228162514264337593543950327
-  s21_decimal check = {{0xFFFFFFF7, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal check = {{0xFFFFFFF7, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add43) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 8
-  s21_decimal decimal2 = {{0x8, 0x0, 0x0, 0x0}};
+  my_decimal decimal2 = {{0x8, 0x0, 0x0, 0x0}};
   // overflow
   int check = TEST_ARITHMETIC_BIG;
 
@@ -694,20 +694,20 @@ START_TEST(test_add43) {
 
 START_TEST(test_add44) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -8
-  s21_decimal decimal2 = {{0x8, 0x0, 0x0, 0x80000000}};
+  my_decimal decimal2 = {{0x8, 0x0, 0x0, 0x80000000}};
   // 79228162514264337593543950327
-  s21_decimal check = {{0xFFFFFFF7, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal check = {{0xFFFFFFF7, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add45) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 3.6336660283201536
-  s21_decimal decimal2 = {{0x811800, 0x811800, 0x0, 0x100000}};
+  my_decimal decimal2 = {{0x811800, 0x811800, 0x0, 0x100000}};
   // overflow
   int check = TEST_ARITHMETIC_BIG;
 
@@ -716,119 +716,119 @@ START_TEST(test_add45) {
 
 START_TEST(test_add46) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -3.6336660283201536
-  s21_decimal decimal2 = {{0x811800, 0x811800, 0x0, 0x80100000}};
+  my_decimal decimal2 = {{0x811800, 0x811800, 0x0, 0x80100000}};
   // 79228162514264337593543950331
-  s21_decimal check = {{0xFFFFFFFB, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal check = {{0xFFFFFFFB, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add47) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -0
-  s21_decimal decimal2 = {{0x0, 0x0, 0x0, 0x80000000}};
+  my_decimal decimal2 = {{0x0, 0x0, 0x0, 0x80000000}};
   // 79228162514264337593543950335
-  s21_decimal check = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal check = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add48) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 0
-  s21_decimal decimal2 = {{0x0, 0x0, 0x0, 0x0}};
+  my_decimal decimal2 = {{0x0, 0x0, 0x0, 0x0}};
   // 79228162514264337593543950335
-  s21_decimal check = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal check = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add49) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -0.0000000000000000000000000000
-  s21_decimal decimal2 = {{0x0, 0x0, 0x0, 0x801C0000}};
+  my_decimal decimal2 = {{0x0, 0x0, 0x0, 0x801C0000}};
   // 79228162514264337593543950335
-  s21_decimal check = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal check = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add50) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 0.0000000000000000000000000000
-  s21_decimal decimal2 = {{0x0, 0x0, 0x0, 0x1C0000}};
+  my_decimal decimal2 = {{0x0, 0x0, 0x0, 0x1C0000}};
   // 79228162514264337593543950335
-  s21_decimal check = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal check = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add51) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 0.0000000000000000000000000001
-  s21_decimal decimal2 = {{0x1, 0x0, 0x0, 0x1C0000}};
+  my_decimal decimal2 = {{0x1, 0x0, 0x0, 0x1C0000}};
   // 79228162514264337593543950335
-  s21_decimal check = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal check = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add52) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -0.0000000000000000000000000001
-  s21_decimal decimal2 = {{0x1, 0x0, 0x0, 0x801C0000}};
+  my_decimal decimal2 = {{0x1, 0x0, 0x0, 0x801C0000}};
   // 79228162514264337593543950335
-  s21_decimal check = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal check = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add53) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 0.0000000000000000000000000010
-  s21_decimal decimal2 = {{0xA, 0x0, 0x0, 0x1C0000}};
+  my_decimal decimal2 = {{0xA, 0x0, 0x0, 0x1C0000}};
   // 79228162514264337593543950335
-  s21_decimal check = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal check = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add54) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -0.0000000000000000000000000010
-  s21_decimal decimal2 = {{0xA, 0x0, 0x0, 0x801C0000}};
+  my_decimal decimal2 = {{0xA, 0x0, 0x0, 0x801C0000}};
   // 79228162514264337593543950335
-  s21_decimal check = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal check = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add55) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -56124981125209321576924.010631
-  s21_decimal decimal2 = {{0xF555887, 0x553F1641, 0xB5597F0B, 0x80060000}};
+  my_decimal decimal2 = {{0xF555887, 0x553F1641, 0xB5597F0B, 0x80060000}};
   // 79228106389283212384222373411
-  s21_decimal check = {{0x3AC4E623, 0x756BD584, 0xFFFFF41D, 0x0}};
+  my_decimal check = {{0x3AC4E623, 0x756BD584, 0xFFFFF41D, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add56) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 56124981125209321576924.010631
-  s21_decimal decimal2 = {{0xF555887, 0x553F1641, 0xB5597F0B, 0x60000}};
+  my_decimal decimal2 = {{0xF555887, 0x553F1641, 0xB5597F0B, 0x60000}};
   // overflow
   int check = TEST_ARITHMETIC_BIG;
 
@@ -837,20 +837,20 @@ START_TEST(test_add56) {
 
 START_TEST(test_add57) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -49704001422.391670881925172831
-  s21_decimal decimal2 = {{0x7F7B8E5F, 0x2B4271A6, 0xA09A2FB4, 0x80120000}};
+  my_decimal decimal2 = {{0x7F7B8E5F, 0x2B4271A6, 0xA09A2FB4, 0x80120000}};
   // 79228162514264337543839948913
-  s21_decimal check = {{0x6D692071, 0xFFFFFFF4, 0xFFFFFFFF, 0x0}};
+  my_decimal check = {{0x6D692071, 0xFFFFFFF4, 0xFFFFFFFF, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add58) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 49704001422.391670881925172831
-  s21_decimal decimal2 = {{0x7F7B8E5F, 0x2B4271A6, 0xA09A2FB4, 0x120000}};
+  my_decimal decimal2 = {{0x7F7B8E5F, 0x2B4271A6, 0xA09A2FB4, 0x120000}};
   // overflow
   int check = TEST_ARITHMETIC_BIG;
 
@@ -859,20 +859,20 @@ START_TEST(test_add58) {
 
 START_TEST(test_add59) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -649244002.20841517182548587502
-  s21_decimal decimal2 = {{0x122233EE, 0x5675EBE6, 0xD1C83484, 0x80140000}};
+  my_decimal decimal2 = {{0x122233EE, 0x5675EBE6, 0xD1C83484, 0x80140000}};
   // 79228162514264337592894706333
-  s21_decimal check = {{0xD94D529D, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal check = {{0xD94D529D, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add60) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 649244002.20841517182548587502
-  s21_decimal decimal2 = {{0x122233EE, 0x5675EBE6, 0xD1C83484, 0x140000}};
+  my_decimal decimal2 = {{0x122233EE, 0x5675EBE6, 0xD1C83484, 0x140000}};
   // overflow
   int check = TEST_ARITHMETIC_BIG;
 
@@ -881,20 +881,20 @@ START_TEST(test_add60) {
 
 START_TEST(test_add61) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -0
-  s21_decimal check = {{0x0, 0x0, 0x0, 0x80000000}};
+  my_decimal check = {{0x0, 0x0, 0x0, 0x80000000}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add62) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // overflow
   int check = TEST_ARITHMETIC_SMALL;
 
@@ -903,20 +903,20 @@ START_TEST(test_add62) {
 
 START_TEST(test_add63) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 79228162514264337593543950334
-  s21_decimal decimal2 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -1
-  s21_decimal check = {{0x1, 0x0, 0x0, 0x80000000}};
+  my_decimal check = {{0x1, 0x0, 0x0, 0x80000000}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add64) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -79228162514264337593543950334
-  s21_decimal decimal2 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal2 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // overflow
   int check = TEST_ARITHMETIC_SMALL;
 
@@ -925,20 +925,20 @@ START_TEST(test_add64) {
 
 START_TEST(test_add65) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 7922816251426433759354395033
-  s21_decimal decimal2 = {{0x99999999, 0x99999999, 0x19999999, 0x0}};
+  my_decimal decimal2 = {{0x99999999, 0x99999999, 0x19999999, 0x0}};
   // -71305346262837903834189555302
-  s21_decimal check = {{0x66666666, 0x66666666, 0xE6666666, 0x80000000}};
+  my_decimal check = {{0x66666666, 0x66666666, 0xE6666666, 0x80000000}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add66) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -7922816251426433759354395033
-  s21_decimal decimal2 = {{0x99999999, 0x99999999, 0x19999999, 0x80000000}};
+  my_decimal decimal2 = {{0x99999999, 0x99999999, 0x19999999, 0x80000000}};
   // overflow
   int check = TEST_ARITHMETIC_SMALL;
 
@@ -947,20 +947,20 @@ START_TEST(test_add66) {
 
 START_TEST(test_add67) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 7922816251426433759354395033.5
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x10000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x10000}};
   // -71305346262837903834189555302
-  s21_decimal check = {{0x66666666, 0x66666666, 0xE6666666, 0x80000000}};
+  my_decimal check = {{0x66666666, 0x66666666, 0xE6666666, 0x80000000}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add68) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -7922816251426433759354395033.5
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80010000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80010000}};
   // overflow
   int check = TEST_ARITHMETIC_SMALL;
 
@@ -969,20 +969,20 @@ START_TEST(test_add68) {
 
 START_TEST(test_add69) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 7922816251426433759354395034
-  s21_decimal decimal2 = {{0x9999999A, 0x99999999, 0x19999999, 0x0}};
+  my_decimal decimal2 = {{0x9999999A, 0x99999999, 0x19999999, 0x0}};
   // -71305346262837903834189555301
-  s21_decimal check = {{0x66666665, 0x66666666, 0xE6666666, 0x80000000}};
+  my_decimal check = {{0x66666665, 0x66666666, 0xE6666666, 0x80000000}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add70) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -7922816251426433759354395034
-  s21_decimal decimal2 = {{0x9999999A, 0x99999999, 0x19999999, 0x80000000}};
+  my_decimal decimal2 = {{0x9999999A, 0x99999999, 0x19999999, 0x80000000}};
   // overflow
   int check = TEST_ARITHMETIC_SMALL;
 
@@ -991,20 +991,20 @@ START_TEST(test_add70) {
 
 START_TEST(test_add71) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 7922816251426433759354395035
-  s21_decimal decimal2 = {{0x9999999B, 0x99999999, 0x19999999, 0x0}};
+  my_decimal decimal2 = {{0x9999999B, 0x99999999, 0x19999999, 0x0}};
   // -71305346262837903834189555300
-  s21_decimal check = {{0x66666664, 0x66666666, 0xE6666666, 0x80000000}};
+  my_decimal check = {{0x66666664, 0x66666666, 0xE6666666, 0x80000000}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add72) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -7922816251426433759354395035
-  s21_decimal decimal2 = {{0x9999999B, 0x99999999, 0x19999999, 0x80000000}};
+  my_decimal decimal2 = {{0x9999999B, 0x99999999, 0x19999999, 0x80000000}};
   // overflow
   int check = TEST_ARITHMETIC_SMALL;
 
@@ -1013,20 +1013,20 @@ START_TEST(test_add72) {
 
 START_TEST(test_add73) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 1
-  s21_decimal decimal2 = {{0x1, 0x0, 0x0, 0x0}};
+  my_decimal decimal2 = {{0x1, 0x0, 0x0, 0x0}};
   // -79228162514264337593543950334
-  s21_decimal check = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal check = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add74) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -1
-  s21_decimal decimal2 = {{0x1, 0x0, 0x0, 0x80000000}};
+  my_decimal decimal2 = {{0x1, 0x0, 0x0, 0x80000000}};
   // overflow
   int check = TEST_ARITHMETIC_SMALL;
 
@@ -1035,20 +1035,20 @@ START_TEST(test_add74) {
 
 START_TEST(test_add75) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 0.5
-  s21_decimal decimal2 = {{0x5, 0x0, 0x0, 0x10000}};
+  my_decimal decimal2 = {{0x5, 0x0, 0x0, 0x10000}};
   // -79228162514264337593543950334
-  s21_decimal check = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal check = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add76) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -0.5
-  s21_decimal decimal2 = {{0x5, 0x0, 0x0, 0x80010000}};
+  my_decimal decimal2 = {{0x5, 0x0, 0x0, 0x80010000}};
   // overflow
   int check = TEST_ARITHMETIC_SMALL;
 
@@ -1057,42 +1057,42 @@ START_TEST(test_add76) {
 
 START_TEST(test_add77) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 0.4999999999999999999999999999
-  s21_decimal decimal2 = {{0x87FFFFFF, 0x1F128130, 0x1027E72F, 0x1C0000}};
+  my_decimal decimal2 = {{0x87FFFFFF, 0x1F128130, 0x1027E72F, 0x1C0000}};
   // -79228162514264337593543950335
-  s21_decimal check = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal check = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add78) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -0.4999999999999999999999999999
-  s21_decimal decimal2 = {{0x87FFFFFF, 0x1F128130, 0x1027E72F, 0x801C0000}};
+  my_decimal decimal2 = {{0x87FFFFFF, 0x1F128130, 0x1027E72F, 0x801C0000}};
   // -79228162514264337593543950335
-  s21_decimal check = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal check = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add79) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 0.5000000000000000000000000001
-  s21_decimal decimal2 = {{0x88000001, 0x1F128130, 0x1027E72F, 0x1C0000}};
+  my_decimal decimal2 = {{0x88000001, 0x1F128130, 0x1027E72F, 0x1C0000}};
   // -79228162514264337593543950334
-  s21_decimal check = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal check = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add80) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -0.5000000000000000000000000001
-  s21_decimal decimal2 = {{0x88000001, 0x1F128130, 0x1027E72F, 0x801C0000}};
+  my_decimal decimal2 = {{0x88000001, 0x1F128130, 0x1027E72F, 0x801C0000}};
   // overflow
   int check = TEST_ARITHMETIC_SMALL;
 
@@ -1101,20 +1101,20 @@ START_TEST(test_add80) {
 
 START_TEST(test_add81) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 1.9999999999999999999999999000
-  s21_decimal decimal2 = {{0x1FFFFC18, 0x7C4A04C2, 0x409F9CBC, 0x1C0000}};
+  my_decimal decimal2 = {{0x1FFFFC18, 0x7C4A04C2, 0x409F9CBC, 0x1C0000}};
   // -79228162514264337593543950333
-  s21_decimal check = {{0xFFFFFFFD, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal check = {{0xFFFFFFFD, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add82) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -1.9999999999999999999999999000
-  s21_decimal decimal2 = {{0x1FFFFC18, 0x7C4A04C2, 0x409F9CBC, 0x801C0000}};
+  my_decimal decimal2 = {{0x1FFFFC18, 0x7C4A04C2, 0x409F9CBC, 0x801C0000}};
   // overflow
   int check = TEST_ARITHMETIC_SMALL;
 
@@ -1123,20 +1123,20 @@ START_TEST(test_add82) {
 
 START_TEST(test_add83) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 1.0000000000000000000000000001
-  s21_decimal decimal2 = {{0x10000001, 0x3E250261, 0x204FCE5E, 0x1C0000}};
+  my_decimal decimal2 = {{0x10000001, 0x3E250261, 0x204FCE5E, 0x1C0000}};
   // -79228162514264337593543950334
-  s21_decimal check = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal check = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add84) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -1.0000000000000000000000000001
-  s21_decimal decimal2 = {{0x10000001, 0x3E250261, 0x204FCE5E, 0x801C0000}};
+  my_decimal decimal2 = {{0x10000001, 0x3E250261, 0x204FCE5E, 0x801C0000}};
   // overflow
   int check = TEST_ARITHMETIC_SMALL;
 
@@ -1145,20 +1145,20 @@ START_TEST(test_add84) {
 
 START_TEST(test_add85) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 26409387504754779197847983445
-  s21_decimal decimal2 = {{0x55555555, 0x55555555, 0x55555555, 0x0}};
+  my_decimal decimal2 = {{0x55555555, 0x55555555, 0x55555555, 0x0}};
   // -52818775009509558395695966890
-  s21_decimal check = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x80000000}};
+  my_decimal check = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x80000000}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add86) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -26409387504754779197847983445
-  s21_decimal decimal2 = {{0x55555555, 0x55555555, 0x55555555, 0x80000000}};
+  my_decimal decimal2 = {{0x55555555, 0x55555555, 0x55555555, 0x80000000}};
   // overflow
   int check = TEST_ARITHMETIC_SMALL;
 
@@ -1167,20 +1167,20 @@ START_TEST(test_add86) {
 
 START_TEST(test_add87) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 26409387498605864508043122005
-  s21_decimal decimal2 = {{0x55555555, 0x0, 0x55555555, 0x0}};
+  my_decimal decimal2 = {{0x55555555, 0x0, 0x55555555, 0x0}};
   // -52818775015658473085500828330
-  s21_decimal check = {{0xAAAAAAAA, 0xFFFFFFFF, 0xAAAAAAAA, 0x80000000}};
+  my_decimal check = {{0xAAAAAAAA, 0xFFFFFFFF, 0xAAAAAAAA, 0x80000000}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add88) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -26409387498605864508043122005
-  s21_decimal decimal2 = {{0x55555555, 0x0, 0x55555555, 0x80000000}};
+  my_decimal decimal2 = {{0x55555555, 0x0, 0x55555555, 0x80000000}};
   // overflow
   int check = TEST_ARITHMETIC_SMALL;
 
@@ -1189,20 +1189,20 @@ START_TEST(test_add88) {
 
 START_TEST(test_add89) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 6148914691236517205
-  s21_decimal decimal2 = {{0x55555555, 0x55555555, 0x0, 0x0}};
+  my_decimal decimal2 = {{0x55555555, 0x55555555, 0x0, 0x0}};
   // -79228162508115422902307433130
-  s21_decimal check = {{0xAAAAAAAA, 0xAAAAAAAA, 0xFFFFFFFF, 0x80000000}};
+  my_decimal check = {{0xAAAAAAAA, 0xAAAAAAAA, 0xFFFFFFFF, 0x80000000}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add90) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -6148914691236517205
-  s21_decimal decimal2 = {{0x55555555, 0x55555555, 0x0, 0x80000000}};
+  my_decimal decimal2 = {{0x55555555, 0x55555555, 0x0, 0x80000000}};
   // overflow
   int check = TEST_ARITHMETIC_SMALL;
 
@@ -1211,20 +1211,20 @@ START_TEST(test_add90) {
 
 START_TEST(test_add91) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 6148914689804861440
-  s21_decimal decimal2 = {{0x0, 0x55555555, 0x0, 0x0}};
+  my_decimal decimal2 = {{0x0, 0x55555555, 0x0, 0x0}};
   // -79228162508115422903739088895
-  s21_decimal check = {{0xFFFFFFFF, 0xAAAAAAAA, 0xFFFFFFFF, 0x80000000}};
+  my_decimal check = {{0xFFFFFFFF, 0xAAAAAAAA, 0xFFFFFFFF, 0x80000000}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add92) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -6148914689804861440
-  s21_decimal decimal2 = {{0x0, 0x55555555, 0x0, 0x80000000}};
+  my_decimal decimal2 = {{0x0, 0x55555555, 0x0, 0x80000000}};
   // overflow
   int check = TEST_ARITHMETIC_SMALL;
 
@@ -1233,20 +1233,20 @@ START_TEST(test_add92) {
 
 START_TEST(test_add93) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 1431655765
-  s21_decimal decimal2 = {{0x55555555, 0x0, 0x0, 0x0}};
+  my_decimal decimal2 = {{0x55555555, 0x0, 0x0, 0x0}};
   // -79228162514264337592112294570
-  s21_decimal check = {{0xAAAAAAAA, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal check = {{0xAAAAAAAA, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add94) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -1431655765
-  s21_decimal decimal2 = {{0x55555555, 0x0, 0x0, 0x80000000}};
+  my_decimal decimal2 = {{0x55555555, 0x0, 0x0, 0x80000000}};
   // overflow
   int check = TEST_ARITHMETIC_SMALL;
 
@@ -1255,20 +1255,20 @@ START_TEST(test_add94) {
 
 START_TEST(test_add95) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 26409387.704754779197847983445
-  s21_decimal decimal2 = {{0x1B755555, 0x2CE411B0, 0x55555560, 0x150000}};
+  my_decimal decimal2 = {{0x1B755555, 0x2CE411B0, 0x55555560, 0x150000}};
   // -79228162514264337593517540947
-  s21_decimal check = {{0xFE6D0653, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal check = {{0xFE6D0653, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add96) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -26409387.704754779197847983445
-  s21_decimal decimal2 = {{0x1B755555, 0x2CE411B0, 0x55555560, 0x80150000}};
+  my_decimal decimal2 = {{0x1B755555, 0x2CE411B0, 0x55555560, 0x80150000}};
   // overflow
   int check = TEST_ARITHMETIC_SMALL;
 
@@ -1277,20 +1277,20 @@ START_TEST(test_add96) {
 
 START_TEST(test_add97) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 26409387.498605864508043122005
-  s21_decimal decimal2 = {{0x55555555, 0x0, 0x55555555, 0x150000}};
+  my_decimal decimal2 = {{0x55555555, 0x0, 0x55555555, 0x150000}};
   // -79228162514264337593517540948
-  s21_decimal check = {{0xFE6D0654, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal check = {{0xFE6D0654, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add98) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -26409387.498605864508043122005
-  s21_decimal decimal2 = {{0x55555555, 0x0, 0x55555555, 0x80150000}};
+  my_decimal decimal2 = {{0x55555555, 0x0, 0x55555555, 0x80150000}};
   // overflow
   int check = TEST_ARITHMETIC_SMALL;
 
@@ -1299,20 +1299,20 @@ START_TEST(test_add98) {
 
 START_TEST(test_add99) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 26409387
-  s21_decimal decimal2 = {{0x192F9AB, 0x0, 0x0, 0x0}};
+  my_decimal decimal2 = {{0x192F9AB, 0x0, 0x0, 0x0}};
   // -79228162514264337593517540948
-  s21_decimal check = {{0xFE6D0654, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal check = {{0xFE6D0654, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add100) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -26409387
-  s21_decimal decimal2 = {{0x192F9AB, 0x0, 0x0, 0x80000000}};
+  my_decimal decimal2 = {{0x192F9AB, 0x0, 0x0, 0x80000000}};
   // overflow
   int check = TEST_ARITHMETIC_SMALL;
 
@@ -1321,20 +1321,20 @@ START_TEST(test_add100) {
 
 START_TEST(test_add101) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 7.9228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x1C0000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x1C0000}};
   // -79228162514264337593543950327
-  s21_decimal check = {{0xFFFFFFF7, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal check = {{0xFFFFFFF7, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add102) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -7.9228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x801C0000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x801C0000}};
   // overflow
   int check = TEST_ARITHMETIC_SMALL;
 
@@ -1343,20 +1343,20 @@ START_TEST(test_add102) {
 
 START_TEST(test_add103) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 8
-  s21_decimal decimal2 = {{0x8, 0x0, 0x0, 0x0}};
+  my_decimal decimal2 = {{0x8, 0x0, 0x0, 0x0}};
   // -79228162514264337593543950327
-  s21_decimal check = {{0xFFFFFFF7, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal check = {{0xFFFFFFF7, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add104) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -8
-  s21_decimal decimal2 = {{0x8, 0x0, 0x0, 0x80000000}};
+  my_decimal decimal2 = {{0x8, 0x0, 0x0, 0x80000000}};
   // overflow
   int check = TEST_ARITHMETIC_SMALL;
 
@@ -1365,20 +1365,20 @@ START_TEST(test_add104) {
 
 START_TEST(test_add105) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 3.6336660283201536
-  s21_decimal decimal2 = {{0x811800, 0x811800, 0x0, 0x100000}};
+  my_decimal decimal2 = {{0x811800, 0x811800, 0x0, 0x100000}};
   // -79228162514264337593543950331
-  s21_decimal check = {{0xFFFFFFFB, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal check = {{0xFFFFFFFB, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add106) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -3.6336660283201536
-  s21_decimal decimal2 = {{0x811800, 0x811800, 0x0, 0x80100000}};
+  my_decimal decimal2 = {{0x811800, 0x811800, 0x0, 0x80100000}};
   // overflow
   int check = TEST_ARITHMETIC_SMALL;
 
@@ -1387,97 +1387,97 @@ START_TEST(test_add106) {
 
 START_TEST(test_add107) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -0
-  s21_decimal decimal2 = {{0x0, 0x0, 0x0, 0x80000000}};
+  my_decimal decimal2 = {{0x0, 0x0, 0x0, 0x80000000}};
   // -79228162514264337593543950335
-  s21_decimal check = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal check = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add108) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 0
-  s21_decimal decimal2 = {{0x0, 0x0, 0x0, 0x0}};
+  my_decimal decimal2 = {{0x0, 0x0, 0x0, 0x0}};
   // -79228162514264337593543950335
-  s21_decimal check = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal check = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add109) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -0.0000000000000000000000000000
-  s21_decimal decimal2 = {{0x0, 0x0, 0x0, 0x801C0000}};
+  my_decimal decimal2 = {{0x0, 0x0, 0x0, 0x801C0000}};
   // -79228162514264337593543950335
-  s21_decimal check = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal check = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add110) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 0.0000000000000000000000000000
-  s21_decimal decimal2 = {{0x0, 0x0, 0x0, 0x1C0000}};
+  my_decimal decimal2 = {{0x0, 0x0, 0x0, 0x1C0000}};
   // -79228162514264337593543950335
-  s21_decimal check = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal check = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add111) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 0.0000000000000000000000000001
-  s21_decimal decimal2 = {{0x1, 0x0, 0x0, 0x1C0000}};
+  my_decimal decimal2 = {{0x1, 0x0, 0x0, 0x1C0000}};
   // -79228162514264337593543950335
-  s21_decimal check = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal check = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add112) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -0.0000000000000000000000000001
-  s21_decimal decimal2 = {{0x1, 0x0, 0x0, 0x801C0000}};
+  my_decimal decimal2 = {{0x1, 0x0, 0x0, 0x801C0000}};
   // -79228162514264337593543950335
-  s21_decimal check = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal check = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add113) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 0.0000000000000000000000000010
-  s21_decimal decimal2 = {{0xA, 0x0, 0x0, 0x1C0000}};
+  my_decimal decimal2 = {{0xA, 0x0, 0x0, 0x1C0000}};
   // -79228162514264337593543950335
-  s21_decimal check = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal check = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add114) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -0.0000000000000000000000000010
-  s21_decimal decimal2 = {{0xA, 0x0, 0x0, 0x801C0000}};
+  my_decimal decimal2 = {{0xA, 0x0, 0x0, 0x801C0000}};
   // -79228162514264337593543950335
-  s21_decimal check = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal check = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add115) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -56124981125209321576924.010631
-  s21_decimal decimal2 = {{0xF555887, 0x553F1641, 0xB5597F0B, 0x80060000}};
+  my_decimal decimal2 = {{0xF555887, 0x553F1641, 0xB5597F0B, 0x80060000}};
   // overflow
   int check = TEST_ARITHMETIC_SMALL;
 
@@ -1486,20 +1486,20 @@ START_TEST(test_add115) {
 
 START_TEST(test_add116) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 56124981125209321576924.010631
-  s21_decimal decimal2 = {{0xF555887, 0x553F1641, 0xB5597F0B, 0x60000}};
+  my_decimal decimal2 = {{0xF555887, 0x553F1641, 0xB5597F0B, 0x60000}};
   // -79228106389283212384222373411
-  s21_decimal check = {{0x3AC4E623, 0x756BD584, 0xFFFFF41D, 0x80000000}};
+  my_decimal check = {{0x3AC4E623, 0x756BD584, 0xFFFFF41D, 0x80000000}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add117) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -49704001422.391670881925172831
-  s21_decimal decimal2 = {{0x7F7B8E5F, 0x2B4271A6, 0xA09A2FB4, 0x80120000}};
+  my_decimal decimal2 = {{0x7F7B8E5F, 0x2B4271A6, 0xA09A2FB4, 0x80120000}};
   // overflow
   int check = TEST_ARITHMETIC_SMALL;
 
@@ -1508,20 +1508,20 @@ START_TEST(test_add117) {
 
 START_TEST(test_add118) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 49704001422.391670881925172831
-  s21_decimal decimal2 = {{0x7F7B8E5F, 0x2B4271A6, 0xA09A2FB4, 0x120000}};
+  my_decimal decimal2 = {{0x7F7B8E5F, 0x2B4271A6, 0xA09A2FB4, 0x120000}};
   // -79228162514264337543839948913
-  s21_decimal check = {{0x6D692071, 0xFFFFFFF4, 0xFFFFFFFF, 0x80000000}};
+  my_decimal check = {{0x6D692071, 0xFFFFFFF4, 0xFFFFFFFF, 0x80000000}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add119) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -649244002.20841517182548587502
-  s21_decimal decimal2 = {{0x122233EE, 0x5675EBE6, 0xD1C83484, 0x80140000}};
+  my_decimal decimal2 = {{0x122233EE, 0x5675EBE6, 0xD1C83484, 0x80140000}};
   // overflow
   int check = TEST_ARITHMETIC_SMALL;
 
@@ -1530,20 +1530,20 @@ START_TEST(test_add119) {
 
 START_TEST(test_add120) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 649244002.20841517182548587502
-  s21_decimal decimal2 = {{0x122233EE, 0x5675EBE6, 0xD1C83484, 0x140000}};
+  my_decimal decimal2 = {{0x122233EE, 0x5675EBE6, 0xD1C83484, 0x140000}};
   // -79228162514264337592894706333
-  s21_decimal check = {{0xD94D529D, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal check = {{0xD94D529D, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add121) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // overflow
   int check = TEST_ARITHMETIC_BIG;
 
@@ -1552,20 +1552,20 @@ START_TEST(test_add121) {
 
 START_TEST(test_add122) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -1
-  s21_decimal check = {{0x1, 0x0, 0x0, 0x80000000}};
+  my_decimal check = {{0x1, 0x0, 0x0, 0x80000000}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add123) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 79228162514264337593543950334
-  s21_decimal decimal2 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // overflow
   int check = TEST_ARITHMETIC_BIG;
 
@@ -1574,20 +1574,20 @@ START_TEST(test_add123) {
 
 START_TEST(test_add124) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -79228162514264337593543950334
-  s21_decimal decimal2 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal2 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 0
-  s21_decimal check = {{0x0, 0x0, 0x0, 0x0}};
+  my_decimal check = {{0x0, 0x0, 0x0, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add125) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 7922816251426433759354395033
-  s21_decimal decimal2 = {{0x99999999, 0x99999999, 0x19999999, 0x0}};
+  my_decimal decimal2 = {{0x99999999, 0x99999999, 0x19999999, 0x0}};
   // overflow
   int check = TEST_ARITHMETIC_BIG;
 
@@ -1596,20 +1596,20 @@ START_TEST(test_add125) {
 
 START_TEST(test_add126) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -7922816251426433759354395033
-  s21_decimal decimal2 = {{0x99999999, 0x99999999, 0x19999999, 0x80000000}};
+  my_decimal decimal2 = {{0x99999999, 0x99999999, 0x19999999, 0x80000000}};
   // 71305346262837903834189555301
-  s21_decimal check = {{0x66666665, 0x66666666, 0xE6666666, 0x0}};
+  my_decimal check = {{0x66666665, 0x66666666, 0xE6666666, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add127) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 7922816251426433759354395033.5
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x10000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x10000}};
   // overflow
   int check = TEST_ARITHMETIC_BIG;
 
@@ -1618,20 +1618,20 @@ START_TEST(test_add127) {
 
 START_TEST(test_add128) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -7922816251426433759354395033.5
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80010000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80010000}};
   // 71305346262837903834189555300
-  s21_decimal check = {{0x66666664, 0x66666666, 0xE6666666, 0x0}};
+  my_decimal check = {{0x66666664, 0x66666666, 0xE6666666, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add129) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 7922816251426433759354395034
-  s21_decimal decimal2 = {{0x9999999A, 0x99999999, 0x19999999, 0x0}};
+  my_decimal decimal2 = {{0x9999999A, 0x99999999, 0x19999999, 0x0}};
   // overflow
   int check = TEST_ARITHMETIC_BIG;
 
@@ -1640,20 +1640,20 @@ START_TEST(test_add129) {
 
 START_TEST(test_add130) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -7922816251426433759354395034
-  s21_decimal decimal2 = {{0x9999999A, 0x99999999, 0x19999999, 0x80000000}};
+  my_decimal decimal2 = {{0x9999999A, 0x99999999, 0x19999999, 0x80000000}};
   // 71305346262837903834189555300
-  s21_decimal check = {{0x66666664, 0x66666666, 0xE6666666, 0x0}};
+  my_decimal check = {{0x66666664, 0x66666666, 0xE6666666, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add131) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 7922816251426433759354395035
-  s21_decimal decimal2 = {{0x9999999B, 0x99999999, 0x19999999, 0x0}};
+  my_decimal decimal2 = {{0x9999999B, 0x99999999, 0x19999999, 0x0}};
   // overflow
   int check = TEST_ARITHMETIC_BIG;
 
@@ -1662,108 +1662,108 @@ START_TEST(test_add131) {
 
 START_TEST(test_add132) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -7922816251426433759354395035
-  s21_decimal decimal2 = {{0x9999999B, 0x99999999, 0x19999999, 0x80000000}};
+  my_decimal decimal2 = {{0x9999999B, 0x99999999, 0x19999999, 0x80000000}};
   // 71305346262837903834189555299
-  s21_decimal check = {{0x66666663, 0x66666666, 0xE6666666, 0x0}};
+  my_decimal check = {{0x66666663, 0x66666666, 0xE6666666, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add133) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 1
-  s21_decimal decimal2 = {{0x1, 0x0, 0x0, 0x0}};
+  my_decimal decimal2 = {{0x1, 0x0, 0x0, 0x0}};
   // 79228162514264337593543950335
-  s21_decimal check = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal check = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add134) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -1
-  s21_decimal decimal2 = {{0x1, 0x0, 0x0, 0x80000000}};
+  my_decimal decimal2 = {{0x1, 0x0, 0x0, 0x80000000}};
   // 79228162514264337593543950333
-  s21_decimal check = {{0xFFFFFFFD, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal check = {{0xFFFFFFFD, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add135) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 0.5
-  s21_decimal decimal2 = {{0x5, 0x0, 0x0, 0x10000}};
+  my_decimal decimal2 = {{0x5, 0x0, 0x0, 0x10000}};
   // 79228162514264337593543950334
-  s21_decimal check = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal check = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add136) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -0.5
-  s21_decimal decimal2 = {{0x5, 0x0, 0x0, 0x80010000}};
+  my_decimal decimal2 = {{0x5, 0x0, 0x0, 0x80010000}};
   // 79228162514264337593543950334
-  s21_decimal check = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal check = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add137) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 0.4999999999999999999999999999
-  s21_decimal decimal2 = {{0x87FFFFFF, 0x1F128130, 0x1027E72F, 0x1C0000}};
+  my_decimal decimal2 = {{0x87FFFFFF, 0x1F128130, 0x1027E72F, 0x1C0000}};
   // 79228162514264337593543950334
-  s21_decimal check = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal check = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add138) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -0.4999999999999999999999999999
-  s21_decimal decimal2 = {{0x87FFFFFF, 0x1F128130, 0x1027E72F, 0x801C0000}};
+  my_decimal decimal2 = {{0x87FFFFFF, 0x1F128130, 0x1027E72F, 0x801C0000}};
   // 79228162514264337593543950334
-  s21_decimal check = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal check = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add139) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 0.5000000000000000000000000001
-  s21_decimal decimal2 = {{0x88000001, 0x1F128130, 0x1027E72F, 0x1C0000}};
+  my_decimal decimal2 = {{0x88000001, 0x1F128130, 0x1027E72F, 0x1C0000}};
   // 79228162514264337593543950335
-  s21_decimal check = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal check = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add140) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -0.5000000000000000000000000001
-  s21_decimal decimal2 = {{0x88000001, 0x1F128130, 0x1027E72F, 0x801C0000}};
+  my_decimal decimal2 = {{0x88000001, 0x1F128130, 0x1027E72F, 0x801C0000}};
   // 79228162514264337593543950333
-  s21_decimal check = {{0xFFFFFFFD, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal check = {{0xFFFFFFFD, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add141) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 1.9999999999999999999999999000
-  s21_decimal decimal2 = {{0x1FFFFC18, 0x7C4A04C2, 0x409F9CBC, 0x1C0000}};
+  my_decimal decimal2 = {{0x1FFFFC18, 0x7C4A04C2, 0x409F9CBC, 0x1C0000}};
   // overflow
   int check = TEST_ARITHMETIC_BIG;
 
@@ -1772,42 +1772,42 @@ START_TEST(test_add141) {
 
 START_TEST(test_add142) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -1.9999999999999999999999999000
-  s21_decimal decimal2 = {{0x1FFFFC18, 0x7C4A04C2, 0x409F9CBC, 0x801C0000}};
+  my_decimal decimal2 = {{0x1FFFFC18, 0x7C4A04C2, 0x409F9CBC, 0x801C0000}};
   // 79228162514264337593543950332
-  s21_decimal check = {{0xFFFFFFFC, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal check = {{0xFFFFFFFC, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add143) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 1.0000000000000000000000000001
-  s21_decimal decimal2 = {{0x10000001, 0x3E250261, 0x204FCE5E, 0x1C0000}};
+  my_decimal decimal2 = {{0x10000001, 0x3E250261, 0x204FCE5E, 0x1C0000}};
   // 79228162514264337593543950335
-  s21_decimal check = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal check = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add144) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -1.0000000000000000000000000001
-  s21_decimal decimal2 = {{0x10000001, 0x3E250261, 0x204FCE5E, 0x801C0000}};
+  my_decimal decimal2 = {{0x10000001, 0x3E250261, 0x204FCE5E, 0x801C0000}};
   // 79228162514264337593543950333
-  s21_decimal check = {{0xFFFFFFFD, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal check = {{0xFFFFFFFD, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add145) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 26409387504754779197847983445
-  s21_decimal decimal2 = {{0x55555555, 0x55555555, 0x55555555, 0x0}};
+  my_decimal decimal2 = {{0x55555555, 0x55555555, 0x55555555, 0x0}};
   // overflow
   int check = TEST_ARITHMETIC_BIG;
 
@@ -1816,20 +1816,20 @@ START_TEST(test_add145) {
 
 START_TEST(test_add146) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -26409387504754779197847983445
-  s21_decimal decimal2 = {{0x55555555, 0x55555555, 0x55555555, 0x80000000}};
+  my_decimal decimal2 = {{0x55555555, 0x55555555, 0x55555555, 0x80000000}};
   // 52818775009509558395695966889
-  s21_decimal check = {{0xAAAAAAA9, 0xAAAAAAAA, 0xAAAAAAAA, 0x0}};
+  my_decimal check = {{0xAAAAAAA9, 0xAAAAAAAA, 0xAAAAAAAA, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add147) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 26409387498605864508043122005
-  s21_decimal decimal2 = {{0x55555555, 0x0, 0x55555555, 0x0}};
+  my_decimal decimal2 = {{0x55555555, 0x0, 0x55555555, 0x0}};
   // overflow
   int check = TEST_ARITHMETIC_BIG;
 
@@ -1838,20 +1838,20 @@ START_TEST(test_add147) {
 
 START_TEST(test_add148) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -26409387498605864508043122005
-  s21_decimal decimal2 = {{0x55555555, 0x0, 0x55555555, 0x80000000}};
+  my_decimal decimal2 = {{0x55555555, 0x0, 0x55555555, 0x80000000}};
   // 52818775015658473085500828329
-  s21_decimal check = {{0xAAAAAAA9, 0xFFFFFFFF, 0xAAAAAAAA, 0x0}};
+  my_decimal check = {{0xAAAAAAA9, 0xFFFFFFFF, 0xAAAAAAAA, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add149) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 6148914691236517205
-  s21_decimal decimal2 = {{0x55555555, 0x55555555, 0x0, 0x0}};
+  my_decimal decimal2 = {{0x55555555, 0x55555555, 0x0, 0x0}};
   // overflow
   int check = TEST_ARITHMETIC_BIG;
 
@@ -1860,20 +1860,20 @@ START_TEST(test_add149) {
 
 START_TEST(test_add150) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -6148914691236517205
-  s21_decimal decimal2 = {{0x55555555, 0x55555555, 0x0, 0x80000000}};
+  my_decimal decimal2 = {{0x55555555, 0x55555555, 0x0, 0x80000000}};
   // 79228162508115422902307433129
-  s21_decimal check = {{0xAAAAAAA9, 0xAAAAAAAA, 0xFFFFFFFF, 0x0}};
+  my_decimal check = {{0xAAAAAAA9, 0xAAAAAAAA, 0xFFFFFFFF, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add151) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 6148914689804861440
-  s21_decimal decimal2 = {{0x0, 0x55555555, 0x0, 0x0}};
+  my_decimal decimal2 = {{0x0, 0x55555555, 0x0, 0x0}};
   // overflow
   int check = TEST_ARITHMETIC_BIG;
 
@@ -1882,20 +1882,20 @@ START_TEST(test_add151) {
 
 START_TEST(test_add152) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -6148914689804861440
-  s21_decimal decimal2 = {{0x0, 0x55555555, 0x0, 0x80000000}};
+  my_decimal decimal2 = {{0x0, 0x55555555, 0x0, 0x80000000}};
   // 79228162508115422903739088894
-  s21_decimal check = {{0xFFFFFFFE, 0xAAAAAAAA, 0xFFFFFFFF, 0x0}};
+  my_decimal check = {{0xFFFFFFFE, 0xAAAAAAAA, 0xFFFFFFFF, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add153) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 1431655765
-  s21_decimal decimal2 = {{0x55555555, 0x0, 0x0, 0x0}};
+  my_decimal decimal2 = {{0x55555555, 0x0, 0x0, 0x0}};
   // overflow
   int check = TEST_ARITHMETIC_BIG;
 
@@ -1904,20 +1904,20 @@ START_TEST(test_add153) {
 
 START_TEST(test_add154) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -1431655765
-  s21_decimal decimal2 = {{0x55555555, 0x0, 0x0, 0x80000000}};
+  my_decimal decimal2 = {{0x55555555, 0x0, 0x0, 0x80000000}};
   // 79228162514264337592112294569
-  s21_decimal check = {{0xAAAAAAA9, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal check = {{0xAAAAAAA9, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add155) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 26409387.704754779197847983445
-  s21_decimal decimal2 = {{0x1B755555, 0x2CE411B0, 0x55555560, 0x150000}};
+  my_decimal decimal2 = {{0x1B755555, 0x2CE411B0, 0x55555560, 0x150000}};
   // overflow
   int check = TEST_ARITHMETIC_BIG;
 
@@ -1926,20 +1926,20 @@ START_TEST(test_add155) {
 
 START_TEST(test_add156) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -26409387.704754779197847983445
-  s21_decimal decimal2 = {{0x1B755555, 0x2CE411B0, 0x55555560, 0x80150000}};
+  my_decimal decimal2 = {{0x1B755555, 0x2CE411B0, 0x55555560, 0x80150000}};
   // 79228162514264337593517540946
-  s21_decimal check = {{0xFE6D0652, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal check = {{0xFE6D0652, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add157) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 26409387.498605864508043122005
-  s21_decimal decimal2 = {{0x55555555, 0x0, 0x55555555, 0x150000}};
+  my_decimal decimal2 = {{0x55555555, 0x0, 0x55555555, 0x150000}};
   // overflow
   int check = TEST_ARITHMETIC_BIG;
 
@@ -1948,20 +1948,20 @@ START_TEST(test_add157) {
 
 START_TEST(test_add158) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -26409387.498605864508043122005
-  s21_decimal decimal2 = {{0x55555555, 0x0, 0x55555555, 0x80150000}};
+  my_decimal decimal2 = {{0x55555555, 0x0, 0x55555555, 0x80150000}};
   // 79228162514264337593517540947
-  s21_decimal check = {{0xFE6D0653, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal check = {{0xFE6D0653, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add159) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 26409387
-  s21_decimal decimal2 = {{0x192F9AB, 0x0, 0x0, 0x0}};
+  my_decimal decimal2 = {{0x192F9AB, 0x0, 0x0, 0x0}};
   // overflow
   int check = TEST_ARITHMETIC_BIG;
 
@@ -1970,20 +1970,20 @@ START_TEST(test_add159) {
 
 START_TEST(test_add160) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -26409387
-  s21_decimal decimal2 = {{0x192F9AB, 0x0, 0x0, 0x80000000}};
+  my_decimal decimal2 = {{0x192F9AB, 0x0, 0x0, 0x80000000}};
   // 79228162514264337593517540947
-  s21_decimal check = {{0xFE6D0653, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal check = {{0xFE6D0653, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add161) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 7.9228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x1C0000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x1C0000}};
   // overflow
   int check = TEST_ARITHMETIC_BIG;
 
@@ -1992,20 +1992,20 @@ START_TEST(test_add161) {
 
 START_TEST(test_add162) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -7.9228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x801C0000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x801C0000}};
   // 79228162514264337593543950326
-  s21_decimal check = {{0xFFFFFFF6, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal check = {{0xFFFFFFF6, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add163) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 8
-  s21_decimal decimal2 = {{0x8, 0x0, 0x0, 0x0}};
+  my_decimal decimal2 = {{0x8, 0x0, 0x0, 0x0}};
   // overflow
   int check = TEST_ARITHMETIC_BIG;
 
@@ -2014,20 +2014,20 @@ START_TEST(test_add163) {
 
 START_TEST(test_add164) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -8
-  s21_decimal decimal2 = {{0x8, 0x0, 0x0, 0x80000000}};
+  my_decimal decimal2 = {{0x8, 0x0, 0x0, 0x80000000}};
   // 79228162514264337593543950326
-  s21_decimal check = {{0xFFFFFFF6, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal check = {{0xFFFFFFF6, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add165) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 3.6336660283201536
-  s21_decimal decimal2 = {{0x811800, 0x811800, 0x0, 0x100000}};
+  my_decimal decimal2 = {{0x811800, 0x811800, 0x0, 0x100000}};
   // overflow
   int check = TEST_ARITHMETIC_BIG;
 
@@ -2036,119 +2036,119 @@ START_TEST(test_add165) {
 
 START_TEST(test_add166) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -3.6336660283201536
-  s21_decimal decimal2 = {{0x811800, 0x811800, 0x0, 0x80100000}};
+  my_decimal decimal2 = {{0x811800, 0x811800, 0x0, 0x80100000}};
   // 79228162514264337593543950330
-  s21_decimal check = {{0xFFFFFFFA, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal check = {{0xFFFFFFFA, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add167) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -0
-  s21_decimal decimal2 = {{0x0, 0x0, 0x0, 0x80000000}};
+  my_decimal decimal2 = {{0x0, 0x0, 0x0, 0x80000000}};
   // 79228162514264337593543950334
-  s21_decimal check = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal check = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add168) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 0
-  s21_decimal decimal2 = {{0x0, 0x0, 0x0, 0x0}};
+  my_decimal decimal2 = {{0x0, 0x0, 0x0, 0x0}};
   // 79228162514264337593543950334
-  s21_decimal check = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal check = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add169) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -0.0000000000000000000000000000
-  s21_decimal decimal2 = {{0x0, 0x0, 0x0, 0x801C0000}};
+  my_decimal decimal2 = {{0x0, 0x0, 0x0, 0x801C0000}};
   // 79228162514264337593543950334
-  s21_decimal check = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal check = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add170) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 0.0000000000000000000000000000
-  s21_decimal decimal2 = {{0x0, 0x0, 0x0, 0x1C0000}};
+  my_decimal decimal2 = {{0x0, 0x0, 0x0, 0x1C0000}};
   // 79228162514264337593543950334
-  s21_decimal check = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal check = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add171) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 0.0000000000000000000000000001
-  s21_decimal decimal2 = {{0x1, 0x0, 0x0, 0x1C0000}};
+  my_decimal decimal2 = {{0x1, 0x0, 0x0, 0x1C0000}};
   // 79228162514264337593543950334
-  s21_decimal check = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal check = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add172) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -0.0000000000000000000000000001
-  s21_decimal decimal2 = {{0x1, 0x0, 0x0, 0x801C0000}};
+  my_decimal decimal2 = {{0x1, 0x0, 0x0, 0x801C0000}};
   // 79228162514264337593543950334
-  s21_decimal check = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal check = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add173) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 0.0000000000000000000000000010
-  s21_decimal decimal2 = {{0xA, 0x0, 0x0, 0x1C0000}};
+  my_decimal decimal2 = {{0xA, 0x0, 0x0, 0x1C0000}};
   // 79228162514264337593543950334
-  s21_decimal check = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal check = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add174) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -0.0000000000000000000000000010
-  s21_decimal decimal2 = {{0xA, 0x0, 0x0, 0x801C0000}};
+  my_decimal decimal2 = {{0xA, 0x0, 0x0, 0x801C0000}};
   // 79228162514264337593543950334
-  s21_decimal check = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal check = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add175) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -56124981125209321576924.010631
-  s21_decimal decimal2 = {{0xF555887, 0x553F1641, 0xB5597F0B, 0x80060000}};
+  my_decimal decimal2 = {{0xF555887, 0x553F1641, 0xB5597F0B, 0x80060000}};
   // 79228106389283212384222373410
-  s21_decimal check = {{0x3AC4E622, 0x756BD584, 0xFFFFF41D, 0x0}};
+  my_decimal check = {{0x3AC4E622, 0x756BD584, 0xFFFFF41D, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add176) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 56124981125209321576924.010631
-  s21_decimal decimal2 = {{0xF555887, 0x553F1641, 0xB5597F0B, 0x60000}};
+  my_decimal decimal2 = {{0xF555887, 0x553F1641, 0xB5597F0B, 0x60000}};
   // overflow
   int check = TEST_ARITHMETIC_BIG;
 
@@ -2157,20 +2157,20 @@ START_TEST(test_add176) {
 
 START_TEST(test_add177) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -49704001422.391670881925172831
-  s21_decimal decimal2 = {{0x7F7B8E5F, 0x2B4271A6, 0xA09A2FB4, 0x80120000}};
+  my_decimal decimal2 = {{0x7F7B8E5F, 0x2B4271A6, 0xA09A2FB4, 0x80120000}};
   // 79228162514264337543839948912
-  s21_decimal check = {{0x6D692070, 0xFFFFFFF4, 0xFFFFFFFF, 0x0}};
+  my_decimal check = {{0x6D692070, 0xFFFFFFF4, 0xFFFFFFFF, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add178) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 49704001422.391670881925172831
-  s21_decimal decimal2 = {{0x7F7B8E5F, 0x2B4271A6, 0xA09A2FB4, 0x120000}};
+  my_decimal decimal2 = {{0x7F7B8E5F, 0x2B4271A6, 0xA09A2FB4, 0x120000}};
   // overflow
   int check = TEST_ARITHMETIC_BIG;
 
@@ -2179,20 +2179,20 @@ START_TEST(test_add178) {
 
 START_TEST(test_add179) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -649244002.20841517182548587502
-  s21_decimal decimal2 = {{0x122233EE, 0x5675EBE6, 0xD1C83484, 0x80140000}};
+  my_decimal decimal2 = {{0x122233EE, 0x5675EBE6, 0xD1C83484, 0x80140000}};
   // 79228162514264337592894706332
-  s21_decimal check = {{0xD94D529C, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal check = {{0xD94D529C, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add180) {
   // 79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 649244002.20841517182548587502
-  s21_decimal decimal2 = {{0x122233EE, 0x5675EBE6, 0xD1C83484, 0x140000}};
+  my_decimal decimal2 = {{0x122233EE, 0x5675EBE6, 0xD1C83484, 0x140000}};
   // overflow
   int check = TEST_ARITHMETIC_BIG;
 
@@ -2201,20 +2201,20 @@ START_TEST(test_add180) {
 
 START_TEST(test_add181) {
   // -79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 1
-  s21_decimal check = {{0x1, 0x0, 0x0, 0x0}};
+  my_decimal check = {{0x1, 0x0, 0x0, 0x0}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add182) {
   // -79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // overflow
   int check = TEST_ARITHMETIC_SMALL;
 
@@ -2223,20 +2223,20 @@ START_TEST(test_add182) {
 
 START_TEST(test_add183) {
   // -79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 79228162514264337593543950334
-  s21_decimal decimal2 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -0
-  s21_decimal check = {{0x0, 0x0, 0x0, 0x80000000}};
+  my_decimal check = {{0x0, 0x0, 0x0, 0x80000000}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add184) {
   // -79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -79228162514264337593543950334
-  s21_decimal decimal2 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal2 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // overflow
   int check = TEST_ARITHMETIC_SMALL;
 
@@ -2245,20 +2245,20 @@ START_TEST(test_add184) {
 
 START_TEST(test_add185) {
   // -79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 7922816251426433759354395033
-  s21_decimal decimal2 = {{0x99999999, 0x99999999, 0x19999999, 0x0}};
+  my_decimal decimal2 = {{0x99999999, 0x99999999, 0x19999999, 0x0}};
   // -71305346262837903834189555301
-  s21_decimal check = {{0x66666665, 0x66666666, 0xE6666666, 0x80000000}};
+  my_decimal check = {{0x66666665, 0x66666666, 0xE6666666, 0x80000000}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add186) {
   // -79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -7922816251426433759354395033
-  s21_decimal decimal2 = {{0x99999999, 0x99999999, 0x19999999, 0x80000000}};
+  my_decimal decimal2 = {{0x99999999, 0x99999999, 0x19999999, 0x80000000}};
   // overflow
   int check = TEST_ARITHMETIC_SMALL;
 
@@ -2267,20 +2267,20 @@ START_TEST(test_add186) {
 
 START_TEST(test_add187) {
   // -79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 7922816251426433759354395033.5
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x10000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x10000}};
   // -71305346262837903834189555300
-  s21_decimal check = {{0x66666664, 0x66666666, 0xE6666666, 0x80000000}};
+  my_decimal check = {{0x66666664, 0x66666666, 0xE6666666, 0x80000000}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add188) {
   // -79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -7922816251426433759354395033.5
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80010000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80010000}};
   // overflow
   int check = TEST_ARITHMETIC_SMALL;
 
@@ -2289,20 +2289,20 @@ START_TEST(test_add188) {
 
 START_TEST(test_add189) {
   // -79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 7922816251426433759354395034
-  s21_decimal decimal2 = {{0x9999999A, 0x99999999, 0x19999999, 0x0}};
+  my_decimal decimal2 = {{0x9999999A, 0x99999999, 0x19999999, 0x0}};
   // -71305346262837903834189555300
-  s21_decimal check = {{0x66666664, 0x66666666, 0xE6666666, 0x80000000}};
+  my_decimal check = {{0x66666664, 0x66666666, 0xE6666666, 0x80000000}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add190) {
   // -79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -7922816251426433759354395034
-  s21_decimal decimal2 = {{0x9999999A, 0x99999999, 0x19999999, 0x80000000}};
+  my_decimal decimal2 = {{0x9999999A, 0x99999999, 0x19999999, 0x80000000}};
   // overflow
   int check = TEST_ARITHMETIC_SMALL;
 
@@ -2311,20 +2311,20 @@ START_TEST(test_add190) {
 
 START_TEST(test_add191) {
   // -79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 7922816251426433759354395035
-  s21_decimal decimal2 = {{0x9999999B, 0x99999999, 0x19999999, 0x0}};
+  my_decimal decimal2 = {{0x9999999B, 0x99999999, 0x19999999, 0x0}};
   // -71305346262837903834189555299
-  s21_decimal check = {{0x66666663, 0x66666666, 0xE6666666, 0x80000000}};
+  my_decimal check = {{0x66666663, 0x66666666, 0xE6666666, 0x80000000}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add192) {
   // -79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -7922816251426433759354395035
-  s21_decimal decimal2 = {{0x9999999B, 0x99999999, 0x19999999, 0x80000000}};
+  my_decimal decimal2 = {{0x9999999B, 0x99999999, 0x19999999, 0x80000000}};
   // overflow
   int check = TEST_ARITHMETIC_SMALL;
 
@@ -2333,88 +2333,88 @@ START_TEST(test_add192) {
 
 START_TEST(test_add193) {
   // -79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 1
-  s21_decimal decimal2 = {{0x1, 0x0, 0x0, 0x0}};
+  my_decimal decimal2 = {{0x1, 0x0, 0x0, 0x0}};
   // -79228162514264337593543950333
-  s21_decimal check = {{0xFFFFFFFD, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal check = {{0xFFFFFFFD, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add194) {
   // -79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -1
-  s21_decimal decimal2 = {{0x1, 0x0, 0x0, 0x80000000}};
+  my_decimal decimal2 = {{0x1, 0x0, 0x0, 0x80000000}};
   // -79228162514264337593543950335
-  s21_decimal check = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal check = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add195) {
   // -79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 0.5
-  s21_decimal decimal2 = {{0x5, 0x0, 0x0, 0x10000}};
+  my_decimal decimal2 = {{0x5, 0x0, 0x0, 0x10000}};
   // -79228162514264337593543950334
-  s21_decimal check = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal check = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add196) {
   // -79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -0.5
-  s21_decimal decimal2 = {{0x5, 0x0, 0x0, 0x80010000}};
+  my_decimal decimal2 = {{0x5, 0x0, 0x0, 0x80010000}};
   // -79228162514264337593543950334
-  s21_decimal check = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal check = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add197) {
   // -79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 0.4999999999999999999999999999
-  s21_decimal decimal2 = {{0x87FFFFFF, 0x1F128130, 0x1027E72F, 0x1C0000}};
+  my_decimal decimal2 = {{0x87FFFFFF, 0x1F128130, 0x1027E72F, 0x1C0000}};
   // -79228162514264337593543950334
-  s21_decimal check = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal check = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add198) {
   // -79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -0.4999999999999999999999999999
-  s21_decimal decimal2 = {{0x87FFFFFF, 0x1F128130, 0x1027E72F, 0x801C0000}};
+  my_decimal decimal2 = {{0x87FFFFFF, 0x1F128130, 0x1027E72F, 0x801C0000}};
   // -79228162514264337593543950334
-  s21_decimal check = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal check = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add199) {
   // -79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 0.5000000000000000000000000001
-  s21_decimal decimal2 = {{0x88000001, 0x1F128130, 0x1027E72F, 0x1C0000}};
+  my_decimal decimal2 = {{0x88000001, 0x1F128130, 0x1027E72F, 0x1C0000}};
   // -79228162514264337593543950333
-  s21_decimal check = {{0xFFFFFFFD, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal check = {{0xFFFFFFFD, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
 
   test_add(decimal1, decimal2, check);
 }
 
 START_TEST(test_add200) {
   // -79228162514264337593543950334
-  s21_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -0.5000000000000000000000000001
-  s21_decimal decimal2 = {{0x88000001, 0x1F128130, 0x1027E72F, 0x801C0000}};
+  my_decimal decimal2 = {{0x88000001, 0x1F128130, 0x1027E72F, 0x801C0000}};
   // -79228162514264337593543950335
-  s21_decimal check = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal check = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
 
   test_add(decimal1, decimal2, check);
 }
@@ -2660,41 +2660,41 @@ Suite *add_suite0(void) {
   return s;
 }
 
-void test_add(s21_decimal decimal1, s21_decimal decimal2, s21_decimal check) {
-  s21_decimal result;
-  int code = s21_add(decimal1, decimal2, &result);
+void test_add(my_decimal decimal1, my_decimal decimal2, my_decimal check) {
+  my_decimal result;
+  int code = my_add(decimal1, decimal2, &result);
 
 #if defined(__DEBUG)
   printf("---------------------------------\n");
   printf("\n\nTests:\n");
-  s21_print_decimal_bits(decimal1);
-  s21_print_decimal_string(decimal1);
-  s21_print_decimal_bits(decimal2);
-  s21_print_decimal_string(decimal2);
+  my_print_decimal_bits(decimal1);
+  my_print_decimal_string(decimal1);
+  my_print_decimal_bits(decimal2);
+  my_print_decimal_string(decimal2);
   printf("\ncheck:\n");
-  s21_print_decimal_bits(check);
-  s21_print_decimal_string(check);
+  my_print_decimal_bits(check);
+  my_print_decimal_string(check);
   printf("\nres:\n");
-  s21_print_decimal_bits(result);
-  s21_print_decimal_string(result);
+  my_print_decimal_bits(result);
+  my_print_decimal_string(result);
   printf("---------------------------------\n\n\n\n");
 #endif
 
-  ck_assert_int_eq(s21_is_equal(result, check), 1);
+  ck_assert_int_eq(my_is_equal(result, check), 1);
   ck_assert_int_eq(code, TEST_ARITHMETIC_OK);
 }
 
-void test_add_fail(s21_decimal decimal1, s21_decimal decimal2, int check) {
-  s21_decimal result;
-  int code = s21_add(decimal1, decimal2, &result);
+void test_add_fail(my_decimal decimal1, my_decimal decimal2, int check) {
+  my_decimal result;
+  int code = my_add(decimal1, decimal2, &result);
 
 #if defined(__DEBUG)
   printf("---------------------------------\n");
   printf("\n\nTests:\n");
-  s21_print_decimal_bits(decimal1);
-  s21_print_decimal_string(decimal1);
-  s21_print_decimal_bits(decimal2);
-  s21_print_decimal_string(decimal2);
+  my_print_decimal_bits(decimal1);
+  my_print_decimal_string(decimal1);
+  my_print_decimal_bits(decimal2);
+  my_print_decimal_string(decimal2);
   printf("Check: %d\n", check);
   printf("Result: %d\n", code);
   printf("---------------------------------\n\n\n\n");

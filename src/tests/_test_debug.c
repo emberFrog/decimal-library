@@ -2,14 +2,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "./../s21_decimal.h"
+#include "./../my_decimal.h"
 #include "./test.h"
 
 START_TEST(test_debug_fail1) {
   // степень 154 (показатель степени должен быть от 0 до 28)
   // биты 0-15 не нули
   // биты 24-30 не нули
-  s21_decimal decimal = {{0, 0, 0, 1000000000}};
+  my_decimal decimal = {{0, 0, 0, 1000000000}};
   char check[1024] = "(Incorrect Decimal)";
 
   test_debug(decimal, check);
@@ -18,7 +18,7 @@ END_TEST
 
 START_TEST(test_debug_fail2) {
   // степень 29 (показатель степени должен быть от 0 до 28)
-  s21_decimal decimal = {{-1, 0, 0, 0x1D0000}};
+  my_decimal decimal = {{-1, 0, 0, 0x1D0000}};
   char check[1024] = "(Incorrect Decimal)";
 
   test_debug(decimal, check);
@@ -27,7 +27,7 @@ END_TEST
 
 START_TEST(test_debug_fail3) {
   // степень 29 (показатель степени должен быть от 0 до 28)
-  s21_decimal decimal = {{0, 0, 0, 0x1D0000}};
+  my_decimal decimal = {{0, 0, 0, 0x1D0000}};
   char check[1024] = "(Incorrect Decimal)";
 
   test_debug(decimal, check);
@@ -36,7 +36,7 @@ END_TEST
 
 START_TEST(test_debug_fail4) {
   // степень 28 (что корректно), но биты 0-15 не нули (младший бит)
-  s21_decimal decimal = {{-1, 0, 0, 0x1C0001}};
+  my_decimal decimal = {{-1, 0, 0, 0x1C0001}};
   char check[1024] = "(Incorrect Decimal)";
 
   test_debug(decimal, check);
@@ -45,7 +45,7 @@ END_TEST
 
 START_TEST(test_debug_fail5) {
   // степень 28 (что корректно), но биты 0-15 не нули (старший бит)
-  s21_decimal decimal = {{-1, 0, 0, 0x1C8000}};
+  my_decimal decimal = {{-1, 0, 0, 0x1C8000}};
   char check[1024] = "(Incorrect Decimal)";
 
   test_debug(decimal, check);
@@ -54,7 +54,7 @@ END_TEST
 
 START_TEST(test_debug_fail6) {
   // степень 28 (что корректно), но биты 24-30 не нули (младший бит)
-  s21_decimal decimal = {{-1, 0, 0, 0x11C0000}};
+  my_decimal decimal = {{-1, 0, 0, 0x11C0000}};
   char check[1024] = "(Incorrect Decimal)";
 
   test_debug(decimal, check);
@@ -63,7 +63,7 @@ END_TEST
 
 START_TEST(test_debug_fail7) {
   // степень 28 (что корректно), но биты 24-30 не нули (старший бит)
-  s21_decimal decimal = {{-1, 0, 0, 0x401C0000}};
+  my_decimal decimal = {{-1, 0, 0, 0x401C0000}};
   char check[1024] = "(Incorrect Decimal)";
 
   test_debug(decimal, check);
@@ -72,7 +72,7 @@ END_TEST
 
 START_TEST(test_debug_fail8) {
   // Просто все единицы
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF}};
   char check[1024] = "(Incorrect Decimal)";
 
   test_debug(decimal, check);
@@ -86,7 +86,7 @@ END_TEST
 // Тесты закомментированы, т.к. в тестируемой библиотеке их может не быть
 // Для своей надо тесмтировать, иначе покрытия тестами не будет
 START_TEST(test_debug_create1) {
-  // s21_decimal decimal = s21_create_decimal_from_array(0xFFFFFFFF, 0x1, 0x0,
+  // my_decimal decimal = my_create_decimal_from_array(0xFFFFFFFF, 0x1, 0x0,
   // 0x1C0000); char check[1024] = "0.0000000000000000008589934591";
 
   // test_debug(decimal, check);
@@ -94,7 +94,7 @@ START_TEST(test_debug_create1) {
 END_TEST
 
 START_TEST(test_debug_create2) {
-  // s21_decimal decimal = s21_create_decimal_from_data(1, 28, 0xFFFFFFFF, 0x1,
+  // my_decimal decimal = my_create_decimal_from_data(1, 28, 0xFFFFFFFF, 0x1,
   // 0x0); char check[1024] = "-0.0000000000000000008589934591";
 
   // test_debug(decimal, check);
@@ -102,7 +102,7 @@ START_TEST(test_debug_create2) {
 END_TEST
 
 START_TEST(test_debug_create3) {
-  // s21_decimal decimal = s21_create_decimal_from_strings(
+  // my_decimal decimal = my_create_decimal_from_strings(
   //     "11111111 11111111 11111111 11111111",
   //     "11111111 11111111 11111111 11111111",
   //     "00000000 00000000 00000000 00000001",
@@ -114,7 +114,7 @@ START_TEST(test_debug_create3) {
 END_TEST
 
 START_TEST(test_debug_create4) {
-  // s21_decimal decimal = s21_create_decimal_from_strings(
+  // my_decimal decimal = my_create_decimal_from_strings(
   //     "11111111 11111111 11111111 11111111",
   //     "11111111 11111111 11111111 11111111",
   //     "00000000 00000000 00000000 00000051",
@@ -132,7 +132,7 @@ END_TEST
 
 START_TEST(test_debug_ok1) {
   // 79228162514264337593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   char check[1024] = "79228162514264337593543950335";
 
   test_debug(decimal, check);
@@ -140,7 +140,7 @@ START_TEST(test_debug_ok1) {
 
 START_TEST(test_debug_ok2) {
   // -79228162514264337593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   char check[1024] = "-79228162514264337593543950335";
 
   test_debug(decimal, check);
@@ -148,7 +148,7 @@ START_TEST(test_debug_ok2) {
 
 START_TEST(test_debug_ok3) {
   // 7922816251426433759354395033.5
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x10000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x10000}};
   char check[1024] = "7922816251426433759354395033.5";
 
   test_debug(decimal, check);
@@ -156,7 +156,7 @@ START_TEST(test_debug_ok3) {
 
 START_TEST(test_debug_ok4) {
   // -7922816251426433759354395033.5
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80010000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80010000}};
   char check[1024] = "-7922816251426433759354395033.5";
 
   test_debug(decimal, check);
@@ -164,7 +164,7 @@ START_TEST(test_debug_ok4) {
 
 START_TEST(test_debug_ok5) {
   // 792281625142643375935439503.35
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x20000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x20000}};
   char check[1024] = "792281625142643375935439503.35";
 
   test_debug(decimal, check);
@@ -172,7 +172,7 @@ START_TEST(test_debug_ok5) {
 
 START_TEST(test_debug_ok6) {
   // -792281625142643375935439503.35
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80020000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80020000}};
   char check[1024] = "-792281625142643375935439503.35";
 
   test_debug(decimal, check);
@@ -180,7 +180,7 @@ START_TEST(test_debug_ok6) {
 
 START_TEST(test_debug_ok7) {
   // 79228162514264337593543950.335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x30000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x30000}};
   char check[1024] = "79228162514264337593543950.335";
 
   test_debug(decimal, check);
@@ -188,7 +188,7 @@ START_TEST(test_debug_ok7) {
 
 START_TEST(test_debug_ok8) {
   // -79228162514264337593543950.335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80030000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80030000}};
   char check[1024] = "-79228162514264337593543950.335";
 
   test_debug(decimal, check);
@@ -196,7 +196,7 @@ START_TEST(test_debug_ok8) {
 
 START_TEST(test_debug_ok9) {
   // 7922816251426433759354395.0335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x40000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x40000}};
   char check[1024] = "7922816251426433759354395.0335";
 
   test_debug(decimal, check);
@@ -204,7 +204,7 @@ START_TEST(test_debug_ok9) {
 
 START_TEST(test_debug_ok10) {
   // -7922816251426433759354395.0335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80040000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80040000}};
   char check[1024] = "-7922816251426433759354395.0335";
 
   test_debug(decimal, check);
@@ -212,7 +212,7 @@ START_TEST(test_debug_ok10) {
 
 START_TEST(test_debug_ok11) {
   // 792281625142643375935439.50335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x50000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x50000}};
   char check[1024] = "792281625142643375935439.50335";
 
   test_debug(decimal, check);
@@ -220,7 +220,7 @@ START_TEST(test_debug_ok11) {
 
 START_TEST(test_debug_ok12) {
   // -792281625142643375935439.50335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80050000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80050000}};
   char check[1024] = "-792281625142643375935439.50335";
 
   test_debug(decimal, check);
@@ -228,7 +228,7 @@ START_TEST(test_debug_ok12) {
 
 START_TEST(test_debug_ok13) {
   // 79228162514264337593543.950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x60000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x60000}};
   char check[1024] = "79228162514264337593543.950335";
 
   test_debug(decimal, check);
@@ -236,7 +236,7 @@ START_TEST(test_debug_ok13) {
 
 START_TEST(test_debug_ok14) {
   // -79228162514264337593543.950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80060000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80060000}};
   char check[1024] = "-79228162514264337593543.950335";
 
   test_debug(decimal, check);
@@ -244,7 +244,7 @@ START_TEST(test_debug_ok14) {
 
 START_TEST(test_debug_ok15) {
   // 7922816251426433759354.3950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x70000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x70000}};
   char check[1024] = "7922816251426433759354.3950335";
 
   test_debug(decimal, check);
@@ -252,7 +252,7 @@ START_TEST(test_debug_ok15) {
 
 START_TEST(test_debug_ok16) {
   // -7922816251426433759354.3950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80070000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80070000}};
   char check[1024] = "-7922816251426433759354.3950335";
 
   test_debug(decimal, check);
@@ -260,7 +260,7 @@ START_TEST(test_debug_ok16) {
 
 START_TEST(test_debug_ok17) {
   // 792281625142643375935.43950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000}};
   char check[1024] = "792281625142643375935.43950335";
 
   test_debug(decimal, check);
@@ -268,7 +268,7 @@ START_TEST(test_debug_ok17) {
 
 START_TEST(test_debug_ok18) {
   // -792281625142643375935.43950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80080000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80080000}};
   char check[1024] = "-792281625142643375935.43950335";
 
   test_debug(decimal, check);
@@ -276,7 +276,7 @@ START_TEST(test_debug_ok18) {
 
 START_TEST(test_debug_ok19) {
   // 79228162514264337593.543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x90000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x90000}};
   char check[1024] = "79228162514264337593.543950335";
 
   test_debug(decimal, check);
@@ -284,7 +284,7 @@ START_TEST(test_debug_ok19) {
 
 START_TEST(test_debug_ok20) {
   // -79228162514264337593.543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80090000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80090000}};
   char check[1024] = "-79228162514264337593.543950335";
 
   test_debug(decimal, check);
@@ -292,7 +292,7 @@ START_TEST(test_debug_ok20) {
 
 START_TEST(test_debug_ok21) {
   // 7922816251426433759.3543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xA0000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xA0000}};
   char check[1024] = "7922816251426433759.3543950335";
 
   test_debug(decimal, check);
@@ -300,7 +300,7 @@ START_TEST(test_debug_ok21) {
 
 START_TEST(test_debug_ok22) {
   // -7922816251426433759.3543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x800A0000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x800A0000}};
   char check[1024] = "-7922816251426433759.3543950335";
 
   test_debug(decimal, check);
@@ -308,7 +308,7 @@ START_TEST(test_debug_ok22) {
 
 START_TEST(test_debug_ok23) {
   // 792281625142643375.93543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xB0000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xB0000}};
   char check[1024] = "792281625142643375.93543950335";
 
   test_debug(decimal, check);
@@ -316,7 +316,7 @@ START_TEST(test_debug_ok23) {
 
 START_TEST(test_debug_ok24) {
   // -792281625142643375.93543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x800B0000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x800B0000}};
   char check[1024] = "-792281625142643375.93543950335";
 
   test_debug(decimal, check);
@@ -324,7 +324,7 @@ START_TEST(test_debug_ok24) {
 
 START_TEST(test_debug_ok25) {
   // 79228162514264337.593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xC0000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xC0000}};
   char check[1024] = "79228162514264337.593543950335";
 
   test_debug(decimal, check);
@@ -332,7 +332,7 @@ START_TEST(test_debug_ok25) {
 
 START_TEST(test_debug_ok26) {
   // -79228162514264337.593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x800C0000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x800C0000}};
   char check[1024] = "-79228162514264337.593543950335";
 
   test_debug(decimal, check);
@@ -340,7 +340,7 @@ START_TEST(test_debug_ok26) {
 
 START_TEST(test_debug_ok27) {
   // 7922816251426433.7593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xD0000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xD0000}};
   char check[1024] = "7922816251426433.7593543950335";
 
   test_debug(decimal, check);
@@ -348,7 +348,7 @@ START_TEST(test_debug_ok27) {
 
 START_TEST(test_debug_ok28) {
   // -7922816251426433.7593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x800D0000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x800D0000}};
   char check[1024] = "-7922816251426433.7593543950335";
 
   test_debug(decimal, check);
@@ -356,7 +356,7 @@ START_TEST(test_debug_ok28) {
 
 START_TEST(test_debug_ok29) {
   // 792281625142643.37593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xE0000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xE0000}};
   char check[1024] = "792281625142643.37593543950335";
 
   test_debug(decimal, check);
@@ -364,7 +364,7 @@ START_TEST(test_debug_ok29) {
 
 START_TEST(test_debug_ok30) {
   // -792281625142643.37593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x800E0000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x800E0000}};
   char check[1024] = "-792281625142643.37593543950335";
 
   test_debug(decimal, check);
@@ -372,7 +372,7 @@ START_TEST(test_debug_ok30) {
 
 START_TEST(test_debug_ok31) {
   // 79228162514264.337593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xF0000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xF0000}};
   char check[1024] = "79228162514264.337593543950335";
 
   test_debug(decimal, check);
@@ -380,7 +380,7 @@ START_TEST(test_debug_ok31) {
 
 START_TEST(test_debug_ok32) {
   // -79228162514264.337593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x800F0000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x800F0000}};
   char check[1024] = "-79228162514264.337593543950335";
 
   test_debug(decimal, check);
@@ -388,7 +388,7 @@ START_TEST(test_debug_ok32) {
 
 START_TEST(test_debug_ok33) {
   // 7922816251426.4337593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x100000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x100000}};
   char check[1024] = "7922816251426.4337593543950335";
 
   test_debug(decimal, check);
@@ -396,7 +396,7 @@ START_TEST(test_debug_ok33) {
 
 START_TEST(test_debug_ok34) {
   // -7922816251426.4337593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80100000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80100000}};
   char check[1024] = "-7922816251426.4337593543950335";
 
   test_debug(decimal, check);
@@ -404,7 +404,7 @@ START_TEST(test_debug_ok34) {
 
 START_TEST(test_debug_ok35) {
   // 792281625142.64337593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x110000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x110000}};
   char check[1024] = "792281625142.64337593543950335";
 
   test_debug(decimal, check);
@@ -412,7 +412,7 @@ START_TEST(test_debug_ok35) {
 
 START_TEST(test_debug_ok36) {
   // -792281625142.64337593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80110000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80110000}};
   char check[1024] = "-792281625142.64337593543950335";
 
   test_debug(decimal, check);
@@ -420,7 +420,7 @@ START_TEST(test_debug_ok36) {
 
 START_TEST(test_debug_ok37) {
   // 79228162514.264337593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x120000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x120000}};
   char check[1024] = "79228162514.264337593543950335";
 
   test_debug(decimal, check);
@@ -428,7 +428,7 @@ START_TEST(test_debug_ok37) {
 
 START_TEST(test_debug_ok38) {
   // -79228162514.264337593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80120000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80120000}};
   char check[1024] = "-79228162514.264337593543950335";
 
   test_debug(decimal, check);
@@ -436,7 +436,7 @@ START_TEST(test_debug_ok38) {
 
 START_TEST(test_debug_ok39) {
   // 7922816251.4264337593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x130000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x130000}};
   char check[1024] = "7922816251.4264337593543950335";
 
   test_debug(decimal, check);
@@ -444,7 +444,7 @@ START_TEST(test_debug_ok39) {
 
 START_TEST(test_debug_ok40) {
   // -7922816251.4264337593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80130000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80130000}};
   char check[1024] = "-7922816251.4264337593543950335";
 
   test_debug(decimal, check);
@@ -452,7 +452,7 @@ START_TEST(test_debug_ok40) {
 
 START_TEST(test_debug_ok41) {
   // 792281625.14264337593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x140000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x140000}};
   char check[1024] = "792281625.14264337593543950335";
 
   test_debug(decimal, check);
@@ -460,7 +460,7 @@ START_TEST(test_debug_ok41) {
 
 START_TEST(test_debug_ok42) {
   // -792281625.14264337593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80140000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80140000}};
   char check[1024] = "-792281625.14264337593543950335";
 
   test_debug(decimal, check);
@@ -468,7 +468,7 @@ START_TEST(test_debug_ok42) {
 
 START_TEST(test_debug_ok43) {
   // 79228162.514264337593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x150000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x150000}};
   char check[1024] = "79228162.514264337593543950335";
 
   test_debug(decimal, check);
@@ -476,7 +476,7 @@ START_TEST(test_debug_ok43) {
 
 START_TEST(test_debug_ok44) {
   // -79228162.514264337593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80150000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80150000}};
   char check[1024] = "-79228162.514264337593543950335";
 
   test_debug(decimal, check);
@@ -484,7 +484,7 @@ START_TEST(test_debug_ok44) {
 
 START_TEST(test_debug_ok45) {
   // 7922816.2514264337593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x160000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x160000}};
   char check[1024] = "7922816.2514264337593543950335";
 
   test_debug(decimal, check);
@@ -492,7 +492,7 @@ START_TEST(test_debug_ok45) {
 
 START_TEST(test_debug_ok46) {
   // -7922816.2514264337593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80160000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80160000}};
   char check[1024] = "-7922816.2514264337593543950335";
 
   test_debug(decimal, check);
@@ -500,7 +500,7 @@ START_TEST(test_debug_ok46) {
 
 START_TEST(test_debug_ok47) {
   // 792281.62514264337593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x170000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x170000}};
   char check[1024] = "792281.62514264337593543950335";
 
   test_debug(decimal, check);
@@ -508,7 +508,7 @@ START_TEST(test_debug_ok47) {
 
 START_TEST(test_debug_ok48) {
   // -792281.62514264337593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80170000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80170000}};
   char check[1024] = "-792281.62514264337593543950335";
 
   test_debug(decimal, check);
@@ -516,7 +516,7 @@ START_TEST(test_debug_ok48) {
 
 START_TEST(test_debug_ok49) {
   // 79228.162514264337593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x180000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x180000}};
   char check[1024] = "79228.162514264337593543950335";
 
   test_debug(decimal, check);
@@ -524,7 +524,7 @@ START_TEST(test_debug_ok49) {
 
 START_TEST(test_debug_ok50) {
   // -79228.162514264337593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80180000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80180000}};
   char check[1024] = "-79228.162514264337593543950335";
 
   test_debug(decimal, check);
@@ -532,7 +532,7 @@ START_TEST(test_debug_ok50) {
 
 START_TEST(test_debug_ok51) {
   // 7922.8162514264337593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x190000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x190000}};
   char check[1024] = "7922.8162514264337593543950335";
 
   test_debug(decimal, check);
@@ -540,7 +540,7 @@ START_TEST(test_debug_ok51) {
 
 START_TEST(test_debug_ok52) {
   // -7922.8162514264337593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80190000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80190000}};
   char check[1024] = "-7922.8162514264337593543950335";
 
   test_debug(decimal, check);
@@ -548,7 +548,7 @@ START_TEST(test_debug_ok52) {
 
 START_TEST(test_debug_ok53) {
   // 792.28162514264337593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x1A0000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x1A0000}};
   char check[1024] = "792.28162514264337593543950335";
 
   test_debug(decimal, check);
@@ -556,7 +556,7 @@ START_TEST(test_debug_ok53) {
 
 START_TEST(test_debug_ok54) {
   // -792.28162514264337593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x801A0000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x801A0000}};
   char check[1024] = "-792.28162514264337593543950335";
 
   test_debug(decimal, check);
@@ -564,7 +564,7 @@ START_TEST(test_debug_ok54) {
 
 START_TEST(test_debug_ok55) {
   // 79.228162514264337593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x1B0000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x1B0000}};
   char check[1024] = "79.228162514264337593543950335";
 
   test_debug(decimal, check);
@@ -572,7 +572,7 @@ START_TEST(test_debug_ok55) {
 
 START_TEST(test_debug_ok56) {
   // -79.228162514264337593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x801B0000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x801B0000}};
   char check[1024] = "-79.228162514264337593543950335";
 
   test_debug(decimal, check);
@@ -580,7 +580,7 @@ START_TEST(test_debug_ok56) {
 
 START_TEST(test_debug_ok57) {
   // 7.9228162514264337593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x1C0000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x1C0000}};
   char check[1024] = "7.9228162514264337593543950335";
 
   test_debug(decimal, check);
@@ -588,7 +588,7 @@ START_TEST(test_debug_ok57) {
 
 START_TEST(test_debug_ok58) {
   // -7.9228162514264337593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x801C0000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x801C0000}};
   char check[1024] = "-7.9228162514264337593543950335";
 
   test_debug(decimal, check);
@@ -596,7 +596,7 @@ START_TEST(test_debug_ok58) {
 
 START_TEST(test_debug_ok59) {
   // 79228162514264337593543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   char check[1024] = "79228162514264337593543950334";
 
   test_debug(decimal, check);
@@ -604,7 +604,7 @@ START_TEST(test_debug_ok59) {
 
 START_TEST(test_debug_ok60) {
   // -79228162514264337593543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   char check[1024] = "-79228162514264337593543950334";
 
   test_debug(decimal, check);
@@ -612,7 +612,7 @@ START_TEST(test_debug_ok60) {
 
 START_TEST(test_debug_ok61) {
   // 7922816251426433759354395033.4
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x10000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x10000}};
   char check[1024] = "7922816251426433759354395033.4";
 
   test_debug(decimal, check);
@@ -620,7 +620,7 @@ START_TEST(test_debug_ok61) {
 
 START_TEST(test_debug_ok62) {
   // -7922816251426433759354395033.4
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80010000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80010000}};
   char check[1024] = "-7922816251426433759354395033.4";
 
   test_debug(decimal, check);
@@ -628,7 +628,7 @@ START_TEST(test_debug_ok62) {
 
 START_TEST(test_debug_ok63) {
   // 792281625142643375935439503.34
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x20000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x20000}};
   char check[1024] = "792281625142643375935439503.34";
 
   test_debug(decimal, check);
@@ -636,7 +636,7 @@ START_TEST(test_debug_ok63) {
 
 START_TEST(test_debug_ok64) {
   // -792281625142643375935439503.34
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80020000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80020000}};
   char check[1024] = "-792281625142643375935439503.34";
 
   test_debug(decimal, check);
@@ -644,7 +644,7 @@ START_TEST(test_debug_ok64) {
 
 START_TEST(test_debug_ok65) {
   // 79228162514264337593543950.334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x30000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x30000}};
   char check[1024] = "79228162514264337593543950.334";
 
   test_debug(decimal, check);
@@ -652,7 +652,7 @@ START_TEST(test_debug_ok65) {
 
 START_TEST(test_debug_ok66) {
   // -79228162514264337593543950.334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80030000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80030000}};
   char check[1024] = "-79228162514264337593543950.334";
 
   test_debug(decimal, check);
@@ -660,7 +660,7 @@ START_TEST(test_debug_ok66) {
 
 START_TEST(test_debug_ok67) {
   // 7922816251426433759354395.0334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x40000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x40000}};
   char check[1024] = "7922816251426433759354395.0334";
 
   test_debug(decimal, check);
@@ -668,7 +668,7 @@ START_TEST(test_debug_ok67) {
 
 START_TEST(test_debug_ok68) {
   // -7922816251426433759354395.0334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80040000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80040000}};
   char check[1024] = "-7922816251426433759354395.0334";
 
   test_debug(decimal, check);
@@ -676,7 +676,7 @@ START_TEST(test_debug_ok68) {
 
 START_TEST(test_debug_ok69) {
   // 792281625142643375935439.50334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x50000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x50000}};
   char check[1024] = "792281625142643375935439.50334";
 
   test_debug(decimal, check);
@@ -684,7 +684,7 @@ START_TEST(test_debug_ok69) {
 
 START_TEST(test_debug_ok70) {
   // -792281625142643375935439.50334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80050000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80050000}};
   char check[1024] = "-792281625142643375935439.50334";
 
   test_debug(decimal, check);
@@ -692,7 +692,7 @@ START_TEST(test_debug_ok70) {
 
 START_TEST(test_debug_ok71) {
   // 79228162514264337593543.950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x60000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x60000}};
   char check[1024] = "79228162514264337593543.950334";
 
   test_debug(decimal, check);
@@ -700,7 +700,7 @@ START_TEST(test_debug_ok71) {
 
 START_TEST(test_debug_ok72) {
   // -79228162514264337593543.950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80060000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80060000}};
   char check[1024] = "-79228162514264337593543.950334";
 
   test_debug(decimal, check);
@@ -708,7 +708,7 @@ START_TEST(test_debug_ok72) {
 
 START_TEST(test_debug_ok73) {
   // 7922816251426433759354.3950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x70000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x70000}};
   char check[1024] = "7922816251426433759354.3950334";
 
   test_debug(decimal, check);
@@ -716,7 +716,7 @@ START_TEST(test_debug_ok73) {
 
 START_TEST(test_debug_ok74) {
   // -7922816251426433759354.3950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80070000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80070000}};
   char check[1024] = "-7922816251426433759354.3950334";
 
   test_debug(decimal, check);
@@ -724,7 +724,7 @@ START_TEST(test_debug_ok74) {
 
 START_TEST(test_debug_ok75) {
   // 792281625142643375935.43950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000}};
   char check[1024] = "792281625142643375935.43950334";
 
   test_debug(decimal, check);
@@ -732,7 +732,7 @@ START_TEST(test_debug_ok75) {
 
 START_TEST(test_debug_ok76) {
   // -792281625142643375935.43950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80080000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80080000}};
   char check[1024] = "-792281625142643375935.43950334";
 
   test_debug(decimal, check);
@@ -740,7 +740,7 @@ START_TEST(test_debug_ok76) {
 
 START_TEST(test_debug_ok77) {
   // 79228162514264337593.543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x90000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x90000}};
   char check[1024] = "79228162514264337593.543950334";
 
   test_debug(decimal, check);
@@ -748,7 +748,7 @@ START_TEST(test_debug_ok77) {
 
 START_TEST(test_debug_ok78) {
   // -79228162514264337593.543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80090000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80090000}};
   char check[1024] = "-79228162514264337593.543950334";
 
   test_debug(decimal, check);
@@ -756,7 +756,7 @@ START_TEST(test_debug_ok78) {
 
 START_TEST(test_debug_ok79) {
   // 7922816251426433759.3543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0xA0000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0xA0000}};
   char check[1024] = "7922816251426433759.3543950334";
 
   test_debug(decimal, check);
@@ -764,7 +764,7 @@ START_TEST(test_debug_ok79) {
 
 START_TEST(test_debug_ok80) {
   // -7922816251426433759.3543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x800A0000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x800A0000}};
   char check[1024] = "-7922816251426433759.3543950334";
 
   test_debug(decimal, check);
@@ -772,7 +772,7 @@ START_TEST(test_debug_ok80) {
 
 START_TEST(test_debug_ok81) {
   // 792281625142643375.93543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0xB0000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0xB0000}};
   char check[1024] = "792281625142643375.93543950334";
 
   test_debug(decimal, check);
@@ -780,7 +780,7 @@ START_TEST(test_debug_ok81) {
 
 START_TEST(test_debug_ok82) {
   // -792281625142643375.93543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x800B0000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x800B0000}};
   char check[1024] = "-792281625142643375.93543950334";
 
   test_debug(decimal, check);
@@ -788,7 +788,7 @@ START_TEST(test_debug_ok82) {
 
 START_TEST(test_debug_ok83) {
   // 79228162514264337.593543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0xC0000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0xC0000}};
   char check[1024] = "79228162514264337.593543950334";
 
   test_debug(decimal, check);
@@ -796,7 +796,7 @@ START_TEST(test_debug_ok83) {
 
 START_TEST(test_debug_ok84) {
   // -79228162514264337.593543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x800C0000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x800C0000}};
   char check[1024] = "-79228162514264337.593543950334";
 
   test_debug(decimal, check);
@@ -804,7 +804,7 @@ START_TEST(test_debug_ok84) {
 
 START_TEST(test_debug_ok85) {
   // 7922816251426433.7593543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0xD0000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0xD0000}};
   char check[1024] = "7922816251426433.7593543950334";
 
   test_debug(decimal, check);
@@ -812,7 +812,7 @@ START_TEST(test_debug_ok85) {
 
 START_TEST(test_debug_ok86) {
   // -7922816251426433.7593543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x800D0000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x800D0000}};
   char check[1024] = "-7922816251426433.7593543950334";
 
   test_debug(decimal, check);
@@ -820,7 +820,7 @@ START_TEST(test_debug_ok86) {
 
 START_TEST(test_debug_ok87) {
   // 792281625142643.37593543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0xE0000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0xE0000}};
   char check[1024] = "792281625142643.37593543950334";
 
   test_debug(decimal, check);
@@ -828,7 +828,7 @@ START_TEST(test_debug_ok87) {
 
 START_TEST(test_debug_ok88) {
   // -792281625142643.37593543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x800E0000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x800E0000}};
   char check[1024] = "-792281625142643.37593543950334";
 
   test_debug(decimal, check);
@@ -836,7 +836,7 @@ START_TEST(test_debug_ok88) {
 
 START_TEST(test_debug_ok89) {
   // 79228162514264.337593543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0xF0000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0xF0000}};
   char check[1024] = "79228162514264.337593543950334";
 
   test_debug(decimal, check);
@@ -844,7 +844,7 @@ START_TEST(test_debug_ok89) {
 
 START_TEST(test_debug_ok90) {
   // -79228162514264.337593543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x800F0000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x800F0000}};
   char check[1024] = "-79228162514264.337593543950334";
 
   test_debug(decimal, check);
@@ -852,7 +852,7 @@ START_TEST(test_debug_ok90) {
 
 START_TEST(test_debug_ok91) {
   // 7922816251426.4337593543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x100000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x100000}};
   char check[1024] = "7922816251426.4337593543950334";
 
   test_debug(decimal, check);
@@ -860,7 +860,7 @@ START_TEST(test_debug_ok91) {
 
 START_TEST(test_debug_ok92) {
   // -7922816251426.4337593543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80100000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80100000}};
   char check[1024] = "-7922816251426.4337593543950334";
 
   test_debug(decimal, check);
@@ -868,7 +868,7 @@ START_TEST(test_debug_ok92) {
 
 START_TEST(test_debug_ok93) {
   // 792281625142.64337593543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x110000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x110000}};
   char check[1024] = "792281625142.64337593543950334";
 
   test_debug(decimal, check);
@@ -876,7 +876,7 @@ START_TEST(test_debug_ok93) {
 
 START_TEST(test_debug_ok94) {
   // -792281625142.64337593543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80110000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80110000}};
   char check[1024] = "-792281625142.64337593543950334";
 
   test_debug(decimal, check);
@@ -884,7 +884,7 @@ START_TEST(test_debug_ok94) {
 
 START_TEST(test_debug_ok95) {
   // 79228162514.264337593543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x120000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x120000}};
   char check[1024] = "79228162514.264337593543950334";
 
   test_debug(decimal, check);
@@ -892,7 +892,7 @@ START_TEST(test_debug_ok95) {
 
 START_TEST(test_debug_ok96) {
   // -79228162514.264337593543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80120000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80120000}};
   char check[1024] = "-79228162514.264337593543950334";
 
   test_debug(decimal, check);
@@ -900,7 +900,7 @@ START_TEST(test_debug_ok96) {
 
 START_TEST(test_debug_ok97) {
   // 7922816251.4264337593543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x130000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x130000}};
   char check[1024] = "7922816251.4264337593543950334";
 
   test_debug(decimal, check);
@@ -908,7 +908,7 @@ START_TEST(test_debug_ok97) {
 
 START_TEST(test_debug_ok98) {
   // -7922816251.4264337593543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80130000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80130000}};
   char check[1024] = "-7922816251.4264337593543950334";
 
   test_debug(decimal, check);
@@ -916,7 +916,7 @@ START_TEST(test_debug_ok98) {
 
 START_TEST(test_debug_ok99) {
   // 792281625.14264337593543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x140000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x140000}};
   char check[1024] = "792281625.14264337593543950334";
 
   test_debug(decimal, check);
@@ -924,7 +924,7 @@ START_TEST(test_debug_ok99) {
 
 START_TEST(test_debug_ok100) {
   // -792281625.14264337593543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80140000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80140000}};
   char check[1024] = "-792281625.14264337593543950334";
 
   test_debug(decimal, check);
@@ -932,7 +932,7 @@ START_TEST(test_debug_ok100) {
 
 START_TEST(test_debug_ok101) {
   // 79228162.514264337593543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x150000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x150000}};
   char check[1024] = "79228162.514264337593543950334";
 
   test_debug(decimal, check);
@@ -940,7 +940,7 @@ START_TEST(test_debug_ok101) {
 
 START_TEST(test_debug_ok102) {
   // -79228162.514264337593543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80150000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80150000}};
   char check[1024] = "-79228162.514264337593543950334";
 
   test_debug(decimal, check);
@@ -948,7 +948,7 @@ START_TEST(test_debug_ok102) {
 
 START_TEST(test_debug_ok103) {
   // 7922816.2514264337593543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x160000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x160000}};
   char check[1024] = "7922816.2514264337593543950334";
 
   test_debug(decimal, check);
@@ -956,7 +956,7 @@ START_TEST(test_debug_ok103) {
 
 START_TEST(test_debug_ok104) {
   // -7922816.2514264337593543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80160000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80160000}};
   char check[1024] = "-7922816.2514264337593543950334";
 
   test_debug(decimal, check);
@@ -964,7 +964,7 @@ START_TEST(test_debug_ok104) {
 
 START_TEST(test_debug_ok105) {
   // 792281.62514264337593543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x170000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x170000}};
   char check[1024] = "792281.62514264337593543950334";
 
   test_debug(decimal, check);
@@ -972,7 +972,7 @@ START_TEST(test_debug_ok105) {
 
 START_TEST(test_debug_ok106) {
   // -792281.62514264337593543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80170000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80170000}};
   char check[1024] = "-792281.62514264337593543950334";
 
   test_debug(decimal, check);
@@ -980,7 +980,7 @@ START_TEST(test_debug_ok106) {
 
 START_TEST(test_debug_ok107) {
   // 79228.162514264337593543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x180000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x180000}};
   char check[1024] = "79228.162514264337593543950334";
 
   test_debug(decimal, check);
@@ -988,7 +988,7 @@ START_TEST(test_debug_ok107) {
 
 START_TEST(test_debug_ok108) {
   // -79228.162514264337593543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80180000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80180000}};
   char check[1024] = "-79228.162514264337593543950334";
 
   test_debug(decimal, check);
@@ -996,7 +996,7 @@ START_TEST(test_debug_ok108) {
 
 START_TEST(test_debug_ok109) {
   // 7922.8162514264337593543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x190000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x190000}};
   char check[1024] = "7922.8162514264337593543950334";
 
   test_debug(decimal, check);
@@ -1004,7 +1004,7 @@ START_TEST(test_debug_ok109) {
 
 START_TEST(test_debug_ok110) {
   // -7922.8162514264337593543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80190000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80190000}};
   char check[1024] = "-7922.8162514264337593543950334";
 
   test_debug(decimal, check);
@@ -1012,7 +1012,7 @@ START_TEST(test_debug_ok110) {
 
 START_TEST(test_debug_ok111) {
   // 792.28162514264337593543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x1A0000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x1A0000}};
   char check[1024] = "792.28162514264337593543950334";
 
   test_debug(decimal, check);
@@ -1020,7 +1020,7 @@ START_TEST(test_debug_ok111) {
 
 START_TEST(test_debug_ok112) {
   // -792.28162514264337593543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x801A0000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x801A0000}};
   char check[1024] = "-792.28162514264337593543950334";
 
   test_debug(decimal, check);
@@ -1028,7 +1028,7 @@ START_TEST(test_debug_ok112) {
 
 START_TEST(test_debug_ok113) {
   // 79.228162514264337593543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x1B0000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x1B0000}};
   char check[1024] = "79.228162514264337593543950334";
 
   test_debug(decimal, check);
@@ -1036,7 +1036,7 @@ START_TEST(test_debug_ok113) {
 
 START_TEST(test_debug_ok114) {
   // -79.228162514264337593543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x801B0000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x801B0000}};
   char check[1024] = "-79.228162514264337593543950334";
 
   test_debug(decimal, check);
@@ -1044,7 +1044,7 @@ START_TEST(test_debug_ok114) {
 
 START_TEST(test_debug_ok115) {
   // 7.9228162514264337593543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x1C0000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x1C0000}};
   char check[1024] = "7.9228162514264337593543950334";
 
   test_debug(decimal, check);
@@ -1052,7 +1052,7 @@ START_TEST(test_debug_ok115) {
 
 START_TEST(test_debug_ok116) {
   // -7.9228162514264337593543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x801C0000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x801C0000}};
   char check[1024] = "-7.9228162514264337593543950334";
 
   test_debug(decimal, check);
@@ -1060,7 +1060,7 @@ START_TEST(test_debug_ok116) {
 
 START_TEST(test_debug_ok117) {
   // 52818775009509558395695966890
-  s21_decimal decimal = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x0}};
+  my_decimal decimal = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x0}};
   char check[1024] = "52818775009509558395695966890";
 
   test_debug(decimal, check);
@@ -1068,7 +1068,7 @@ START_TEST(test_debug_ok117) {
 
 START_TEST(test_debug_ok118) {
   // -52818775009509558395695966890
-  s21_decimal decimal = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x80000000}};
+  my_decimal decimal = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x80000000}};
   char check[1024] = "-52818775009509558395695966890";
 
   test_debug(decimal, check);
@@ -1076,7 +1076,7 @@ START_TEST(test_debug_ok118) {
 
 START_TEST(test_debug_ok119) {
   // 5281877500950955839569596689.0
-  s21_decimal decimal = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x10000}};
+  my_decimal decimal = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x10000}};
   char check[1024] = "5281877500950955839569596689.0";
 
   test_debug(decimal, check);
@@ -1084,7 +1084,7 @@ START_TEST(test_debug_ok119) {
 
 START_TEST(test_debug_ok120) {
   // -5281877500950955839569596689.0
-  s21_decimal decimal = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x80010000}};
+  my_decimal decimal = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x80010000}};
   char check[1024] = "-5281877500950955839569596689.0";
 
   test_debug(decimal, check);
@@ -1092,7 +1092,7 @@ START_TEST(test_debug_ok120) {
 
 START_TEST(test_debug_ok121) {
   // 528187750.09509558395695966890
-  s21_decimal decimal = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x140000}};
+  my_decimal decimal = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x140000}};
   char check[1024] = "528187750.09509558395695966890";
 
   test_debug(decimal, check);
@@ -1100,7 +1100,7 @@ START_TEST(test_debug_ok121) {
 
 START_TEST(test_debug_ok122) {
   // -528187750.09509558395695966890
-  s21_decimal decimal = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x80140000}};
+  my_decimal decimal = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x80140000}};
   char check[1024] = "-528187750.09509558395695966890";
 
   test_debug(decimal, check);
@@ -1108,7 +1108,7 @@ START_TEST(test_debug_ok122) {
 
 START_TEST(test_debug_ok123) {
   // 5.2818775009509558395695966890
-  s21_decimal decimal = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x1C0000}};
+  my_decimal decimal = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x1C0000}};
   char check[1024] = "5.2818775009509558395695966890";
 
   test_debug(decimal, check);
@@ -1116,7 +1116,7 @@ START_TEST(test_debug_ok123) {
 
 START_TEST(test_debug_ok124) {
   // -5.2818775009509558395695966890
-  s21_decimal decimal = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x801C0000}};
+  my_decimal decimal = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x801C0000}};
   char check[1024] = "-5.2818775009509558395695966890";
 
   test_debug(decimal, check);
@@ -1124,7 +1124,7 @@ START_TEST(test_debug_ok124) {
 
 START_TEST(test_debug_ok125) {
   // 52818775009509558392832655360
-  s21_decimal decimal = {{0x0, 0xAAAAAAAA, 0xAAAAAAAA, 0x0}};
+  my_decimal decimal = {{0x0, 0xAAAAAAAA, 0xAAAAAAAA, 0x0}};
   char check[1024] = "52818775009509558392832655360";
 
   test_debug(decimal, check);
@@ -1132,7 +1132,7 @@ START_TEST(test_debug_ok125) {
 
 START_TEST(test_debug_ok126) {
   // -52818775009509558392832655360
-  s21_decimal decimal = {{0x0, 0xAAAAAAAA, 0xAAAAAAAA, 0x80000000}};
+  my_decimal decimal = {{0x0, 0xAAAAAAAA, 0xAAAAAAAA, 0x80000000}};
   char check[1024] = "-52818775009509558392832655360";
 
   test_debug(decimal, check);
@@ -1140,7 +1140,7 @@ START_TEST(test_debug_ok126) {
 
 START_TEST(test_debug_ok127) {
   // 5281877500950955839283265536.0
-  s21_decimal decimal = {{0x0, 0xAAAAAAAA, 0xAAAAAAAA, 0x10000}};
+  my_decimal decimal = {{0x0, 0xAAAAAAAA, 0xAAAAAAAA, 0x10000}};
   char check[1024] = "5281877500950955839283265536.0";
 
   test_debug(decimal, check);
@@ -1148,7 +1148,7 @@ START_TEST(test_debug_ok127) {
 
 START_TEST(test_debug_ok128) {
   // -5281877500950955839283265536.0
-  s21_decimal decimal = {{0x0, 0xAAAAAAAA, 0xAAAAAAAA, 0x80010000}};
+  my_decimal decimal = {{0x0, 0xAAAAAAAA, 0xAAAAAAAA, 0x80010000}};
   char check[1024] = "-5281877500950955839283265536.0";
 
   test_debug(decimal, check);
@@ -1156,7 +1156,7 @@ START_TEST(test_debug_ok128) {
 
 START_TEST(test_debug_ok129) {
   // 528187750.09509558392832655360
-  s21_decimal decimal = {{0x0, 0xAAAAAAAA, 0xAAAAAAAA, 0x140000}};
+  my_decimal decimal = {{0x0, 0xAAAAAAAA, 0xAAAAAAAA, 0x140000}};
   char check[1024] = "528187750.09509558392832655360";
 
   test_debug(decimal, check);
@@ -1164,7 +1164,7 @@ START_TEST(test_debug_ok129) {
 
 START_TEST(test_debug_ok130) {
   // -528187750.09509558392832655360
-  s21_decimal decimal = {{0x0, 0xAAAAAAAA, 0xAAAAAAAA, 0x80140000}};
+  my_decimal decimal = {{0x0, 0xAAAAAAAA, 0xAAAAAAAA, 0x80140000}};
   char check[1024] = "-528187750.09509558392832655360";
 
   test_debug(decimal, check);
@@ -1172,7 +1172,7 @@ START_TEST(test_debug_ok130) {
 
 START_TEST(test_debug_ok131) {
   // 5.2818775009509558392832655360
-  s21_decimal decimal = {{0x0, 0xAAAAAAAA, 0xAAAAAAAA, 0x1C0000}};
+  my_decimal decimal = {{0x0, 0xAAAAAAAA, 0xAAAAAAAA, 0x1C0000}};
   char check[1024] = "5.2818775009509558392832655360";
 
   test_debug(decimal, check);
@@ -1180,7 +1180,7 @@ START_TEST(test_debug_ok131) {
 
 START_TEST(test_debug_ok132) {
   // -5.2818775009509558392832655360
-  s21_decimal decimal = {{0x0, 0xAAAAAAAA, 0xAAAAAAAA, 0x801C0000}};
+  my_decimal decimal = {{0x0, 0xAAAAAAAA, 0xAAAAAAAA, 0x801C0000}};
   char check[1024] = "-5.2818775009509558392832655360";
 
   test_debug(decimal, check);
@@ -1188,7 +1188,7 @@ START_TEST(test_debug_ok132) {
 
 START_TEST(test_debug_ok133) {
   // 52818774997211729016086244010
-  s21_decimal decimal = {{0xAAAAAAAA, 0x0, 0xAAAAAAAA, 0x0}};
+  my_decimal decimal = {{0xAAAAAAAA, 0x0, 0xAAAAAAAA, 0x0}};
   char check[1024] = "52818774997211729016086244010";
 
   test_debug(decimal, check);
@@ -1196,7 +1196,7 @@ START_TEST(test_debug_ok133) {
 
 START_TEST(test_debug_ok134) {
   // -52818774997211729016086244010
-  s21_decimal decimal = {{0xAAAAAAAA, 0x0, 0xAAAAAAAA, 0x80000000}};
+  my_decimal decimal = {{0xAAAAAAAA, 0x0, 0xAAAAAAAA, 0x80000000}};
   char check[1024] = "-52818774997211729016086244010";
 
   test_debug(decimal, check);
@@ -1204,7 +1204,7 @@ START_TEST(test_debug_ok134) {
 
 START_TEST(test_debug_ok135) {
   // 5281877499721172901608624401.0
-  s21_decimal decimal = {{0xAAAAAAAA, 0x0, 0xAAAAAAAA, 0x10000}};
+  my_decimal decimal = {{0xAAAAAAAA, 0x0, 0xAAAAAAAA, 0x10000}};
   char check[1024] = "5281877499721172901608624401.0";
 
   test_debug(decimal, check);
@@ -1212,7 +1212,7 @@ START_TEST(test_debug_ok135) {
 
 START_TEST(test_debug_ok136) {
   // -5281877499721172901608624401.0
-  s21_decimal decimal = {{0xAAAAAAAA, 0x0, 0xAAAAAAAA, 0x80010000}};
+  my_decimal decimal = {{0xAAAAAAAA, 0x0, 0xAAAAAAAA, 0x80010000}};
   char check[1024] = "-5281877499721172901608624401.0";
 
   test_debug(decimal, check);
@@ -1220,7 +1220,7 @@ START_TEST(test_debug_ok136) {
 
 START_TEST(test_debug_ok137) {
   // 528187749.97211729016086244010
-  s21_decimal decimal = {{0xAAAAAAAA, 0x0, 0xAAAAAAAA, 0x140000}};
+  my_decimal decimal = {{0xAAAAAAAA, 0x0, 0xAAAAAAAA, 0x140000}};
   char check[1024] = "528187749.97211729016086244010";
 
   test_debug(decimal, check);
@@ -1228,7 +1228,7 @@ START_TEST(test_debug_ok137) {
 
 START_TEST(test_debug_ok138) {
   // -528187749.97211729016086244010
-  s21_decimal decimal = {{0xAAAAAAAA, 0x0, 0xAAAAAAAA, 0x80140000}};
+  my_decimal decimal = {{0xAAAAAAAA, 0x0, 0xAAAAAAAA, 0x80140000}};
   char check[1024] = "-528187749.97211729016086244010";
 
   test_debug(decimal, check);
@@ -1236,7 +1236,7 @@ START_TEST(test_debug_ok138) {
 
 START_TEST(test_debug_ok139) {
   // 5.2818774997211729016086244010
-  s21_decimal decimal = {{0xAAAAAAAA, 0x0, 0xAAAAAAAA, 0x1C0000}};
+  my_decimal decimal = {{0xAAAAAAAA, 0x0, 0xAAAAAAAA, 0x1C0000}};
   char check[1024] = "5.2818774997211729016086244010";
 
   test_debug(decimal, check);
@@ -1244,7 +1244,7 @@ START_TEST(test_debug_ok139) {
 
 START_TEST(test_debug_ok140) {
   // -5.2818774997211729016086244010
-  s21_decimal decimal = {{0xAAAAAAAA, 0x0, 0xAAAAAAAA, 0x801C0000}};
+  my_decimal decimal = {{0xAAAAAAAA, 0x0, 0xAAAAAAAA, 0x801C0000}};
   char check[1024] = "-5.2818774997211729016086244010";
 
   test_debug(decimal, check);
@@ -1252,7 +1252,7 @@ START_TEST(test_debug_ok140) {
 
 START_TEST(test_debug_ok141) {
   // 52818774997211729013222932480
-  s21_decimal decimal = {{0x0, 0x0, 0xAAAAAAAA, 0x0}};
+  my_decimal decimal = {{0x0, 0x0, 0xAAAAAAAA, 0x0}};
   char check[1024] = "52818774997211729013222932480";
 
   test_debug(decimal, check);
@@ -1260,7 +1260,7 @@ START_TEST(test_debug_ok141) {
 
 START_TEST(test_debug_ok142) {
   // -52818774997211729013222932480
-  s21_decimal decimal = {{0x0, 0x0, 0xAAAAAAAA, 0x80000000}};
+  my_decimal decimal = {{0x0, 0x0, 0xAAAAAAAA, 0x80000000}};
   char check[1024] = "-52818774997211729013222932480";
 
   test_debug(decimal, check);
@@ -1268,7 +1268,7 @@ START_TEST(test_debug_ok142) {
 
 START_TEST(test_debug_ok143) {
   // 5281877499721172901322293248.0
-  s21_decimal decimal = {{0x0, 0x0, 0xAAAAAAAA, 0x10000}};
+  my_decimal decimal = {{0x0, 0x0, 0xAAAAAAAA, 0x10000}};
   char check[1024] = "5281877499721172901322293248.0";
 
   test_debug(decimal, check);
@@ -1276,7 +1276,7 @@ START_TEST(test_debug_ok143) {
 
 START_TEST(test_debug_ok144) {
   // -5281877499721172901322293248.0
-  s21_decimal decimal = {{0x0, 0x0, 0xAAAAAAAA, 0x80010000}};
+  my_decimal decimal = {{0x0, 0x0, 0xAAAAAAAA, 0x80010000}};
   char check[1024] = "-5281877499721172901322293248.0";
 
   test_debug(decimal, check);
@@ -1284,7 +1284,7 @@ START_TEST(test_debug_ok144) {
 
 START_TEST(test_debug_ok145) {
   // 528187749.97211729013222932480
-  s21_decimal decimal = {{0x0, 0x0, 0xAAAAAAAA, 0x140000}};
+  my_decimal decimal = {{0x0, 0x0, 0xAAAAAAAA, 0x140000}};
   char check[1024] = "528187749.97211729013222932480";
 
   test_debug(decimal, check);
@@ -1292,7 +1292,7 @@ START_TEST(test_debug_ok145) {
 
 START_TEST(test_debug_ok146) {
   // -528187749.97211729013222932480
-  s21_decimal decimal = {{0x0, 0x0, 0xAAAAAAAA, 0x80140000}};
+  my_decimal decimal = {{0x0, 0x0, 0xAAAAAAAA, 0x80140000}};
   char check[1024] = "-528187749.97211729013222932480";
 
   test_debug(decimal, check);
@@ -1300,7 +1300,7 @@ START_TEST(test_debug_ok146) {
 
 START_TEST(test_debug_ok147) {
   // 5.2818774997211729013222932480
-  s21_decimal decimal = {{0x0, 0x0, 0xAAAAAAAA, 0x1C0000}};
+  my_decimal decimal = {{0x0, 0x0, 0xAAAAAAAA, 0x1C0000}};
   char check[1024] = "5.2818774997211729013222932480";
 
   test_debug(decimal, check);
@@ -1308,7 +1308,7 @@ START_TEST(test_debug_ok147) {
 
 START_TEST(test_debug_ok148) {
   // -5.2818774997211729013222932480
-  s21_decimal decimal = {{0x0, 0x0, 0xAAAAAAAA, 0x801C0000}};
+  my_decimal decimal = {{0x0, 0x0, 0xAAAAAAAA, 0x801C0000}};
   char check[1024] = "-5.2818774997211729013222932480";
 
   test_debug(decimal, check);
@@ -1316,7 +1316,7 @@ START_TEST(test_debug_ok148) {
 
 START_TEST(test_debug_ok149) {
   // 12297829382473034410
-  s21_decimal decimal = {{0xAAAAAAAA, 0xAAAAAAAA, 0x0, 0x0}};
+  my_decimal decimal = {{0xAAAAAAAA, 0xAAAAAAAA, 0x0, 0x0}};
   char check[1024] = "12297829382473034410";
 
   test_debug(decimal, check);
@@ -1324,7 +1324,7 @@ START_TEST(test_debug_ok149) {
 
 START_TEST(test_debug_ok150) {
   // -12297829382473034410
-  s21_decimal decimal = {{0xAAAAAAAA, 0xAAAAAAAA, 0x0, 0x80000000}};
+  my_decimal decimal = {{0xAAAAAAAA, 0xAAAAAAAA, 0x0, 0x80000000}};
   char check[1024] = "-12297829382473034410";
 
   test_debug(decimal, check);
@@ -1332,7 +1332,7 @@ START_TEST(test_debug_ok150) {
 
 START_TEST(test_debug_ok151) {
   // 1229782938247303441.0
-  s21_decimal decimal = {{0xAAAAAAAA, 0xAAAAAAAA, 0x0, 0x10000}};
+  my_decimal decimal = {{0xAAAAAAAA, 0xAAAAAAAA, 0x0, 0x10000}};
   char check[1024] = "1229782938247303441.0";
 
   test_debug(decimal, check);
@@ -1340,7 +1340,7 @@ START_TEST(test_debug_ok151) {
 
 START_TEST(test_debug_ok152) {
   // -1229782938247303441.0
-  s21_decimal decimal = {{0xAAAAAAAA, 0xAAAAAAAA, 0x0, 0x80010000}};
+  my_decimal decimal = {{0xAAAAAAAA, 0xAAAAAAAA, 0x0, 0x80010000}};
   char check[1024] = "-1229782938247303441.0";
 
   test_debug(decimal, check);
@@ -1348,7 +1348,7 @@ START_TEST(test_debug_ok152) {
 
 START_TEST(test_debug_ok153) {
   // 122978293.82473034410
-  s21_decimal decimal = {{0xAAAAAAAA, 0xAAAAAAAA, 0x0, 0xB0000}};
+  my_decimal decimal = {{0xAAAAAAAA, 0xAAAAAAAA, 0x0, 0xB0000}};
   char check[1024] = "122978293.82473034410";
 
   test_debug(decimal, check);
@@ -1356,7 +1356,7 @@ START_TEST(test_debug_ok153) {
 
 START_TEST(test_debug_ok154) {
   // -122978293.82473034410
-  s21_decimal decimal = {{0xAAAAAAAA, 0xAAAAAAAA, 0x0, 0x800B0000}};
+  my_decimal decimal = {{0xAAAAAAAA, 0xAAAAAAAA, 0x0, 0x800B0000}};
   char check[1024] = "-122978293.82473034410";
 
   test_debug(decimal, check);
@@ -1364,7 +1364,7 @@ START_TEST(test_debug_ok154) {
 
 START_TEST(test_debug_ok155) {
   // 1.2297829382473034410
-  s21_decimal decimal = {{0xAAAAAAAA, 0xAAAAAAAA, 0x0, 0x130000}};
+  my_decimal decimal = {{0xAAAAAAAA, 0xAAAAAAAA, 0x0, 0x130000}};
   char check[1024] = "1.2297829382473034410";
 
   test_debug(decimal, check);
@@ -1372,7 +1372,7 @@ START_TEST(test_debug_ok155) {
 
 START_TEST(test_debug_ok156) {
   // -1.2297829382473034410
-  s21_decimal decimal = {{0xAAAAAAAA, 0xAAAAAAAA, 0x0, 0x80130000}};
+  my_decimal decimal = {{0xAAAAAAAA, 0xAAAAAAAA, 0x0, 0x80130000}};
   char check[1024] = "-1.2297829382473034410";
 
   test_debug(decimal, check);
@@ -1380,7 +1380,7 @@ START_TEST(test_debug_ok156) {
 
 START_TEST(test_debug_ok157) {
   // 12297829379609722880
-  s21_decimal decimal = {{0x0, 0xAAAAAAAA, 0x0, 0x0}};
+  my_decimal decimal = {{0x0, 0xAAAAAAAA, 0x0, 0x0}};
   char check[1024] = "12297829379609722880";
 
   test_debug(decimal, check);
@@ -1388,7 +1388,7 @@ START_TEST(test_debug_ok157) {
 
 START_TEST(test_debug_ok158) {
   // -12297829379609722880
-  s21_decimal decimal = {{0x0, 0xAAAAAAAA, 0x0, 0x80000000}};
+  my_decimal decimal = {{0x0, 0xAAAAAAAA, 0x0, 0x80000000}};
   char check[1024] = "-12297829379609722880";
 
   test_debug(decimal, check);
@@ -1396,7 +1396,7 @@ START_TEST(test_debug_ok158) {
 
 START_TEST(test_debug_ok159) {
   // 1229782937960972288.0
-  s21_decimal decimal = {{0x0, 0xAAAAAAAA, 0x0, 0x10000}};
+  my_decimal decimal = {{0x0, 0xAAAAAAAA, 0x0, 0x10000}};
   char check[1024] = "1229782937960972288.0";
 
   test_debug(decimal, check);
@@ -1404,7 +1404,7 @@ START_TEST(test_debug_ok159) {
 
 START_TEST(test_debug_ok160) {
   // -1229782937960972288.0
-  s21_decimal decimal = {{0x0, 0xAAAAAAAA, 0x0, 0x80010000}};
+  my_decimal decimal = {{0x0, 0xAAAAAAAA, 0x0, 0x80010000}};
   char check[1024] = "-1229782937960972288.0";
 
   test_debug(decimal, check);
@@ -1412,7 +1412,7 @@ START_TEST(test_debug_ok160) {
 
 START_TEST(test_debug_ok161) {
   // 122978293.79609722880
-  s21_decimal decimal = {{0x0, 0xAAAAAAAA, 0x0, 0xB0000}};
+  my_decimal decimal = {{0x0, 0xAAAAAAAA, 0x0, 0xB0000}};
   char check[1024] = "122978293.79609722880";
 
   test_debug(decimal, check);
@@ -1420,7 +1420,7 @@ START_TEST(test_debug_ok161) {
 
 START_TEST(test_debug_ok162) {
   // -122978293.79609722880
-  s21_decimal decimal = {{0x0, 0xAAAAAAAA, 0x0, 0x800B0000}};
+  my_decimal decimal = {{0x0, 0xAAAAAAAA, 0x0, 0x800B0000}};
   char check[1024] = "-122978293.79609722880";
 
   test_debug(decimal, check);
@@ -1428,7 +1428,7 @@ START_TEST(test_debug_ok162) {
 
 START_TEST(test_debug_ok163) {
   // 1.2297829379609722880
-  s21_decimal decimal = {{0x0, 0xAAAAAAAA, 0x0, 0x130000}};
+  my_decimal decimal = {{0x0, 0xAAAAAAAA, 0x0, 0x130000}};
   char check[1024] = "1.2297829379609722880";
 
   test_debug(decimal, check);
@@ -1436,7 +1436,7 @@ START_TEST(test_debug_ok163) {
 
 START_TEST(test_debug_ok164) {
   // -1.2297829379609722880
-  s21_decimal decimal = {{0x0, 0xAAAAAAAA, 0x0, 0x80130000}};
+  my_decimal decimal = {{0x0, 0xAAAAAAAA, 0x0, 0x80130000}};
   char check[1024] = "-1.2297829379609722880";
 
   test_debug(decimal, check);
@@ -1444,7 +1444,7 @@ START_TEST(test_debug_ok164) {
 
 START_TEST(test_debug_ok165) {
   // 2863311530
-  s21_decimal decimal = {{0xAAAAAAAA, 0x0, 0x0, 0x0}};
+  my_decimal decimal = {{0xAAAAAAAA, 0x0, 0x0, 0x0}};
   char check[1024] = "2863311530";
 
   test_debug(decimal, check);
@@ -1452,7 +1452,7 @@ START_TEST(test_debug_ok165) {
 
 START_TEST(test_debug_ok166) {
   // -2863311530
-  s21_decimal decimal = {{0xAAAAAAAA, 0x0, 0x0, 0x80000000}};
+  my_decimal decimal = {{0xAAAAAAAA, 0x0, 0x0, 0x80000000}};
   char check[1024] = "-2863311530";
 
   test_debug(decimal, check);
@@ -1460,7 +1460,7 @@ START_TEST(test_debug_ok166) {
 
 START_TEST(test_debug_ok167) {
   // 286331153.0
-  s21_decimal decimal = {{0xAAAAAAAA, 0x0, 0x0, 0x10000}};
+  my_decimal decimal = {{0xAAAAAAAA, 0x0, 0x0, 0x10000}};
   char check[1024] = "286331153.0";
 
   test_debug(decimal, check);
@@ -1468,7 +1468,7 @@ START_TEST(test_debug_ok167) {
 
 START_TEST(test_debug_ok168) {
   // -286331153.0
-  s21_decimal decimal = {{0xAAAAAAAA, 0x0, 0x0, 0x80010000}};
+  my_decimal decimal = {{0xAAAAAAAA, 0x0, 0x0, 0x80010000}};
   char check[1024] = "-286331153.0";
 
   test_debug(decimal, check);
@@ -1476,7 +1476,7 @@ START_TEST(test_debug_ok168) {
 
 START_TEST(test_debug_ok169) {
   // 286331.1530
-  s21_decimal decimal = {{0xAAAAAAAA, 0x0, 0x0, 0x40000}};
+  my_decimal decimal = {{0xAAAAAAAA, 0x0, 0x0, 0x40000}};
   char check[1024] = "286331.1530";
 
   test_debug(decimal, check);
@@ -1484,7 +1484,7 @@ START_TEST(test_debug_ok169) {
 
 START_TEST(test_debug_ok170) {
   // -286331.1530
-  s21_decimal decimal = {{0xAAAAAAAA, 0x0, 0x0, 0x80040000}};
+  my_decimal decimal = {{0xAAAAAAAA, 0x0, 0x0, 0x80040000}};
   char check[1024] = "-286331.1530";
 
   test_debug(decimal, check);
@@ -1492,7 +1492,7 @@ START_TEST(test_debug_ok170) {
 
 START_TEST(test_debug_ok171) {
   // 2.863311530
-  s21_decimal decimal = {{0xAAAAAAAA, 0x0, 0x0, 0x90000}};
+  my_decimal decimal = {{0xAAAAAAAA, 0x0, 0x0, 0x90000}};
   char check[1024] = "2.863311530";
 
   test_debug(decimal, check);
@@ -1500,7 +1500,7 @@ START_TEST(test_debug_ok171) {
 
 START_TEST(test_debug_ok172) {
   // -2.863311530
-  s21_decimal decimal = {{0xAAAAAAAA, 0x0, 0x0, 0x80090000}};
+  my_decimal decimal = {{0xAAAAAAAA, 0x0, 0x0, 0x80090000}};
   char check[1024] = "-2.863311530";
 
   test_debug(decimal, check);
@@ -1508,7 +1508,7 @@ START_TEST(test_debug_ok172) {
 
 START_TEST(test_debug_ok173) {
   // 26409387504754779197847983445
-  s21_decimal decimal = {{0x55555555, 0x55555555, 0x55555555, 0x0}};
+  my_decimal decimal = {{0x55555555, 0x55555555, 0x55555555, 0x0}};
   char check[1024] = "26409387504754779197847983445";
 
   test_debug(decimal, check);
@@ -1516,7 +1516,7 @@ START_TEST(test_debug_ok173) {
 
 START_TEST(test_debug_ok174) {
   // -26409387504754779197847983445
-  s21_decimal decimal = {{0x55555555, 0x55555555, 0x55555555, 0x80000000}};
+  my_decimal decimal = {{0x55555555, 0x55555555, 0x55555555, 0x80000000}};
   char check[1024] = "-26409387504754779197847983445";
 
   test_debug(decimal, check);
@@ -1524,7 +1524,7 @@ START_TEST(test_debug_ok174) {
 
 START_TEST(test_debug_ok175) {
   // 2640938750475477919784798344.5
-  s21_decimal decimal = {{0x55555555, 0x55555555, 0x55555555, 0x10000}};
+  my_decimal decimal = {{0x55555555, 0x55555555, 0x55555555, 0x10000}};
   char check[1024] = "2640938750475477919784798344.5";
 
   test_debug(decimal, check);
@@ -1532,7 +1532,7 @@ START_TEST(test_debug_ok175) {
 
 START_TEST(test_debug_ok176) {
   // -2640938750475477919784798344.5
-  s21_decimal decimal = {{0x55555555, 0x55555555, 0x55555555, 0x80010000}};
+  my_decimal decimal = {{0x55555555, 0x55555555, 0x55555555, 0x80010000}};
   char check[1024] = "-2640938750475477919784798344.5";
 
   test_debug(decimal, check);
@@ -1540,7 +1540,7 @@ START_TEST(test_debug_ok176) {
 
 START_TEST(test_debug_ok177) {
   // 264093875.04754779197847983445
-  s21_decimal decimal = {{0x55555555, 0x55555555, 0x55555555, 0x140000}};
+  my_decimal decimal = {{0x55555555, 0x55555555, 0x55555555, 0x140000}};
   char check[1024] = "264093875.04754779197847983445";
 
   test_debug(decimal, check);
@@ -1548,7 +1548,7 @@ START_TEST(test_debug_ok177) {
 
 START_TEST(test_debug_ok178) {
   // -264093875.04754779197847983445
-  s21_decimal decimal = {{0x55555555, 0x55555555, 0x55555555, 0x80140000}};
+  my_decimal decimal = {{0x55555555, 0x55555555, 0x55555555, 0x80140000}};
   char check[1024] = "-264093875.04754779197847983445";
 
   test_debug(decimal, check);
@@ -1556,7 +1556,7 @@ START_TEST(test_debug_ok178) {
 
 START_TEST(test_debug_ok179) {
   // 2.6409387504754779197847983445
-  s21_decimal decimal = {{0x55555555, 0x55555555, 0x55555555, 0x1C0000}};
+  my_decimal decimal = {{0x55555555, 0x55555555, 0x55555555, 0x1C0000}};
   char check[1024] = "2.6409387504754779197847983445";
 
   test_debug(decimal, check);
@@ -1564,7 +1564,7 @@ START_TEST(test_debug_ok179) {
 
 START_TEST(test_debug_ok180) {
   // -2.6409387504754779197847983445
-  s21_decimal decimal = {{0x55555555, 0x55555555, 0x55555555, 0x801C0000}};
+  my_decimal decimal = {{0x55555555, 0x55555555, 0x55555555, 0x801C0000}};
   char check[1024] = "-2.6409387504754779197847983445";
 
   test_debug(decimal, check);
@@ -1572,7 +1572,7 @@ START_TEST(test_debug_ok180) {
 
 START_TEST(test_debug_ok181) {
   // 26409387504754779196416327680
-  s21_decimal decimal = {{0x0, 0x55555555, 0x55555555, 0x0}};
+  my_decimal decimal = {{0x0, 0x55555555, 0x55555555, 0x0}};
   char check[1024] = "26409387504754779196416327680";
 
   test_debug(decimal, check);
@@ -1580,7 +1580,7 @@ START_TEST(test_debug_ok181) {
 
 START_TEST(test_debug_ok182) {
   // -26409387504754779196416327680
-  s21_decimal decimal = {{0x0, 0x55555555, 0x55555555, 0x80000000}};
+  my_decimal decimal = {{0x0, 0x55555555, 0x55555555, 0x80000000}};
   char check[1024] = "-26409387504754779196416327680";
 
   test_debug(decimal, check);
@@ -1588,7 +1588,7 @@ START_TEST(test_debug_ok182) {
 
 START_TEST(test_debug_ok183) {
   // 2640938750475477919641632768.0
-  s21_decimal decimal = {{0x0, 0x55555555, 0x55555555, 0x10000}};
+  my_decimal decimal = {{0x0, 0x55555555, 0x55555555, 0x10000}};
   char check[1024] = "2640938750475477919641632768.0";
 
   test_debug(decimal, check);
@@ -1596,7 +1596,7 @@ START_TEST(test_debug_ok183) {
 
 START_TEST(test_debug_ok184) {
   // -2640938750475477919641632768.0
-  s21_decimal decimal = {{0x0, 0x55555555, 0x55555555, 0x80010000}};
+  my_decimal decimal = {{0x0, 0x55555555, 0x55555555, 0x80010000}};
   char check[1024] = "-2640938750475477919641632768.0";
 
   test_debug(decimal, check);
@@ -1604,7 +1604,7 @@ START_TEST(test_debug_ok184) {
 
 START_TEST(test_debug_ok185) {
   // 264093875.04754779196416327680
-  s21_decimal decimal = {{0x0, 0x55555555, 0x55555555, 0x140000}};
+  my_decimal decimal = {{0x0, 0x55555555, 0x55555555, 0x140000}};
   char check[1024] = "264093875.04754779196416327680";
 
   test_debug(decimal, check);
@@ -1612,7 +1612,7 @@ START_TEST(test_debug_ok185) {
 
 START_TEST(test_debug_ok186) {
   // -264093875.04754779196416327680
-  s21_decimal decimal = {{0x0, 0x55555555, 0x55555555, 0x80140000}};
+  my_decimal decimal = {{0x0, 0x55555555, 0x55555555, 0x80140000}};
   char check[1024] = "-264093875.04754779196416327680";
 
   test_debug(decimal, check);
@@ -1620,7 +1620,7 @@ START_TEST(test_debug_ok186) {
 
 START_TEST(test_debug_ok187) {
   // 2.6409387504754779196416327680
-  s21_decimal decimal = {{0x0, 0x55555555, 0x55555555, 0x1C0000}};
+  my_decimal decimal = {{0x0, 0x55555555, 0x55555555, 0x1C0000}};
   char check[1024] = "2.6409387504754779196416327680";
 
   test_debug(decimal, check);
@@ -1628,7 +1628,7 @@ START_TEST(test_debug_ok187) {
 
 START_TEST(test_debug_ok188) {
   // -2.6409387504754779196416327680
-  s21_decimal decimal = {{0x0, 0x55555555, 0x55555555, 0x801C0000}};
+  my_decimal decimal = {{0x0, 0x55555555, 0x55555555, 0x801C0000}};
   char check[1024] = "-2.6409387504754779196416327680";
 
   test_debug(decimal, check);
@@ -1636,7 +1636,7 @@ START_TEST(test_debug_ok188) {
 
 START_TEST(test_debug_ok189) {
   // 26409387498605864508043122005
-  s21_decimal decimal = {{0x55555555, 0x0, 0x55555555, 0x0}};
+  my_decimal decimal = {{0x55555555, 0x0, 0x55555555, 0x0}};
   char check[1024] = "26409387498605864508043122005";
 
   test_debug(decimal, check);
@@ -1644,7 +1644,7 @@ START_TEST(test_debug_ok189) {
 
 START_TEST(test_debug_ok190) {
   // -26409387498605864508043122005
-  s21_decimal decimal = {{0x55555555, 0x0, 0x55555555, 0x80000000}};
+  my_decimal decimal = {{0x55555555, 0x0, 0x55555555, 0x80000000}};
   char check[1024] = "-26409387498605864508043122005";
 
   test_debug(decimal, check);
@@ -1652,7 +1652,7 @@ START_TEST(test_debug_ok190) {
 
 START_TEST(test_debug_ok191) {
   // 2640938749860586450804312200.5
-  s21_decimal decimal = {{0x55555555, 0x0, 0x55555555, 0x10000}};
+  my_decimal decimal = {{0x55555555, 0x0, 0x55555555, 0x10000}};
   char check[1024] = "2640938749860586450804312200.5";
 
   test_debug(decimal, check);
@@ -1660,7 +1660,7 @@ START_TEST(test_debug_ok191) {
 
 START_TEST(test_debug_ok192) {
   // -2640938749860586450804312200.5
-  s21_decimal decimal = {{0x55555555, 0x0, 0x55555555, 0x80010000}};
+  my_decimal decimal = {{0x55555555, 0x0, 0x55555555, 0x80010000}};
   char check[1024] = "-2640938749860586450804312200.5";
 
   test_debug(decimal, check);
@@ -1668,7 +1668,7 @@ START_TEST(test_debug_ok192) {
 
 START_TEST(test_debug_ok193) {
   // 264093874.98605864508043122005
-  s21_decimal decimal = {{0x55555555, 0x0, 0x55555555, 0x140000}};
+  my_decimal decimal = {{0x55555555, 0x0, 0x55555555, 0x140000}};
   char check[1024] = "264093874.98605864508043122005";
 
   test_debug(decimal, check);
@@ -1676,7 +1676,7 @@ START_TEST(test_debug_ok193) {
 
 START_TEST(test_debug_ok194) {
   // -264093874.98605864508043122005
-  s21_decimal decimal = {{0x55555555, 0x0, 0x55555555, 0x80140000}};
+  my_decimal decimal = {{0x55555555, 0x0, 0x55555555, 0x80140000}};
   char check[1024] = "-264093874.98605864508043122005";
 
   test_debug(decimal, check);
@@ -1684,7 +1684,7 @@ START_TEST(test_debug_ok194) {
 
 START_TEST(test_debug_ok195) {
   // 2.6409387498605864508043122005
-  s21_decimal decimal = {{0x55555555, 0x0, 0x55555555, 0x1C0000}};
+  my_decimal decimal = {{0x55555555, 0x0, 0x55555555, 0x1C0000}};
   char check[1024] = "2.6409387498605864508043122005";
 
   test_debug(decimal, check);
@@ -1692,7 +1692,7 @@ START_TEST(test_debug_ok195) {
 
 START_TEST(test_debug_ok196) {
   // -2.6409387498605864508043122005
-  s21_decimal decimal = {{0x55555555, 0x0, 0x55555555, 0x801C0000}};
+  my_decimal decimal = {{0x55555555, 0x0, 0x55555555, 0x801C0000}};
   char check[1024] = "-2.6409387498605864508043122005";
 
   test_debug(decimal, check);
@@ -1700,7 +1700,7 @@ START_TEST(test_debug_ok196) {
 
 START_TEST(test_debug_ok197) {
   // 26409387498605864506611466240
-  s21_decimal decimal = {{0x0, 0x0, 0x55555555, 0x0}};
+  my_decimal decimal = {{0x0, 0x0, 0x55555555, 0x0}};
   char check[1024] = "26409387498605864506611466240";
 
   test_debug(decimal, check);
@@ -1708,7 +1708,7 @@ START_TEST(test_debug_ok197) {
 
 START_TEST(test_debug_ok198) {
   // -26409387498605864506611466240
-  s21_decimal decimal = {{0x0, 0x0, 0x55555555, 0x80000000}};
+  my_decimal decimal = {{0x0, 0x0, 0x55555555, 0x80000000}};
   char check[1024] = "-26409387498605864506611466240";
 
   test_debug(decimal, check);
@@ -1716,7 +1716,7 @@ START_TEST(test_debug_ok198) {
 
 START_TEST(test_debug_ok199) {
   // 2640938749860586450661146624.0
-  s21_decimal decimal = {{0x0, 0x0, 0x55555555, 0x10000}};
+  my_decimal decimal = {{0x0, 0x0, 0x55555555, 0x10000}};
   char check[1024] = "2640938749860586450661146624.0";
 
   test_debug(decimal, check);
@@ -1724,7 +1724,7 @@ START_TEST(test_debug_ok199) {
 
 START_TEST(test_debug_ok200) {
   // -2640938749860586450661146624.0
-  s21_decimal decimal = {{0x0, 0x0, 0x55555555, 0x80010000}};
+  my_decimal decimal = {{0x0, 0x0, 0x55555555, 0x80010000}};
   char check[1024] = "-2640938749860586450661146624.0";
 
   test_debug(decimal, check);
@@ -1732,7 +1732,7 @@ START_TEST(test_debug_ok200) {
 
 START_TEST(test_debug_ok201) {
   // 264093874.98605864506611466240
-  s21_decimal decimal = {{0x0, 0x0, 0x55555555, 0x140000}};
+  my_decimal decimal = {{0x0, 0x0, 0x55555555, 0x140000}};
   char check[1024] = "264093874.98605864506611466240";
 
   test_debug(decimal, check);
@@ -1740,7 +1740,7 @@ START_TEST(test_debug_ok201) {
 
 START_TEST(test_debug_ok202) {
   // -264093874.98605864506611466240
-  s21_decimal decimal = {{0x0, 0x0, 0x55555555, 0x80140000}};
+  my_decimal decimal = {{0x0, 0x0, 0x55555555, 0x80140000}};
   char check[1024] = "-264093874.98605864506611466240";
 
   test_debug(decimal, check);
@@ -1748,7 +1748,7 @@ START_TEST(test_debug_ok202) {
 
 START_TEST(test_debug_ok203) {
   // 2.6409387498605864506611466240
-  s21_decimal decimal = {{0x0, 0x0, 0x55555555, 0x1C0000}};
+  my_decimal decimal = {{0x0, 0x0, 0x55555555, 0x1C0000}};
   char check[1024] = "2.6409387498605864506611466240";
 
   test_debug(decimal, check);
@@ -1756,7 +1756,7 @@ START_TEST(test_debug_ok203) {
 
 START_TEST(test_debug_ok204) {
   // -2.6409387498605864506611466240
-  s21_decimal decimal = {{0x0, 0x0, 0x55555555, 0x801C0000}};
+  my_decimal decimal = {{0x0, 0x0, 0x55555555, 0x801C0000}};
   char check[1024] = "-2.6409387498605864506611466240";
 
   test_debug(decimal, check);
@@ -1764,7 +1764,7 @@ START_TEST(test_debug_ok204) {
 
 START_TEST(test_debug_ok205) {
   // 6148914691236517205
-  s21_decimal decimal = {{0x55555555, 0x55555555, 0x0, 0x0}};
+  my_decimal decimal = {{0x55555555, 0x55555555, 0x0, 0x0}};
   char check[1024] = "6148914691236517205";
 
   test_debug(decimal, check);
@@ -1772,7 +1772,7 @@ START_TEST(test_debug_ok205) {
 
 START_TEST(test_debug_ok206) {
   // -6148914691236517205
-  s21_decimal decimal = {{0x55555555, 0x55555555, 0x0, 0x80000000}};
+  my_decimal decimal = {{0x55555555, 0x55555555, 0x0, 0x80000000}};
   char check[1024] = "-6148914691236517205";
 
   test_debug(decimal, check);
@@ -1780,7 +1780,7 @@ START_TEST(test_debug_ok206) {
 
 START_TEST(test_debug_ok207) {
   // 614891469123651720.5
-  s21_decimal decimal = {{0x55555555, 0x55555555, 0x0, 0x10000}};
+  my_decimal decimal = {{0x55555555, 0x55555555, 0x0, 0x10000}};
   char check[1024] = "614891469123651720.5";
 
   test_debug(decimal, check);
@@ -1788,7 +1788,7 @@ START_TEST(test_debug_ok207) {
 
 START_TEST(test_debug_ok208) {
   // -614891469123651720.5
-  s21_decimal decimal = {{0x55555555, 0x55555555, 0x0, 0x80010000}};
+  my_decimal decimal = {{0x55555555, 0x55555555, 0x0, 0x80010000}};
   char check[1024] = "-614891469123651720.5";
 
   test_debug(decimal, check);
@@ -1796,7 +1796,7 @@ START_TEST(test_debug_ok208) {
 
 START_TEST(test_debug_ok209) {
   // 6148914.691236517205
-  s21_decimal decimal = {{0x55555555, 0x55555555, 0x0, 0xC0000}};
+  my_decimal decimal = {{0x55555555, 0x55555555, 0x0, 0xC0000}};
   char check[1024] = "6148914.691236517205";
 
   test_debug(decimal, check);
@@ -1804,7 +1804,7 @@ START_TEST(test_debug_ok209) {
 
 START_TEST(test_debug_ok210) {
   // -6148914.691236517205
-  s21_decimal decimal = {{0x55555555, 0x55555555, 0x0, 0x800C0000}};
+  my_decimal decimal = {{0x55555555, 0x55555555, 0x0, 0x800C0000}};
   char check[1024] = "-6148914.691236517205";
 
   test_debug(decimal, check);
@@ -1812,7 +1812,7 @@ START_TEST(test_debug_ok210) {
 
 START_TEST(test_debug_ok211) {
   // 6.148914691236517205
-  s21_decimal decimal = {{0x55555555, 0x55555555, 0x0, 0x120000}};
+  my_decimal decimal = {{0x55555555, 0x55555555, 0x0, 0x120000}};
   char check[1024] = "6.148914691236517205";
 
   test_debug(decimal, check);
@@ -1820,7 +1820,7 @@ START_TEST(test_debug_ok211) {
 
 START_TEST(test_debug_ok212) {
   // -6.148914691236517205
-  s21_decimal decimal = {{0x55555555, 0x55555555, 0x0, 0x80120000}};
+  my_decimal decimal = {{0x55555555, 0x55555555, 0x0, 0x80120000}};
   char check[1024] = "-6.148914691236517205";
 
   test_debug(decimal, check);
@@ -1828,7 +1828,7 @@ START_TEST(test_debug_ok212) {
 
 START_TEST(test_debug_ok213) {
   // 6148914689804861440
-  s21_decimal decimal = {{0x0, 0x55555555, 0x0, 0x0}};
+  my_decimal decimal = {{0x0, 0x55555555, 0x0, 0x0}};
   char check[1024] = "6148914689804861440";
 
   test_debug(decimal, check);
@@ -1836,7 +1836,7 @@ START_TEST(test_debug_ok213) {
 
 START_TEST(test_debug_ok214) {
   // -6148914689804861440
-  s21_decimal decimal = {{0x0, 0x55555555, 0x0, 0x80000000}};
+  my_decimal decimal = {{0x0, 0x55555555, 0x0, 0x80000000}};
   char check[1024] = "-6148914689804861440";
 
   test_debug(decimal, check);
@@ -1844,7 +1844,7 @@ START_TEST(test_debug_ok214) {
 
 START_TEST(test_debug_ok215) {
   // 614891468980486144.0
-  s21_decimal decimal = {{0x0, 0x55555555, 0x0, 0x10000}};
+  my_decimal decimal = {{0x0, 0x55555555, 0x0, 0x10000}};
   char check[1024] = "614891468980486144.0";
 
   test_debug(decimal, check);
@@ -1852,7 +1852,7 @@ START_TEST(test_debug_ok215) {
 
 START_TEST(test_debug_ok216) {
   // -614891468980486144.0
-  s21_decimal decimal = {{0x0, 0x55555555, 0x0, 0x80010000}};
+  my_decimal decimal = {{0x0, 0x55555555, 0x0, 0x80010000}};
   char check[1024] = "-614891468980486144.0";
 
   test_debug(decimal, check);
@@ -1860,7 +1860,7 @@ START_TEST(test_debug_ok216) {
 
 START_TEST(test_debug_ok217) {
   // 6148914.689804861440
-  s21_decimal decimal = {{0x0, 0x55555555, 0x0, 0xC0000}};
+  my_decimal decimal = {{0x0, 0x55555555, 0x0, 0xC0000}};
   char check[1024] = "6148914.689804861440";
 
   test_debug(decimal, check);
@@ -1868,7 +1868,7 @@ START_TEST(test_debug_ok217) {
 
 START_TEST(test_debug_ok218) {
   // -6148914.689804861440
-  s21_decimal decimal = {{0x0, 0x55555555, 0x0, 0x800C0000}};
+  my_decimal decimal = {{0x0, 0x55555555, 0x0, 0x800C0000}};
   char check[1024] = "-6148914.689804861440";
 
   test_debug(decimal, check);
@@ -1876,7 +1876,7 @@ START_TEST(test_debug_ok218) {
 
 START_TEST(test_debug_ok219) {
   // 6.148914689804861440
-  s21_decimal decimal = {{0x0, 0x55555555, 0x0, 0x120000}};
+  my_decimal decimal = {{0x0, 0x55555555, 0x0, 0x120000}};
   char check[1024] = "6.148914689804861440";
 
   test_debug(decimal, check);
@@ -1884,7 +1884,7 @@ START_TEST(test_debug_ok219) {
 
 START_TEST(test_debug_ok220) {
   // -6.148914689804861440
-  s21_decimal decimal = {{0x0, 0x55555555, 0x0, 0x80120000}};
+  my_decimal decimal = {{0x0, 0x55555555, 0x0, 0x80120000}};
   char check[1024] = "-6.148914689804861440";
 
   test_debug(decimal, check);
@@ -1892,7 +1892,7 @@ START_TEST(test_debug_ok220) {
 
 START_TEST(test_debug_ok221) {
   // 1431655765
-  s21_decimal decimal = {{0x55555555, 0x0, 0x0, 0x0}};
+  my_decimal decimal = {{0x55555555, 0x0, 0x0, 0x0}};
   char check[1024] = "1431655765";
 
   test_debug(decimal, check);
@@ -1900,7 +1900,7 @@ START_TEST(test_debug_ok221) {
 
 START_TEST(test_debug_ok222) {
   // -1431655765
-  s21_decimal decimal = {{0x55555555, 0x0, 0x0, 0x80000000}};
+  my_decimal decimal = {{0x55555555, 0x0, 0x0, 0x80000000}};
   char check[1024] = "-1431655765";
 
   test_debug(decimal, check);
@@ -1908,7 +1908,7 @@ START_TEST(test_debug_ok222) {
 
 START_TEST(test_debug_ok223) {
   // 143165576.5
-  s21_decimal decimal = {{0x55555555, 0x0, 0x0, 0x10000}};
+  my_decimal decimal = {{0x55555555, 0x0, 0x0, 0x10000}};
   char check[1024] = "143165576.5";
 
   test_debug(decimal, check);
@@ -1916,7 +1916,7 @@ START_TEST(test_debug_ok223) {
 
 START_TEST(test_debug_ok224) {
   // -143165576.5
-  s21_decimal decimal = {{0x55555555, 0x0, 0x0, 0x80010000}};
+  my_decimal decimal = {{0x55555555, 0x0, 0x0, 0x80010000}};
   char check[1024] = "-143165576.5";
 
   test_debug(decimal, check);
@@ -1924,7 +1924,7 @@ START_TEST(test_debug_ok224) {
 
 START_TEST(test_debug_ok225) {
   // 143165.5765
-  s21_decimal decimal = {{0x55555555, 0x0, 0x0, 0x40000}};
+  my_decimal decimal = {{0x55555555, 0x0, 0x0, 0x40000}};
   char check[1024] = "143165.5765";
 
   test_debug(decimal, check);
@@ -1932,7 +1932,7 @@ START_TEST(test_debug_ok225) {
 
 START_TEST(test_debug_ok226) {
   // -143165.5765
-  s21_decimal decimal = {{0x55555555, 0x0, 0x0, 0x80040000}};
+  my_decimal decimal = {{0x55555555, 0x0, 0x0, 0x80040000}};
   char check[1024] = "-143165.5765";
 
   test_debug(decimal, check);
@@ -1940,7 +1940,7 @@ START_TEST(test_debug_ok226) {
 
 START_TEST(test_debug_ok227) {
   // 1.431655765
-  s21_decimal decimal = {{0x55555555, 0x0, 0x0, 0x90000}};
+  my_decimal decimal = {{0x55555555, 0x0, 0x0, 0x90000}};
   char check[1024] = "1.431655765";
 
   test_debug(decimal, check);
@@ -1948,7 +1948,7 @@ START_TEST(test_debug_ok227) {
 
 START_TEST(test_debug_ok228) {
   // -1.431655765
-  s21_decimal decimal = {{0x55555555, 0x0, 0x0, 0x80090000}};
+  my_decimal decimal = {{0x55555555, 0x0, 0x0, 0x80090000}};
   char check[1024] = "-1.431655765";
 
   test_debug(decimal, check);
@@ -1956,7 +1956,7 @@ START_TEST(test_debug_ok228) {
 
 START_TEST(test_debug_ok229) {
   // 18446744078004518913
-  s21_decimal decimal = {{0x1, 0x1, 0x1, 0x0}};
+  my_decimal decimal = {{0x1, 0x1, 0x1, 0x0}};
   char check[1024] = "18446744078004518913";
 
   test_debug(decimal, check);
@@ -1964,7 +1964,7 @@ START_TEST(test_debug_ok229) {
 
 START_TEST(test_debug_ok230) {
   // -18446744078004518913
-  s21_decimal decimal = {{0x1, 0x1, 0x1, 0x80000000}};
+  my_decimal decimal = {{0x1, 0x1, 0x1, 0x80000000}};
   char check[1024] = "-18446744078004518913";
 
   test_debug(decimal, check);
@@ -1972,7 +1972,7 @@ START_TEST(test_debug_ok230) {
 
 START_TEST(test_debug_ok231) {
   // 1844674407800451891.3
-  s21_decimal decimal = {{0x1, 0x1, 0x1, 0x10000}};
+  my_decimal decimal = {{0x1, 0x1, 0x1, 0x10000}};
   char check[1024] = "1844674407800451891.3";
 
   test_debug(decimal, check);
@@ -1980,7 +1980,7 @@ START_TEST(test_debug_ok231) {
 
 START_TEST(test_debug_ok232) {
   // -1844674407800451891.3
-  s21_decimal decimal = {{0x1, 0x1, 0x1, 0x80010000}};
+  my_decimal decimal = {{0x1, 0x1, 0x1, 0x80010000}};
   char check[1024] = "-1844674407800451891.3";
 
   test_debug(decimal, check);
@@ -1988,7 +1988,7 @@ START_TEST(test_debug_ok232) {
 
 START_TEST(test_debug_ok233) {
   // 184467440.78004518913
-  s21_decimal decimal = {{0x1, 0x1, 0x1, 0xB0000}};
+  my_decimal decimal = {{0x1, 0x1, 0x1, 0xB0000}};
   char check[1024] = "184467440.78004518913";
 
   test_debug(decimal, check);
@@ -1996,7 +1996,7 @@ START_TEST(test_debug_ok233) {
 
 START_TEST(test_debug_ok234) {
   // -184467440.78004518913
-  s21_decimal decimal = {{0x1, 0x1, 0x1, 0x800B0000}};
+  my_decimal decimal = {{0x1, 0x1, 0x1, 0x800B0000}};
   char check[1024] = "-184467440.78004518913";
 
   test_debug(decimal, check);
@@ -2004,7 +2004,7 @@ START_TEST(test_debug_ok234) {
 
 START_TEST(test_debug_ok235) {
   // 1.8446744078004518913
-  s21_decimal decimal = {{0x1, 0x1, 0x1, 0x130000}};
+  my_decimal decimal = {{0x1, 0x1, 0x1, 0x130000}};
   char check[1024] = "1.8446744078004518913";
 
   test_debug(decimal, check);
@@ -2012,7 +2012,7 @@ START_TEST(test_debug_ok235) {
 
 START_TEST(test_debug_ok236) {
   // -1.8446744078004518913
-  s21_decimal decimal = {{0x1, 0x1, 0x1, 0x80130000}};
+  my_decimal decimal = {{0x1, 0x1, 0x1, 0x80130000}};
   char check[1024] = "-1.8446744078004518913";
 
   test_debug(decimal, check);
@@ -2020,7 +2020,7 @@ START_TEST(test_debug_ok236) {
 
 START_TEST(test_debug_ok237) {
   // 18446744078004518912
-  s21_decimal decimal = {{0x0, 0x1, 0x1, 0x0}};
+  my_decimal decimal = {{0x0, 0x1, 0x1, 0x0}};
   char check[1024] = "18446744078004518912";
 
   test_debug(decimal, check);
@@ -2028,7 +2028,7 @@ START_TEST(test_debug_ok237) {
 
 START_TEST(test_debug_ok238) {
   // -18446744078004518912
-  s21_decimal decimal = {{0x0, 0x1, 0x1, 0x80000000}};
+  my_decimal decimal = {{0x0, 0x1, 0x1, 0x80000000}};
   char check[1024] = "-18446744078004518912";
 
   test_debug(decimal, check);
@@ -2036,7 +2036,7 @@ START_TEST(test_debug_ok238) {
 
 START_TEST(test_debug_ok239) {
   // 1844674407800451891.2
-  s21_decimal decimal = {{0x0, 0x1, 0x1, 0x10000}};
+  my_decimal decimal = {{0x0, 0x1, 0x1, 0x10000}};
   char check[1024] = "1844674407800451891.2";
 
   test_debug(decimal, check);
@@ -2044,7 +2044,7 @@ START_TEST(test_debug_ok239) {
 
 START_TEST(test_debug_ok240) {
   // -1844674407800451891.2
-  s21_decimal decimal = {{0x0, 0x1, 0x1, 0x80010000}};
+  my_decimal decimal = {{0x0, 0x1, 0x1, 0x80010000}};
   char check[1024] = "-1844674407800451891.2";
 
   test_debug(decimal, check);
@@ -2052,7 +2052,7 @@ START_TEST(test_debug_ok240) {
 
 START_TEST(test_debug_ok241) {
   // 18446744.078004518912
-  s21_decimal decimal = {{0x0, 0x1, 0x1, 0xC0000}};
+  my_decimal decimal = {{0x0, 0x1, 0x1, 0xC0000}};
   char check[1024] = "18446744.078004518912";
 
   test_debug(decimal, check);
@@ -2060,7 +2060,7 @@ START_TEST(test_debug_ok241) {
 
 START_TEST(test_debug_ok242) {
   // -18446744.078004518912
-  s21_decimal decimal = {{0x0, 0x1, 0x1, 0x800C0000}};
+  my_decimal decimal = {{0x0, 0x1, 0x1, 0x800C0000}};
   char check[1024] = "-18446744.078004518912";
 
   test_debug(decimal, check);
@@ -2068,7 +2068,7 @@ START_TEST(test_debug_ok242) {
 
 START_TEST(test_debug_ok243) {
   // 1.8446744078004518912
-  s21_decimal decimal = {{0x0, 0x1, 0x1, 0x130000}};
+  my_decimal decimal = {{0x0, 0x1, 0x1, 0x130000}};
   char check[1024] = "1.8446744078004518912";
 
   test_debug(decimal, check);
@@ -2076,7 +2076,7 @@ START_TEST(test_debug_ok243) {
 
 START_TEST(test_debug_ok244) {
   // -1.8446744078004518912
-  s21_decimal decimal = {{0x0, 0x1, 0x1, 0x80130000}};
+  my_decimal decimal = {{0x0, 0x1, 0x1, 0x80130000}};
   char check[1024] = "-1.8446744078004518912";
 
   test_debug(decimal, check);
@@ -2084,7 +2084,7 @@ START_TEST(test_debug_ok244) {
 
 START_TEST(test_debug_ok245) {
   // 18446744073709551617
-  s21_decimal decimal = {{0x1, 0x0, 0x1, 0x0}};
+  my_decimal decimal = {{0x1, 0x0, 0x1, 0x0}};
   char check[1024] = "18446744073709551617";
 
   test_debug(decimal, check);
@@ -2092,7 +2092,7 @@ START_TEST(test_debug_ok245) {
 
 START_TEST(test_debug_ok246) {
   // -18446744073709551617
-  s21_decimal decimal = {{0x1, 0x0, 0x1, 0x80000000}};
+  my_decimal decimal = {{0x1, 0x0, 0x1, 0x80000000}};
   char check[1024] = "-18446744073709551617";
 
   test_debug(decimal, check);
@@ -2100,7 +2100,7 @@ START_TEST(test_debug_ok246) {
 
 START_TEST(test_debug_ok247) {
   // 1844674407370955161.7
-  s21_decimal decimal = {{0x1, 0x0, 0x1, 0x10000}};
+  my_decimal decimal = {{0x1, 0x0, 0x1, 0x10000}};
   char check[1024] = "1844674407370955161.7";
 
   test_debug(decimal, check);
@@ -2108,7 +2108,7 @@ START_TEST(test_debug_ok247) {
 
 START_TEST(test_debug_ok248) {
   // -1844674407370955161.7
-  s21_decimal decimal = {{0x1, 0x0, 0x1, 0x80010000}};
+  my_decimal decimal = {{0x1, 0x0, 0x1, 0x80010000}};
   char check[1024] = "-1844674407370955161.7";
 
   test_debug(decimal, check);
@@ -2116,7 +2116,7 @@ START_TEST(test_debug_ok248) {
 
 START_TEST(test_debug_ok249) {
   // 1844674.4073709551617
-  s21_decimal decimal = {{0x1, 0x0, 0x1, 0xD0000}};
+  my_decimal decimal = {{0x1, 0x0, 0x1, 0xD0000}};
   char check[1024] = "1844674.4073709551617";
 
   test_debug(decimal, check);
@@ -2124,7 +2124,7 @@ START_TEST(test_debug_ok249) {
 
 START_TEST(test_debug_ok250) {
   // -1844674.4073709551617
-  s21_decimal decimal = {{0x1, 0x0, 0x1, 0x800D0000}};
+  my_decimal decimal = {{0x1, 0x0, 0x1, 0x800D0000}};
   char check[1024] = "-1844674.4073709551617";
 
   test_debug(decimal, check);
@@ -2132,7 +2132,7 @@ START_TEST(test_debug_ok250) {
 
 START_TEST(test_debug_ok251) {
   // 1.8446744073709551617
-  s21_decimal decimal = {{0x1, 0x0, 0x1, 0x130000}};
+  my_decimal decimal = {{0x1, 0x0, 0x1, 0x130000}};
   char check[1024] = "1.8446744073709551617";
 
   test_debug(decimal, check);
@@ -2140,7 +2140,7 @@ START_TEST(test_debug_ok251) {
 
 START_TEST(test_debug_ok252) {
   // -1.8446744073709551617
-  s21_decimal decimal = {{0x1, 0x0, 0x1, 0x80130000}};
+  my_decimal decimal = {{0x1, 0x0, 0x1, 0x80130000}};
   char check[1024] = "-1.8446744073709551617";
 
   test_debug(decimal, check);
@@ -2148,7 +2148,7 @@ START_TEST(test_debug_ok252) {
 
 START_TEST(test_debug_ok253) {
   // 18446744073709551616
-  s21_decimal decimal = {{0x0, 0x0, 0x1, 0x0}};
+  my_decimal decimal = {{0x0, 0x0, 0x1, 0x0}};
   char check[1024] = "18446744073709551616";
 
   test_debug(decimal, check);
@@ -2156,7 +2156,7 @@ START_TEST(test_debug_ok253) {
 
 START_TEST(test_debug_ok254) {
   // -18446744073709551616
-  s21_decimal decimal = {{0x0, 0x0, 0x1, 0x80000000}};
+  my_decimal decimal = {{0x0, 0x0, 0x1, 0x80000000}};
   char check[1024] = "-18446744073709551616";
 
   test_debug(decimal, check);
@@ -2164,7 +2164,7 @@ START_TEST(test_debug_ok254) {
 
 START_TEST(test_debug_ok255) {
   // 1844674407370955161.6
-  s21_decimal decimal = {{0x0, 0x0, 0x1, 0x10000}};
+  my_decimal decimal = {{0x0, 0x0, 0x1, 0x10000}};
   char check[1024] = "1844674407370955161.6";
 
   test_debug(decimal, check);
@@ -2172,7 +2172,7 @@ START_TEST(test_debug_ok255) {
 
 START_TEST(test_debug_ok256) {
   // -1844674407370955161.6
-  s21_decimal decimal = {{0x0, 0x0, 0x1, 0x80010000}};
+  my_decimal decimal = {{0x0, 0x0, 0x1, 0x80010000}};
   char check[1024] = "-1844674407370955161.6";
 
   test_debug(decimal, check);
@@ -2180,7 +2180,7 @@ START_TEST(test_debug_ok256) {
 
 START_TEST(test_debug_ok257) {
   // 184467.44073709551616
-  s21_decimal decimal = {{0x0, 0x0, 0x1, 0xE0000}};
+  my_decimal decimal = {{0x0, 0x0, 0x1, 0xE0000}};
   char check[1024] = "184467.44073709551616";
 
   test_debug(decimal, check);
@@ -2188,7 +2188,7 @@ START_TEST(test_debug_ok257) {
 
 START_TEST(test_debug_ok258) {
   // -184467.44073709551616
-  s21_decimal decimal = {{0x0, 0x0, 0x1, 0x800E0000}};
+  my_decimal decimal = {{0x0, 0x0, 0x1, 0x800E0000}};
   char check[1024] = "-184467.44073709551616";
 
   test_debug(decimal, check);
@@ -2196,7 +2196,7 @@ START_TEST(test_debug_ok258) {
 
 START_TEST(test_debug_ok259) {
   // 1.8446744073709551616
-  s21_decimal decimal = {{0x0, 0x0, 0x1, 0x130000}};
+  my_decimal decimal = {{0x0, 0x0, 0x1, 0x130000}};
   char check[1024] = "1.8446744073709551616";
 
   test_debug(decimal, check);
@@ -2204,7 +2204,7 @@ START_TEST(test_debug_ok259) {
 
 START_TEST(test_debug_ok260) {
   // -1.8446744073709551616
-  s21_decimal decimal = {{0x0, 0x0, 0x1, 0x80130000}};
+  my_decimal decimal = {{0x0, 0x0, 0x1, 0x80130000}};
   char check[1024] = "-1.8446744073709551616";
 
   test_debug(decimal, check);
@@ -2212,7 +2212,7 @@ START_TEST(test_debug_ok260) {
 
 START_TEST(test_debug_ok261) {
   // 4294967297
-  s21_decimal decimal = {{0x1, 0x1, 0x0, 0x0}};
+  my_decimal decimal = {{0x1, 0x1, 0x0, 0x0}};
   char check[1024] = "4294967297";
 
   test_debug(decimal, check);
@@ -2220,7 +2220,7 @@ START_TEST(test_debug_ok261) {
 
 START_TEST(test_debug_ok262) {
   // -4294967297
-  s21_decimal decimal = {{0x1, 0x1, 0x0, 0x80000000}};
+  my_decimal decimal = {{0x1, 0x1, 0x0, 0x80000000}};
   char check[1024] = "-4294967297";
 
   test_debug(decimal, check);
@@ -2228,7 +2228,7 @@ START_TEST(test_debug_ok262) {
 
 START_TEST(test_debug_ok263) {
   // 429496729.7
-  s21_decimal decimal = {{0x1, 0x1, 0x0, 0x10000}};
+  my_decimal decimal = {{0x1, 0x1, 0x0, 0x10000}};
   char check[1024] = "429496729.7";
 
   test_debug(decimal, check);
@@ -2236,7 +2236,7 @@ START_TEST(test_debug_ok263) {
 
 START_TEST(test_debug_ok264) {
   // -429496729.7
-  s21_decimal decimal = {{0x1, 0x1, 0x0, 0x80010000}};
+  my_decimal decimal = {{0x1, 0x1, 0x0, 0x80010000}};
   char check[1024] = "-429496729.7";
 
   test_debug(decimal, check);
@@ -2244,7 +2244,7 @@ START_TEST(test_debug_ok264) {
 
 START_TEST(test_debug_ok265) {
   // 42949672.97
-  s21_decimal decimal = {{0x1, 0x1, 0x0, 0x20000}};
+  my_decimal decimal = {{0x1, 0x1, 0x0, 0x20000}};
   char check[1024] = "42949672.97";
 
   test_debug(decimal, check);
@@ -2252,7 +2252,7 @@ START_TEST(test_debug_ok265) {
 
 START_TEST(test_debug_ok266) {
   // -42949672.97
-  s21_decimal decimal = {{0x1, 0x1, 0x0, 0x80020000}};
+  my_decimal decimal = {{0x1, 0x1, 0x0, 0x80020000}};
   char check[1024] = "-42949672.97";
 
   test_debug(decimal, check);
@@ -2260,7 +2260,7 @@ START_TEST(test_debug_ok266) {
 
 START_TEST(test_debug_ok267) {
   // 429496.7297
-  s21_decimal decimal = {{0x1, 0x1, 0x0, 0x40000}};
+  my_decimal decimal = {{0x1, 0x1, 0x0, 0x40000}};
   char check[1024] = "429496.7297";
 
   test_debug(decimal, check);
@@ -2268,7 +2268,7 @@ START_TEST(test_debug_ok267) {
 
 START_TEST(test_debug_ok268) {
   // -429496.7297
-  s21_decimal decimal = {{0x1, 0x1, 0x0, 0x80040000}};
+  my_decimal decimal = {{0x1, 0x1, 0x0, 0x80040000}};
   char check[1024] = "-429496.7297";
 
   test_debug(decimal, check);
@@ -2276,7 +2276,7 @@ START_TEST(test_debug_ok268) {
 
 START_TEST(test_debug_ok269) {
   // 4.294967297
-  s21_decimal decimal = {{0x1, 0x1, 0x0, 0x90000}};
+  my_decimal decimal = {{0x1, 0x1, 0x0, 0x90000}};
   char check[1024] = "4.294967297";
 
   test_debug(decimal, check);
@@ -2284,7 +2284,7 @@ START_TEST(test_debug_ok269) {
 
 START_TEST(test_debug_ok270) {
   // -4.294967297
-  s21_decimal decimal = {{0x1, 0x1, 0x0, 0x80090000}};
+  my_decimal decimal = {{0x1, 0x1, 0x0, 0x80090000}};
   char check[1024] = "-4.294967297";
 
   test_debug(decimal, check);
@@ -2292,7 +2292,7 @@ START_TEST(test_debug_ok270) {
 
 START_TEST(test_debug_ok271) {
   // 42.94967297
-  s21_decimal decimal = {{0x1, 0x1, 0x0, 0x80000}};
+  my_decimal decimal = {{0x1, 0x1, 0x0, 0x80000}};
   char check[1024] = "42.94967297";
 
   test_debug(decimal, check);
@@ -2300,7 +2300,7 @@ START_TEST(test_debug_ok271) {
 
 START_TEST(test_debug_ok272) {
   // -42.94967297
-  s21_decimal decimal = {{0x1, 0x1, 0x0, 0x80080000}};
+  my_decimal decimal = {{0x1, 0x1, 0x0, 0x80080000}};
   char check[1024] = "-42.94967297";
 
   test_debug(decimal, check);
@@ -2308,7 +2308,7 @@ START_TEST(test_debug_ok272) {
 
 START_TEST(test_debug_ok273) {
   // 4294967296
-  s21_decimal decimal = {{0x0, 0x1, 0x0, 0x0}};
+  my_decimal decimal = {{0x0, 0x1, 0x0, 0x0}};
   char check[1024] = "4294967296";
 
   test_debug(decimal, check);
@@ -2316,7 +2316,7 @@ START_TEST(test_debug_ok273) {
 
 START_TEST(test_debug_ok274) {
   // -4294967296
-  s21_decimal decimal = {{0x0, 0x1, 0x0, 0x80000000}};
+  my_decimal decimal = {{0x0, 0x1, 0x0, 0x80000000}};
   char check[1024] = "-4294967296";
 
   test_debug(decimal, check);
@@ -2324,7 +2324,7 @@ START_TEST(test_debug_ok274) {
 
 START_TEST(test_debug_ok275) {
   // 429496729.6
-  s21_decimal decimal = {{0x0, 0x1, 0x0, 0x10000}};
+  my_decimal decimal = {{0x0, 0x1, 0x0, 0x10000}};
   char check[1024] = "429496729.6";
 
   test_debug(decimal, check);
@@ -2332,7 +2332,7 @@ START_TEST(test_debug_ok275) {
 
 START_TEST(test_debug_ok276) {
   // -429496729.6
-  s21_decimal decimal = {{0x0, 0x1, 0x0, 0x80010000}};
+  my_decimal decimal = {{0x0, 0x1, 0x0, 0x80010000}};
   char check[1024] = "-429496729.6";
 
   test_debug(decimal, check);
@@ -2340,7 +2340,7 @@ START_TEST(test_debug_ok276) {
 
 START_TEST(test_debug_ok277) {
   // 42949672.96
-  s21_decimal decimal = {{0x0, 0x1, 0x0, 0x20000}};
+  my_decimal decimal = {{0x0, 0x1, 0x0, 0x20000}};
   char check[1024] = "42949672.96";
 
   test_debug(decimal, check);
@@ -2348,7 +2348,7 @@ START_TEST(test_debug_ok277) {
 
 START_TEST(test_debug_ok278) {
   // -42949672.96
-  s21_decimal decimal = {{0x0, 0x1, 0x0, 0x80020000}};
+  my_decimal decimal = {{0x0, 0x1, 0x0, 0x80020000}};
   char check[1024] = "-42949672.96";
 
   test_debug(decimal, check);
@@ -2356,7 +2356,7 @@ START_TEST(test_debug_ok278) {
 
 START_TEST(test_debug_ok279) {
   // 4294967.296
-  s21_decimal decimal = {{0x0, 0x1, 0x0, 0x30000}};
+  my_decimal decimal = {{0x0, 0x1, 0x0, 0x30000}};
   char check[1024] = "4294967.296";
 
   test_debug(decimal, check);
@@ -2364,7 +2364,7 @@ START_TEST(test_debug_ok279) {
 
 START_TEST(test_debug_ok280) {
   // -4294967.296
-  s21_decimal decimal = {{0x0, 0x1, 0x0, 0x80030000}};
+  my_decimal decimal = {{0x0, 0x1, 0x0, 0x80030000}};
   char check[1024] = "-4294967.296";
 
   test_debug(decimal, check);
@@ -2372,7 +2372,7 @@ START_TEST(test_debug_ok280) {
 
 START_TEST(test_debug_ok281) {
   // 4.294967296
-  s21_decimal decimal = {{0x0, 0x1, 0x0, 0x90000}};
+  my_decimal decimal = {{0x0, 0x1, 0x0, 0x90000}};
   char check[1024] = "4.294967296";
 
   test_debug(decimal, check);
@@ -2380,7 +2380,7 @@ START_TEST(test_debug_ok281) {
 
 START_TEST(test_debug_ok282) {
   // -4.294967296
-  s21_decimal decimal = {{0x0, 0x1, 0x0, 0x80090000}};
+  my_decimal decimal = {{0x0, 0x1, 0x0, 0x80090000}};
   char check[1024] = "-4.294967296";
 
   test_debug(decimal, check);
@@ -2388,7 +2388,7 @@ START_TEST(test_debug_ok282) {
 
 START_TEST(test_debug_ok283) {
   // 42.94967296
-  s21_decimal decimal = {{0x0, 0x1, 0x0, 0x80000}};
+  my_decimal decimal = {{0x0, 0x1, 0x0, 0x80000}};
   char check[1024] = "42.94967296";
 
   test_debug(decimal, check);
@@ -2396,7 +2396,7 @@ START_TEST(test_debug_ok283) {
 
 START_TEST(test_debug_ok284) {
   // -42.94967296
-  s21_decimal decimal = {{0x0, 0x1, 0x0, 0x80080000}};
+  my_decimal decimal = {{0x0, 0x1, 0x0, 0x80080000}};
   char check[1024] = "-42.94967296";
 
   test_debug(decimal, check);
@@ -2404,7 +2404,7 @@ START_TEST(test_debug_ok284) {
 
 START_TEST(test_debug_ok285) {
   // 0.1
-  s21_decimal decimal = {{0x1, 0x0, 0x0, 0x10000}};
+  my_decimal decimal = {{0x1, 0x0, 0x0, 0x10000}};
   char check[1024] = "0.1";
 
   test_debug(decimal, check);
@@ -2412,7 +2412,7 @@ START_TEST(test_debug_ok285) {
 
 START_TEST(test_debug_ok286) {
   // -0.1
-  s21_decimal decimal = {{0x1, 0x0, 0x0, 0x80010000}};
+  my_decimal decimal = {{0x1, 0x0, 0x0, 0x80010000}};
   char check[1024] = "-0.1";
 
   test_debug(decimal, check);
@@ -2420,7 +2420,7 @@ START_TEST(test_debug_ok286) {
 
 START_TEST(test_debug_ok287) {
   // 0.0000000000001
-  s21_decimal decimal = {{0x1, 0x0, 0x0, 0xD0000}};
+  my_decimal decimal = {{0x1, 0x0, 0x0, 0xD0000}};
   char check[1024] = "0.0000000000001";
 
   test_debug(decimal, check);
@@ -2428,7 +2428,7 @@ START_TEST(test_debug_ok287) {
 
 START_TEST(test_debug_ok288) {
   // -0.0000000000001
-  s21_decimal decimal = {{0x1, 0x0, 0x0, 0x800D0000}};
+  my_decimal decimal = {{0x1, 0x0, 0x0, 0x800D0000}};
   char check[1024] = "-0.0000000000001";
 
   test_debug(decimal, check);
@@ -2436,7 +2436,7 @@ START_TEST(test_debug_ok288) {
 
 START_TEST(test_debug_ok289) {
   // 0.00000000000001
-  s21_decimal decimal = {{0x1, 0x0, 0x0, 0xE0000}};
+  my_decimal decimal = {{0x1, 0x0, 0x0, 0xE0000}};
   char check[1024] = "0.00000000000001";
 
   test_debug(decimal, check);
@@ -2444,7 +2444,7 @@ START_TEST(test_debug_ok289) {
 
 START_TEST(test_debug_ok290) {
   // -0.00000000000001
-  s21_decimal decimal = {{0x1, 0x0, 0x0, 0x800E0000}};
+  my_decimal decimal = {{0x1, 0x0, 0x0, 0x800E0000}};
   char check[1024] = "-0.00000000000001";
 
   test_debug(decimal, check);
@@ -2452,7 +2452,7 @@ START_TEST(test_debug_ok290) {
 
 START_TEST(test_debug_ok291) {
   // 0.000000000000000000000000001
-  s21_decimal decimal = {{0x1, 0x0, 0x0, 0x1B0000}};
+  my_decimal decimal = {{0x1, 0x0, 0x0, 0x1B0000}};
   char check[1024] = "0.000000000000000000000000001";
 
   test_debug(decimal, check);
@@ -2460,7 +2460,7 @@ START_TEST(test_debug_ok291) {
 
 START_TEST(test_debug_ok292) {
   // -0.000000000000000000000000001
-  s21_decimal decimal = {{0x1, 0x0, 0x0, 0x801B0000}};
+  my_decimal decimal = {{0x1, 0x0, 0x0, 0x801B0000}};
   char check[1024] = "-0.000000000000000000000000001";
 
   test_debug(decimal, check);
@@ -2468,7 +2468,7 @@ START_TEST(test_debug_ok292) {
 
 START_TEST(test_debug_ok293) {
   // 0.0000000000000000000000000001
-  s21_decimal decimal = {{0x1, 0x0, 0x0, 0x1C0000}};
+  my_decimal decimal = {{0x1, 0x0, 0x0, 0x1C0000}};
   char check[1024] = "0.0000000000000000000000000001";
 
   test_debug(decimal, check);
@@ -2476,7 +2476,7 @@ START_TEST(test_debug_ok293) {
 
 START_TEST(test_debug_ok294) {
   // -0.0000000000000000000000000001
-  s21_decimal decimal = {{0x1, 0x0, 0x0, 0x801C0000}};
+  my_decimal decimal = {{0x1, 0x0, 0x0, 0x801C0000}};
   char check[1024] = "-0.0000000000000000000000000001";
 
   test_debug(decimal, check);
@@ -2484,7 +2484,7 @@ START_TEST(test_debug_ok294) {
 
 START_TEST(test_debug_ok295) {
   // 39614081266355540835774234624
-  s21_decimal decimal = {{0x80000000, 0x80000000, 0x80000000, 0x0}};
+  my_decimal decimal = {{0x80000000, 0x80000000, 0x80000000, 0x0}};
   char check[1024] = "39614081266355540835774234624";
 
   test_debug(decimal, check);
@@ -2492,7 +2492,7 @@ START_TEST(test_debug_ok295) {
 
 START_TEST(test_debug_ok296) {
   // -39614081266355540835774234624
-  s21_decimal decimal = {{0x80000000, 0x80000000, 0x80000000, 0x80000000}};
+  my_decimal decimal = {{0x80000000, 0x80000000, 0x80000000, 0x80000000}};
   char check[1024] = "-39614081266355540835774234624";
 
   test_debug(decimal, check);
@@ -2500,7 +2500,7 @@ START_TEST(test_debug_ok296) {
 
 START_TEST(test_debug_ok297) {
   // 3961408126635554083577423462.4
-  s21_decimal decimal = {{0x80000000, 0x80000000, 0x80000000, 0x10000}};
+  my_decimal decimal = {{0x80000000, 0x80000000, 0x80000000, 0x10000}};
   char check[1024] = "3961408126635554083577423462.4";
 
   test_debug(decimal, check);
@@ -2508,7 +2508,7 @@ START_TEST(test_debug_ok297) {
 
 START_TEST(test_debug_ok298) {
   // -3961408126635554083577423462.4
-  s21_decimal decimal = {{0x80000000, 0x80000000, 0x80000000, 0x80010000}};
+  my_decimal decimal = {{0x80000000, 0x80000000, 0x80000000, 0x80010000}};
   char check[1024] = "-3961408126635554083577423462.4";
 
   test_debug(decimal, check);
@@ -2516,7 +2516,7 @@ START_TEST(test_debug_ok298) {
 
 START_TEST(test_debug_ok299) {
   // 396140812.66355540835774234624
-  s21_decimal decimal = {{0x80000000, 0x80000000, 0x80000000, 0x140000}};
+  my_decimal decimal = {{0x80000000, 0x80000000, 0x80000000, 0x140000}};
   char check[1024] = "396140812.66355540835774234624";
 
   test_debug(decimal, check);
@@ -2524,7 +2524,7 @@ START_TEST(test_debug_ok299) {
 
 START_TEST(test_debug_ok300) {
   // -396140812.66355540835774234624
-  s21_decimal decimal = {{0x80000000, 0x80000000, 0x80000000, 0x80140000}};
+  my_decimal decimal = {{0x80000000, 0x80000000, 0x80000000, 0x80140000}};
   char check[1024] = "-396140812.66355540835774234624";
 
   test_debug(decimal, check);
@@ -2532,7 +2532,7 @@ START_TEST(test_debug_ok300) {
 
 START_TEST(test_debug_ok301) {
   // 3.9614081266355540835774234624
-  s21_decimal decimal = {{0x80000000, 0x80000000, 0x80000000, 0x1C0000}};
+  my_decimal decimal = {{0x80000000, 0x80000000, 0x80000000, 0x1C0000}};
   char check[1024] = "3.9614081266355540835774234624";
 
   test_debug(decimal, check);
@@ -2540,7 +2540,7 @@ START_TEST(test_debug_ok301) {
 
 START_TEST(test_debug_ok302) {
   // -3.9614081266355540835774234624
-  s21_decimal decimal = {{0x80000000, 0x80000000, 0x80000000, 0x801C0000}};
+  my_decimal decimal = {{0x80000000, 0x80000000, 0x80000000, 0x801C0000}};
   char check[1024] = "-3.9614081266355540835774234624";
 
   test_debug(decimal, check);
@@ -2548,7 +2548,7 @@ START_TEST(test_debug_ok302) {
 
 START_TEST(test_debug_ok303) {
   // 39614081266355540833626750976
-  s21_decimal decimal = {{0x0, 0x80000000, 0x80000000, 0x0}};
+  my_decimal decimal = {{0x0, 0x80000000, 0x80000000, 0x0}};
   char check[1024] = "39614081266355540833626750976";
 
   test_debug(decimal, check);
@@ -2556,7 +2556,7 @@ START_TEST(test_debug_ok303) {
 
 START_TEST(test_debug_ok304) {
   // -39614081266355540833626750976
-  s21_decimal decimal = {{0x0, 0x80000000, 0x80000000, 0x80000000}};
+  my_decimal decimal = {{0x0, 0x80000000, 0x80000000, 0x80000000}};
   char check[1024] = "-39614081266355540833626750976";
 
   test_debug(decimal, check);
@@ -2564,7 +2564,7 @@ START_TEST(test_debug_ok304) {
 
 START_TEST(test_debug_ok305) {
   // 3961408126635554083362675097.6
-  s21_decimal decimal = {{0x0, 0x80000000, 0x80000000, 0x10000}};
+  my_decimal decimal = {{0x0, 0x80000000, 0x80000000, 0x10000}};
   char check[1024] = "3961408126635554083362675097.6";
 
   test_debug(decimal, check);
@@ -2572,7 +2572,7 @@ START_TEST(test_debug_ok305) {
 
 START_TEST(test_debug_ok306) {
   // -3961408126635554083362675097.6
-  s21_decimal decimal = {{0x0, 0x80000000, 0x80000000, 0x80010000}};
+  my_decimal decimal = {{0x0, 0x80000000, 0x80000000, 0x80010000}};
   char check[1024] = "-3961408126635554083362675097.6";
 
   test_debug(decimal, check);
@@ -2580,7 +2580,7 @@ START_TEST(test_debug_ok306) {
 
 START_TEST(test_debug_ok307) {
   // 39614081.266355540833626750976
-  s21_decimal decimal = {{0x0, 0x80000000, 0x80000000, 0x150000}};
+  my_decimal decimal = {{0x0, 0x80000000, 0x80000000, 0x150000}};
   char check[1024] = "39614081.266355540833626750976";
 
   test_debug(decimal, check);
@@ -2588,7 +2588,7 @@ START_TEST(test_debug_ok307) {
 
 START_TEST(test_debug_ok308) {
   // -39614081.266355540833626750976
-  s21_decimal decimal = {{0x0, 0x80000000, 0x80000000, 0x80150000}};
+  my_decimal decimal = {{0x0, 0x80000000, 0x80000000, 0x80150000}};
   char check[1024] = "-39614081.266355540833626750976";
 
   test_debug(decimal, check);
@@ -2596,7 +2596,7 @@ START_TEST(test_debug_ok308) {
 
 START_TEST(test_debug_ok309) {
   // 3.9614081266355540833626750976
-  s21_decimal decimal = {{0x0, 0x80000000, 0x80000000, 0x1C0000}};
+  my_decimal decimal = {{0x0, 0x80000000, 0x80000000, 0x1C0000}};
   char check[1024] = "3.9614081266355540833626750976";
 
   test_debug(decimal, check);
@@ -2604,7 +2604,7 @@ START_TEST(test_debug_ok309) {
 
 START_TEST(test_debug_ok310) {
   // -3.9614081266355540833626750976
-  s21_decimal decimal = {{0x0, 0x80000000, 0x80000000, 0x801C0000}};
+  my_decimal decimal = {{0x0, 0x80000000, 0x80000000, 0x801C0000}};
   char check[1024] = "-3.9614081266355540833626750976";
 
   test_debug(decimal, check);
@@ -2612,7 +2612,7 @@ START_TEST(test_debug_ok310) {
 
 START_TEST(test_debug_ok311) {
   // 39614081257132168798919458816
-  s21_decimal decimal = {{0x80000000, 0x0, 0x80000000, 0x0}};
+  my_decimal decimal = {{0x80000000, 0x0, 0x80000000, 0x0}};
   char check[1024] = "39614081257132168798919458816";
 
   test_debug(decimal, check);
@@ -2620,7 +2620,7 @@ START_TEST(test_debug_ok311) {
 
 START_TEST(test_debug_ok312) {
   // -39614081257132168798919458816
-  s21_decimal decimal = {{0x80000000, 0x0, 0x80000000, 0x80000000}};
+  my_decimal decimal = {{0x80000000, 0x0, 0x80000000, 0x80000000}};
   char check[1024] = "-39614081257132168798919458816";
 
   test_debug(decimal, check);
@@ -2628,7 +2628,7 @@ START_TEST(test_debug_ok312) {
 
 START_TEST(test_debug_ok313) {
   // 3961408125713216879891945881.6
-  s21_decimal decimal = {{0x80000000, 0x0, 0x80000000, 0x10000}};
+  my_decimal decimal = {{0x80000000, 0x0, 0x80000000, 0x10000}};
   char check[1024] = "3961408125713216879891945881.6";
 
   test_debug(decimal, check);
@@ -2636,7 +2636,7 @@ START_TEST(test_debug_ok313) {
 
 START_TEST(test_debug_ok314) {
   // -3961408125713216879891945881.6
-  s21_decimal decimal = {{0x80000000, 0x0, 0x80000000, 0x80010000}};
+  my_decimal decimal = {{0x80000000, 0x0, 0x80000000, 0x80010000}};
   char check[1024] = "-3961408125713216879891945881.6";
 
   test_debug(decimal, check);
@@ -2644,7 +2644,7 @@ START_TEST(test_debug_ok314) {
 
 START_TEST(test_debug_ok315) {
   // 3961408.1257132168798919458816
-  s21_decimal decimal = {{0x80000000, 0x0, 0x80000000, 0x160000}};
+  my_decimal decimal = {{0x80000000, 0x0, 0x80000000, 0x160000}};
   char check[1024] = "3961408.1257132168798919458816";
 
   test_debug(decimal, check);
@@ -2652,7 +2652,7 @@ START_TEST(test_debug_ok315) {
 
 START_TEST(test_debug_ok316) {
   // -3961408.1257132168798919458816
-  s21_decimal decimal = {{0x80000000, 0x0, 0x80000000, 0x80160000}};
+  my_decimal decimal = {{0x80000000, 0x0, 0x80000000, 0x80160000}};
   char check[1024] = "-3961408.1257132168798919458816";
 
   test_debug(decimal, check);
@@ -2660,7 +2660,7 @@ START_TEST(test_debug_ok316) {
 
 START_TEST(test_debug_ok317) {
   // 3.9614081257132168798919458816
-  s21_decimal decimal = {{0x80000000, 0x0, 0x80000000, 0x1C0000}};
+  my_decimal decimal = {{0x80000000, 0x0, 0x80000000, 0x1C0000}};
   char check[1024] = "3.9614081257132168798919458816";
 
   test_debug(decimal, check);
@@ -2668,7 +2668,7 @@ START_TEST(test_debug_ok317) {
 
 START_TEST(test_debug_ok318) {
   // -3.9614081257132168798919458816
-  s21_decimal decimal = {{0x80000000, 0x0, 0x80000000, 0x801C0000}};
+  my_decimal decimal = {{0x80000000, 0x0, 0x80000000, 0x801C0000}};
   char check[1024] = "-3.9614081257132168798919458816";
 
   test_debug(decimal, check);
@@ -2676,7 +2676,7 @@ START_TEST(test_debug_ok318) {
 
 START_TEST(test_debug_ok319) {
   // 39614081257132168796771975168
-  s21_decimal decimal = {{0x0, 0x0, 0x80000000, 0x0}};
+  my_decimal decimal = {{0x0, 0x0, 0x80000000, 0x0}};
   char check[1024] = "39614081257132168796771975168";
 
   test_debug(decimal, check);
@@ -2684,7 +2684,7 @@ START_TEST(test_debug_ok319) {
 
 START_TEST(test_debug_ok320) {
   // -39614081257132168796771975168
-  s21_decimal decimal = {{0x0, 0x0, 0x80000000, 0x80000000}};
+  my_decimal decimal = {{0x0, 0x0, 0x80000000, 0x80000000}};
   char check[1024] = "-39614081257132168796771975168";
 
   test_debug(decimal, check);
@@ -2692,7 +2692,7 @@ START_TEST(test_debug_ok320) {
 
 START_TEST(test_debug_ok321) {
   // 3961408125713216879677197516.8
-  s21_decimal decimal = {{0x0, 0x0, 0x80000000, 0x10000}};
+  my_decimal decimal = {{0x0, 0x0, 0x80000000, 0x10000}};
   char check[1024] = "3961408125713216879677197516.8";
 
   test_debug(decimal, check);
@@ -2700,7 +2700,7 @@ START_TEST(test_debug_ok321) {
 
 START_TEST(test_debug_ok322) {
   // -3961408125713216879677197516.8
-  s21_decimal decimal = {{0x0, 0x0, 0x80000000, 0x80010000}};
+  my_decimal decimal = {{0x0, 0x0, 0x80000000, 0x80010000}};
   char check[1024] = "-3961408125713216879677197516.8";
 
   test_debug(decimal, check);
@@ -2708,7 +2708,7 @@ START_TEST(test_debug_ok322) {
 
 START_TEST(test_debug_ok323) {
   // 396140.81257132168796771975168
-  s21_decimal decimal = {{0x0, 0x0, 0x80000000, 0x170000}};
+  my_decimal decimal = {{0x0, 0x0, 0x80000000, 0x170000}};
   char check[1024] = "396140.81257132168796771975168";
 
   test_debug(decimal, check);
@@ -2716,7 +2716,7 @@ START_TEST(test_debug_ok323) {
 
 START_TEST(test_debug_ok324) {
   // -396140.81257132168796771975168
-  s21_decimal decimal = {{0x0, 0x0, 0x80000000, 0x80170000}};
+  my_decimal decimal = {{0x0, 0x0, 0x80000000, 0x80170000}};
   char check[1024] = "-396140.81257132168796771975168";
 
   test_debug(decimal, check);
@@ -2724,7 +2724,7 @@ START_TEST(test_debug_ok324) {
 
 START_TEST(test_debug_ok325) {
   // 3.9614081257132168796771975168
-  s21_decimal decimal = {{0x0, 0x0, 0x80000000, 0x1C0000}};
+  my_decimal decimal = {{0x0, 0x0, 0x80000000, 0x1C0000}};
   char check[1024] = "3.9614081257132168796771975168";
 
   test_debug(decimal, check);
@@ -2732,7 +2732,7 @@ START_TEST(test_debug_ok325) {
 
 START_TEST(test_debug_ok326) {
   // -3.9614081257132168796771975168
-  s21_decimal decimal = {{0x0, 0x0, 0x80000000, 0x801C0000}};
+  my_decimal decimal = {{0x0, 0x0, 0x80000000, 0x801C0000}};
   char check[1024] = "-3.9614081257132168796771975168";
 
   test_debug(decimal, check);
@@ -2740,7 +2740,7 @@ START_TEST(test_debug_ok326) {
 
 START_TEST(test_debug_ok327) {
   // 9223372039002259456
-  s21_decimal decimal = {{0x80000000, 0x80000000, 0x0, 0x0}};
+  my_decimal decimal = {{0x80000000, 0x80000000, 0x0, 0x0}};
   char check[1024] = "9223372039002259456";
 
   test_debug(decimal, check);
@@ -2748,7 +2748,7 @@ START_TEST(test_debug_ok327) {
 
 START_TEST(test_debug_ok328) {
   // -9223372039002259456
-  s21_decimal decimal = {{0x80000000, 0x80000000, 0x0, 0x80000000}};
+  my_decimal decimal = {{0x80000000, 0x80000000, 0x0, 0x80000000}};
   char check[1024] = "-9223372039002259456";
 
   test_debug(decimal, check);
@@ -2756,7 +2756,7 @@ START_TEST(test_debug_ok328) {
 
 START_TEST(test_debug_ok329) {
   // 922337203900225945.6
-  s21_decimal decimal = {{0x80000000, 0x80000000, 0x0, 0x10000}};
+  my_decimal decimal = {{0x80000000, 0x80000000, 0x0, 0x10000}};
   char check[1024] = "922337203900225945.6";
 
   test_debug(decimal, check);
@@ -2764,7 +2764,7 @@ START_TEST(test_debug_ok329) {
 
 START_TEST(test_debug_ok330) {
   // -922337203900225945.6
-  s21_decimal decimal = {{0x80000000, 0x80000000, 0x0, 0x80010000}};
+  my_decimal decimal = {{0x80000000, 0x80000000, 0x0, 0x80010000}};
   char check[1024] = "-922337203900225945.6";
 
   test_debug(decimal, check);
@@ -2772,7 +2772,7 @@ START_TEST(test_debug_ok330) {
 
 START_TEST(test_debug_ok331) {
   // 922337203.9002259456
-  s21_decimal decimal = {{0x80000000, 0x80000000, 0x0, 0xA0000}};
+  my_decimal decimal = {{0x80000000, 0x80000000, 0x0, 0xA0000}};
   char check[1024] = "922337203.9002259456";
 
   test_debug(decimal, check);
@@ -2780,7 +2780,7 @@ START_TEST(test_debug_ok331) {
 
 START_TEST(test_debug_ok332) {
   // -922337203.9002259456
-  s21_decimal decimal = {{0x80000000, 0x80000000, 0x0, 0x800A0000}};
+  my_decimal decimal = {{0x80000000, 0x80000000, 0x0, 0x800A0000}};
   char check[1024] = "-922337203.9002259456";
 
   test_debug(decimal, check);
@@ -2788,7 +2788,7 @@ START_TEST(test_debug_ok332) {
 
 START_TEST(test_debug_ok333) {
   // 9.223372039002259456
-  s21_decimal decimal = {{0x80000000, 0x80000000, 0x0, 0x120000}};
+  my_decimal decimal = {{0x80000000, 0x80000000, 0x0, 0x120000}};
   char check[1024] = "9.223372039002259456";
 
   test_debug(decimal, check);
@@ -2796,7 +2796,7 @@ START_TEST(test_debug_ok333) {
 
 START_TEST(test_debug_ok334) {
   // -9.223372039002259456
-  s21_decimal decimal = {{0x80000000, 0x80000000, 0x0, 0x80120000}};
+  my_decimal decimal = {{0x80000000, 0x80000000, 0x0, 0x80120000}};
   char check[1024] = "-9.223372039002259456";
 
   test_debug(decimal, check);
@@ -2804,7 +2804,7 @@ START_TEST(test_debug_ok334) {
 
 START_TEST(test_debug_ok335) {
   // 9223372036854775808
-  s21_decimal decimal = {{0x0, 0x80000000, 0x0, 0x0}};
+  my_decimal decimal = {{0x0, 0x80000000, 0x0, 0x0}};
   char check[1024] = "9223372036854775808";
 
   test_debug(decimal, check);
@@ -2812,7 +2812,7 @@ START_TEST(test_debug_ok335) {
 
 START_TEST(test_debug_ok336) {
   // -9223372036854775808
-  s21_decimal decimal = {{0x0, 0x80000000, 0x0, 0x80000000}};
+  my_decimal decimal = {{0x0, 0x80000000, 0x0, 0x80000000}};
   char check[1024] = "-9223372036854775808";
 
   test_debug(decimal, check);
@@ -2820,7 +2820,7 @@ START_TEST(test_debug_ok336) {
 
 START_TEST(test_debug_ok337) {
   // 922337203685477580.8
-  s21_decimal decimal = {{0x0, 0x80000000, 0x0, 0x10000}};
+  my_decimal decimal = {{0x0, 0x80000000, 0x0, 0x10000}};
   char check[1024] = "922337203685477580.8";
 
   test_debug(decimal, check);
@@ -2828,7 +2828,7 @@ START_TEST(test_debug_ok337) {
 
 START_TEST(test_debug_ok338) {
   // -922337203685477580.8
-  s21_decimal decimal = {{0x0, 0x80000000, 0x0, 0x80010000}};
+  my_decimal decimal = {{0x0, 0x80000000, 0x0, 0x80010000}};
   char check[1024] = "-922337203685477580.8";
 
   test_debug(decimal, check);
@@ -2836,7 +2836,7 @@ START_TEST(test_debug_ok338) {
 
 START_TEST(test_debug_ok339) {
   // 92233720.36854775808
-  s21_decimal decimal = {{0x0, 0x80000000, 0x0, 0xB0000}};
+  my_decimal decimal = {{0x0, 0x80000000, 0x0, 0xB0000}};
   char check[1024] = "92233720.36854775808";
 
   test_debug(decimal, check);
@@ -2844,7 +2844,7 @@ START_TEST(test_debug_ok339) {
 
 START_TEST(test_debug_ok340) {
   // -92233720.36854775808
-  s21_decimal decimal = {{0x0, 0x80000000, 0x0, 0x800B0000}};
+  my_decimal decimal = {{0x0, 0x80000000, 0x0, 0x800B0000}};
   char check[1024] = "-92233720.36854775808";
 
   test_debug(decimal, check);
@@ -2852,7 +2852,7 @@ START_TEST(test_debug_ok340) {
 
 START_TEST(test_debug_ok341) {
   // 9.223372036854775808
-  s21_decimal decimal = {{0x0, 0x80000000, 0x0, 0x120000}};
+  my_decimal decimal = {{0x0, 0x80000000, 0x0, 0x120000}};
   char check[1024] = "9.223372036854775808";
 
   test_debug(decimal, check);
@@ -2860,7 +2860,7 @@ START_TEST(test_debug_ok341) {
 
 START_TEST(test_debug_ok342) {
   // -9.223372036854775808
-  s21_decimal decimal = {{0x0, 0x80000000, 0x0, 0x80120000}};
+  my_decimal decimal = {{0x0, 0x80000000, 0x0, 0x80120000}};
   char check[1024] = "-9.223372036854775808";
 
   test_debug(decimal, check);
@@ -2868,7 +2868,7 @@ START_TEST(test_debug_ok342) {
 
 START_TEST(test_debug_ok343) {
   // 2147483648
-  s21_decimal decimal = {{0x80000000, 0x0, 0x0, 0x0}};
+  my_decimal decimal = {{0x80000000, 0x0, 0x0, 0x0}};
   char check[1024] = "2147483648";
 
   test_debug(decimal, check);
@@ -2876,7 +2876,7 @@ START_TEST(test_debug_ok343) {
 
 START_TEST(test_debug_ok344) {
   // -2147483648
-  s21_decimal decimal = {{0x80000000, 0x0, 0x0, 0x80000000}};
+  my_decimal decimal = {{0x80000000, 0x0, 0x0, 0x80000000}};
   char check[1024] = "-2147483648";
 
   test_debug(decimal, check);
@@ -2884,7 +2884,7 @@ START_TEST(test_debug_ok344) {
 
 START_TEST(test_debug_ok345) {
   // 214748364.8
-  s21_decimal decimal = {{0x80000000, 0x0, 0x0, 0x10000}};
+  my_decimal decimal = {{0x80000000, 0x0, 0x0, 0x10000}};
   char check[1024] = "214748364.8";
 
   test_debug(decimal, check);
@@ -2892,7 +2892,7 @@ START_TEST(test_debug_ok345) {
 
 START_TEST(test_debug_ok346) {
   // -214748364.8
-  s21_decimal decimal = {{0x80000000, 0x0, 0x0, 0x80010000}};
+  my_decimal decimal = {{0x80000000, 0x0, 0x0, 0x80010000}};
   char check[1024] = "-214748364.8";
 
   test_debug(decimal, check);
@@ -2900,7 +2900,7 @@ START_TEST(test_debug_ok346) {
 
 START_TEST(test_debug_ok347) {
   // 21474836.48
-  s21_decimal decimal = {{0x80000000, 0x0, 0x0, 0x20000}};
+  my_decimal decimal = {{0x80000000, 0x0, 0x0, 0x20000}};
   char check[1024] = "21474836.48";
 
   test_debug(decimal, check);
@@ -2908,7 +2908,7 @@ START_TEST(test_debug_ok347) {
 
 START_TEST(test_debug_ok348) {
   // -21474836.48
-  s21_decimal decimal = {{0x80000000, 0x0, 0x0, 0x80020000}};
+  my_decimal decimal = {{0x80000000, 0x0, 0x0, 0x80020000}};
   char check[1024] = "-21474836.48";
 
   test_debug(decimal, check);
@@ -2916,7 +2916,7 @@ START_TEST(test_debug_ok348) {
 
 START_TEST(test_debug_ok349) {
   // 214748.3648
-  s21_decimal decimal = {{0x80000000, 0x0, 0x0, 0x40000}};
+  my_decimal decimal = {{0x80000000, 0x0, 0x0, 0x40000}};
   char check[1024] = "214748.3648";
 
   test_debug(decimal, check);
@@ -2924,7 +2924,7 @@ START_TEST(test_debug_ok349) {
 
 START_TEST(test_debug_ok350) {
   // -214748.3648
-  s21_decimal decimal = {{0x80000000, 0x0, 0x0, 0x80040000}};
+  my_decimal decimal = {{0x80000000, 0x0, 0x0, 0x80040000}};
   char check[1024] = "-214748.3648";
 
   test_debug(decimal, check);
@@ -2932,7 +2932,7 @@ START_TEST(test_debug_ok350) {
 
 START_TEST(test_debug_ok351) {
   // 21.47483648
-  s21_decimal decimal = {{0x80000000, 0x0, 0x0, 0x80000}};
+  my_decimal decimal = {{0x80000000, 0x0, 0x0, 0x80000}};
   char check[1024] = "21.47483648";
 
   test_debug(decimal, check);
@@ -2940,7 +2940,7 @@ START_TEST(test_debug_ok351) {
 
 START_TEST(test_debug_ok352) {
   // -21.47483648
-  s21_decimal decimal = {{0x80000000, 0x0, 0x0, 0x80080000}};
+  my_decimal decimal = {{0x80000000, 0x0, 0x0, 0x80080000}};
   char check[1024] = "-21.47483648";
 
   test_debug(decimal, check);
@@ -2948,7 +2948,7 @@ START_TEST(test_debug_ok352) {
 
 START_TEST(test_debug_ok353) {
   // 2.147483648
-  s21_decimal decimal = {{0x80000000, 0x0, 0x0, 0x90000}};
+  my_decimal decimal = {{0x80000000, 0x0, 0x0, 0x90000}};
   char check[1024] = "2.147483648";
 
   test_debug(decimal, check);
@@ -2956,7 +2956,7 @@ START_TEST(test_debug_ok353) {
 
 START_TEST(test_debug_ok354) {
   // -2.147483648
-  s21_decimal decimal = {{0x80000000, 0x0, 0x0, 0x80090000}};
+  my_decimal decimal = {{0x80000000, 0x0, 0x0, 0x80090000}};
   char check[1024] = "-2.147483648";
 
   test_debug(decimal, check);
@@ -2964,7 +2964,7 @@ START_TEST(test_debug_ok354) {
 
 START_TEST(test_debug_ok355) {
   // 156064767562212695305426944
-  s21_decimal decimal = {{0x811800, 0x811800, 0x811800, 0x0}};
+  my_decimal decimal = {{0x811800, 0x811800, 0x811800, 0x0}};
   char check[1024] = "156064767562212695305426944";
 
   test_debug(decimal, check);
@@ -2972,7 +2972,7 @@ START_TEST(test_debug_ok355) {
 
 START_TEST(test_debug_ok356) {
   // -156064767562212695305426944
-  s21_decimal decimal = {{0x811800, 0x811800, 0x811800, 0x80000000}};
+  my_decimal decimal = {{0x811800, 0x811800, 0x811800, 0x80000000}};
   char check[1024] = "-156064767562212695305426944";
 
   test_debug(decimal, check);
@@ -2980,7 +2980,7 @@ START_TEST(test_debug_ok356) {
 
 START_TEST(test_debug_ok357) {
   // 15606476756221269530542694.4
-  s21_decimal decimal = {{0x811800, 0x811800, 0x811800, 0x10000}};
+  my_decimal decimal = {{0x811800, 0x811800, 0x811800, 0x10000}};
   char check[1024] = "15606476756221269530542694.4";
 
   test_debug(decimal, check);
@@ -2988,7 +2988,7 @@ START_TEST(test_debug_ok357) {
 
 START_TEST(test_debug_ok358) {
   // -15606476756221269530542694.4
-  s21_decimal decimal = {{0x811800, 0x811800, 0x811800, 0x80010000}};
+  my_decimal decimal = {{0x811800, 0x811800, 0x811800, 0x80010000}};
   char check[1024] = "-15606476756221269530542694.4";
 
   test_debug(decimal, check);
@@ -2996,7 +2996,7 @@ START_TEST(test_debug_ok358) {
 
 START_TEST(test_debug_ok359) {
   // 1560647.67562212695305426944
-  s21_decimal decimal = {{0x811800, 0x811800, 0x811800, 0x140000}};
+  my_decimal decimal = {{0x811800, 0x811800, 0x811800, 0x140000}};
   char check[1024] = "1560647.67562212695305426944";
 
   test_debug(decimal, check);
@@ -3004,7 +3004,7 @@ START_TEST(test_debug_ok359) {
 
 START_TEST(test_debug_ok360) {
   // -1560647.67562212695305426944
-  s21_decimal decimal = {{0x811800, 0x811800, 0x811800, 0x80140000}};
+  my_decimal decimal = {{0x811800, 0x811800, 0x811800, 0x80140000}};
   char check[1024] = "-1560647.67562212695305426944";
 
   test_debug(decimal, check);
@@ -3012,7 +3012,7 @@ START_TEST(test_debug_ok360) {
 
 START_TEST(test_debug_ok361) {
   // 1.56064767562212695305426944
-  s21_decimal decimal = {{0x811800, 0x811800, 0x811800, 0x1A0000}};
+  my_decimal decimal = {{0x811800, 0x811800, 0x811800, 0x1A0000}};
   char check[1024] = "1.56064767562212695305426944";
 
   test_debug(decimal, check);
@@ -3020,7 +3020,7 @@ START_TEST(test_debug_ok361) {
 
 START_TEST(test_debug_ok362) {
   // -1.56064767562212695305426944
-  s21_decimal decimal = {{0x811800, 0x811800, 0x811800, 0x801A0000}};
+  my_decimal decimal = {{0x811800, 0x811800, 0x811800, 0x801A0000}};
   char check[1024] = "-1.56064767562212695305426944";
 
   test_debug(decimal, check);
@@ -3028,7 +3028,7 @@ START_TEST(test_debug_ok362) {
 
 START_TEST(test_debug_ok363) {
   // 156064767562212695296966656
-  s21_decimal decimal = {{0x0, 0x811800, 0x811800, 0x0}};
+  my_decimal decimal = {{0x0, 0x811800, 0x811800, 0x0}};
   char check[1024] = "156064767562212695296966656";
 
   test_debug(decimal, check);
@@ -3036,7 +3036,7 @@ START_TEST(test_debug_ok363) {
 
 START_TEST(test_debug_ok364) {
   // -156064767562212695296966656
-  s21_decimal decimal = {{0x0, 0x811800, 0x811800, 0x80000000}};
+  my_decimal decimal = {{0x0, 0x811800, 0x811800, 0x80000000}};
   char check[1024] = "-156064767562212695296966656";
 
   test_debug(decimal, check);
@@ -3044,7 +3044,7 @@ START_TEST(test_debug_ok364) {
 
 START_TEST(test_debug_ok365) {
   // 15606476756221269529696665.6
-  s21_decimal decimal = {{0x0, 0x811800, 0x811800, 0x10000}};
+  my_decimal decimal = {{0x0, 0x811800, 0x811800, 0x10000}};
   char check[1024] = "15606476756221269529696665.6";
 
   test_debug(decimal, check);
@@ -3052,7 +3052,7 @@ START_TEST(test_debug_ok365) {
 
 START_TEST(test_debug_ok366) {
   // -15606476756221269529696665.6
-  s21_decimal decimal = {{0x0, 0x811800, 0x811800, 0x80010000}};
+  my_decimal decimal = {{0x0, 0x811800, 0x811800, 0x80010000}};
   char check[1024] = "-15606476756221269529696665.6";
 
   test_debug(decimal, check);
@@ -3060,7 +3060,7 @@ START_TEST(test_debug_ok366) {
 
 START_TEST(test_debug_ok367) {
   // 15606476.7562212695296966656
-  s21_decimal decimal = {{0x0, 0x811800, 0x811800, 0x130000}};
+  my_decimal decimal = {{0x0, 0x811800, 0x811800, 0x130000}};
   char check[1024] = "15606476.7562212695296966656";
 
   test_debug(decimal, check);
@@ -3068,7 +3068,7 @@ START_TEST(test_debug_ok367) {
 
 START_TEST(test_debug_ok368) {
   // -15606476.7562212695296966656
-  s21_decimal decimal = {{0x0, 0x811800, 0x811800, 0x80130000}};
+  my_decimal decimal = {{0x0, 0x811800, 0x811800, 0x80130000}};
   char check[1024] = "-15606476.7562212695296966656";
 
   test_debug(decimal, check);
@@ -3076,7 +3076,7 @@ START_TEST(test_debug_ok368) {
 
 START_TEST(test_debug_ok369) {
   // 1.56064767562212695296966656
-  s21_decimal decimal = {{0x0, 0x811800, 0x811800, 0x1A0000}};
+  my_decimal decimal = {{0x0, 0x811800, 0x811800, 0x1A0000}};
   char check[1024] = "1.56064767562212695296966656";
 
   test_debug(decimal, check);
@@ -3084,7 +3084,7 @@ START_TEST(test_debug_ok369) {
 
 START_TEST(test_debug_ok370) {
   // -1.56064767562212695296966656
-  s21_decimal decimal = {{0x0, 0x811800, 0x811800, 0x801A0000}};
+  my_decimal decimal = {{0x0, 0x811800, 0x811800, 0x801A0000}};
   char check[1024] = "-1.56064767562212695296966656";
 
   test_debug(decimal, check);
@@ -3092,7 +3092,7 @@ START_TEST(test_debug_ok370) {
 
 START_TEST(test_debug_ok371) {
   // 156064767525876035030685696
-  s21_decimal decimal = {{0x811800, 0x0, 0x811800, 0x0}};
+  my_decimal decimal = {{0x811800, 0x0, 0x811800, 0x0}};
   char check[1024] = "156064767525876035030685696";
 
   test_debug(decimal, check);
@@ -3100,7 +3100,7 @@ START_TEST(test_debug_ok371) {
 
 START_TEST(test_debug_ok372) {
   // -156064767525876035030685696
-  s21_decimal decimal = {{0x811800, 0x0, 0x811800, 0x80000000}};
+  my_decimal decimal = {{0x811800, 0x0, 0x811800, 0x80000000}};
   char check[1024] = "-156064767525876035030685696";
 
   test_debug(decimal, check);
@@ -3108,7 +3108,7 @@ START_TEST(test_debug_ok372) {
 
 START_TEST(test_debug_ok373) {
   // 15606476752587603503068569.6
-  s21_decimal decimal = {{0x811800, 0x0, 0x811800, 0x10000}};
+  my_decimal decimal = {{0x811800, 0x0, 0x811800, 0x10000}};
   char check[1024] = "15606476752587603503068569.6";
 
   test_debug(decimal, check);
@@ -3116,7 +3116,7 @@ START_TEST(test_debug_ok373) {
 
 START_TEST(test_debug_ok374) {
   // -15606476752587603503068569.6
-  s21_decimal decimal = {{0x811800, 0x0, 0x811800, 0x80010000}};
+  my_decimal decimal = {{0x811800, 0x0, 0x811800, 0x80010000}};
   char check[1024] = "-15606476752587603503068569.6";
 
   test_debug(decimal, check);
@@ -3124,7 +3124,7 @@ START_TEST(test_debug_ok374) {
 
 START_TEST(test_debug_ok375) {
   // 156064.767525876035030685696
-  s21_decimal decimal = {{0x811800, 0x0, 0x811800, 0x150000}};
+  my_decimal decimal = {{0x811800, 0x0, 0x811800, 0x150000}};
   char check[1024] = "156064.767525876035030685696";
 
   test_debug(decimal, check);
@@ -3132,7 +3132,7 @@ START_TEST(test_debug_ok375) {
 
 START_TEST(test_debug_ok376) {
   // -156064.767525876035030685696
-  s21_decimal decimal = {{0x811800, 0x0, 0x811800, 0x80150000}};
+  my_decimal decimal = {{0x811800, 0x0, 0x811800, 0x80150000}};
   char check[1024] = "-156064.767525876035030685696";
 
   test_debug(decimal, check);
@@ -3140,7 +3140,7 @@ START_TEST(test_debug_ok376) {
 
 START_TEST(test_debug_ok377) {
   // 1.56064767525876035030685696
-  s21_decimal decimal = {{0x811800, 0x0, 0x811800, 0x1A0000}};
+  my_decimal decimal = {{0x811800, 0x0, 0x811800, 0x1A0000}};
   char check[1024] = "1.56064767525876035030685696";
 
   test_debug(decimal, check);
@@ -3148,7 +3148,7 @@ START_TEST(test_debug_ok377) {
 
 START_TEST(test_debug_ok378) {
   // -1.56064767525876035030685696
-  s21_decimal decimal = {{0x811800, 0x0, 0x811800, 0x801A0000}};
+  my_decimal decimal = {{0x811800, 0x0, 0x811800, 0x801A0000}};
   char check[1024] = "-1.56064767525876035030685696";
 
   test_debug(decimal, check);
@@ -3156,7 +3156,7 @@ START_TEST(test_debug_ok378) {
 
 START_TEST(test_debug_ok379) {
   // 156064767525876035022225408
-  s21_decimal decimal = {{0x0, 0x0, 0x811800, 0x0}};
+  my_decimal decimal = {{0x0, 0x0, 0x811800, 0x0}};
   char check[1024] = "156064767525876035022225408";
 
   test_debug(decimal, check);
@@ -3164,7 +3164,7 @@ START_TEST(test_debug_ok379) {
 
 START_TEST(test_debug_ok380) {
   // -156064767525876035022225408
-  s21_decimal decimal = {{0x0, 0x0, 0x811800, 0x80000000}};
+  my_decimal decimal = {{0x0, 0x0, 0x811800, 0x80000000}};
   char check[1024] = "-156064767525876035022225408";
 
   test_debug(decimal, check);
@@ -3172,7 +3172,7 @@ START_TEST(test_debug_ok380) {
 
 START_TEST(test_debug_ok381) {
   // 15606476752587603502222540.8
-  s21_decimal decimal = {{0x0, 0x0, 0x811800, 0x10000}};
+  my_decimal decimal = {{0x0, 0x0, 0x811800, 0x10000}};
   char check[1024] = "15606476752587603502222540.8";
 
   test_debug(decimal, check);
@@ -3180,7 +3180,7 @@ START_TEST(test_debug_ok381) {
 
 START_TEST(test_debug_ok382) {
   // -15606476752587603502222540.8
-  s21_decimal decimal = {{0x0, 0x0, 0x811800, 0x80010000}};
+  my_decimal decimal = {{0x0, 0x0, 0x811800, 0x80010000}};
   char check[1024] = "-15606476752587603502222540.8";
 
   test_debug(decimal, check);
@@ -3188,7 +3188,7 @@ START_TEST(test_debug_ok382) {
 
 START_TEST(test_debug_ok383) {
   // 15606.4767525876035022225408
-  s21_decimal decimal = {{0x0, 0x0, 0x811800, 0x160000}};
+  my_decimal decimal = {{0x0, 0x0, 0x811800, 0x160000}};
   char check[1024] = "15606.4767525876035022225408";
 
   test_debug(decimal, check);
@@ -3196,7 +3196,7 @@ START_TEST(test_debug_ok383) {
 
 START_TEST(test_debug_ok384) {
   // -15606.4767525876035022225408
-  s21_decimal decimal = {{0x0, 0x0, 0x811800, 0x80160000}};
+  my_decimal decimal = {{0x0, 0x0, 0x811800, 0x80160000}};
   char check[1024] = "-15606.4767525876035022225408";
 
   test_debug(decimal, check);
@@ -3204,7 +3204,7 @@ START_TEST(test_debug_ok384) {
 
 START_TEST(test_debug_ok385) {
   // 1.56064767525876035022225408
-  s21_decimal decimal = {{0x0, 0x0, 0x811800, 0x1A0000}};
+  my_decimal decimal = {{0x0, 0x0, 0x811800, 0x1A0000}};
   char check[1024] = "1.56064767525876035022225408";
 
   test_debug(decimal, check);
@@ -3212,7 +3212,7 @@ START_TEST(test_debug_ok385) {
 
 START_TEST(test_debug_ok386) {
   // -1.56064767525876035022225408
-  s21_decimal decimal = {{0x0, 0x0, 0x811800, 0x801A0000}};
+  my_decimal decimal = {{0x0, 0x0, 0x811800, 0x801A0000}};
   char check[1024] = "-1.56064767525876035022225408";
 
   test_debug(decimal, check);
@@ -3220,7 +3220,7 @@ START_TEST(test_debug_ok386) {
 
 START_TEST(test_debug_ok387) {
   // 36336660283201536
-  s21_decimal decimal = {{0x811800, 0x811800, 0x0, 0x0}};
+  my_decimal decimal = {{0x811800, 0x811800, 0x0, 0x0}};
   char check[1024] = "36336660283201536";
 
   test_debug(decimal, check);
@@ -3228,7 +3228,7 @@ START_TEST(test_debug_ok387) {
 
 START_TEST(test_debug_ok388) {
   // -36336660283201536
-  s21_decimal decimal = {{0x811800, 0x811800, 0x0, 0x80000000}};
+  my_decimal decimal = {{0x811800, 0x811800, 0x0, 0x80000000}};
   char check[1024] = "-36336660283201536";
 
   test_debug(decimal, check);
@@ -3236,7 +3236,7 @@ START_TEST(test_debug_ok388) {
 
 START_TEST(test_debug_ok389) {
   // 3633666028320153.6
-  s21_decimal decimal = {{0x811800, 0x811800, 0x0, 0x10000}};
+  my_decimal decimal = {{0x811800, 0x811800, 0x0, 0x10000}};
   char check[1024] = "3633666028320153.6";
 
   test_debug(decimal, check);
@@ -3244,7 +3244,7 @@ START_TEST(test_debug_ok389) {
 
 START_TEST(test_debug_ok390) {
   // -3633666028320153.6
-  s21_decimal decimal = {{0x811800, 0x811800, 0x0, 0x80010000}};
+  my_decimal decimal = {{0x811800, 0x811800, 0x0, 0x80010000}};
   char check[1024] = "-3633666028320153.6";
 
   test_debug(decimal, check);
@@ -3252,7 +3252,7 @@ START_TEST(test_debug_ok390) {
 
 START_TEST(test_debug_ok391) {
   // 363366602.83201536
-  s21_decimal decimal = {{0x811800, 0x811800, 0x0, 0x80000}};
+  my_decimal decimal = {{0x811800, 0x811800, 0x0, 0x80000}};
   char check[1024] = "363366602.83201536";
 
   test_debug(decimal, check);
@@ -3260,7 +3260,7 @@ START_TEST(test_debug_ok391) {
 
 START_TEST(test_debug_ok392) {
   // -363366602.83201536
-  s21_decimal decimal = {{0x811800, 0x811800, 0x0, 0x80080000}};
+  my_decimal decimal = {{0x811800, 0x811800, 0x0, 0x80080000}};
   char check[1024] = "-363366602.83201536";
 
   test_debug(decimal, check);
@@ -3268,7 +3268,7 @@ START_TEST(test_debug_ok392) {
 
 START_TEST(test_debug_ok393) {
   // 3.6336660283201536
-  s21_decimal decimal = {{0x811800, 0x811800, 0x0, 0x100000}};
+  my_decimal decimal = {{0x811800, 0x811800, 0x0, 0x100000}};
   char check[1024] = "3.6336660283201536";
 
   test_debug(decimal, check);
@@ -3276,7 +3276,7 @@ START_TEST(test_debug_ok393) {
 
 START_TEST(test_debug_ok394) {
   // -3.6336660283201536
-  s21_decimal decimal = {{0x811800, 0x811800, 0x0, 0x80100000}};
+  my_decimal decimal = {{0x811800, 0x811800, 0x0, 0x80100000}};
   char check[1024] = "-3.6336660283201536";
 
   test_debug(decimal, check);
@@ -3284,7 +3284,7 @@ START_TEST(test_debug_ok394) {
 
 START_TEST(test_debug_ok395) {
   // 36336660274741248
-  s21_decimal decimal = {{0x0, 0x811800, 0x0, 0x0}};
+  my_decimal decimal = {{0x0, 0x811800, 0x0, 0x0}};
   char check[1024] = "36336660274741248";
 
   test_debug(decimal, check);
@@ -3292,7 +3292,7 @@ START_TEST(test_debug_ok395) {
 
 START_TEST(test_debug_ok396) {
   // -36336660274741248
-  s21_decimal decimal = {{0x0, 0x811800, 0x0, 0x80000000}};
+  my_decimal decimal = {{0x0, 0x811800, 0x0, 0x80000000}};
   char check[1024] = "-36336660274741248";
 
   test_debug(decimal, check);
@@ -3300,7 +3300,7 @@ START_TEST(test_debug_ok396) {
 
 START_TEST(test_debug_ok397) {
   // 3633666027474124.8
-  s21_decimal decimal = {{0x0, 0x811800, 0x0, 0x10000}};
+  my_decimal decimal = {{0x0, 0x811800, 0x0, 0x10000}};
   char check[1024] = "3633666027474124.8";
 
   test_debug(decimal, check);
@@ -3308,7 +3308,7 @@ START_TEST(test_debug_ok397) {
 
 START_TEST(test_debug_ok398) {
   // -3633666027474124.8
-  s21_decimal decimal = {{0x0, 0x811800, 0x0, 0x80010000}};
+  my_decimal decimal = {{0x0, 0x811800, 0x0, 0x80010000}};
   char check[1024] = "-3633666027474124.8";
 
   test_debug(decimal, check);
@@ -3316,7 +3316,7 @@ START_TEST(test_debug_ok398) {
 
 START_TEST(test_debug_ok399) {
   // 3633666.0274741248
-  s21_decimal decimal = {{0x0, 0x811800, 0x0, 0xA0000}};
+  my_decimal decimal = {{0x0, 0x811800, 0x0, 0xA0000}};
   char check[1024] = "3633666.0274741248";
 
   test_debug(decimal, check);
@@ -3324,7 +3324,7 @@ START_TEST(test_debug_ok399) {
 
 START_TEST(test_debug_ok400) {
   // -3633666.0274741248
-  s21_decimal decimal = {{0x0, 0x811800, 0x0, 0x800A0000}};
+  my_decimal decimal = {{0x0, 0x811800, 0x0, 0x800A0000}};
   char check[1024] = "-3633666.0274741248";
 
   test_debug(decimal, check);
@@ -3332,7 +3332,7 @@ START_TEST(test_debug_ok400) {
 
 START_TEST(test_debug_ok401) {
   // 363366602.74741248
-  s21_decimal decimal = {{0x0, 0x811800, 0x0, 0x80000}};
+  my_decimal decimal = {{0x0, 0x811800, 0x0, 0x80000}};
   char check[1024] = "363366602.74741248";
 
   test_debug(decimal, check);
@@ -3340,7 +3340,7 @@ START_TEST(test_debug_ok401) {
 
 START_TEST(test_debug_ok402) {
   // -363366602.74741248
-  s21_decimal decimal = {{0x0, 0x811800, 0x0, 0x80080000}};
+  my_decimal decimal = {{0x0, 0x811800, 0x0, 0x80080000}};
   char check[1024] = "-363366602.74741248";
 
   test_debug(decimal, check);
@@ -3348,7 +3348,7 @@ START_TEST(test_debug_ok402) {
 
 START_TEST(test_debug_ok403) {
   // 36.336660274741248
-  s21_decimal decimal = {{0x0, 0x811800, 0x0, 0xF0000}};
+  my_decimal decimal = {{0x0, 0x811800, 0x0, 0xF0000}};
   char check[1024] = "36.336660274741248";
 
   test_debug(decimal, check);
@@ -3356,7 +3356,7 @@ START_TEST(test_debug_ok403) {
 
 START_TEST(test_debug_ok404) {
   // -36.336660274741248
-  s21_decimal decimal = {{0x0, 0x811800, 0x0, 0x800F0000}};
+  my_decimal decimal = {{0x0, 0x811800, 0x0, 0x800F0000}};
   char check[1024] = "-36.336660274741248";
 
   test_debug(decimal, check);
@@ -3364,7 +3364,7 @@ START_TEST(test_debug_ok404) {
 
 START_TEST(test_debug_ok405) {
   // 3.6336660274741248
-  s21_decimal decimal = {{0x0, 0x811800, 0x0, 0x100000}};
+  my_decimal decimal = {{0x0, 0x811800, 0x0, 0x100000}};
   char check[1024] = "3.6336660274741248";
 
   test_debug(decimal, check);
@@ -3372,7 +3372,7 @@ START_TEST(test_debug_ok405) {
 
 START_TEST(test_debug_ok406) {
   // -3.6336660274741248
-  s21_decimal decimal = {{0x0, 0x811800, 0x0, 0x80100000}};
+  my_decimal decimal = {{0x0, 0x811800, 0x0, 0x80100000}};
   char check[1024] = "-3.6336660274741248";
 
   test_debug(decimal, check);
@@ -3380,7 +3380,7 @@ START_TEST(test_debug_ok406) {
 
 START_TEST(test_debug_ok407) {
   // 8460288
-  s21_decimal decimal = {{0x811800, 0x0, 0x0, 0x0}};
+  my_decimal decimal = {{0x811800, 0x0, 0x0, 0x0}};
   char check[1024] = "8460288";
 
   test_debug(decimal, check);
@@ -3388,7 +3388,7 @@ START_TEST(test_debug_ok407) {
 
 START_TEST(test_debug_ok408) {
   // -8460288
-  s21_decimal decimal = {{0x811800, 0x0, 0x0, 0x80000000}};
+  my_decimal decimal = {{0x811800, 0x0, 0x0, 0x80000000}};
   char check[1024] = "-8460288";
 
   test_debug(decimal, check);
@@ -3396,7 +3396,7 @@ START_TEST(test_debug_ok408) {
 
 START_TEST(test_debug_ok409) {
   // 846028.8
-  s21_decimal decimal = {{0x811800, 0x0, 0x0, 0x10000}};
+  my_decimal decimal = {{0x811800, 0x0, 0x0, 0x10000}};
   char check[1024] = "846028.8";
 
   test_debug(decimal, check);
@@ -3404,7 +3404,7 @@ START_TEST(test_debug_ok409) {
 
 START_TEST(test_debug_ok410) {
   // -846028.8
-  s21_decimal decimal = {{0x811800, 0x0, 0x0, 0x80010000}};
+  my_decimal decimal = {{0x811800, 0x0, 0x0, 0x80010000}};
   char check[1024] = "-846028.8";
 
   test_debug(decimal, check);
@@ -3412,7 +3412,7 @@ START_TEST(test_debug_ok410) {
 
 START_TEST(test_debug_ok411) {
   // 84602.88
-  s21_decimal decimal = {{0x811800, 0x0, 0x0, 0x20000}};
+  my_decimal decimal = {{0x811800, 0x0, 0x0, 0x20000}};
   char check[1024] = "84602.88";
 
   test_debug(decimal, check);
@@ -3420,7 +3420,7 @@ START_TEST(test_debug_ok411) {
 
 START_TEST(test_debug_ok412) {
   // -84602.88
-  s21_decimal decimal = {{0x811800, 0x0, 0x0, 0x80020000}};
+  my_decimal decimal = {{0x811800, 0x0, 0x0, 0x80020000}};
   char check[1024] = "-84602.88";
 
   test_debug(decimal, check);
@@ -3428,7 +3428,7 @@ START_TEST(test_debug_ok412) {
 
 START_TEST(test_debug_ok413) {
   // 8460.288
-  s21_decimal decimal = {{0x811800, 0x0, 0x0, 0x30000}};
+  my_decimal decimal = {{0x811800, 0x0, 0x0, 0x30000}};
   char check[1024] = "8460.288";
 
   test_debug(decimal, check);
@@ -3436,7 +3436,7 @@ START_TEST(test_debug_ok413) {
 
 START_TEST(test_debug_ok414) {
   // -8460.288
-  s21_decimal decimal = {{0x811800, 0x0, 0x0, 0x80030000}};
+  my_decimal decimal = {{0x811800, 0x0, 0x0, 0x80030000}};
   char check[1024] = "-8460.288";
 
   test_debug(decimal, check);
@@ -3444,7 +3444,7 @@ START_TEST(test_debug_ok414) {
 
 START_TEST(test_debug_ok415) {
   // 84.60288
-  s21_decimal decimal = {{0x811800, 0x0, 0x0, 0x50000}};
+  my_decimal decimal = {{0x811800, 0x0, 0x0, 0x50000}};
   char check[1024] = "84.60288";
 
   test_debug(decimal, check);
@@ -3452,7 +3452,7 @@ START_TEST(test_debug_ok415) {
 
 START_TEST(test_debug_ok416) {
   // -84.60288
-  s21_decimal decimal = {{0x811800, 0x0, 0x0, 0x80050000}};
+  my_decimal decimal = {{0x811800, 0x0, 0x0, 0x80050000}};
   char check[1024] = "-84.60288";
 
   test_debug(decimal, check);
@@ -3460,7 +3460,7 @@ START_TEST(test_debug_ok416) {
 
 START_TEST(test_debug_ok417) {
   // 8.460288
-  s21_decimal decimal = {{0x811800, 0x0, 0x0, 0x60000}};
+  my_decimal decimal = {{0x811800, 0x0, 0x0, 0x60000}};
   char check[1024] = "8.460288";
 
   test_debug(decimal, check);
@@ -3468,7 +3468,7 @@ START_TEST(test_debug_ok417) {
 
 START_TEST(test_debug_ok418) {
   // -8.460288
-  s21_decimal decimal = {{0x811800, 0x0, 0x0, 0x80060000}};
+  my_decimal decimal = {{0x811800, 0x0, 0x0, 0x80060000}};
   char check[1024] = "-8.460288";
 
   test_debug(decimal, check);
@@ -3476,7 +3476,7 @@ START_TEST(test_debug_ok418) {
 
 START_TEST(test_debug_ok419) {
   // 79228162514264337593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   char check[1024] = "79228162514264337593543950335";
 
   test_debug(decimal, check);
@@ -3484,7 +3484,7 @@ START_TEST(test_debug_ok419) {
 
 START_TEST(test_debug_ok420) {
   // -79228162514264337593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   char check[1024] = "-79228162514264337593543950335";
 
   test_debug(decimal, check);
@@ -3492,7 +3492,7 @@ START_TEST(test_debug_ok420) {
 
 START_TEST(test_debug_ok421) {
   // 7922816251426433759354395033.5
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x10000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x10000}};
   char check[1024] = "7922816251426433759354395033.5";
 
   test_debug(decimal, check);
@@ -3500,7 +3500,7 @@ START_TEST(test_debug_ok421) {
 
 START_TEST(test_debug_ok422) {
   // -7922816251426433759354395033.5
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80010000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80010000}};
   char check[1024] = "-7922816251426433759354395033.5";
 
   test_debug(decimal, check);
@@ -3508,7 +3508,7 @@ START_TEST(test_debug_ok422) {
 
 START_TEST(test_debug_ok423) {
   // 792281625.14264337593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x140000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x140000}};
   char check[1024] = "792281625.14264337593543950335";
 
   test_debug(decimal, check);
@@ -3516,7 +3516,7 @@ START_TEST(test_debug_ok423) {
 
 START_TEST(test_debug_ok424) {
   // -792281625.14264337593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80140000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80140000}};
   char check[1024] = "-792281625.14264337593543950335";
 
   test_debug(decimal, check);
@@ -3524,7 +3524,7 @@ START_TEST(test_debug_ok424) {
 
 START_TEST(test_debug_ok425) {
   // 7.9228162514264337593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x1C0000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x1C0000}};
   char check[1024] = "7.9228162514264337593543950335";
 
   test_debug(decimal, check);
@@ -3532,7 +3532,7 @@ START_TEST(test_debug_ok425) {
 
 START_TEST(test_debug_ok426) {
   // -7.9228162514264337593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x801C0000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x801C0000}};
   char check[1024] = "-7.9228162514264337593543950335";
 
   test_debug(decimal, check);
@@ -3540,7 +3540,7 @@ START_TEST(test_debug_ok426) {
 
 START_TEST(test_debug_ok427) {
   // 79228162514264337589248983040
-  s21_decimal decimal = {{0x0, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal = {{0x0, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   char check[1024] = "79228162514264337589248983040";
 
   test_debug(decimal, check);
@@ -3548,7 +3548,7 @@ START_TEST(test_debug_ok427) {
 
 START_TEST(test_debug_ok428) {
   // -79228162514264337589248983040
-  s21_decimal decimal = {{0x0, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal = {{0x0, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   char check[1024] = "-79228162514264337589248983040";
 
   test_debug(decimal, check);
@@ -3556,7 +3556,7 @@ START_TEST(test_debug_ok428) {
 
 START_TEST(test_debug_ok429) {
   // 7922816251426433758924898304.0
-  s21_decimal decimal = {{0x0, 0xFFFFFFFF, 0xFFFFFFFF, 0x10000}};
+  my_decimal decimal = {{0x0, 0xFFFFFFFF, 0xFFFFFFFF, 0x10000}};
   char check[1024] = "7922816251426433758924898304.0";
 
   test_debug(decimal, check);
@@ -3564,7 +3564,7 @@ START_TEST(test_debug_ok429) {
 
 START_TEST(test_debug_ok430) {
   // -7922816251426433758924898304.0
-  s21_decimal decimal = {{0x0, 0xFFFFFFFF, 0xFFFFFFFF, 0x80010000}};
+  my_decimal decimal = {{0x0, 0xFFFFFFFF, 0xFFFFFFFF, 0x80010000}};
   char check[1024] = "-7922816251426433758924898304.0";
 
   test_debug(decimal, check);
@@ -3572,7 +3572,7 @@ START_TEST(test_debug_ok430) {
 
 START_TEST(test_debug_ok431) {
   // 79228162.514264337589248983040
-  s21_decimal decimal = {{0x0, 0xFFFFFFFF, 0xFFFFFFFF, 0x150000}};
+  my_decimal decimal = {{0x0, 0xFFFFFFFF, 0xFFFFFFFF, 0x150000}};
   char check[1024] = "79228162.514264337589248983040";
 
   test_debug(decimal, check);
@@ -3580,7 +3580,7 @@ START_TEST(test_debug_ok431) {
 
 START_TEST(test_debug_ok432) {
   // -79228162.514264337589248983040
-  s21_decimal decimal = {{0x0, 0xFFFFFFFF, 0xFFFFFFFF, 0x80150000}};
+  my_decimal decimal = {{0x0, 0xFFFFFFFF, 0xFFFFFFFF, 0x80150000}};
   char check[1024] = "-79228162.514264337589248983040";
 
   test_debug(decimal, check);
@@ -3588,7 +3588,7 @@ START_TEST(test_debug_ok432) {
 
 START_TEST(test_debug_ok433) {
   // 7.9228162514264337589248983040
-  s21_decimal decimal = {{0x0, 0xFFFFFFFF, 0xFFFFFFFF, 0x1C0000}};
+  my_decimal decimal = {{0x0, 0xFFFFFFFF, 0xFFFFFFFF, 0x1C0000}};
   char check[1024] = "7.9228162514264337589248983040";
 
   test_debug(decimal, check);
@@ -3596,7 +3596,7 @@ START_TEST(test_debug_ok433) {
 
 START_TEST(test_debug_ok434) {
   // -7.9228162514264337589248983040
-  s21_decimal decimal = {{0x0, 0xFFFFFFFF, 0xFFFFFFFF, 0x801C0000}};
+  my_decimal decimal = {{0x0, 0xFFFFFFFF, 0xFFFFFFFF, 0x801C0000}};
   char check[1024] = "-7.9228162514264337589248983040";
 
   test_debug(decimal, check);
@@ -3604,7 +3604,7 @@ START_TEST(test_debug_ok434) {
 
 START_TEST(test_debug_ok435) {
   // 79228162495817593524129366015
-  s21_decimal decimal = {{0xFFFFFFFF, 0x0, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal = {{0xFFFFFFFF, 0x0, 0xFFFFFFFF, 0x0}};
   char check[1024] = "79228162495817593524129366015";
 
   test_debug(decimal, check);
@@ -3612,7 +3612,7 @@ START_TEST(test_debug_ok435) {
 
 START_TEST(test_debug_ok436) {
   // -79228162495817593524129366015
-  s21_decimal decimal = {{0xFFFFFFFF, 0x0, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0x0, 0xFFFFFFFF, 0x80000000}};
   char check[1024] = "-79228162495817593524129366015";
 
   test_debug(decimal, check);
@@ -3620,7 +3620,7 @@ START_TEST(test_debug_ok436) {
 
 START_TEST(test_debug_ok437) {
   // 7922816249581759352412936601.5
-  s21_decimal decimal = {{0xFFFFFFFF, 0x0, 0xFFFFFFFF, 0x10000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0x0, 0xFFFFFFFF, 0x10000}};
   char check[1024] = "7922816249581759352412936601.5";
 
   test_debug(decimal, check);
@@ -3628,7 +3628,7 @@ START_TEST(test_debug_ok437) {
 
 START_TEST(test_debug_ok438) {
   // -7922816249581759352412936601.5
-  s21_decimal decimal = {{0xFFFFFFFF, 0x0, 0xFFFFFFFF, 0x80010000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0x0, 0xFFFFFFFF, 0x80010000}};
   char check[1024] = "-7922816249581759352412936601.5";
 
   test_debug(decimal, check);
@@ -3636,7 +3636,7 @@ START_TEST(test_debug_ok438) {
 
 START_TEST(test_debug_ok439) {
   // 7922816.2495817593524129366015
-  s21_decimal decimal = {{0xFFFFFFFF, 0x0, 0xFFFFFFFF, 0x160000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0x0, 0xFFFFFFFF, 0x160000}};
   char check[1024] = "7922816.2495817593524129366015";
 
   test_debug(decimal, check);
@@ -3644,7 +3644,7 @@ START_TEST(test_debug_ok439) {
 
 START_TEST(test_debug_ok440) {
   // -7922816.2495817593524129366015
-  s21_decimal decimal = {{0xFFFFFFFF, 0x0, 0xFFFFFFFF, 0x80160000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0x0, 0xFFFFFFFF, 0x80160000}};
   char check[1024] = "-7922816.2495817593524129366015";
 
   test_debug(decimal, check);
@@ -3652,7 +3652,7 @@ START_TEST(test_debug_ok440) {
 
 START_TEST(test_debug_ok441) {
   // 7.9228162495817593524129366015
-  s21_decimal decimal = {{0xFFFFFFFF, 0x0, 0xFFFFFFFF, 0x1C0000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0x0, 0xFFFFFFFF, 0x1C0000}};
   char check[1024] = "7.9228162495817593524129366015";
 
   test_debug(decimal, check);
@@ -3660,7 +3660,7 @@ START_TEST(test_debug_ok441) {
 
 START_TEST(test_debug_ok442) {
   // -7.9228162495817593524129366015
-  s21_decimal decimal = {{0xFFFFFFFF, 0x0, 0xFFFFFFFF, 0x801C0000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0x0, 0xFFFFFFFF, 0x801C0000}};
   char check[1024] = "-7.9228162495817593524129366015";
 
   test_debug(decimal, check);
@@ -3668,7 +3668,7 @@ START_TEST(test_debug_ok442) {
 
 START_TEST(test_debug_ok443) {
   // 79228162495817593519834398720
-  s21_decimal decimal = {{0x0, 0x0, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal = {{0x0, 0x0, 0xFFFFFFFF, 0x0}};
   char check[1024] = "79228162495817593519834398720";
 
   test_debug(decimal, check);
@@ -3676,7 +3676,7 @@ START_TEST(test_debug_ok443) {
 
 START_TEST(test_debug_ok444) {
   // -79228162495817593519834398720
-  s21_decimal decimal = {{0x0, 0x0, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal = {{0x0, 0x0, 0xFFFFFFFF, 0x80000000}};
   char check[1024] = "-79228162495817593519834398720";
 
   test_debug(decimal, check);
@@ -3684,7 +3684,7 @@ START_TEST(test_debug_ok444) {
 
 START_TEST(test_debug_ok445) {
   // 7922816249581759351983439872.0
-  s21_decimal decimal = {{0x0, 0x0, 0xFFFFFFFF, 0x10000}};
+  my_decimal decimal = {{0x0, 0x0, 0xFFFFFFFF, 0x10000}};
   char check[1024] = "7922816249581759351983439872.0";
 
   test_debug(decimal, check);
@@ -3692,7 +3692,7 @@ START_TEST(test_debug_ok445) {
 
 START_TEST(test_debug_ok446) {
   // -7922816249581759351983439872.0
-  s21_decimal decimal = {{0x0, 0x0, 0xFFFFFFFF, 0x80010000}};
+  my_decimal decimal = {{0x0, 0x0, 0xFFFFFFFF, 0x80010000}};
   char check[1024] = "-7922816249581759351983439872.0";
 
   test_debug(decimal, check);
@@ -3700,7 +3700,7 @@ START_TEST(test_debug_ok446) {
 
 START_TEST(test_debug_ok447) {
   // 792281.62495817593519834398720
-  s21_decimal decimal = {{0x0, 0x0, 0xFFFFFFFF, 0x170000}};
+  my_decimal decimal = {{0x0, 0x0, 0xFFFFFFFF, 0x170000}};
   char check[1024] = "792281.62495817593519834398720";
 
   test_debug(decimal, check);
@@ -3708,7 +3708,7 @@ START_TEST(test_debug_ok447) {
 
 START_TEST(test_debug_ok448) {
   // -792281.62495817593519834398720
-  s21_decimal decimal = {{0x0, 0x0, 0xFFFFFFFF, 0x80170000}};
+  my_decimal decimal = {{0x0, 0x0, 0xFFFFFFFF, 0x80170000}};
   char check[1024] = "-792281.62495817593519834398720";
 
   test_debug(decimal, check);
@@ -3716,7 +3716,7 @@ START_TEST(test_debug_ok448) {
 
 START_TEST(test_debug_ok449) {
   // 7.9228162495817593519834398720
-  s21_decimal decimal = {{0x0, 0x0, 0xFFFFFFFF, 0x1C0000}};
+  my_decimal decimal = {{0x0, 0x0, 0xFFFFFFFF, 0x1C0000}};
   char check[1024] = "7.9228162495817593519834398720";
 
   test_debug(decimal, check);
@@ -3724,7 +3724,7 @@ START_TEST(test_debug_ok449) {
 
 START_TEST(test_debug_ok450) {
   // -7.9228162495817593519834398720
-  s21_decimal decimal = {{0x0, 0x0, 0xFFFFFFFF, 0x801C0000}};
+  my_decimal decimal = {{0x0, 0x0, 0xFFFFFFFF, 0x801C0000}};
   char check[1024] = "-7.9228162495817593519834398720";
 
   test_debug(decimal, check);
@@ -3732,7 +3732,7 @@ START_TEST(test_debug_ok450) {
 
 START_TEST(test_debug_ok451) {
   // 18446744073709551615
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0x0, 0x0}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0x0, 0x0}};
   char check[1024] = "18446744073709551615";
 
   test_debug(decimal, check);
@@ -3740,7 +3740,7 @@ START_TEST(test_debug_ok451) {
 
 START_TEST(test_debug_ok452) {
   // -18446744073709551615
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0x0, 0x80000000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0x0, 0x80000000}};
   char check[1024] = "-18446744073709551615";
 
   test_debug(decimal, check);
@@ -3748,7 +3748,7 @@ START_TEST(test_debug_ok452) {
 
 START_TEST(test_debug_ok453) {
   // 1844674407370955161.5
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0x0, 0x10000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0x0, 0x10000}};
   char check[1024] = "1844674407370955161.5";
 
   test_debug(decimal, check);
@@ -3756,7 +3756,7 @@ START_TEST(test_debug_ok453) {
 
 START_TEST(test_debug_ok454) {
   // -1844674407370955161.5
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0x0, 0x80010000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0x0, 0x80010000}};
   char check[1024] = "-1844674407370955161.5";
 
   test_debug(decimal, check);
@@ -3764,7 +3764,7 @@ START_TEST(test_debug_ok454) {
 
 START_TEST(test_debug_ok455) {
   // 18446744073709551.615
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0x0, 0x30000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0x0, 0x30000}};
   char check[1024] = "18446744073709551.615";
 
   test_debug(decimal, check);
@@ -3772,7 +3772,7 @@ START_TEST(test_debug_ok455) {
 
 START_TEST(test_debug_ok456) {
   // -18446744073709551.615
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0x0, 0x80030000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0x0, 0x80030000}};
   char check[1024] = "-18446744073709551.615";
 
   test_debug(decimal, check);
@@ -3780,7 +3780,7 @@ START_TEST(test_debug_ok456) {
 
 START_TEST(test_debug_ok457) {
   // 184467440.73709551615
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0x0, 0xB0000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0x0, 0xB0000}};
   char check[1024] = "184467440.73709551615";
 
   test_debug(decimal, check);
@@ -3788,7 +3788,7 @@ START_TEST(test_debug_ok457) {
 
 START_TEST(test_debug_ok458) {
   // -184467440.73709551615
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0x0, 0x800B0000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0x0, 0x800B0000}};
   char check[1024] = "-184467440.73709551615";
 
   test_debug(decimal, check);
@@ -3796,7 +3796,7 @@ START_TEST(test_debug_ok458) {
 
 START_TEST(test_debug_ok459) {
   // 184.46744073709551615
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0x0, 0x110000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0x0, 0x110000}};
   char check[1024] = "184.46744073709551615";
 
   test_debug(decimal, check);
@@ -3804,7 +3804,7 @@ START_TEST(test_debug_ok459) {
 
 START_TEST(test_debug_ok460) {
   // -184.46744073709551615
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0x0, 0x80110000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0x0, 0x80110000}};
   char check[1024] = "-184.46744073709551615";
 
   test_debug(decimal, check);
@@ -3812,7 +3812,7 @@ START_TEST(test_debug_ok460) {
 
 START_TEST(test_debug_ok461) {
   // 1.8446744073709551615
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0x0, 0x130000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0x0, 0x130000}};
   char check[1024] = "1.8446744073709551615";
 
   test_debug(decimal, check);
@@ -3820,7 +3820,7 @@ START_TEST(test_debug_ok461) {
 
 START_TEST(test_debug_ok462) {
   // -1.8446744073709551615
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0x0, 0x80130000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0x0, 0x80130000}};
   char check[1024] = "-1.8446744073709551615";
 
   test_debug(decimal, check);
@@ -3828,7 +3828,7 @@ START_TEST(test_debug_ok462) {
 
 START_TEST(test_debug_ok463) {
   // 18446744069414584320
-  s21_decimal decimal = {{0x0, 0xFFFFFFFF, 0x0, 0x0}};
+  my_decimal decimal = {{0x0, 0xFFFFFFFF, 0x0, 0x0}};
   char check[1024] = "18446744069414584320";
 
   test_debug(decimal, check);
@@ -3836,7 +3836,7 @@ START_TEST(test_debug_ok463) {
 
 START_TEST(test_debug_ok464) {
   // -18446744069414584320
-  s21_decimal decimal = {{0x0, 0xFFFFFFFF, 0x0, 0x80000000}};
+  my_decimal decimal = {{0x0, 0xFFFFFFFF, 0x0, 0x80000000}};
   char check[1024] = "-18446744069414584320";
 
   test_debug(decimal, check);
@@ -3844,7 +3844,7 @@ START_TEST(test_debug_ok464) {
 
 START_TEST(test_debug_ok465) {
   // 1844674406941458432.0
-  s21_decimal decimal = {{0x0, 0xFFFFFFFF, 0x0, 0x10000}};
+  my_decimal decimal = {{0x0, 0xFFFFFFFF, 0x0, 0x10000}};
   char check[1024] = "1844674406941458432.0";
 
   test_debug(decimal, check);
@@ -3852,7 +3852,7 @@ START_TEST(test_debug_ok465) {
 
 START_TEST(test_debug_ok466) {
   // -1844674406941458432.0
-  s21_decimal decimal = {{0x0, 0xFFFFFFFF, 0x0, 0x80010000}};
+  my_decimal decimal = {{0x0, 0xFFFFFFFF, 0x0, 0x80010000}};
   char check[1024] = "-1844674406941458432.0";
 
   test_debug(decimal, check);
@@ -3860,7 +3860,7 @@ START_TEST(test_debug_ok466) {
 
 START_TEST(test_debug_ok467) {
   // 18446744069414584.320
-  s21_decimal decimal = {{0x0, 0xFFFFFFFF, 0x0, 0x30000}};
+  my_decimal decimal = {{0x0, 0xFFFFFFFF, 0x0, 0x30000}};
   char check[1024] = "18446744069414584.320";
 
   test_debug(decimal, check);
@@ -3868,7 +3868,7 @@ START_TEST(test_debug_ok467) {
 
 START_TEST(test_debug_ok468) {
   // -18446744069414584.320
-  s21_decimal decimal = {{0x0, 0xFFFFFFFF, 0x0, 0x80030000}};
+  my_decimal decimal = {{0x0, 0xFFFFFFFF, 0x0, 0x80030000}};
   char check[1024] = "-18446744069414584.320";
 
   test_debug(decimal, check);
@@ -3876,7 +3876,7 @@ START_TEST(test_debug_ok468) {
 
 START_TEST(test_debug_ok469) {
   // 18446744.069414584320
-  s21_decimal decimal = {{0x0, 0xFFFFFFFF, 0x0, 0xC0000}};
+  my_decimal decimal = {{0x0, 0xFFFFFFFF, 0x0, 0xC0000}};
   char check[1024] = "18446744.069414584320";
 
   test_debug(decimal, check);
@@ -3884,7 +3884,7 @@ START_TEST(test_debug_ok469) {
 
 START_TEST(test_debug_ok470) {
   // -18446744.069414584320
-  s21_decimal decimal = {{0x0, 0xFFFFFFFF, 0x0, 0x800C0000}};
+  my_decimal decimal = {{0x0, 0xFFFFFFFF, 0x0, 0x800C0000}};
   char check[1024] = "-18446744.069414584320";
 
   test_debug(decimal, check);
@@ -3892,7 +3892,7 @@ START_TEST(test_debug_ok470) {
 
 START_TEST(test_debug_ok471) {
   // 184.46744069414584320
-  s21_decimal decimal = {{0x0, 0xFFFFFFFF, 0x0, 0x110000}};
+  my_decimal decimal = {{0x0, 0xFFFFFFFF, 0x0, 0x110000}};
   char check[1024] = "184.46744069414584320";
 
   test_debug(decimal, check);
@@ -3900,7 +3900,7 @@ START_TEST(test_debug_ok471) {
 
 START_TEST(test_debug_ok472) {
   // -184.46744069414584320
-  s21_decimal decimal = {{0x0, 0xFFFFFFFF, 0x0, 0x80110000}};
+  my_decimal decimal = {{0x0, 0xFFFFFFFF, 0x0, 0x80110000}};
   char check[1024] = "-184.46744069414584320";
 
   test_debug(decimal, check);
@@ -3908,7 +3908,7 @@ START_TEST(test_debug_ok472) {
 
 START_TEST(test_debug_ok473) {
   // 1.8446744069414584320
-  s21_decimal decimal = {{0x0, 0xFFFFFFFF, 0x0, 0x130000}};
+  my_decimal decimal = {{0x0, 0xFFFFFFFF, 0x0, 0x130000}};
   char check[1024] = "1.8446744069414584320";
 
   test_debug(decimal, check);
@@ -3916,7 +3916,7 @@ START_TEST(test_debug_ok473) {
 
 START_TEST(test_debug_ok474) {
   // -1.8446744069414584320
-  s21_decimal decimal = {{0x0, 0xFFFFFFFF, 0x0, 0x80130000}};
+  my_decimal decimal = {{0x0, 0xFFFFFFFF, 0x0, 0x80130000}};
   char check[1024] = "-1.8446744069414584320";
 
   test_debug(decimal, check);
@@ -3924,7 +3924,7 @@ START_TEST(test_debug_ok474) {
 
 START_TEST(test_debug_ok475) {
   // 4294967295
-  s21_decimal decimal = {{0xFFFFFFFF, 0x0, 0x0, 0x0}};
+  my_decimal decimal = {{0xFFFFFFFF, 0x0, 0x0, 0x0}};
   char check[1024] = "4294967295";
 
   test_debug(decimal, check);
@@ -3932,7 +3932,7 @@ START_TEST(test_debug_ok475) {
 
 START_TEST(test_debug_ok476) {
   // -4294967295
-  s21_decimal decimal = {{0xFFFFFFFF, 0x0, 0x0, 0x80000000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0x0, 0x0, 0x80000000}};
   char check[1024] = "-4294967295";
 
   test_debug(decimal, check);
@@ -3940,7 +3940,7 @@ START_TEST(test_debug_ok476) {
 
 START_TEST(test_debug_ok477) {
   // 429496729.5
-  s21_decimal decimal = {{0xFFFFFFFF, 0x0, 0x0, 0x10000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0x0, 0x0, 0x10000}};
   char check[1024] = "429496729.5";
 
   test_debug(decimal, check);
@@ -3948,7 +3948,7 @@ START_TEST(test_debug_ok477) {
 
 START_TEST(test_debug_ok478) {
   // -429496729.5
-  s21_decimal decimal = {{0xFFFFFFFF, 0x0, 0x0, 0x80010000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0x0, 0x0, 0x80010000}};
   char check[1024] = "-429496729.5";
 
   test_debug(decimal, check);
@@ -3956,7 +3956,7 @@ START_TEST(test_debug_ok478) {
 
 START_TEST(test_debug_ok479) {
   // 42949672.95
-  s21_decimal decimal = {{0xFFFFFFFF, 0x0, 0x0, 0x20000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0x0, 0x0, 0x20000}};
   char check[1024] = "42949672.95";
 
   test_debug(decimal, check);
@@ -3964,7 +3964,7 @@ START_TEST(test_debug_ok479) {
 
 START_TEST(test_debug_ok480) {
   // -42949672.95
-  s21_decimal decimal = {{0xFFFFFFFF, 0x0, 0x0, 0x80020000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0x0, 0x0, 0x80020000}};
   char check[1024] = "-42949672.95";
 
   test_debug(decimal, check);
@@ -3972,7 +3972,7 @@ START_TEST(test_debug_ok480) {
 
 START_TEST(test_debug_ok481) {
   // 42949.67295
-  s21_decimal decimal = {{0xFFFFFFFF, 0x0, 0x0, 0x50000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0x0, 0x0, 0x50000}};
   char check[1024] = "42949.67295";
 
   test_debug(decimal, check);
@@ -3980,7 +3980,7 @@ START_TEST(test_debug_ok481) {
 
 START_TEST(test_debug_ok482) {
   // -42949.67295
-  s21_decimal decimal = {{0xFFFFFFFF, 0x0, 0x0, 0x80050000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0x0, 0x0, 0x80050000}};
   char check[1024] = "-42949.67295";
 
   test_debug(decimal, check);
@@ -3988,7 +3988,7 @@ START_TEST(test_debug_ok482) {
 
 START_TEST(test_debug_ok483) {
   // 42.94967295
-  s21_decimal decimal = {{0xFFFFFFFF, 0x0, 0x0, 0x80000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0x0, 0x0, 0x80000}};
   char check[1024] = "42.94967295";
 
   test_debug(decimal, check);
@@ -3996,7 +3996,7 @@ START_TEST(test_debug_ok483) {
 
 START_TEST(test_debug_ok484) {
   // -42.94967295
-  s21_decimal decimal = {{0xFFFFFFFF, 0x0, 0x0, 0x80080000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0x0, 0x0, 0x80080000}};
   char check[1024] = "-42.94967295";
 
   test_debug(decimal, check);
@@ -4004,7 +4004,7 @@ START_TEST(test_debug_ok484) {
 
 START_TEST(test_debug_ok485) {
   // 4.294967295
-  s21_decimal decimal = {{0xFFFFFFFF, 0x0, 0x0, 0x90000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0x0, 0x0, 0x90000}};
   char check[1024] = "4.294967295";
 
   test_debug(decimal, check);
@@ -4012,7 +4012,7 @@ START_TEST(test_debug_ok485) {
 
 START_TEST(test_debug_ok486) {
   // -4.294967295
-  s21_decimal decimal = {{0xFFFFFFFF, 0x0, 0x0, 0x80090000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0x0, 0x0, 0x80090000}};
   char check[1024] = "-4.294967295";
 
   test_debug(decimal, check);
@@ -4020,7 +4020,7 @@ START_TEST(test_debug_ok486) {
 
 START_TEST(test_debug_ok487) {
   // 1
-  s21_decimal decimal = {{0x1, 0x0, 0x0, 0x0}};
+  my_decimal decimal = {{0x1, 0x0, 0x0, 0x0}};
   char check[1024] = "1";
 
   test_debug(decimal, check);
@@ -4028,7 +4028,7 @@ START_TEST(test_debug_ok487) {
 
 START_TEST(test_debug_ok488) {
   // -1
-  s21_decimal decimal = {{0x1, 0x0, 0x0, 0x80000000}};
+  my_decimal decimal = {{0x1, 0x0, 0x0, 0x80000000}};
   char check[1024] = "-1";
 
   test_debug(decimal, check);
@@ -4036,7 +4036,7 @@ START_TEST(test_debug_ok488) {
 
 START_TEST(test_debug_ok489) {
   // 1.0
-  s21_decimal decimal = {{0xA, 0x0, 0x0, 0x10000}};
+  my_decimal decimal = {{0xA, 0x0, 0x0, 0x10000}};
   char check[1024] = "1.0";
 
   test_debug(decimal, check);
@@ -4044,7 +4044,7 @@ START_TEST(test_debug_ok489) {
 
 START_TEST(test_debug_ok490) {
   // -1.0
-  s21_decimal decimal = {{0xA, 0x0, 0x0, 0x80010000}};
+  my_decimal decimal = {{0xA, 0x0, 0x0, 0x80010000}};
   char check[1024] = "-1.0";
 
   test_debug(decimal, check);
@@ -4052,7 +4052,7 @@ START_TEST(test_debug_ok490) {
 
 START_TEST(test_debug_ok491) {
   // 1.00
-  s21_decimal decimal = {{0x64, 0x0, 0x0, 0x20000}};
+  my_decimal decimal = {{0x64, 0x0, 0x0, 0x20000}};
   char check[1024] = "1.00";
 
   test_debug(decimal, check);
@@ -4060,7 +4060,7 @@ START_TEST(test_debug_ok491) {
 
 START_TEST(test_debug_ok492) {
   // -1.00
-  s21_decimal decimal = {{0x64, 0x0, 0x0, 0x80020000}};
+  my_decimal decimal = {{0x64, 0x0, 0x0, 0x80020000}};
   char check[1024] = "-1.00";
 
   test_debug(decimal, check);
@@ -4068,7 +4068,7 @@ START_TEST(test_debug_ok492) {
 
 START_TEST(test_debug_ok493) {
   // 1.000
-  s21_decimal decimal = {{0x3E8, 0x0, 0x0, 0x30000}};
+  my_decimal decimal = {{0x3E8, 0x0, 0x0, 0x30000}};
   char check[1024] = "1.000";
 
   test_debug(decimal, check);
@@ -4076,7 +4076,7 @@ START_TEST(test_debug_ok493) {
 
 START_TEST(test_debug_ok494) {
   // -1.000
-  s21_decimal decimal = {{0x3E8, 0x0, 0x0, 0x80030000}};
+  my_decimal decimal = {{0x3E8, 0x0, 0x0, 0x80030000}};
   char check[1024] = "-1.000";
 
   test_debug(decimal, check);
@@ -4084,7 +4084,7 @@ START_TEST(test_debug_ok494) {
 
 START_TEST(test_debug_ok495) {
   // 1.0000000000
-  s21_decimal decimal = {{0x540BE400, 0x2, 0x0, 0xA0000}};
+  my_decimal decimal = {{0x540BE400, 0x2, 0x0, 0xA0000}};
   char check[1024] = "1.0000000000";
 
   test_debug(decimal, check);
@@ -4092,7 +4092,7 @@ START_TEST(test_debug_ok495) {
 
 START_TEST(test_debug_ok496) {
   // -1.0000000000
-  s21_decimal decimal = {{0x540BE400, 0x2, 0x0, 0x800A0000}};
+  my_decimal decimal = {{0x540BE400, 0x2, 0x0, 0x800A0000}};
   char check[1024] = "-1.0000000000";
 
   test_debug(decimal, check);
@@ -4100,7 +4100,7 @@ START_TEST(test_debug_ok496) {
 
 START_TEST(test_debug_ok497) {
   // 1.0000000000000000
-  s21_decimal decimal = {{0x6FC10000, 0x2386F2, 0x0, 0x100000}};
+  my_decimal decimal = {{0x6FC10000, 0x2386F2, 0x0, 0x100000}};
   char check[1024] = "1.0000000000000000";
 
   test_debug(decimal, check);
@@ -4108,7 +4108,7 @@ START_TEST(test_debug_ok497) {
 
 START_TEST(test_debug_ok498) {
   // -1.0000000000000000
-  s21_decimal decimal = {{0x6FC10000, 0x2386F2, 0x0, 0x80100000}};
+  my_decimal decimal = {{0x6FC10000, 0x2386F2, 0x0, 0x80100000}};
   char check[1024] = "-1.0000000000000000";
 
   test_debug(decimal, check);
@@ -4116,7 +4116,7 @@ START_TEST(test_debug_ok498) {
 
 START_TEST(test_debug_ok499) {
   // 1.00000000000000000000000
-  s21_decimal decimal = {{0xF6800000, 0x2C7E14A, 0x152D, 0x170000}};
+  my_decimal decimal = {{0xF6800000, 0x2C7E14A, 0x152D, 0x170000}};
   char check[1024] = "1.00000000000000000000000";
 
   test_debug(decimal, check);
@@ -4124,7 +4124,7 @@ START_TEST(test_debug_ok499) {
 
 START_TEST(test_debug_ok500) {
   // -1.00000000000000000000000
-  s21_decimal decimal = {{0xF6800000, 0x2C7E14A, 0x152D, 0x80170000}};
+  my_decimal decimal = {{0xF6800000, 0x2C7E14A, 0x152D, 0x80170000}};
   char check[1024] = "-1.00000000000000000000000";
 
   test_debug(decimal, check);
@@ -4132,7 +4132,7 @@ START_TEST(test_debug_ok500) {
 
 START_TEST(test_debug_ok501) {
   // 1.000000000000000000000000000
-  s21_decimal decimal = {{0xE8000000, 0x9FD0803C, 0x33B2E3C, 0x1B0000}};
+  my_decimal decimal = {{0xE8000000, 0x9FD0803C, 0x33B2E3C, 0x1B0000}};
   char check[1024] = "1.000000000000000000000000000";
 
   test_debug(decimal, check);
@@ -4140,7 +4140,7 @@ START_TEST(test_debug_ok501) {
 
 START_TEST(test_debug_ok502) {
   // -1.000000000000000000000000000
-  s21_decimal decimal = {{0xE8000000, 0x9FD0803C, 0x33B2E3C, 0x801B0000}};
+  my_decimal decimal = {{0xE8000000, 0x9FD0803C, 0x33B2E3C, 0x801B0000}};
   char check[1024] = "-1.000000000000000000000000000";
 
   test_debug(decimal, check);
@@ -4148,7 +4148,7 @@ START_TEST(test_debug_ok502) {
 
 START_TEST(test_debug_ok503) {
   // 1.0000000000000000000000000000
-  s21_decimal decimal = {{0x10000000, 0x3E250261, 0x204FCE5E, 0x1C0000}};
+  my_decimal decimal = {{0x10000000, 0x3E250261, 0x204FCE5E, 0x1C0000}};
   char check[1024] = "1.0000000000000000000000000000";
 
   test_debug(decimal, check);
@@ -4156,7 +4156,7 @@ START_TEST(test_debug_ok503) {
 
 START_TEST(test_debug_ok504) {
   // -1.0000000000000000000000000000
-  s21_decimal decimal = {{0x10000000, 0x3E250261, 0x204FCE5E, 0x801C0000}};
+  my_decimal decimal = {{0x10000000, 0x3E250261, 0x204FCE5E, 0x801C0000}};
   char check[1024] = "-1.0000000000000000000000000000";
 
   test_debug(decimal, check);
@@ -4164,7 +4164,7 @@ START_TEST(test_debug_ok504) {
 
 START_TEST(test_debug_ok505) {
   // 1.1
-  s21_decimal decimal = {{0xB, 0x0, 0x0, 0x10000}};
+  my_decimal decimal = {{0xB, 0x0, 0x0, 0x10000}};
   char check[1024] = "1.1";
 
   test_debug(decimal, check);
@@ -4172,7 +4172,7 @@ START_TEST(test_debug_ok505) {
 
 START_TEST(test_debug_ok506) {
   // -1.1
-  s21_decimal decimal = {{0xB, 0x0, 0x0, 0x80010000}};
+  my_decimal decimal = {{0xB, 0x0, 0x0, 0x80010000}};
   char check[1024] = "-1.1";
 
   test_debug(decimal, check);
@@ -4180,7 +4180,7 @@ START_TEST(test_debug_ok506) {
 
 START_TEST(test_debug_ok507) {
   // 12.12
-  s21_decimal decimal = {{0x4BC, 0x0, 0x0, 0x20000}};
+  my_decimal decimal = {{0x4BC, 0x0, 0x0, 0x20000}};
   char check[1024] = "12.12";
 
   test_debug(decimal, check);
@@ -4188,7 +4188,7 @@ START_TEST(test_debug_ok507) {
 
 START_TEST(test_debug_ok508) {
   // -12.12
-  s21_decimal decimal = {{0x4BC, 0x0, 0x0, 0x80020000}};
+  my_decimal decimal = {{0x4BC, 0x0, 0x0, 0x80020000}};
   char check[1024] = "-12.12";
 
   test_debug(decimal, check);
@@ -4196,7 +4196,7 @@ START_TEST(test_debug_ok508) {
 
 START_TEST(test_debug_ok509) {
   // 123.123
-  s21_decimal decimal = {{0x1E0F3, 0x0, 0x0, 0x30000}};
+  my_decimal decimal = {{0x1E0F3, 0x0, 0x0, 0x30000}};
   char check[1024] = "123.123";
 
   test_debug(decimal, check);
@@ -4204,7 +4204,7 @@ START_TEST(test_debug_ok509) {
 
 START_TEST(test_debug_ok510) {
   // -123.123
-  s21_decimal decimal = {{0x1E0F3, 0x0, 0x0, 0x80030000}};
+  my_decimal decimal = {{0x1E0F3, 0x0, 0x0, 0x80030000}};
   char check[1024] = "-123.123";
 
   test_debug(decimal, check);
@@ -4212,7 +4212,7 @@ START_TEST(test_debug_ok510) {
 
 START_TEST(test_debug_ok511) {
   // 1234.1234
-  s21_decimal decimal = {{0xBC4FF2, 0x0, 0x0, 0x40000}};
+  my_decimal decimal = {{0xBC4FF2, 0x0, 0x0, 0x40000}};
   char check[1024] = "1234.1234";
 
   test_debug(decimal, check);
@@ -4220,7 +4220,7 @@ START_TEST(test_debug_ok511) {
 
 START_TEST(test_debug_ok512) {
   // -1234.1234
-  s21_decimal decimal = {{0xBC4FF2, 0x0, 0x0, 0x80040000}};
+  my_decimal decimal = {{0xBC4FF2, 0x0, 0x0, 0x80040000}};
   char check[1024] = "-1234.1234";
 
   test_debug(decimal, check);
@@ -4228,7 +4228,7 @@ START_TEST(test_debug_ok512) {
 
 START_TEST(test_debug_ok513) {
   // 12345.12345
-  s21_decimal decimal = {{0x499529D9, 0x0, 0x0, 0x50000}};
+  my_decimal decimal = {{0x499529D9, 0x0, 0x0, 0x50000}};
   char check[1024] = "12345.12345";
 
   test_debug(decimal, check);
@@ -4236,7 +4236,7 @@ START_TEST(test_debug_ok513) {
 
 START_TEST(test_debug_ok514) {
   // -12345.12345
-  s21_decimal decimal = {{0x499529D9, 0x0, 0x0, 0x80050000}};
+  my_decimal decimal = {{0x499529D9, 0x0, 0x0, 0x80050000}};
   char check[1024] = "-12345.12345";
 
   test_debug(decimal, check);
@@ -4244,7 +4244,7 @@ START_TEST(test_debug_ok514) {
 
 START_TEST(test_debug_ok515) {
   // 123456.123456
-  s21_decimal decimal = {{0xBE8EF240, 0x1C, 0x0, 0x60000}};
+  my_decimal decimal = {{0xBE8EF240, 0x1C, 0x0, 0x60000}};
   char check[1024] = "123456.123456";
 
   test_debug(decimal, check);
@@ -4252,7 +4252,7 @@ START_TEST(test_debug_ok515) {
 
 START_TEST(test_debug_ok516) {
   // -123456.123456
-  s21_decimal decimal = {{0xBE8EF240, 0x1C, 0x0, 0x80060000}};
+  my_decimal decimal = {{0xBE8EF240, 0x1C, 0x0, 0x80060000}};
   char check[1024] = "-123456.123456";
 
   test_debug(decimal, check);
@@ -4260,7 +4260,7 @@ START_TEST(test_debug_ok516) {
 
 START_TEST(test_debug_ok517) {
   // 1234567.1234567
-  s21_decimal decimal = {{0x73593407, 0xB3A, 0x0, 0x70000}};
+  my_decimal decimal = {{0x73593407, 0xB3A, 0x0, 0x70000}};
   char check[1024] = "1234567.1234567";
 
   test_debug(decimal, check);
@@ -4268,7 +4268,7 @@ START_TEST(test_debug_ok517) {
 
 START_TEST(test_debug_ok518) {
   // -1234567.1234567
-  s21_decimal decimal = {{0x73593407, 0xB3A, 0x0, 0x80070000}};
+  my_decimal decimal = {{0x73593407, 0xB3A, 0x0, 0x80070000}};
   char check[1024] = "-1234567.1234567";
 
   test_debug(decimal, check);
@@ -4276,7 +4276,7 @@ START_TEST(test_debug_ok518) {
 
 START_TEST(test_debug_ok519) {
   // 1234567890.1234567890
-  s21_decimal decimal = {{0xEB1F0AD2, 0xAB54A98C, 0x0, 0xA0000}};
+  my_decimal decimal = {{0xEB1F0AD2, 0xAB54A98C, 0x0, 0xA0000}};
   char check[1024] = "1234567890.1234567890";
 
   test_debug(decimal, check);
@@ -4284,7 +4284,7 @@ START_TEST(test_debug_ok519) {
 
 START_TEST(test_debug_ok520) {
   // -1234567890.1234567890
-  s21_decimal decimal = {{0xEB1F0AD2, 0xAB54A98C, 0x0, 0x800A0000}};
+  my_decimal decimal = {{0xEB1F0AD2, 0xAB54A98C, 0x0, 0x800A0000}};
   char check[1024] = "-1234567890.1234567890";
 
   test_debug(decimal, check);
@@ -4292,7 +4292,7 @@ START_TEST(test_debug_ok520) {
 
 START_TEST(test_debug_ok521) {
   // 12345678901234.12345678901234
-  s21_decimal decimal = {{0xF91EAFF2, 0x6D795225, 0x3FD35EB, 0xE0000}};
+  my_decimal decimal = {{0xF91EAFF2, 0x6D795225, 0x3FD35EB, 0xE0000}};
   char check[1024] = "12345678901234.12345678901234";
 
   test_debug(decimal, check);
@@ -4300,7 +4300,7 @@ START_TEST(test_debug_ok521) {
 
 START_TEST(test_debug_ok522) {
   // -12345678901234.12345678901234
-  s21_decimal decimal = {{0xF91EAFF2, 0x6D795225, 0x3FD35EB, 0x800E0000}};
+  my_decimal decimal = {{0xF91EAFF2, 0x6D795225, 0x3FD35EB, 0x800E0000}};
   char check[1024] = "-12345678901234.12345678901234";
 
   test_debug(decimal, check);
@@ -4308,7 +4308,7 @@ START_TEST(test_debug_ok522) {
 
 START_TEST(test_debug_ok523) {
   // 99
-  s21_decimal decimal = {{0x63, 0x0, 0x0, 0x0}};
+  my_decimal decimal = {{0x63, 0x0, 0x0, 0x0}};
   char check[1024] = "99";
 
   test_debug(decimal, check);
@@ -4316,7 +4316,7 @@ START_TEST(test_debug_ok523) {
 
 START_TEST(test_debug_ok524) {
   // -99
-  s21_decimal decimal = {{0x63, 0x0, 0x0, 0x80000000}};
+  my_decimal decimal = {{0x63, 0x0, 0x0, 0x80000000}};
   char check[1024] = "-99";
 
   test_debug(decimal, check);
@@ -4324,7 +4324,7 @@ START_TEST(test_debug_ok524) {
 
 START_TEST(test_debug_ok525) {
   // 9.9
-  s21_decimal decimal = {{0x63, 0x0, 0x0, 0x10000}};
+  my_decimal decimal = {{0x63, 0x0, 0x0, 0x10000}};
   char check[1024] = "9.9";
 
   test_debug(decimal, check);
@@ -4332,7 +4332,7 @@ START_TEST(test_debug_ok525) {
 
 START_TEST(test_debug_ok526) {
   // -9.9
-  s21_decimal decimal = {{0x63, 0x0, 0x0, 0x80010000}};
+  my_decimal decimal = {{0x63, 0x0, 0x0, 0x80010000}};
   char check[1024] = "-9.9";
 
   test_debug(decimal, check);
@@ -4340,7 +4340,7 @@ START_TEST(test_debug_ok526) {
 
 START_TEST(test_debug_ok527) {
   // 99.99
-  s21_decimal decimal = {{0x270F, 0x0, 0x0, 0x20000}};
+  my_decimal decimal = {{0x270F, 0x0, 0x0, 0x20000}};
   char check[1024] = "99.99";
 
   test_debug(decimal, check);
@@ -4348,7 +4348,7 @@ START_TEST(test_debug_ok527) {
 
 START_TEST(test_debug_ok528) {
   // -99.99
-  s21_decimal decimal = {{0x270F, 0x0, 0x0, 0x80020000}};
+  my_decimal decimal = {{0x270F, 0x0, 0x0, 0x80020000}};
   char check[1024] = "-99.99";
 
   test_debug(decimal, check);
@@ -4356,7 +4356,7 @@ START_TEST(test_debug_ok528) {
 
 START_TEST(test_debug_ok529) {
   // 999.999
-  s21_decimal decimal = {{0xF423F, 0x0, 0x0, 0x30000}};
+  my_decimal decimal = {{0xF423F, 0x0, 0x0, 0x30000}};
   char check[1024] = "999.999";
 
   test_debug(decimal, check);
@@ -4364,7 +4364,7 @@ START_TEST(test_debug_ok529) {
 
 START_TEST(test_debug_ok530) {
   // -999.999
-  s21_decimal decimal = {{0xF423F, 0x0, 0x0, 0x80030000}};
+  my_decimal decimal = {{0xF423F, 0x0, 0x0, 0x80030000}};
   char check[1024] = "-999.999";
 
   test_debug(decimal, check);
@@ -4372,7 +4372,7 @@ START_TEST(test_debug_ok530) {
 
 START_TEST(test_debug_ok531) {
   // 9999.9999
-  s21_decimal decimal = {{0x5F5E0FF, 0x0, 0x0, 0x40000}};
+  my_decimal decimal = {{0x5F5E0FF, 0x0, 0x0, 0x40000}};
   char check[1024] = "9999.9999";
 
   test_debug(decimal, check);
@@ -4380,7 +4380,7 @@ START_TEST(test_debug_ok531) {
 
 START_TEST(test_debug_ok532) {
   // -9999.9999
-  s21_decimal decimal = {{0x5F5E0FF, 0x0, 0x0, 0x80040000}};
+  my_decimal decimal = {{0x5F5E0FF, 0x0, 0x0, 0x80040000}};
   char check[1024] = "-9999.9999";
 
   test_debug(decimal, check);
@@ -4388,7 +4388,7 @@ START_TEST(test_debug_ok532) {
 
 START_TEST(test_debug_ok533) {
   // 99999.99999
-  s21_decimal decimal = {{0x540BE3FF, 0x2, 0x0, 0x50000}};
+  my_decimal decimal = {{0x540BE3FF, 0x2, 0x0, 0x50000}};
   char check[1024] = "99999.99999";
 
   test_debug(decimal, check);
@@ -4396,7 +4396,7 @@ START_TEST(test_debug_ok533) {
 
 START_TEST(test_debug_ok534) {
   // -99999.99999
-  s21_decimal decimal = {{0x540BE3FF, 0x2, 0x0, 0x80050000}};
+  my_decimal decimal = {{0x540BE3FF, 0x2, 0x0, 0x80050000}};
   char check[1024] = "-99999.99999";
 
   test_debug(decimal, check);
@@ -4404,7 +4404,7 @@ START_TEST(test_debug_ok534) {
 
 START_TEST(test_debug_ok535) {
   // 999999.999999
-  s21_decimal decimal = {{0xD4A50FFF, 0xE8, 0x0, 0x60000}};
+  my_decimal decimal = {{0xD4A50FFF, 0xE8, 0x0, 0x60000}};
   char check[1024] = "999999.999999";
 
   test_debug(decimal, check);
@@ -4412,7 +4412,7 @@ START_TEST(test_debug_ok535) {
 
 START_TEST(test_debug_ok536) {
   // -999999.999999
-  s21_decimal decimal = {{0xD4A50FFF, 0xE8, 0x0, 0x80060000}};
+  my_decimal decimal = {{0xD4A50FFF, 0xE8, 0x0, 0x80060000}};
   char check[1024] = "-999999.999999";
 
   test_debug(decimal, check);
@@ -4420,7 +4420,7 @@ START_TEST(test_debug_ok536) {
 
 START_TEST(test_debug_ok537) {
   // 9999999.9999999
-  s21_decimal decimal = {{0x107A3FFF, 0x5AF3, 0x0, 0x70000}};
+  my_decimal decimal = {{0x107A3FFF, 0x5AF3, 0x0, 0x70000}};
   char check[1024] = "9999999.9999999";
 
   test_debug(decimal, check);
@@ -4428,7 +4428,7 @@ START_TEST(test_debug_ok537) {
 
 START_TEST(test_debug_ok538) {
   // -9999999.9999999
-  s21_decimal decimal = {{0x107A3FFF, 0x5AF3, 0x0, 0x80070000}};
+  my_decimal decimal = {{0x107A3FFF, 0x5AF3, 0x0, 0x80070000}};
   char check[1024] = "-9999999.9999999";
 
   test_debug(decimal, check);
@@ -4436,7 +4436,7 @@ START_TEST(test_debug_ok538) {
 
 START_TEST(test_debug_ok539) {
   // 99999999.99999999
-  s21_decimal decimal = {{0x6FC0FFFF, 0x2386F2, 0x0, 0x80000}};
+  my_decimal decimal = {{0x6FC0FFFF, 0x2386F2, 0x0, 0x80000}};
   char check[1024] = "99999999.99999999";
 
   test_debug(decimal, check);
@@ -4444,7 +4444,7 @@ START_TEST(test_debug_ok539) {
 
 START_TEST(test_debug_ok540) {
   // -99999999.99999999
-  s21_decimal decimal = {{0x6FC0FFFF, 0x2386F2, 0x0, 0x80080000}};
+  my_decimal decimal = {{0x6FC0FFFF, 0x2386F2, 0x0, 0x80080000}};
   char check[1024] = "-99999999.99999999";
 
   test_debug(decimal, check);
@@ -4452,7 +4452,7 @@ START_TEST(test_debug_ok540) {
 
 START_TEST(test_debug_ok541) {
   // 999999999.999999999
-  s21_decimal decimal = {{0xA763FFFF, 0xDE0B6B3, 0x0, 0x90000}};
+  my_decimal decimal = {{0xA763FFFF, 0xDE0B6B3, 0x0, 0x90000}};
   char check[1024] = "999999999.999999999";
 
   test_debug(decimal, check);
@@ -4460,7 +4460,7 @@ START_TEST(test_debug_ok541) {
 
 START_TEST(test_debug_ok542) {
   // -999999999.999999999
-  s21_decimal decimal = {{0xA763FFFF, 0xDE0B6B3, 0x0, 0x80090000}};
+  my_decimal decimal = {{0xA763FFFF, 0xDE0B6B3, 0x0, 0x80090000}};
   char check[1024] = "-999999999.999999999";
 
   test_debug(decimal, check);
@@ -4468,7 +4468,7 @@ START_TEST(test_debug_ok542) {
 
 START_TEST(test_debug_ok543) {
   // 9999999999.9999999999
-  s21_decimal decimal = {{0x630FFFFF, 0x6BC75E2D, 0x5, 0xA0000}};
+  my_decimal decimal = {{0x630FFFFF, 0x6BC75E2D, 0x5, 0xA0000}};
   char check[1024] = "9999999999.9999999999";
 
   test_debug(decimal, check);
@@ -4476,7 +4476,7 @@ START_TEST(test_debug_ok543) {
 
 START_TEST(test_debug_ok544) {
   // -9999999999.9999999999
-  s21_decimal decimal = {{0x630FFFFF, 0x6BC75E2D, 0x5, 0x800A0000}};
+  my_decimal decimal = {{0x630FFFFF, 0x6BC75E2D, 0x5, 0x800A0000}};
   char check[1024] = "-9999999999.9999999999";
 
   test_debug(decimal, check);
@@ -4484,7 +4484,7 @@ START_TEST(test_debug_ok544) {
 
 START_TEST(test_debug_ok545) {
   // 9
-  s21_decimal decimal = {{0x9, 0x0, 0x0, 0x0}};
+  my_decimal decimal = {{0x9, 0x0, 0x0, 0x0}};
   char check[1024] = "9";
 
   test_debug(decimal, check);
@@ -4492,7 +4492,7 @@ START_TEST(test_debug_ok545) {
 
 START_TEST(test_debug_ok546) {
   // -9
-  s21_decimal decimal = {{0x9, 0x0, 0x0, 0x80000000}};
+  my_decimal decimal = {{0x9, 0x0, 0x0, 0x80000000}};
   char check[1024] = "-9";
 
   test_debug(decimal, check);
@@ -4500,7 +4500,7 @@ START_TEST(test_debug_ok546) {
 
 START_TEST(test_debug_ok547) {
   // 0.9
-  s21_decimal decimal = {{0x9, 0x0, 0x0, 0x10000}};
+  my_decimal decimal = {{0x9, 0x0, 0x0, 0x10000}};
   char check[1024] = "0.9";
 
   test_debug(decimal, check);
@@ -4508,7 +4508,7 @@ START_TEST(test_debug_ok547) {
 
 START_TEST(test_debug_ok548) {
   // -0.9
-  s21_decimal decimal = {{0x9, 0x0, 0x0, 0x80010000}};
+  my_decimal decimal = {{0x9, 0x0, 0x0, 0x80010000}};
   char check[1024] = "-0.9";
 
   test_debug(decimal, check);
@@ -4516,7 +4516,7 @@ START_TEST(test_debug_ok548) {
 
 START_TEST(test_debug_ok549) {
   // 0.99
-  s21_decimal decimal = {{0x63, 0x0, 0x0, 0x20000}};
+  my_decimal decimal = {{0x63, 0x0, 0x0, 0x20000}};
   char check[1024] = "0.99";
 
   test_debug(decimal, check);
@@ -4524,7 +4524,7 @@ START_TEST(test_debug_ok549) {
 
 START_TEST(test_debug_ok550) {
   // -0.99
-  s21_decimal decimal = {{0x63, 0x0, 0x0, 0x80020000}};
+  my_decimal decimal = {{0x63, 0x0, 0x0, 0x80020000}};
   char check[1024] = "-0.99";
 
   test_debug(decimal, check);
@@ -4532,7 +4532,7 @@ START_TEST(test_debug_ok550) {
 
 START_TEST(test_debug_ok551) {
   // 0.999
-  s21_decimal decimal = {{0x3E7, 0x0, 0x0, 0x30000}};
+  my_decimal decimal = {{0x3E7, 0x0, 0x0, 0x30000}};
   char check[1024] = "0.999";
 
   test_debug(decimal, check);
@@ -4540,7 +4540,7 @@ START_TEST(test_debug_ok551) {
 
 START_TEST(test_debug_ok552) {
   // -0.999
-  s21_decimal decimal = {{0x3E7, 0x0, 0x0, 0x80030000}};
+  my_decimal decimal = {{0x3E7, 0x0, 0x0, 0x80030000}};
   char check[1024] = "-0.999";
 
   test_debug(decimal, check);
@@ -4548,7 +4548,7 @@ START_TEST(test_debug_ok552) {
 
 START_TEST(test_debug_ok553) {
   // 0.9999
-  s21_decimal decimal = {{0x270F, 0x0, 0x0, 0x40000}};
+  my_decimal decimal = {{0x270F, 0x0, 0x0, 0x40000}};
   char check[1024] = "0.9999";
 
   test_debug(decimal, check);
@@ -4556,7 +4556,7 @@ START_TEST(test_debug_ok553) {
 
 START_TEST(test_debug_ok554) {
   // -0.9999
-  s21_decimal decimal = {{0x270F, 0x0, 0x0, 0x80040000}};
+  my_decimal decimal = {{0x270F, 0x0, 0x0, 0x80040000}};
   char check[1024] = "-0.9999";
 
   test_debug(decimal, check);
@@ -4564,7 +4564,7 @@ START_TEST(test_debug_ok554) {
 
 START_TEST(test_debug_ok555) {
   // 0.99999
-  s21_decimal decimal = {{0x1869F, 0x0, 0x0, 0x50000}};
+  my_decimal decimal = {{0x1869F, 0x0, 0x0, 0x50000}};
   char check[1024] = "0.99999";
 
   test_debug(decimal, check);
@@ -4572,7 +4572,7 @@ START_TEST(test_debug_ok555) {
 
 START_TEST(test_debug_ok556) {
   // -0.99999
-  s21_decimal decimal = {{0x1869F, 0x0, 0x0, 0x80050000}};
+  my_decimal decimal = {{0x1869F, 0x0, 0x0, 0x80050000}};
   char check[1024] = "-0.99999";
 
   test_debug(decimal, check);
@@ -4580,7 +4580,7 @@ START_TEST(test_debug_ok556) {
 
 START_TEST(test_debug_ok557) {
   // 0.999999
-  s21_decimal decimal = {{0xF423F, 0x0, 0x0, 0x60000}};
+  my_decimal decimal = {{0xF423F, 0x0, 0x0, 0x60000}};
   char check[1024] = "0.999999";
 
   test_debug(decimal, check);
@@ -4588,7 +4588,7 @@ START_TEST(test_debug_ok557) {
 
 START_TEST(test_debug_ok558) {
   // -0.999999
-  s21_decimal decimal = {{0xF423F, 0x0, 0x0, 0x80060000}};
+  my_decimal decimal = {{0xF423F, 0x0, 0x0, 0x80060000}};
   char check[1024] = "-0.999999";
 
   test_debug(decimal, check);
@@ -4596,7 +4596,7 @@ START_TEST(test_debug_ok558) {
 
 START_TEST(test_debug_ok559) {
   // 0.9999999
-  s21_decimal decimal = {{0x98967F, 0x0, 0x0, 0x70000}};
+  my_decimal decimal = {{0x98967F, 0x0, 0x0, 0x70000}};
   char check[1024] = "0.9999999";
 
   test_debug(decimal, check);
@@ -4604,7 +4604,7 @@ START_TEST(test_debug_ok559) {
 
 START_TEST(test_debug_ok560) {
   // -0.9999999
-  s21_decimal decimal = {{0x98967F, 0x0, 0x0, 0x80070000}};
+  my_decimal decimal = {{0x98967F, 0x0, 0x0, 0x80070000}};
   char check[1024] = "-0.9999999";
 
   test_debug(decimal, check);
@@ -4612,7 +4612,7 @@ START_TEST(test_debug_ok560) {
 
 START_TEST(test_debug_ok561) {
   // 0.99999999
-  s21_decimal decimal = {{0x5F5E0FF, 0x0, 0x0, 0x80000}};
+  my_decimal decimal = {{0x5F5E0FF, 0x0, 0x0, 0x80000}};
   char check[1024] = "0.99999999";
 
   test_debug(decimal, check);
@@ -4620,7 +4620,7 @@ START_TEST(test_debug_ok561) {
 
 START_TEST(test_debug_ok562) {
   // -0.99999999
-  s21_decimal decimal = {{0x5F5E0FF, 0x0, 0x0, 0x80080000}};
+  my_decimal decimal = {{0x5F5E0FF, 0x0, 0x0, 0x80080000}};
   char check[1024] = "-0.99999999";
 
   test_debug(decimal, check);
@@ -4628,7 +4628,7 @@ START_TEST(test_debug_ok562) {
 
 START_TEST(test_debug_ok563) {
   // 0.999999999
-  s21_decimal decimal = {{0x3B9AC9FF, 0x0, 0x0, 0x90000}};
+  my_decimal decimal = {{0x3B9AC9FF, 0x0, 0x0, 0x90000}};
   char check[1024] = "0.999999999";
 
   test_debug(decimal, check);
@@ -4636,7 +4636,7 @@ START_TEST(test_debug_ok563) {
 
 START_TEST(test_debug_ok564) {
   // -0.999999999
-  s21_decimal decimal = {{0x3B9AC9FF, 0x0, 0x0, 0x80090000}};
+  my_decimal decimal = {{0x3B9AC9FF, 0x0, 0x0, 0x80090000}};
   char check[1024] = "-0.999999999";
 
   test_debug(decimal, check);
@@ -4644,7 +4644,7 @@ START_TEST(test_debug_ok564) {
 
 START_TEST(test_debug_ok565) {
   // 0.9999999999
-  s21_decimal decimal = {{0x540BE3FF, 0x2, 0x0, 0xA0000}};
+  my_decimal decimal = {{0x540BE3FF, 0x2, 0x0, 0xA0000}};
   char check[1024] = "0.9999999999";
 
   test_debug(decimal, check);
@@ -4652,7 +4652,7 @@ START_TEST(test_debug_ok565) {
 
 START_TEST(test_debug_ok566) {
   // -0.9999999999
-  s21_decimal decimal = {{0x540BE3FF, 0x2, 0x0, 0x800A0000}};
+  my_decimal decimal = {{0x540BE3FF, 0x2, 0x0, 0x800A0000}};
   char check[1024] = "-0.9999999999";
 
   test_debug(decimal, check);
@@ -4660,7 +4660,7 @@ START_TEST(test_debug_ok566) {
 
 START_TEST(test_debug_ok567) {
   // 0.99999999999999999999
-  s21_decimal decimal = {{0x630FFFFF, 0x6BC75E2D, 0x5, 0x140000}};
+  my_decimal decimal = {{0x630FFFFF, 0x6BC75E2D, 0x5, 0x140000}};
   char check[1024] = "0.99999999999999999999";
 
   test_debug(decimal, check);
@@ -4668,7 +4668,7 @@ START_TEST(test_debug_ok567) {
 
 START_TEST(test_debug_ok568) {
   // -0.99999999999999999999
-  s21_decimal decimal = {{0x630FFFFF, 0x6BC75E2D, 0x5, 0x80140000}};
+  my_decimal decimal = {{0x630FFFFF, 0x6BC75E2D, 0x5, 0x80140000}};
   char check[1024] = "-0.99999999999999999999";
 
   test_debug(decimal, check);
@@ -4676,7 +4676,7 @@ START_TEST(test_debug_ok568) {
 
 START_TEST(test_debug_ok569) {
   // -0
-  s21_decimal decimal = {{0x0, 0x0, 0x0, 0x80000000}};
+  my_decimal decimal = {{0x0, 0x0, 0x0, 0x80000000}};
   char check[1024] = "0";
 
   test_debug(decimal, check);
@@ -4684,7 +4684,7 @@ START_TEST(test_debug_ok569) {
 
 START_TEST(test_debug_ok570) {
   // 0
-  s21_decimal decimal = {{0x0, 0x0, 0x0, 0x0}};
+  my_decimal decimal = {{0x0, 0x0, 0x0, 0x0}};
   char check[1024] = "0";
 
   test_debug(decimal, check);
@@ -4692,7 +4692,7 @@ START_TEST(test_debug_ok570) {
 
 START_TEST(test_debug_ok571) {
   // -0.0
-  s21_decimal decimal = {{0x0, 0x0, 0x0, 0x80010000}};
+  my_decimal decimal = {{0x0, 0x0, 0x0, 0x80010000}};
   char check[1024] = "0.0";
 
   test_debug(decimal, check);
@@ -4700,7 +4700,7 @@ START_TEST(test_debug_ok571) {
 
 START_TEST(test_debug_ok572) {
   // 0.0
-  s21_decimal decimal = {{0x0, 0x0, 0x0, 0x10000}};
+  my_decimal decimal = {{0x0, 0x0, 0x0, 0x10000}};
   char check[1024] = "0.0";
 
   test_debug(decimal, check);
@@ -4708,7 +4708,7 @@ START_TEST(test_debug_ok572) {
 
 START_TEST(test_debug_ok573) {
   // -0.00
-  s21_decimal decimal = {{0x0, 0x0, 0x0, 0x80020000}};
+  my_decimal decimal = {{0x0, 0x0, 0x0, 0x80020000}};
   char check[1024] = "0.00";
 
   test_debug(decimal, check);
@@ -4716,7 +4716,7 @@ START_TEST(test_debug_ok573) {
 
 START_TEST(test_debug_ok574) {
   // 0.00
-  s21_decimal decimal = {{0x0, 0x0, 0x0, 0x20000}};
+  my_decimal decimal = {{0x0, 0x0, 0x0, 0x20000}};
   char check[1024] = "0.00";
 
   test_debug(decimal, check);
@@ -4724,7 +4724,7 @@ START_TEST(test_debug_ok574) {
 
 START_TEST(test_debug_ok575) {
   // -0.00000000000000
-  s21_decimal decimal = {{0x0, 0x0, 0x0, 0x800E0000}};
+  my_decimal decimal = {{0x0, 0x0, 0x0, 0x800E0000}};
   char check[1024] = "0.00000000000000";
 
   test_debug(decimal, check);
@@ -4732,7 +4732,7 @@ START_TEST(test_debug_ok575) {
 
 START_TEST(test_debug_ok576) {
   // 0.00000000000000
-  s21_decimal decimal = {{0x0, 0x0, 0x0, 0xE0000}};
+  my_decimal decimal = {{0x0, 0x0, 0x0, 0xE0000}};
   char check[1024] = "0.00000000000000";
 
   test_debug(decimal, check);
@@ -4740,7 +4740,7 @@ START_TEST(test_debug_ok576) {
 
 START_TEST(test_debug_ok577) {
   // -0.000000000000000000000000000
-  s21_decimal decimal = {{0x0, 0x0, 0x0, 0x801B0000}};
+  my_decimal decimal = {{0x0, 0x0, 0x0, 0x801B0000}};
   char check[1024] = "0.000000000000000000000000000";
 
   test_debug(decimal, check);
@@ -4748,7 +4748,7 @@ START_TEST(test_debug_ok577) {
 
 START_TEST(test_debug_ok578) {
   // 0.000000000000000000000000000
-  s21_decimal decimal = {{0x0, 0x0, 0x0, 0x1B0000}};
+  my_decimal decimal = {{0x0, 0x0, 0x0, 0x1B0000}};
   char check[1024] = "0.000000000000000000000000000";
 
   test_debug(decimal, check);
@@ -4756,7 +4756,7 @@ START_TEST(test_debug_ok578) {
 
 START_TEST(test_debug_ok579) {
   // -0.0000000000000000000000000000
-  s21_decimal decimal = {{0x0, 0x0, 0x0, 0x801C0000}};
+  my_decimal decimal = {{0x0, 0x0, 0x0, 0x801C0000}};
   char check[1024] = "0.0000000000000000000000000000";
 
   test_debug(decimal, check);
@@ -4764,7 +4764,7 @@ START_TEST(test_debug_ok579) {
 
 START_TEST(test_debug_ok580) {
   // 0.0000000000000000000000000000
-  s21_decimal decimal = {{0x0, 0x0, 0x0, 0x1C0000}};
+  my_decimal decimal = {{0x0, 0x0, 0x0, 0x1C0000}};
   char check[1024] = "0.0000000000000000000000000000";
 
   test_debug(decimal, check);
@@ -4772,7 +4772,7 @@ START_TEST(test_debug_ok580) {
 
 START_TEST(test_debug_ok581) {
   // 2147483646
-  s21_decimal decimal = {{0x7FFFFFFE, 0x0, 0x0, 0x0}};
+  my_decimal decimal = {{0x7FFFFFFE, 0x0, 0x0, 0x0}};
   char check[1024] = "2147483646";
 
   test_debug(decimal, check);
@@ -4780,7 +4780,7 @@ START_TEST(test_debug_ok581) {
 
 START_TEST(test_debug_ok582) {
   // -2147483646
-  s21_decimal decimal = {{0x7FFFFFFE, 0x0, 0x0, 0x80000000}};
+  my_decimal decimal = {{0x7FFFFFFE, 0x0, 0x0, 0x80000000}};
   char check[1024] = "-2147483646";
 
   test_debug(decimal, check);
@@ -4788,7 +4788,7 @@ START_TEST(test_debug_ok582) {
 
 START_TEST(test_debug_ok583) {
   // 2147483646.00
-  s21_decimal decimal = {{0xFFFFFF38, 0x31, 0x0, 0x20000}};
+  my_decimal decimal = {{0xFFFFFF38, 0x31, 0x0, 0x20000}};
   char check[1024] = "2147483646.00";
 
   test_debug(decimal, check);
@@ -4796,7 +4796,7 @@ START_TEST(test_debug_ok583) {
 
 START_TEST(test_debug_ok584) {
   // -2147483646.00
-  s21_decimal decimal = {{0xFFFFFF38, 0x31, 0x0, 0x80020000}};
+  my_decimal decimal = {{0xFFFFFF38, 0x31, 0x0, 0x80020000}};
   char check[1024] = "-2147483646.00";
 
   test_debug(decimal, check);
@@ -4804,7 +4804,7 @@ START_TEST(test_debug_ok584) {
 
 START_TEST(test_debug_ok585) {
   // 2147483646.99
-  s21_decimal decimal = {{0xFFFFFF9B, 0x31, 0x0, 0x20000}};
+  my_decimal decimal = {{0xFFFFFF9B, 0x31, 0x0, 0x20000}};
   char check[1024] = "2147483646.99";
 
   test_debug(decimal, check);
@@ -4812,7 +4812,7 @@ START_TEST(test_debug_ok585) {
 
 START_TEST(test_debug_ok586) {
   // -2147483646.99
-  s21_decimal decimal = {{0xFFFFFF9B, 0x31, 0x0, 0x80020000}};
+  my_decimal decimal = {{0xFFFFFF9B, 0x31, 0x0, 0x80020000}};
   char check[1024] = "-2147483646.99";
 
   test_debug(decimal, check);
@@ -4820,7 +4820,7 @@ START_TEST(test_debug_ok586) {
 
 START_TEST(test_debug_ok587) {
   // 2147483646.999999999999999999
-  s21_decimal decimal = {{0x589BFFFF, 0xC5D1494C, 0x6F05B59, 0x120000}};
+  my_decimal decimal = {{0x589BFFFF, 0xC5D1494C, 0x6F05B59, 0x120000}};
   char check[1024] = "2147483646.999999999999999999";
 
   test_debug(decimal, check);
@@ -4828,7 +4828,7 @@ START_TEST(test_debug_ok587) {
 
 START_TEST(test_debug_ok588) {
   // -2147483646.999999999999999999
-  s21_decimal decimal = {{0x589BFFFF, 0xC5D1494C, 0x6F05B59, 0x80120000}};
+  my_decimal decimal = {{0x589BFFFF, 0xC5D1494C, 0x6F05B59, 0x80120000}};
   char check[1024] = "-2147483646.999999999999999999";
 
   test_debug(decimal, check);
@@ -4836,7 +4836,7 @@ START_TEST(test_debug_ok588) {
 
 START_TEST(test_debug_ok589) {
   // 21474836.46
-  s21_decimal decimal = {{0x7FFFFFFE, 0x0, 0x0, 0x20000}};
+  my_decimal decimal = {{0x7FFFFFFE, 0x0, 0x0, 0x20000}};
   char check[1024] = "21474836.46";
 
   test_debug(decimal, check);
@@ -4844,7 +4844,7 @@ START_TEST(test_debug_ok589) {
 
 START_TEST(test_debug_ok590) {
   // -21474836.46
-  s21_decimal decimal = {{0x7FFFFFFE, 0x0, 0x0, 0x80020000}};
+  my_decimal decimal = {{0x7FFFFFFE, 0x0, 0x0, 0x80020000}};
   char check[1024] = "-21474836.46";
 
   test_debug(decimal, check);
@@ -4852,7 +4852,7 @@ START_TEST(test_debug_ok590) {
 
 START_TEST(test_debug_ok591) {
   // 214.7483646
-  s21_decimal decimal = {{0x7FFFFFFE, 0x0, 0x0, 0x70000}};
+  my_decimal decimal = {{0x7FFFFFFE, 0x0, 0x0, 0x70000}};
   char check[1024] = "214.7483646";
 
   test_debug(decimal, check);
@@ -4860,7 +4860,7 @@ START_TEST(test_debug_ok591) {
 
 START_TEST(test_debug_ok592) {
   // -214.7483646
-  s21_decimal decimal = {{0x7FFFFFFE, 0x0, 0x0, 0x80070000}};
+  my_decimal decimal = {{0x7FFFFFFE, 0x0, 0x0, 0x80070000}};
   char check[1024] = "-214.7483646";
 
   test_debug(decimal, check);
@@ -4868,7 +4868,7 @@ START_TEST(test_debug_ok592) {
 
 START_TEST(test_debug_ok593) {
   // 2.147483646
-  s21_decimal decimal = {{0x7FFFFFFE, 0x0, 0x0, 0x90000}};
+  my_decimal decimal = {{0x7FFFFFFE, 0x0, 0x0, 0x90000}};
   char check[1024] = "2.147483646";
 
   test_debug(decimal, check);
@@ -4876,7 +4876,7 @@ START_TEST(test_debug_ok593) {
 
 START_TEST(test_debug_ok594) {
   // -2.147483646
-  s21_decimal decimal = {{0x7FFFFFFE, 0x0, 0x0, 0x80090000}};
+  my_decimal decimal = {{0x7FFFFFFE, 0x0, 0x0, 0x80090000}};
   char check[1024] = "-2.147483646";
 
   test_debug(decimal, check);
@@ -4884,7 +4884,7 @@ START_TEST(test_debug_ok594) {
 
 START_TEST(test_debug_ok595) {
   // 0.2147483646
-  s21_decimal decimal = {{0x7FFFFFFE, 0x0, 0x0, 0xA0000}};
+  my_decimal decimal = {{0x7FFFFFFE, 0x0, 0x0, 0xA0000}};
   char check[1024] = "0.2147483646";
 
   test_debug(decimal, check);
@@ -4892,7 +4892,7 @@ START_TEST(test_debug_ok595) {
 
 START_TEST(test_debug_ok596) {
   // -0.2147483646
-  s21_decimal decimal = {{0x7FFFFFFE, 0x0, 0x0, 0x800A0000}};
+  my_decimal decimal = {{0x7FFFFFFE, 0x0, 0x0, 0x800A0000}};
   char check[1024] = "-0.2147483646";
 
   test_debug(decimal, check);
@@ -4900,7 +4900,7 @@ START_TEST(test_debug_ok596) {
 
 START_TEST(test_debug_ok597) {
   // 0.0000000000000000002147483646
-  s21_decimal decimal = {{0x7FFFFFFE, 0x0, 0x0, 0x1C0000}};
+  my_decimal decimal = {{0x7FFFFFFE, 0x0, 0x0, 0x1C0000}};
   char check[1024] = "0.0000000000000000002147483646";
 
   test_debug(decimal, check);
@@ -4908,7 +4908,7 @@ START_TEST(test_debug_ok597) {
 
 START_TEST(test_debug_ok598) {
   // -0.0000000000000000002147483646
-  s21_decimal decimal = {{0x7FFFFFFE, 0x0, 0x0, 0x801C0000}};
+  my_decimal decimal = {{0x7FFFFFFE, 0x0, 0x0, 0x801C0000}};
   char check[1024] = "-0.0000000000000000002147483646";
 
   test_debug(decimal, check);
@@ -4916,7 +4916,7 @@ START_TEST(test_debug_ok598) {
 
 START_TEST(test_debug_ok599) {
   // 2147483647
-  s21_decimal decimal = {{0x7FFFFFFF, 0x0, 0x0, 0x0}};
+  my_decimal decimal = {{0x7FFFFFFF, 0x0, 0x0, 0x0}};
   char check[1024] = "2147483647";
 
   test_debug(decimal, check);
@@ -4924,7 +4924,7 @@ START_TEST(test_debug_ok599) {
 
 START_TEST(test_debug_ok600) {
   // -2147483647
-  s21_decimal decimal = {{0x7FFFFFFF, 0x0, 0x0, 0x80000000}};
+  my_decimal decimal = {{0x7FFFFFFF, 0x0, 0x0, 0x80000000}};
   char check[1024] = "-2147483647";
 
   test_debug(decimal, check);
@@ -4932,7 +4932,7 @@ START_TEST(test_debug_ok600) {
 
 START_TEST(test_debug_ok601) {
   // 2147483647.00
-  s21_decimal decimal = {{0xFFFFFF9C, 0x31, 0x0, 0x20000}};
+  my_decimal decimal = {{0xFFFFFF9C, 0x31, 0x0, 0x20000}};
   char check[1024] = "2147483647.00";
 
   test_debug(decimal, check);
@@ -4940,7 +4940,7 @@ START_TEST(test_debug_ok601) {
 
 START_TEST(test_debug_ok602) {
   // -2147483647.00
-  s21_decimal decimal = {{0xFFFFFF9C, 0x31, 0x0, 0x80020000}};
+  my_decimal decimal = {{0xFFFFFF9C, 0x31, 0x0, 0x80020000}};
   char check[1024] = "-2147483647.00";
 
   test_debug(decimal, check);
@@ -4948,7 +4948,7 @@ START_TEST(test_debug_ok602) {
 
 START_TEST(test_debug_ok603) {
   // 2147483647.99
-  s21_decimal decimal = {{0xFFFFFFFF, 0x31, 0x0, 0x20000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0x31, 0x0, 0x20000}};
   char check[1024] = "2147483647.99";
 
   test_debug(decimal, check);
@@ -4956,7 +4956,7 @@ START_TEST(test_debug_ok603) {
 
 START_TEST(test_debug_ok604) {
   // -2147483647.99
-  s21_decimal decimal = {{0xFFFFFFFF, 0x31, 0x0, 0x80020000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0x31, 0x0, 0x80020000}};
   char check[1024] = "-2147483647.99";
 
   test_debug(decimal, check);
@@ -4964,7 +4964,7 @@ START_TEST(test_debug_ok604) {
 
 START_TEST(test_debug_ok605) {
   // 2147483647.999999999999999999
-  s21_decimal decimal = {{0xFFFFFFFF, 0xD3B1FFFF, 0x6F05B59, 0x120000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xD3B1FFFF, 0x6F05B59, 0x120000}};
   char check[1024] = "2147483647.999999999999999999";
 
   test_debug(decimal, check);
@@ -4972,7 +4972,7 @@ START_TEST(test_debug_ok605) {
 
 START_TEST(test_debug_ok606) {
   // -2147483647.999999999999999999
-  s21_decimal decimal = {{0xFFFFFFFF, 0xD3B1FFFF, 0x6F05B59, 0x80120000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xD3B1FFFF, 0x6F05B59, 0x80120000}};
   char check[1024] = "-2147483647.999999999999999999";
 
   test_debug(decimal, check);
@@ -4980,7 +4980,7 @@ START_TEST(test_debug_ok606) {
 
 START_TEST(test_debug_ok607) {
   // 21474836.47
-  s21_decimal decimal = {{0x7FFFFFFF, 0x0, 0x0, 0x20000}};
+  my_decimal decimal = {{0x7FFFFFFF, 0x0, 0x0, 0x20000}};
   char check[1024] = "21474836.47";
 
   test_debug(decimal, check);
@@ -4988,7 +4988,7 @@ START_TEST(test_debug_ok607) {
 
 START_TEST(test_debug_ok608) {
   // -21474836.47
-  s21_decimal decimal = {{0x7FFFFFFF, 0x0, 0x0, 0x80020000}};
+  my_decimal decimal = {{0x7FFFFFFF, 0x0, 0x0, 0x80020000}};
   char check[1024] = "-21474836.47";
 
   test_debug(decimal, check);
@@ -4996,7 +4996,7 @@ START_TEST(test_debug_ok608) {
 
 START_TEST(test_debug_ok609) {
   // 214.7483647
-  s21_decimal decimal = {{0x7FFFFFFF, 0x0, 0x0, 0x70000}};
+  my_decimal decimal = {{0x7FFFFFFF, 0x0, 0x0, 0x70000}};
   char check[1024] = "214.7483647";
 
   test_debug(decimal, check);
@@ -5004,7 +5004,7 @@ START_TEST(test_debug_ok609) {
 
 START_TEST(test_debug_ok610) {
   // -214.7483647
-  s21_decimal decimal = {{0x7FFFFFFF, 0x0, 0x0, 0x80070000}};
+  my_decimal decimal = {{0x7FFFFFFF, 0x0, 0x0, 0x80070000}};
   char check[1024] = "-214.7483647";
 
   test_debug(decimal, check);
@@ -5012,7 +5012,7 @@ START_TEST(test_debug_ok610) {
 
 START_TEST(test_debug_ok611) {
   // 2.147483647
-  s21_decimal decimal = {{0x7FFFFFFF, 0x0, 0x0, 0x90000}};
+  my_decimal decimal = {{0x7FFFFFFF, 0x0, 0x0, 0x90000}};
   char check[1024] = "2.147483647";
 
   test_debug(decimal, check);
@@ -5020,7 +5020,7 @@ START_TEST(test_debug_ok611) {
 
 START_TEST(test_debug_ok612) {
   // -2.147483647
-  s21_decimal decimal = {{0x7FFFFFFF, 0x0, 0x0, 0x80090000}};
+  my_decimal decimal = {{0x7FFFFFFF, 0x0, 0x0, 0x80090000}};
   char check[1024] = "-2.147483647";
 
   test_debug(decimal, check);
@@ -5028,7 +5028,7 @@ START_TEST(test_debug_ok612) {
 
 START_TEST(test_debug_ok613) {
   // 0.2147483647
-  s21_decimal decimal = {{0x7FFFFFFF, 0x0, 0x0, 0xA0000}};
+  my_decimal decimal = {{0x7FFFFFFF, 0x0, 0x0, 0xA0000}};
   char check[1024] = "0.2147483647";
 
   test_debug(decimal, check);
@@ -5036,7 +5036,7 @@ START_TEST(test_debug_ok613) {
 
 START_TEST(test_debug_ok614) {
   // -0.2147483647
-  s21_decimal decimal = {{0x7FFFFFFF, 0x0, 0x0, 0x800A0000}};
+  my_decimal decimal = {{0x7FFFFFFF, 0x0, 0x0, 0x800A0000}};
   char check[1024] = "-0.2147483647";
 
   test_debug(decimal, check);
@@ -5044,7 +5044,7 @@ START_TEST(test_debug_ok614) {
 
 START_TEST(test_debug_ok615) {
   // 0.0000000000000000002147483647
-  s21_decimal decimal = {{0x7FFFFFFF, 0x0, 0x0, 0x1C0000}};
+  my_decimal decimal = {{0x7FFFFFFF, 0x0, 0x0, 0x1C0000}};
   char check[1024] = "0.0000000000000000002147483647";
 
   test_debug(decimal, check);
@@ -5052,7 +5052,7 @@ START_TEST(test_debug_ok615) {
 
 START_TEST(test_debug_ok616) {
   // -0.0000000000000000002147483647
-  s21_decimal decimal = {{0x7FFFFFFF, 0x0, 0x0, 0x801C0000}};
+  my_decimal decimal = {{0x7FFFFFFF, 0x0, 0x0, 0x801C0000}};
   char check[1024] = "-0.0000000000000000002147483647";
 
   test_debug(decimal, check);
@@ -5060,7 +5060,7 @@ START_TEST(test_debug_ok616) {
 
 START_TEST(test_debug_ok617) {
   // 2147483648
-  s21_decimal decimal = {{0x80000000, 0x0, 0x0, 0x0}};
+  my_decimal decimal = {{0x80000000, 0x0, 0x0, 0x0}};
   char check[1024] = "2147483648";
 
   test_debug(decimal, check);
@@ -5068,7 +5068,7 @@ START_TEST(test_debug_ok617) {
 
 START_TEST(test_debug_ok618) {
   // -2147483648
-  s21_decimal decimal = {{0x80000000, 0x0, 0x0, 0x80000000}};
+  my_decimal decimal = {{0x80000000, 0x0, 0x0, 0x80000000}};
   char check[1024] = "-2147483648";
 
   test_debug(decimal, check);
@@ -5076,7 +5076,7 @@ START_TEST(test_debug_ok618) {
 
 START_TEST(test_debug_ok619) {
   // 2147483648.00
-  s21_decimal decimal = {{0x0, 0x32, 0x0, 0x20000}};
+  my_decimal decimal = {{0x0, 0x32, 0x0, 0x20000}};
   char check[1024] = "2147483648.00";
 
   test_debug(decimal, check);
@@ -5084,7 +5084,7 @@ START_TEST(test_debug_ok619) {
 
 START_TEST(test_debug_ok620) {
   // -2147483648.00
-  s21_decimal decimal = {{0x0, 0x32, 0x0, 0x80020000}};
+  my_decimal decimal = {{0x0, 0x32, 0x0, 0x80020000}};
   char check[1024] = "-2147483648.00";
 
   test_debug(decimal, check);
@@ -5092,7 +5092,7 @@ START_TEST(test_debug_ok620) {
 
 START_TEST(test_debug_ok621) {
   // 2147483648.99
-  s21_decimal decimal = {{0x63, 0x32, 0x0, 0x20000}};
+  my_decimal decimal = {{0x63, 0x32, 0x0, 0x20000}};
   char check[1024] = "2147483648.99";
 
   test_debug(decimal, check);
@@ -5100,7 +5100,7 @@ START_TEST(test_debug_ok621) {
 
 START_TEST(test_debug_ok622) {
   // -2147483648.99
-  s21_decimal decimal = {{0x63, 0x32, 0x0, 0x80020000}};
+  my_decimal decimal = {{0x63, 0x32, 0x0, 0x80020000}};
   char check[1024] = "-2147483648.99";
 
   test_debug(decimal, check);
@@ -5108,7 +5108,7 @@ START_TEST(test_debug_ok622) {
 
 START_TEST(test_debug_ok623) {
   // 2147483648.999999999999999999
-  s21_decimal decimal = {{0xA763FFFF, 0xE192B6B3, 0x6F05B59, 0x120000}};
+  my_decimal decimal = {{0xA763FFFF, 0xE192B6B3, 0x6F05B59, 0x120000}};
   char check[1024] = "2147483648.999999999999999999";
 
   test_debug(decimal, check);
@@ -5116,7 +5116,7 @@ START_TEST(test_debug_ok623) {
 
 START_TEST(test_debug_ok624) {
   // -2147483648.999999999999999999
-  s21_decimal decimal = {{0xA763FFFF, 0xE192B6B3, 0x6F05B59, 0x80120000}};
+  my_decimal decimal = {{0xA763FFFF, 0xE192B6B3, 0x6F05B59, 0x80120000}};
   char check[1024] = "-2147483648.999999999999999999";
 
   test_debug(decimal, check);
@@ -5124,7 +5124,7 @@ START_TEST(test_debug_ok624) {
 
 START_TEST(test_debug_ok625) {
   // 21474836.48
-  s21_decimal decimal = {{0x80000000, 0x0, 0x0, 0x20000}};
+  my_decimal decimal = {{0x80000000, 0x0, 0x0, 0x20000}};
   char check[1024] = "21474836.48";
 
   test_debug(decimal, check);
@@ -5132,7 +5132,7 @@ START_TEST(test_debug_ok625) {
 
 START_TEST(test_debug_ok626) {
   // -21474836.48
-  s21_decimal decimal = {{0x80000000, 0x0, 0x0, 0x80020000}};
+  my_decimal decimal = {{0x80000000, 0x0, 0x0, 0x80020000}};
   char check[1024] = "-21474836.48";
 
   test_debug(decimal, check);
@@ -5140,7 +5140,7 @@ START_TEST(test_debug_ok626) {
 
 START_TEST(test_debug_ok627) {
   // 214.7483648
-  s21_decimal decimal = {{0x80000000, 0x0, 0x0, 0x70000}};
+  my_decimal decimal = {{0x80000000, 0x0, 0x0, 0x70000}};
   char check[1024] = "214.7483648";
 
   test_debug(decimal, check);
@@ -5148,7 +5148,7 @@ START_TEST(test_debug_ok627) {
 
 START_TEST(test_debug_ok628) {
   // -214.7483648
-  s21_decimal decimal = {{0x80000000, 0x0, 0x0, 0x80070000}};
+  my_decimal decimal = {{0x80000000, 0x0, 0x0, 0x80070000}};
   char check[1024] = "-214.7483648";
 
   test_debug(decimal, check);
@@ -5156,7 +5156,7 @@ START_TEST(test_debug_ok628) {
 
 START_TEST(test_debug_ok629) {
   // 2.147483648
-  s21_decimal decimal = {{0x80000000, 0x0, 0x0, 0x90000}};
+  my_decimal decimal = {{0x80000000, 0x0, 0x0, 0x90000}};
   char check[1024] = "2.147483648";
 
   test_debug(decimal, check);
@@ -5164,7 +5164,7 @@ START_TEST(test_debug_ok629) {
 
 START_TEST(test_debug_ok630) {
   // -2.147483648
-  s21_decimal decimal = {{0x80000000, 0x0, 0x0, 0x80090000}};
+  my_decimal decimal = {{0x80000000, 0x0, 0x0, 0x80090000}};
   char check[1024] = "-2.147483648";
 
   test_debug(decimal, check);
@@ -5172,7 +5172,7 @@ START_TEST(test_debug_ok630) {
 
 START_TEST(test_debug_ok631) {
   // 0.2147483648
-  s21_decimal decimal = {{0x80000000, 0x0, 0x0, 0xA0000}};
+  my_decimal decimal = {{0x80000000, 0x0, 0x0, 0xA0000}};
   char check[1024] = "0.2147483648";
 
   test_debug(decimal, check);
@@ -5180,7 +5180,7 @@ START_TEST(test_debug_ok631) {
 
 START_TEST(test_debug_ok632) {
   // -0.2147483648
-  s21_decimal decimal = {{0x80000000, 0x0, 0x0, 0x800A0000}};
+  my_decimal decimal = {{0x80000000, 0x0, 0x0, 0x800A0000}};
   char check[1024] = "-0.2147483648";
 
   test_debug(decimal, check);
@@ -5188,7 +5188,7 @@ START_TEST(test_debug_ok632) {
 
 START_TEST(test_debug_ok633) {
   // 0.0000000000000000002147483648
-  s21_decimal decimal = {{0x80000000, 0x0, 0x0, 0x1C0000}};
+  my_decimal decimal = {{0x80000000, 0x0, 0x0, 0x1C0000}};
   char check[1024] = "0.0000000000000000002147483648";
 
   test_debug(decimal, check);
@@ -5196,7 +5196,7 @@ START_TEST(test_debug_ok633) {
 
 START_TEST(test_debug_ok634) {
   // -0.0000000000000000002147483648
-  s21_decimal decimal = {{0x80000000, 0x0, 0x0, 0x801C0000}};
+  my_decimal decimal = {{0x80000000, 0x0, 0x0, 0x801C0000}};
   char check[1024] = "-0.0000000000000000002147483648";
 
   test_debug(decimal, check);
@@ -5204,7 +5204,7 @@ START_TEST(test_debug_ok634) {
 
 START_TEST(test_debug_ok635) {
   // -84966884.15613141837474582841
-  s21_decimal decimal = {{0x84B65139, 0xF4FE9092, 0x1B744BC1, 0x80140000}};
+  my_decimal decimal = {{0x84B65139, 0xF4FE9092, 0x1B744BC1, 0x80140000}};
   char check[1024] = "-84966884.15613141837474582841";
 
   test_debug(decimal, check);
@@ -5212,7 +5212,7 @@ START_TEST(test_debug_ok635) {
 
 START_TEST(test_debug_ok636) {
   // 84966884.15613141837474582841
-  s21_decimal decimal = {{0x84B65139, 0xF4FE9092, 0x1B744BC1, 0x140000}};
+  my_decimal decimal = {{0x84B65139, 0xF4FE9092, 0x1B744BC1, 0x140000}};
   char check[1024] = "84966884.15613141837474582841";
 
   test_debug(decimal, check);
@@ -5220,7 +5220,7 @@ START_TEST(test_debug_ok636) {
 
 START_TEST(test_debug_ok637) {
   // 430785.36689610368553590669637
-  s21_decimal decimal = {{0xDBFB4145, 0x51900168, 0x8B31BAF9, 0x170000}};
+  my_decimal decimal = {{0xDBFB4145, 0x51900168, 0x8B31BAF9, 0x170000}};
   char check[1024] = "430785.36689610368553590669637";
 
   test_debug(decimal, check);
@@ -5228,7 +5228,7 @@ START_TEST(test_debug_ok637) {
 
 START_TEST(test_debug_ok638) {
   // -430785.36689610368553590669637
-  s21_decimal decimal = {{0xDBFB4145, 0x51900168, 0x8B31BAF9, 0x80170000}};
+  my_decimal decimal = {{0xDBFB4145, 0x51900168, 0x8B31BAF9, 0x80170000}};
   char check[1024] = "-430785.36689610368553590669637";
 
   test_debug(decimal, check);
@@ -5236,7 +5236,7 @@ START_TEST(test_debug_ok638) {
 
 START_TEST(test_debug_ok639) {
   // -44389006201633590448504510019
-  s21_decimal decimal = {{0x1A751643, 0xEA07EC67, 0x8F6DB9AF, 0x80000000}};
+  my_decimal decimal = {{0x1A751643, 0xEA07EC67, 0x8F6DB9AF, 0x80000000}};
   char check[1024] = "-44389006201633590448504510019";
 
   test_debug(decimal, check);
@@ -5244,7 +5244,7 @@ START_TEST(test_debug_ok639) {
 
 START_TEST(test_debug_ok640) {
   // 44389006201633590448504510019
-  s21_decimal decimal = {{0x1A751643, 0xEA07EC67, 0x8F6DB9AF, 0x0}};
+  my_decimal decimal = {{0x1A751643, 0xEA07EC67, 0x8F6DB9AF, 0x0}};
   char check[1024] = "44389006201633590448504510019";
 
   test_debug(decimal, check);
@@ -5252,7 +5252,7 @@ START_TEST(test_debug_ok640) {
 
 START_TEST(test_debug_ok641) {
   // -501391838188057782340.7888082
-  s21_decimal decimal = {{0x8FE456D2, 0x1D70670B, 0x10336A84, 0x80070000}};
+  my_decimal decimal = {{0x8FE456D2, 0x1D70670B, 0x10336A84, 0x80070000}};
   char check[1024] = "-501391838188057782340.7888082";
 
   test_debug(decimal, check);
@@ -5260,7 +5260,7 @@ START_TEST(test_debug_ok641) {
 
 START_TEST(test_debug_ok642) {
   // 501391838188057782340.7888082
-  s21_decimal decimal = {{0x8FE456D2, 0x1D70670B, 0x10336A84, 0x70000}};
+  my_decimal decimal = {{0x8FE456D2, 0x1D70670B, 0x10336A84, 0x70000}};
   char check[1024] = "501391838188057782340.7888082";
 
   test_debug(decimal, check);
@@ -5268,7 +5268,7 @@ START_TEST(test_debug_ok642) {
 
 START_TEST(test_debug_ok643) {
   // 352100282.96513092625475156003
-  s21_decimal decimal = {{0xED71B823, 0x9E26C3A5, 0x71C50D82, 0x140000}};
+  my_decimal decimal = {{0xED71B823, 0x9E26C3A5, 0x71C50D82, 0x140000}};
   char check[1024] = "352100282.96513092625475156003";
 
   test_debug(decimal, check);
@@ -5276,7 +5276,7 @@ START_TEST(test_debug_ok643) {
 
 START_TEST(test_debug_ok644) {
   // -352100282.96513092625475156003
-  s21_decimal decimal = {{0xED71B823, 0x9E26C3A5, 0x71C50D82, 0x80140000}};
+  my_decimal decimal = {{0xED71B823, 0x9E26C3A5, 0x71C50D82, 0x80140000}};
   char check[1024] = "-352100282.96513092625475156003";
 
   test_debug(decimal, check);
@@ -5284,7 +5284,7 @@ START_TEST(test_debug_ok644) {
 
 START_TEST(test_debug_ok645) {
   // 15834841991830798713483220.203
-  s21_decimal decimal = {{0xA6C0D4EB, 0x6CE5D93C, 0x332A4638, 0x30000}};
+  my_decimal decimal = {{0xA6C0D4EB, 0x6CE5D93C, 0x332A4638, 0x30000}};
   char check[1024] = "15834841991830798713483220.203";
 
   test_debug(decimal, check);
@@ -5292,7 +5292,7 @@ START_TEST(test_debug_ok645) {
 
 START_TEST(test_debug_ok646) {
   // -15834841991830798713483220.203
-  s21_decimal decimal = {{0xA6C0D4EB, 0x6CE5D93C, 0x332A4638, 0x80030000}};
+  my_decimal decimal = {{0xA6C0D4EB, 0x6CE5D93C, 0x332A4638, 0x80030000}};
   char check[1024] = "-15834841991830798713483220.203";
 
   test_debug(decimal, check);
@@ -5300,7 +5300,7 @@ START_TEST(test_debug_ok646) {
 
 START_TEST(test_debug_ok647) {
   // 27109765607807321971.795351143
-  s21_decimal decimal = {{0x8376D667, 0x60BC72EC, 0x5798AC2A, 0x90000}};
+  my_decimal decimal = {{0x8376D667, 0x60BC72EC, 0x5798AC2A, 0x90000}};
   char check[1024] = "27109765607807321971.795351143";
 
   test_debug(decimal, check);
@@ -5308,7 +5308,7 @@ START_TEST(test_debug_ok647) {
 
 START_TEST(test_debug_ok648) {
   // -27109765607807321971.795351143
-  s21_decimal decimal = {{0x8376D667, 0x60BC72EC, 0x5798AC2A, 0x80090000}};
+  my_decimal decimal = {{0x8376D667, 0x60BC72EC, 0x5798AC2A, 0x80090000}};
   char check[1024] = "-27109765607807321971.795351143";
 
   test_debug(decimal, check);
@@ -5316,7 +5316,7 @@ START_TEST(test_debug_ok648) {
 
 START_TEST(test_debug_ok649) {
   // -22.608144517601435513819058494
-  s21_decimal decimal = {{0x6371513E, 0x17AD2C22, 0x490D04D2, 0x801B0000}};
+  my_decimal decimal = {{0x6371513E, 0x17AD2C22, 0x490D04D2, 0x801B0000}};
   char check[1024] = "-22.608144517601435513819058494";
 
   test_debug(decimal, check);
@@ -5324,7 +5324,7 @@ START_TEST(test_debug_ok649) {
 
 START_TEST(test_debug_ok650) {
   // 22.608144517601435513819058494
-  s21_decimal decimal = {{0x6371513E, 0x17AD2C22, 0x490D04D2, 0x1B0000}};
+  my_decimal decimal = {{0x6371513E, 0x17AD2C22, 0x490D04D2, 0x1B0000}};
   char check[1024] = "22.608144517601435513819058494";
 
   test_debug(decimal, check);
@@ -5332,7 +5332,7 @@ START_TEST(test_debug_ok650) {
 
 START_TEST(test_debug_ok651) {
   // 47463239705.949939042819348711
-  s21_decimal decimal = {{0x5E4998E7, 0x1E9B69F6, 0x995CABF4, 0x120000}};
+  my_decimal decimal = {{0x5E4998E7, 0x1E9B69F6, 0x995CABF4, 0x120000}};
   char check[1024] = "47463239705.949939042819348711";
 
   test_debug(decimal, check);
@@ -5340,7 +5340,7 @@ START_TEST(test_debug_ok651) {
 
 START_TEST(test_debug_ok652) {
   // -47463239705.949939042819348711
-  s21_decimal decimal = {{0x5E4998E7, 0x1E9B69F6, 0x995CABF4, 0x80120000}};
+  my_decimal decimal = {{0x5E4998E7, 0x1E9B69F6, 0x995CABF4, 0x80120000}};
   char check[1024] = "-47463239705.949939042819348711";
 
   test_debug(decimal, check);
@@ -5348,7 +5348,7 @@ START_TEST(test_debug_ok652) {
 
 START_TEST(test_debug_ok653) {
   // 38644898511940650527384.093243
-  s21_decimal decimal = {{0x405F423B, 0x1B3CAC31, 0x7CDE4F92, 0x60000}};
+  my_decimal decimal = {{0x405F423B, 0x1B3CAC31, 0x7CDE4F92, 0x60000}};
   char check[1024] = "38644898511940650527384.093243";
 
   test_debug(decimal, check);
@@ -5356,7 +5356,7 @@ START_TEST(test_debug_ok653) {
 
 START_TEST(test_debug_ok654) {
   // -38644898511940650527384.093243
-  s21_decimal decimal = {{0x405F423B, 0x1B3CAC31, 0x7CDE4F92, 0x80060000}};
+  my_decimal decimal = {{0x405F423B, 0x1B3CAC31, 0x7CDE4F92, 0x80060000}};
   char check[1024] = "-38644898511940650527384.093243";
 
   test_debug(decimal, check);
@@ -5364,7 +5364,7 @@ START_TEST(test_debug_ok654) {
 
 START_TEST(test_debug_ok655) {
   // -53416522595.903440935527647266
-  s21_decimal decimal = {{0x2D580822, 0x41463286, 0xAC991CA4, 0x80120000}};
+  my_decimal decimal = {{0x2D580822, 0x41463286, 0xAC991CA4, 0x80120000}};
   char check[1024] = "-53416522595.903440935527647266";
 
   test_debug(decimal, check);
@@ -5372,7 +5372,7 @@ START_TEST(test_debug_ok655) {
 
 START_TEST(test_debug_ok656) {
   // 53416522595.903440935527647266
-  s21_decimal decimal = {{0x2D580822, 0x41463286, 0xAC991CA4, 0x120000}};
+  my_decimal decimal = {{0x2D580822, 0x41463286, 0xAC991CA4, 0x120000}};
   char check[1024] = "53416522595.903440935527647266";
 
   test_debug(decimal, check);
@@ -5380,7 +5380,7 @@ START_TEST(test_debug_ok656) {
 
 START_TEST(test_debug_ok657) {
   // -3499005386397700568539876.4837
-  s21_decimal decimal = {{0x64F6FD25, 0xBC456E22, 0x710F181C, 0x80040000}};
+  my_decimal decimal = {{0x64F6FD25, 0xBC456E22, 0x710F181C, 0x80040000}};
   char check[1024] = "-3499005386397700568539876.4837";
 
   test_debug(decimal, check);
@@ -5388,7 +5388,7 @@ START_TEST(test_debug_ok657) {
 
 START_TEST(test_debug_ok658) {
   // 3499005386397700568539876.4837
-  s21_decimal decimal = {{0x64F6FD25, 0xBC456E22, 0x710F181C, 0x40000}};
+  my_decimal decimal = {{0x64F6FD25, 0xBC456E22, 0x710F181C, 0x40000}};
   char check[1024] = "3499005386397700568539876.4837";
 
   test_debug(decimal, check);
@@ -5396,7 +5396,7 @@ START_TEST(test_debug_ok658) {
 
 START_TEST(test_debug_ok659) {
   // 5804313867127868784366285.0766
-  s21_decimal decimal = {{0x611A6ACE, 0x438E2062, 0xBB8C28B4, 0x40000}};
+  my_decimal decimal = {{0x611A6ACE, 0x438E2062, 0xBB8C28B4, 0x40000}};
   char check[1024] = "5804313867127868784366285.0766";
 
   test_debug(decimal, check);
@@ -5404,7 +5404,7 @@ START_TEST(test_debug_ok659) {
 
 START_TEST(test_debug_ok660) {
   // -5804313867127868784366285.0766
-  s21_decimal decimal = {{0x611A6ACE, 0x438E2062, 0xBB8C28B4, 0x80040000}};
+  my_decimal decimal = {{0x611A6ACE, 0x438E2062, 0xBB8C28B4, 0x80040000}};
   char check[1024] = "-5804313867127868784366285.0766";
 
   test_debug(decimal, check);
@@ -5412,7 +5412,7 @@ START_TEST(test_debug_ok660) {
 
 START_TEST(test_debug_ok661) {
   // -527979783783034971.457603690
-  s21_decimal decimal = {{0x302C486A, 0x6E281E86, 0x1B4BC11, 0x80090000}};
+  my_decimal decimal = {{0x302C486A, 0x6E281E86, 0x1B4BC11, 0x80090000}};
   char check[1024] = "-527979783783034971.457603690";
 
   test_debug(decimal, check);
@@ -5420,7 +5420,7 @@ START_TEST(test_debug_ok661) {
 
 START_TEST(test_debug_ok662) {
   // 527979783783034971.457603690
-  s21_decimal decimal = {{0x302C486A, 0x6E281E86, 0x1B4BC11, 0x90000}};
+  my_decimal decimal = {{0x302C486A, 0x6E281E86, 0x1B4BC11, 0x90000}};
   char check[1024] = "527979783783034971.457603690";
 
   test_debug(decimal, check);
@@ -5428,7 +5428,7 @@ START_TEST(test_debug_ok662) {
 
 START_TEST(test_debug_ok663) {
   // -366666303726510783781.37849371
-  s21_decimal decimal = {{0x6EE80E1B, 0x6337651C, 0x7679ECFF, 0x80080000}};
+  my_decimal decimal = {{0x6EE80E1B, 0x6337651C, 0x7679ECFF, 0x80080000}};
   char check[1024] = "-366666303726510783781.37849371";
 
   test_debug(decimal, check);
@@ -5436,7 +5436,7 @@ START_TEST(test_debug_ok663) {
 
 START_TEST(test_debug_ok664) {
   // 366666303726510783781.37849371
-  s21_decimal decimal = {{0x6EE80E1B, 0x6337651C, 0x7679ECFF, 0x80000}};
+  my_decimal decimal = {{0x6EE80E1B, 0x6337651C, 0x7679ECFF, 0x80000}};
   char check[1024] = "366666303726510783781.37849371";
 
   test_debug(decimal, check);
@@ -5444,7 +5444,7 @@ START_TEST(test_debug_ok664) {
 
 START_TEST(test_debug_ok665) {
   // 77368958798214.660500952389886
-  s21_decimal decimal = {{0xB70B18FE, 0x992996FA, 0xF9FE1A4C, 0xF0000}};
+  my_decimal decimal = {{0xB70B18FE, 0x992996FA, 0xF9FE1A4C, 0xF0000}};
   char check[1024] = "77368958798214.660500952389886";
 
   test_debug(decimal, check);
@@ -5452,7 +5452,7 @@ START_TEST(test_debug_ok665) {
 
 START_TEST(test_debug_ok666) {
   // -77368958798214.660500952389886
-  s21_decimal decimal = {{0xB70B18FE, 0x992996FA, 0xF9FE1A4C, 0x800F0000}};
+  my_decimal decimal = {{0xB70B18FE, 0x992996FA, 0xF9FE1A4C, 0x800F0000}};
   char check[1024] = "-77368958798214.660500952389886";
 
   test_debug(decimal, check);
@@ -5460,7 +5460,7 @@ START_TEST(test_debug_ok666) {
 
 START_TEST(test_debug_ok667) {
   // -7.0256503638787659340968799062
-  s21_decimal decimal = {{0x5E0EAB56, 0xD20A15CB, 0xE302D155, 0x801C0000}};
+  my_decimal decimal = {{0x5E0EAB56, 0xD20A15CB, 0xE302D155, 0x801C0000}};
   char check[1024] = "-7.0256503638787659340968799062";
 
   test_debug(decimal, check);
@@ -5468,7 +5468,7 @@ START_TEST(test_debug_ok667) {
 
 START_TEST(test_debug_ok668) {
   // 7.0256503638787659340968799062
-  s21_decimal decimal = {{0x5E0EAB56, 0xD20A15CB, 0xE302D155, 0x1C0000}};
+  my_decimal decimal = {{0x5E0EAB56, 0xD20A15CB, 0xE302D155, 0x1C0000}};
   char check[1024] = "7.0256503638787659340968799062";
 
   test_debug(decimal, check);
@@ -5476,7 +5476,7 @@ START_TEST(test_debug_ok668) {
 
 START_TEST(test_debug_ok669) {
   // 470.75167041950795779797384920
-  s21_decimal decimal = {{0x31277ED8, 0xD99D1B60, 0x981BAA5E, 0x1A0000}};
+  my_decimal decimal = {{0x31277ED8, 0xD99D1B60, 0x981BAA5E, 0x1A0000}};
   char check[1024] = "470.75167041950795779797384920";
 
   test_debug(decimal, check);
@@ -5484,7 +5484,7 @@ START_TEST(test_debug_ok669) {
 
 START_TEST(test_debug_ok670) {
   // -470.75167041950795779797384920
-  s21_decimal decimal = {{0x31277ED8, 0xD99D1B60, 0x981BAA5E, 0x801A0000}};
+  my_decimal decimal = {{0x31277ED8, 0xD99D1B60, 0x981BAA5E, 0x801A0000}};
   char check[1024] = "-470.75167041950795779797384920";
 
   test_debug(decimal, check);
@@ -5492,7 +5492,7 @@ START_TEST(test_debug_ok670) {
 
 START_TEST(test_debug_ok671) {
   // -0.476181089374254692357126100
-  s21_decimal decimal = {{0xDE5C37D4, 0x946E09DB, 0x189E344, 0x801B0000}};
+  my_decimal decimal = {{0xDE5C37D4, 0x946E09DB, 0x189E344, 0x801B0000}};
   char check[1024] = "-0.476181089374254692357126100";
 
   test_debug(decimal, check);
@@ -5500,7 +5500,7 @@ START_TEST(test_debug_ok671) {
 
 START_TEST(test_debug_ok672) {
   // 0.476181089374254692357126100
-  s21_decimal decimal = {{0xDE5C37D4, 0x946E09DB, 0x189E344, 0x1B0000}};
+  my_decimal decimal = {{0xDE5C37D4, 0x946E09DB, 0x189E344, 0x1B0000}};
   char check[1024] = "0.476181089374254692357126100";
 
   test_debug(decimal, check);
@@ -5508,7 +5508,7 @@ START_TEST(test_debug_ok672) {
 
 START_TEST(test_debug_ok673) {
   // 6357673359991586094808514.5689
-  s21_decimal decimal = {{0x7D608059, 0x6D947E40, 0xCD6D7102, 0x40000}};
+  my_decimal decimal = {{0x7D608059, 0x6D947E40, 0xCD6D7102, 0x40000}};
   char check[1024] = "6357673359991586094808514.5689";
 
   test_debug(decimal, check);
@@ -5516,7 +5516,7 @@ START_TEST(test_debug_ok673) {
 
 START_TEST(test_debug_ok674) {
   // -6357673359991586094808514.5689
-  s21_decimal decimal = {{0x7D608059, 0x6D947E40, 0xCD6D7102, 0x80040000}};
+  my_decimal decimal = {{0x7D608059, 0x6D947E40, 0xCD6D7102, 0x80040000}};
   char check[1024] = "-6357673359991586094808514.5689";
 
   test_debug(decimal, check);
@@ -5524,7 +5524,7 @@ START_TEST(test_debug_ok674) {
 
 START_TEST(test_debug_ok675) {
   // -7770643047668729493331.3330834
-  s21_decimal decimal = {{0xACC11E92, 0xF2271528, 0xFB1540B4, 0x80070000}};
+  my_decimal decimal = {{0xACC11E92, 0xF2271528, 0xFB1540B4, 0x80070000}};
   char check[1024] = "-7770643047668729493331.3330834";
 
   test_debug(decimal, check);
@@ -5532,7 +5532,7 @@ START_TEST(test_debug_ok675) {
 
 START_TEST(test_debug_ok676) {
   // 7770643047668729493331.3330834
-  s21_decimal decimal = {{0xACC11E92, 0xF2271528, 0xFB1540B4, 0x70000}};
+  my_decimal decimal = {{0xACC11E92, 0xF2271528, 0xFB1540B4, 0x70000}};
   char check[1024] = "7770643047668729493331.3330834";
 
   test_debug(decimal, check);
@@ -5540,7 +5540,7 @@ START_TEST(test_debug_ok676) {
 
 START_TEST(test_debug_ok677) {
   // -716057.48207294469325083428655
-  s21_decimal decimal = {{0x2934C72F, 0x709F822F, 0xE75EE2FC, 0x80170000}};
+  my_decimal decimal = {{0x2934C72F, 0x709F822F, 0xE75EE2FC, 0x80170000}};
   char check[1024] = "-716057.48207294469325083428655";
 
   test_debug(decimal, check);
@@ -5548,7 +5548,7 @@ START_TEST(test_debug_ok677) {
 
 START_TEST(test_debug_ok678) {
   // 716057.48207294469325083428655
-  s21_decimal decimal = {{0x2934C72F, 0x709F822F, 0xE75EE2FC, 0x170000}};
+  my_decimal decimal = {{0x2934C72F, 0x709F822F, 0xE75EE2FC, 0x170000}};
   char check[1024] = "716057.48207294469325083428655";
 
   test_debug(decimal, check);
@@ -5556,7 +5556,7 @@ START_TEST(test_debug_ok678) {
 
 START_TEST(test_debug_ok679) {
   // -253267.34041835760026855829926
-  s21_decimal decimal = {{0xC9FA71A6, 0x818C33F8, 0x51D5C88B, 0x80170000}};
+  my_decimal decimal = {{0xC9FA71A6, 0x818C33F8, 0x51D5C88B, 0x80170000}};
   char check[1024] = "-253267.34041835760026855829926";
 
   test_debug(decimal, check);
@@ -5564,7 +5564,7 @@ START_TEST(test_debug_ok679) {
 
 START_TEST(test_debug_ok680) {
   // 253267.34041835760026855829926
-  s21_decimal decimal = {{0xC9FA71A6, 0x818C33F8, 0x51D5C88B, 0x170000}};
+  my_decimal decimal = {{0xC9FA71A6, 0x818C33F8, 0x51D5C88B, 0x170000}};
   char check[1024] = "253267.34041835760026855829926";
 
   test_debug(decimal, check);
@@ -5572,7 +5572,7 @@ START_TEST(test_debug_ok680) {
 
 START_TEST(test_debug_ok681) {
   // -44705407026.635368759314252532
-  s21_decimal decimal = {{0x61D682F4, 0x19F8139, 0x9073722B, 0x80120000}};
+  my_decimal decimal = {{0x61D682F4, 0x19F8139, 0x9073722B, 0x80120000}};
   char check[1024] = "-44705407026.635368759314252532";
 
   test_debug(decimal, check);
@@ -5580,7 +5580,7 @@ START_TEST(test_debug_ok681) {
 
 START_TEST(test_debug_ok682) {
   // 44705407026.635368759314252532
-  s21_decimal decimal = {{0x61D682F4, 0x19F8139, 0x9073722B, 0x120000}};
+  my_decimal decimal = {{0x61D682F4, 0x19F8139, 0x9073722B, 0x120000}};
   char check[1024] = "44705407026.635368759314252532";
 
   test_debug(decimal, check);
@@ -5588,7 +5588,7 @@ START_TEST(test_debug_ok682) {
 
 START_TEST(test_debug_ok683) {
   // 747970156051326230239009740.76
-  s21_decimal decimal = {{0xF45BDBFC, 0xB9D13283, 0xF1AEA424, 0x20000}};
+  my_decimal decimal = {{0xF45BDBFC, 0xB9D13283, 0xF1AEA424, 0x20000}};
   char check[1024] = "747970156051326230239009740.76";
 
   test_debug(decimal, check);
@@ -5596,7 +5596,7 @@ START_TEST(test_debug_ok683) {
 
 START_TEST(test_debug_ok684) {
   // -747970156051326230239009740.76
-  s21_decimal decimal = {{0xF45BDBFC, 0xB9D13283, 0xF1AEA424, 0x80020000}};
+  my_decimal decimal = {{0xF45BDBFC, 0xB9D13283, 0xF1AEA424, 0x80020000}};
   char check[1024] = "-747970156051326230239009740.76";
 
   test_debug(decimal, check);
@@ -5604,7 +5604,7 @@ START_TEST(test_debug_ok684) {
 
 START_TEST(test_debug_ok685) {
   // 53987754357930817018618339470
-  s21_decimal decimal = {{0x7656608E, 0x1FC62B3F, 0xAE719FAC, 0x0}};
+  my_decimal decimal = {{0x7656608E, 0x1FC62B3F, 0xAE719FAC, 0x0}};
   char check[1024] = "53987754357930817018618339470";
 
   test_debug(decimal, check);
@@ -5612,7 +5612,7 @@ START_TEST(test_debug_ok685) {
 
 START_TEST(test_debug_ok686) {
   // -53987754357930817018618339470
-  s21_decimal decimal = {{0x7656608E, 0x1FC62B3F, 0xAE719FAC, 0x80000000}};
+  my_decimal decimal = {{0x7656608E, 0x1FC62B3F, 0xAE719FAC, 0x80000000}};
   char check[1024] = "-53987754357930817018618339470";
 
   test_debug(decimal, check);
@@ -5620,7 +5620,7 @@ START_TEST(test_debug_ok686) {
 
 START_TEST(test_debug_ok687) {
   // 310171940359945380570.75669445
-  s21_decimal decimal = {{0x588639C5, 0xE9571CC2, 0x6438D251, 0x80000}};
+  my_decimal decimal = {{0x588639C5, 0xE9571CC2, 0x6438D251, 0x80000}};
   char check[1024] = "310171940359945380570.75669445";
 
   test_debug(decimal, check);
@@ -5628,7 +5628,7 @@ START_TEST(test_debug_ok687) {
 
 START_TEST(test_debug_ok688) {
   // -310171940359945380570.75669445
-  s21_decimal decimal = {{0x588639C5, 0xE9571CC2, 0x6438D251, 0x80080000}};
+  my_decimal decimal = {{0x588639C5, 0xE9571CC2, 0x6438D251, 0x80080000}};
   char check[1024] = "-310171940359945380570.75669445";
 
   test_debug(decimal, check);
@@ -5636,7 +5636,7 @@ START_TEST(test_debug_ok688) {
 
 START_TEST(test_debug_ok689) {
   // 1421088291977.048476313845507
-  s21_decimal decimal = {{0x19B1FF03, 0xAC3A19AC, 0x4977F26, 0xF0000}};
+  my_decimal decimal = {{0x19B1FF03, 0xAC3A19AC, 0x4977F26, 0xF0000}};
   char check[1024] = "1421088291977.048476313845507";
 
   test_debug(decimal, check);
@@ -5644,7 +5644,7 @@ START_TEST(test_debug_ok689) {
 
 START_TEST(test_debug_ok690) {
   // -1421088291977.048476313845507
-  s21_decimal decimal = {{0x19B1FF03, 0xAC3A19AC, 0x4977F26, 0x800F0000}};
+  my_decimal decimal = {{0x19B1FF03, 0xAC3A19AC, 0x4977F26, 0x800F0000}};
   char check[1024] = "-1421088291977.048476313845507";
 
   test_debug(decimal, check);
@@ -5652,7 +5652,7 @@ START_TEST(test_debug_ok690) {
 
 START_TEST(test_debug_ok691) {
   // -175.30894418077848033862465498
-  s21_decimal decimal = {{0x52DDB7DA, 0xAF4884B9, 0x38A5374A, 0x801A0000}};
+  my_decimal decimal = {{0x52DDB7DA, 0xAF4884B9, 0x38A5374A, 0x801A0000}};
   char check[1024] = "-175.30894418077848033862465498";
 
   test_debug(decimal, check);
@@ -5660,7 +5660,7 @@ START_TEST(test_debug_ok691) {
 
 START_TEST(test_debug_ok692) {
   // 175.30894418077848033862465498
-  s21_decimal decimal = {{0x52DDB7DA, 0xAF4884B9, 0x38A5374A, 0x1A0000}};
+  my_decimal decimal = {{0x52DDB7DA, 0xAF4884B9, 0x38A5374A, 0x1A0000}};
   char check[1024] = "175.30894418077848033862465498";
 
   test_debug(decimal, check);
@@ -5668,7 +5668,7 @@ START_TEST(test_debug_ok692) {
 
 START_TEST(test_debug_ok693) {
   // 20961160837918637117804124.679
-  s21_decimal decimal = {{0x5B281A07, 0xEA1AE970, 0x43BAAA75, 0x30000}};
+  my_decimal decimal = {{0x5B281A07, 0xEA1AE970, 0x43BAAA75, 0x30000}};
   char check[1024] = "20961160837918637117804124.679";
 
   test_debug(decimal, check);
@@ -5676,7 +5676,7 @@ START_TEST(test_debug_ok693) {
 
 START_TEST(test_debug_ok694) {
   // -20961160837918637117804124.679
-  s21_decimal decimal = {{0x5B281A07, 0xEA1AE970, 0x43BAAA75, 0x80030000}};
+  my_decimal decimal = {{0x5B281A07, 0xEA1AE970, 0x43BAAA75, 0x80030000}};
   char check[1024] = "-20961160837918637117804124.679";
 
   test_debug(decimal, check);
@@ -5684,7 +5684,7 @@ START_TEST(test_debug_ok694) {
 
 START_TEST(test_debug_ok695) {
   // -540391125.2818810379406603919
-  s21_decimal decimal = {{0xA7BEF68F, 0x2E156F4, 0x117602B8, 0x80130000}};
+  my_decimal decimal = {{0xA7BEF68F, 0x2E156F4, 0x117602B8, 0x80130000}};
   char check[1024] = "-540391125.2818810379406603919";
 
   test_debug(decimal, check);
@@ -5692,7 +5692,7 @@ START_TEST(test_debug_ok695) {
 
 START_TEST(test_debug_ok696) {
   // 540391125.2818810379406603919
-  s21_decimal decimal = {{0xA7BEF68F, 0x2E156F4, 0x117602B8, 0x130000}};
+  my_decimal decimal = {{0xA7BEF68F, 0x2E156F4, 0x117602B8, 0x130000}};
   char check[1024] = "540391125.2818810379406603919";
 
   test_debug(decimal, check);
@@ -5700,7 +5700,7 @@ START_TEST(test_debug_ok696) {
 
 START_TEST(test_debug_ok697) {
   // 6762980.6133399889226602583702
-  s21_decimal decimal = {{0x34DB1696, 0xBAF3CD40, 0xDA861080, 0x160000}};
+  my_decimal decimal = {{0x34DB1696, 0xBAF3CD40, 0xDA861080, 0x160000}};
   char check[1024] = "6762980.6133399889226602583702";
 
   test_debug(decimal, check);
@@ -5708,7 +5708,7 @@ START_TEST(test_debug_ok697) {
 
 START_TEST(test_debug_ok698) {
   // -6762980.6133399889226602583702
-  s21_decimal decimal = {{0x34DB1696, 0xBAF3CD40, 0xDA861080, 0x80160000}};
+  my_decimal decimal = {{0x34DB1696, 0xBAF3CD40, 0xDA861080, 0x80160000}};
   char check[1024] = "-6762980.6133399889226602583702";
 
   test_debug(decimal, check);
@@ -5716,7 +5716,7 @@ START_TEST(test_debug_ok698) {
 
 START_TEST(test_debug_ok699) {
   // -678622099244.84571317995985778
-  s21_decimal decimal = {{0xA10E5B72, 0x7D5B721B, 0xDB464DEB, 0x80110000}};
+  my_decimal decimal = {{0xA10E5B72, 0x7D5B721B, 0xDB464DEB, 0x80110000}};
   char check[1024] = "-678622099244.84571317995985778";
 
   test_debug(decimal, check);
@@ -5724,7 +5724,7 @@ START_TEST(test_debug_ok699) {
 
 START_TEST(test_debug_ok700) {
   // 678622099244.84571317995985778
-  s21_decimal decimal = {{0xA10E5B72, 0x7D5B721B, 0xDB464DEB, 0x110000}};
+  my_decimal decimal = {{0xA10E5B72, 0x7D5B721B, 0xDB464DEB, 0x110000}};
   char check[1024] = "678622099244.84571317995985778";
 
   test_debug(decimal, check);
@@ -5732,7 +5732,7 @@ START_TEST(test_debug_ok700) {
 
 START_TEST(test_debug_ok701) {
   // -6282855121790600545045326178.9
-  s21_decimal decimal = {{0x28F99DDD, 0x3A8089A8, 0xCB028F3A, 0x80010000}};
+  my_decimal decimal = {{0x28F99DDD, 0x3A8089A8, 0xCB028F3A, 0x80010000}};
   char check[1024] = "-6282855121790600545045326178.9";
 
   test_debug(decimal, check);
@@ -5740,7 +5740,7 @@ START_TEST(test_debug_ok701) {
 
 START_TEST(test_debug_ok702) {
   // 6282855121790600545045326178.9
-  s21_decimal decimal = {{0x28F99DDD, 0x3A8089A8, 0xCB028F3A, 0x10000}};
+  my_decimal decimal = {{0x28F99DDD, 0x3A8089A8, 0xCB028F3A, 0x10000}};
   char check[1024] = "6282855121790600545045326178.9";
 
   test_debug(decimal, check);
@@ -5748,7 +5748,7 @@ START_TEST(test_debug_ok702) {
 
 START_TEST(test_debug_ok703) {
   // 15324941537.140194085635176765
-  s21_decimal decimal = {{0xC9393D, 0x6397F146, 0x31847E99, 0x120000}};
+  my_decimal decimal = {{0xC9393D, 0x6397F146, 0x31847E99, 0x120000}};
   char check[1024] = "15324941537.140194085635176765";
 
   test_debug(decimal, check);
@@ -5756,7 +5756,7 @@ START_TEST(test_debug_ok703) {
 
 START_TEST(test_debug_ok704) {
   // -15324941537.140194085635176765
-  s21_decimal decimal = {{0xC9393D, 0x6397F146, 0x31847E99, 0x80120000}};
+  my_decimal decimal = {{0xC9393D, 0x6397F146, 0x31847E99, 0x80120000}};
   char check[1024] = "-15324941537.140194085635176765";
 
   test_debug(decimal, check);
@@ -5764,7 +5764,7 @@ START_TEST(test_debug_ok704) {
 
 START_TEST(test_debug_ok705) {
   // -199896.02009581067994553545631
-  s21_decimal decimal = {{0xC97A739F, 0x4BA0A46D, 0x409702E0, 0x80170000}};
+  my_decimal decimal = {{0xC97A739F, 0x4BA0A46D, 0x409702E0, 0x80170000}};
   char check[1024] = "-199896.02009581067994553545631";
 
   test_debug(decimal, check);
@@ -5772,7 +5772,7 @@ START_TEST(test_debug_ok705) {
 
 START_TEST(test_debug_ok706) {
   // 199896.02009581067994553545631
-  s21_decimal decimal = {{0xC97A739F, 0x4BA0A46D, 0x409702E0, 0x170000}};
+  my_decimal decimal = {{0xC97A739F, 0x4BA0A46D, 0x409702E0, 0x170000}};
   char check[1024] = "199896.02009581067994553545631";
 
   test_debug(decimal, check);
@@ -5780,7 +5780,7 @@ START_TEST(test_debug_ok706) {
 
 START_TEST(test_debug_ok707) {
   // -137536457.9487297713757255827
-  s21_decimal decimal = {{0x3A087893, 0x408238B0, 0x471ACC7, 0x80130000}};
+  my_decimal decimal = {{0x3A087893, 0x408238B0, 0x471ACC7, 0x80130000}};
   char check[1024] = "-137536457.9487297713757255827";
 
   test_debug(decimal, check);
@@ -5788,7 +5788,7 @@ START_TEST(test_debug_ok707) {
 
 START_TEST(test_debug_ok708) {
   // 137536457.9487297713757255827
-  s21_decimal decimal = {{0x3A087893, 0x408238B0, 0x471ACC7, 0x130000}};
+  my_decimal decimal = {{0x3A087893, 0x408238B0, 0x471ACC7, 0x130000}};
   char check[1024] = "137536457.9487297713757255827";
 
   test_debug(decimal, check);
@@ -5796,7 +5796,7 @@ START_TEST(test_debug_ok708) {
 
 START_TEST(test_debug_ok709) {
   // 5.0501509669208114994181180848
-  s21_decimal decimal = {{0x860E0DB0, 0xDB8F6E55, 0xA32DDEA4, 0x1C0000}};
+  my_decimal decimal = {{0x860E0DB0, 0xDB8F6E55, 0xA32DDEA4, 0x1C0000}};
   char check[1024] = "5.0501509669208114994181180848";
 
   test_debug(decimal, check);
@@ -5804,7 +5804,7 @@ START_TEST(test_debug_ok709) {
 
 START_TEST(test_debug_ok710) {
   // -5.0501509669208114994181180848
-  s21_decimal decimal = {{0x860E0DB0, 0xDB8F6E55, 0xA32DDEA4, 0x801C0000}};
+  my_decimal decimal = {{0x860E0DB0, 0xDB8F6E55, 0xA32DDEA4, 0x801C0000}};
   char check[1024] = "-5.0501509669208114994181180848";
 
   test_debug(decimal, check);
@@ -5812,7 +5812,7 @@ START_TEST(test_debug_ok710) {
 
 START_TEST(test_debug_ok711) {
   // -2640955263416491.0881837304784
-  s21_decimal decimal = {{0x232A4BD0, 0x43F7AFD, 0x5555784D, 0x800D0000}};
+  my_decimal decimal = {{0x232A4BD0, 0x43F7AFD, 0x5555784D, 0x800D0000}};
   char check[1024] = "-2640955263416491.0881837304784";
 
   test_debug(decimal, check);
@@ -5820,7 +5820,7 @@ START_TEST(test_debug_ok711) {
 
 START_TEST(test_debug_ok712) {
   // 2640955263416491.0881837304784
-  s21_decimal decimal = {{0x232A4BD0, 0x43F7AFD, 0x5555784D, 0xD0000}};
+  my_decimal decimal = {{0x232A4BD0, 0x43F7AFD, 0x5555784D, 0xD0000}};
   char check[1024] = "2640955263416491.0881837304784";
 
   test_debug(decimal, check);
@@ -5828,7 +5828,7 @@ START_TEST(test_debug_ok712) {
 
 START_TEST(test_debug_ok713) {
   // 63378844447784825784946125896
-  s21_decimal decimal = {{0xBB63EC48, 0xFED654CC, 0xCCC9C059, 0x0}};
+  my_decimal decimal = {{0xBB63EC48, 0xFED654CC, 0xCCC9C059, 0x0}};
   char check[1024] = "63378844447784825784946125896";
 
   test_debug(decimal, check);
@@ -5836,7 +5836,7 @@ START_TEST(test_debug_ok713) {
 
 START_TEST(test_debug_ok714) {
   // -63378844447784825784946125896
-  s21_decimal decimal = {{0xBB63EC48, 0xFED654CC, 0xCCC9C059, 0x80000000}};
+  my_decimal decimal = {{0xBB63EC48, 0xFED654CC, 0xCCC9C059, 0x80000000}};
   char check[1024] = "-63378844447784825784946125896";
 
   test_debug(decimal, check);
@@ -5844,7 +5844,7 @@ START_TEST(test_debug_ok714) {
 
 START_TEST(test_debug_ok715) {
   // 3120892356.5440596689406971907
-  s21_decimal decimal = {{0xCBE4D003, 0x877C1BB7, 0x64D76AA0, 0x130000}};
+  my_decimal decimal = {{0xCBE4D003, 0x877C1BB7, 0x64D76AA0, 0x130000}};
   char check[1024] = "3120892356.5440596689406971907";
 
   test_debug(decimal, check);
@@ -5852,7 +5852,7 @@ START_TEST(test_debug_ok715) {
 
 START_TEST(test_debug_ok716) {
   // -3120892356.5440596689406971907
-  s21_decimal decimal = {{0xCBE4D003, 0x877C1BB7, 0x64D76AA0, 0x80130000}};
+  my_decimal decimal = {{0xCBE4D003, 0x877C1BB7, 0x64D76AA0, 0x80130000}};
   char check[1024] = "-3120892356.5440596689406971907";
 
   test_debug(decimal, check);
@@ -5860,7 +5860,7 @@ START_TEST(test_debug_ok716) {
 
 START_TEST(test_debug_ok717) {
   // 255342960082.94301095191613314
-  s21_decimal decimal = {{0x8E078F82, 0x41083150, 0x52817980, 0x110000}};
+  my_decimal decimal = {{0x8E078F82, 0x41083150, 0x52817980, 0x110000}};
   char check[1024] = "255342960082.94301095191613314";
 
   test_debug(decimal, check);
@@ -5868,7 +5868,7 @@ START_TEST(test_debug_ok717) {
 
 START_TEST(test_debug_ok718) {
   // -255342960082.94301095191613314
-  s21_decimal decimal = {{0x8E078F82, 0x41083150, 0x52817980, 0x80110000}};
+  my_decimal decimal = {{0x8E078F82, 0x41083150, 0x52817980, 0x80110000}};
   char check[1024] = "-255342960082.94301095191613314";
 
   test_debug(decimal, check);
@@ -5876,7 +5876,7 @@ START_TEST(test_debug_ok718) {
 
 START_TEST(test_debug_ok719) {
   // -14316487300359898045.037001025
-  s21_decimal decimal = {{0x9159B941, 0xABAA43F7, 0x2E42521B, 0x80090000}};
+  my_decimal decimal = {{0x9159B941, 0xABAA43F7, 0x2E42521B, 0x80090000}};
   char check[1024] = "-14316487300359898045.037001025";
 
   test_debug(decimal, check);
@@ -5884,7 +5884,7 @@ START_TEST(test_debug_ok719) {
 
 START_TEST(test_debug_ok720) {
   // 14316487300359898045.037001025
-  s21_decimal decimal = {{0x9159B941, 0xABAA43F7, 0x2E42521B, 0x90000}};
+  my_decimal decimal = {{0x9159B941, 0xABAA43F7, 0x2E42521B, 0x90000}};
   char check[1024] = "14316487300359898045.037001025";
 
   test_debug(decimal, check);
@@ -5892,7 +5892,7 @@ START_TEST(test_debug_ok720) {
 
 START_TEST(test_debug_ok721) {
   // -439810095666814839492.96463512
-  s21_decimal decimal = {{0x65AA2E98, 0x3DD0008, 0x8E1C3D0A, 0x80080000}};
+  my_decimal decimal = {{0x65AA2E98, 0x3DD0008, 0x8E1C3D0A, 0x80080000}};
   char check[1024] = "-439810095666814839492.96463512";
 
   test_debug(decimal, check);
@@ -5900,7 +5900,7 @@ START_TEST(test_debug_ok721) {
 
 START_TEST(test_debug_ok722) {
   // 439810095666814839492.96463512
-  s21_decimal decimal = {{0x65AA2E98, 0x3DD0008, 0x8E1C3D0A, 0x80000}};
+  my_decimal decimal = {{0x65AA2E98, 0x3DD0008, 0x8E1C3D0A, 0x80000}};
   char check[1024] = "439810095666814839492.96463512";
 
   test_debug(decimal, check);
@@ -5908,7 +5908,7 @@ START_TEST(test_debug_ok722) {
 
 START_TEST(test_debug_ok723) {
   // 7419220167640.3921165177722837
-  s21_decimal decimal = {{0x7F5E17D5, 0xF3B5AABE, 0xEFBA59CF, 0x100000}};
+  my_decimal decimal = {{0x7F5E17D5, 0xF3B5AABE, 0xEFBA59CF, 0x100000}};
   char check[1024] = "7419220167640.3921165177722837";
 
   test_debug(decimal, check);
@@ -5916,7 +5916,7 @@ START_TEST(test_debug_ok723) {
 
 START_TEST(test_debug_ok724) {
   // -7419220167640.3921165177722837
-  s21_decimal decimal = {{0x7F5E17D5, 0xF3B5AABE, 0xEFBA59CF, 0x80100000}};
+  my_decimal decimal = {{0x7F5E17D5, 0xF3B5AABE, 0xEFBA59CF, 0x80100000}};
   char check[1024] = "-7419220167640.3921165177722837";
 
   test_debug(decimal, check);
@@ -5924,7 +5924,7 @@ START_TEST(test_debug_ok724) {
 
 START_TEST(test_debug_ok725) {
   // -596800606971092161664808315.46
-  s21_decimal decimal = {{0x6395E43A, 0x17F81246, 0xC0D6306D, 0x80020000}};
+  my_decimal decimal = {{0x6395E43A, 0x17F81246, 0xC0D6306D, 0x80020000}};
   char check[1024] = "-596800606971092161664808315.46";
 
   test_debug(decimal, check);
@@ -5932,7 +5932,7 @@ START_TEST(test_debug_ok725) {
 
 START_TEST(test_debug_ok726) {
   // 596800606971092161664808315.46
-  s21_decimal decimal = {{0x6395E43A, 0x17F81246, 0xC0D6306D, 0x20000}};
+  my_decimal decimal = {{0x6395E43A, 0x17F81246, 0xC0D6306D, 0x20000}};
   char check[1024] = "596800606971092161664808315.46";
 
   test_debug(decimal, check);
@@ -5940,7 +5940,7 @@ START_TEST(test_debug_ok726) {
 
 START_TEST(test_debug_ok727) {
   // -821650937542173460525385.9128
-  s21_decimal decimal = {{0x87415738, 0xC1055B60, 0x1A8C8989, 0x80040000}};
+  my_decimal decimal = {{0x87415738, 0xC1055B60, 0x1A8C8989, 0x80040000}};
   char check[1024] = "-821650937542173460525385.9128";
 
   test_debug(decimal, check);
@@ -5948,7 +5948,7 @@ START_TEST(test_debug_ok727) {
 
 START_TEST(test_debug_ok728) {
   // 821650937542173460525385.9128
-  s21_decimal decimal = {{0x87415738, 0xC1055B60, 0x1A8C8989, 0x40000}};
+  my_decimal decimal = {{0x87415738, 0xC1055B60, 0x1A8C8989, 0x40000}};
   char check[1024] = "821650937542173460525385.9128";
 
   test_debug(decimal, check);
@@ -5956,7 +5956,7 @@ START_TEST(test_debug_ok728) {
 
 START_TEST(test_debug_ok729) {
   // -28393504963209842679210759.452
-  s21_decimal decimal = {{0x923ED51C, 0x478D85A0, 0x5BBE8E8C, 0x80030000}};
+  my_decimal decimal = {{0x923ED51C, 0x478D85A0, 0x5BBE8E8C, 0x80030000}};
   char check[1024] = "-28393504963209842679210759.452";
 
   test_debug(decimal, check);
@@ -5964,7 +5964,7 @@ START_TEST(test_debug_ok729) {
 
 START_TEST(test_debug_ok730) {
   // 28393504963209842679210759.452
-  s21_decimal decimal = {{0x923ED51C, 0x478D85A0, 0x5BBE8E8C, 0x30000}};
+  my_decimal decimal = {{0x923ED51C, 0x478D85A0, 0x5BBE8E8C, 0x30000}};
   char check[1024] = "28393504963209842679210759.452";
 
   test_debug(decimal, check);
@@ -5972,7 +5972,7 @@ START_TEST(test_debug_ok730) {
 
 START_TEST(test_debug_ok731) {
   // -73.696580396195915882976900270
-  s21_decimal decimal = {{0x53E1F4AE, 0x83F21214, 0xEE2061EC, 0x801B0000}};
+  my_decimal decimal = {{0x53E1F4AE, 0x83F21214, 0xEE2061EC, 0x801B0000}};
   char check[1024] = "-73.696580396195915882976900270";
 
   test_debug(decimal, check);
@@ -5980,7 +5980,7 @@ START_TEST(test_debug_ok731) {
 
 START_TEST(test_debug_ok732) {
   // 73.696580396195915882976900270
-  s21_decimal decimal = {{0x53E1F4AE, 0x83F21214, 0xEE2061EC, 0x1B0000}};
+  my_decimal decimal = {{0x53E1F4AE, 0x83F21214, 0xEE2061EC, 0x1B0000}};
   char check[1024] = "73.696580396195915882976900270";
 
   test_debug(decimal, check);
@@ -5988,7 +5988,7 @@ START_TEST(test_debug_ok732) {
 
 START_TEST(test_debug_ok733) {
   // -3.056542161306615709632888207
-  s21_decimal decimal = {{0x93DCFD8F, 0x944075F8, 0x9E04FFA, 0x801B0000}};
+  my_decimal decimal = {{0x93DCFD8F, 0x944075F8, 0x9E04FFA, 0x801B0000}};
   char check[1024] = "-3.056542161306615709632888207";
 
   test_debug(decimal, check);
@@ -5996,7 +5996,7 @@ START_TEST(test_debug_ok733) {
 
 START_TEST(test_debug_ok734) {
   // 3.056542161306615709632888207
-  s21_decimal decimal = {{0x93DCFD8F, 0x944075F8, 0x9E04FFA, 0x1B0000}};
+  my_decimal decimal = {{0x93DCFD8F, 0x944075F8, 0x9E04FFA, 0x1B0000}};
   char check[1024] = "3.056542161306615709632888207";
 
   test_debug(decimal, check);
@@ -6004,7 +6004,7 @@ START_TEST(test_debug_ok734) {
 
 START_TEST(test_debug_ok735) {
   // -480811544379106268.24011154160
-  s21_decimal decimal = {{0xAB1482F0, 0xDC147E95, 0x9B5BCC7C, 0x800B0000}};
+  my_decimal decimal = {{0xAB1482F0, 0xDC147E95, 0x9B5BCC7C, 0x800B0000}};
   char check[1024] = "-480811544379106268.24011154160";
 
   test_debug(decimal, check);
@@ -6012,7 +6012,7 @@ START_TEST(test_debug_ok735) {
 
 START_TEST(test_debug_ok736) {
   // 480811544379106268.24011154160
-  s21_decimal decimal = {{0xAB1482F0, 0xDC147E95, 0x9B5BCC7C, 0xB0000}};
+  my_decimal decimal = {{0xAB1482F0, 0xDC147E95, 0x9B5BCC7C, 0xB0000}};
   char check[1024] = "480811544379106268.24011154160";
 
   test_debug(decimal, check);
@@ -6020,7 +6020,7 @@ START_TEST(test_debug_ok736) {
 
 START_TEST(test_debug_ok737) {
   // -1446636272407690.8765828407290
-  s21_decimal decimal = {{0x6A60DFFA, 0xAB9DB5E3, 0x2EBE4B76, 0x800D0000}};
+  my_decimal decimal = {{0x6A60DFFA, 0xAB9DB5E3, 0x2EBE4B76, 0x800D0000}};
   char check[1024] = "-1446636272407690.8765828407290";
 
   test_debug(decimal, check);
@@ -6028,7 +6028,7 @@ START_TEST(test_debug_ok737) {
 
 START_TEST(test_debug_ok738) {
   // 1446636272407690.8765828407290
-  s21_decimal decimal = {{0x6A60DFFA, 0xAB9DB5E3, 0x2EBE4B76, 0xD0000}};
+  my_decimal decimal = {{0x6A60DFFA, 0xAB9DB5E3, 0x2EBE4B76, 0xD0000}};
   char check[1024] = "1446636272407690.8765828407290";
 
   test_debug(decimal, check);
@@ -6036,7 +6036,7 @@ START_TEST(test_debug_ok738) {
 
 START_TEST(test_debug_ok739) {
   // -3907063.7355032883565648347572
-  s21_decimal decimal = {{0x333701B4, 0x937262B, 0x7E3E7947, 0x80160000}};
+  my_decimal decimal = {{0x333701B4, 0x937262B, 0x7E3E7947, 0x80160000}};
   char check[1024] = "-3907063.7355032883565648347572";
 
   test_debug(decimal, check);
@@ -6044,7 +6044,7 @@ START_TEST(test_debug_ok739) {
 
 START_TEST(test_debug_ok740) {
   // 3907063.7355032883565648347572
-  s21_decimal decimal = {{0x333701B4, 0x937262B, 0x7E3E7947, 0x160000}};
+  my_decimal decimal = {{0x333701B4, 0x937262B, 0x7E3E7947, 0x160000}};
   char check[1024] = "3907063.7355032883565648347572";
 
   test_debug(decimal, check);
@@ -6052,7 +6052,7 @@ START_TEST(test_debug_ok740) {
 
 START_TEST(test_debug_ok741) {
   // 557508977484709757421.28144062
-  s21_decimal decimal = {{0xDC2FBEBE, 0xD870E272, 0xB4240FCE, 0x80000}};
+  my_decimal decimal = {{0xDC2FBEBE, 0xD870E272, 0xB4240FCE, 0x80000}};
   char check[1024] = "557508977484709757421.28144062";
 
   test_debug(decimal, check);
@@ -6060,7 +6060,7 @@ START_TEST(test_debug_ok741) {
 
 START_TEST(test_debug_ok742) {
   // -557508977484709757421.28144062
-  s21_decimal decimal = {{0xDC2FBEBE, 0xD870E272, 0xB4240FCE, 0x80080000}};
+  my_decimal decimal = {{0xDC2FBEBE, 0xD870E272, 0xB4240FCE, 0x80080000}};
   char check[1024] = "-557508977484709757421.28144062";
 
   test_debug(decimal, check);
@@ -6068,7 +6068,7 @@ START_TEST(test_debug_ok742) {
 
 START_TEST(test_debug_ok743) {
   // 4432978541471375388033428250.7
-  s21_decimal decimal = {{0x83B9AF0B, 0x9F587D83, 0x8F3CBD32, 0x10000}};
+  my_decimal decimal = {{0x83B9AF0B, 0x9F587D83, 0x8F3CBD32, 0x10000}};
   char check[1024] = "4432978541471375388033428250.7";
 
   test_debug(decimal, check);
@@ -6076,7 +6076,7 @@ START_TEST(test_debug_ok743) {
 
 START_TEST(test_debug_ok744) {
   // -4432978541471375388033428250.7
-  s21_decimal decimal = {{0x83B9AF0B, 0x9F587D83, 0x8F3CBD32, 0x80010000}};
+  my_decimal decimal = {{0x83B9AF0B, 0x9F587D83, 0x8F3CBD32, 0x80010000}};
   char check[1024] = "-4432978541471375388033428250.7";
 
   test_debug(decimal, check);
@@ -6084,7 +6084,7 @@ START_TEST(test_debug_ok744) {
 
 START_TEST(test_debug_ok745) {
   // 84476498.849371918519200648
-  s21_decimal decimal = {{0xE38F6B88, 0x2DC756A0, 0x45E098, 0x120000}};
+  my_decimal decimal = {{0xE38F6B88, 0x2DC756A0, 0x45E098, 0x120000}};
   char check[1024] = "84476498.849371918519200648";
 
   test_debug(decimal, check);
@@ -6092,7 +6092,7 @@ START_TEST(test_debug_ok745) {
 
 START_TEST(test_debug_ok746) {
   // -84476498.849371918519200648
-  s21_decimal decimal = {{0xE38F6B88, 0x2DC756A0, 0x45E098, 0x80120000}};
+  my_decimal decimal = {{0xE38F6B88, 0x2DC756A0, 0x45E098, 0x80120000}};
   char check[1024] = "-84476498.849371918519200648";
 
   test_debug(decimal, check);
@@ -6100,7 +6100,7 @@ START_TEST(test_debug_ok746) {
 
 START_TEST(test_debug_ok747) {
   // 9233452317534056.351524682028
-  s21_decimal decimal = {{0x1CFF792C, 0x1C4F6DAB, 0x1DD5BB95, 0xC0000}};
+  my_decimal decimal = {{0x1CFF792C, 0x1C4F6DAB, 0x1DD5BB95, 0xC0000}};
   char check[1024] = "9233452317534056.351524682028";
 
   test_debug(decimal, check);
@@ -6108,7 +6108,7 @@ START_TEST(test_debug_ok747) {
 
 START_TEST(test_debug_ok748) {
   // -9233452317534056.351524682028
-  s21_decimal decimal = {{0x1CFF792C, 0x1C4F6DAB, 0x1DD5BB95, 0x800C0000}};
+  my_decimal decimal = {{0x1CFF792C, 0x1C4F6DAB, 0x1DD5BB95, 0x800C0000}};
   char check[1024] = "-9233452317534056.351524682028";
 
   test_debug(decimal, check);
@@ -6116,7 +6116,7 @@ START_TEST(test_debug_ok748) {
 
 START_TEST(test_debug_ok749) {
   // -156.01018090952745103798591965
-  s21_decimal decimal = {{0xD2D061DD, 0x5C1DE522, 0x3268DC15, 0x801A0000}};
+  my_decimal decimal = {{0xD2D061DD, 0x5C1DE522, 0x3268DC15, 0x801A0000}};
   char check[1024] = "-156.01018090952745103798591965";
 
   test_debug(decimal, check);
@@ -6124,7 +6124,7 @@ START_TEST(test_debug_ok749) {
 
 START_TEST(test_debug_ok750) {
   // 156.01018090952745103798591965
-  s21_decimal decimal = {{0xD2D061DD, 0x5C1DE522, 0x3268DC15, 0x1A0000}};
+  my_decimal decimal = {{0xD2D061DD, 0x5C1DE522, 0x3268DC15, 0x1A0000}};
   char check[1024] = "156.01018090952745103798591965";
 
   test_debug(decimal, check);
@@ -6132,7 +6132,7 @@ START_TEST(test_debug_ok750) {
 
 START_TEST(test_debug_ok751) {
   // -555282413253792.36951843479173
-  s21_decimal decimal = {{0x96E91E85, 0xF6BA128B, 0xB36BE279, 0x800E0000}};
+  my_decimal decimal = {{0x96E91E85, 0xF6BA128B, 0xB36BE279, 0x800E0000}};
   char check[1024] = "-555282413253792.36951843479173";
 
   test_debug(decimal, check);
@@ -6140,7 +6140,7 @@ START_TEST(test_debug_ok751) {
 
 START_TEST(test_debug_ok752) {
   // 555282413253792.36951843479173
-  s21_decimal decimal = {{0x96E91E85, 0xF6BA128B, 0xB36BE279, 0xE0000}};
+  my_decimal decimal = {{0x96E91E85, 0xF6BA128B, 0xB36BE279, 0xE0000}};
   char check[1024] = "555282413253792.36951843479173";
 
   test_debug(decimal, check);
@@ -6148,7 +6148,7 @@ START_TEST(test_debug_ok752) {
 
 START_TEST(test_debug_ok753) {
   // 660044249440575936213.17159308
-  s21_decimal decimal = {{0x39B0098C, 0xE67266B4, 0xD54594A5, 0x80000}};
+  my_decimal decimal = {{0x39B0098C, 0xE67266B4, 0xD54594A5, 0x80000}};
   char check[1024] = "660044249440575936213.17159308";
 
   test_debug(decimal, check);
@@ -6156,7 +6156,7 @@ START_TEST(test_debug_ok753) {
 
 START_TEST(test_debug_ok754) {
   // -660044249440575936213.17159308
-  s21_decimal decimal = {{0x39B0098C, 0xE67266B4, 0xD54594A5, 0x80080000}};
+  my_decimal decimal = {{0x39B0098C, 0xE67266B4, 0xD54594A5, 0x80080000}};
   char check[1024] = "-660044249440575936213.17159308";
 
   test_debug(decimal, check);
@@ -6164,7 +6164,7 @@ START_TEST(test_debug_ok754) {
 
 START_TEST(test_debug_ok755) {
   // -28369449868483.736067303461803
-  s21_decimal decimal = {{0x5F5AD3AB, 0xFB3F3DC1, 0x5BAAA8AE, 0x800F0000}};
+  my_decimal decimal = {{0x5F5AD3AB, 0xFB3F3DC1, 0x5BAAA8AE, 0x800F0000}};
   char check[1024] = "-28369449868483.736067303461803";
 
   test_debug(decimal, check);
@@ -6172,7 +6172,7 @@ START_TEST(test_debug_ok755) {
 
 START_TEST(test_debug_ok756) {
   // 28369449868483.736067303461803
-  s21_decimal decimal = {{0x5F5AD3AB, 0xFB3F3DC1, 0x5BAAA8AE, 0xF0000}};
+  my_decimal decimal = {{0x5F5AD3AB, 0xFB3F3DC1, 0x5BAAA8AE, 0xF0000}};
   char check[1024] = "28369449868483.736067303461803";
 
   test_debug(decimal, check);
@@ -6180,7 +6180,7 @@ START_TEST(test_debug_ok756) {
 
 START_TEST(test_debug_ok757) {
   // 593953434558151503.25001801754
-  s21_decimal decimal = {{0x8662D01A, 0x84104D03, 0xBFEAAD34, 0xB0000}};
+  my_decimal decimal = {{0x8662D01A, 0x84104D03, 0xBFEAAD34, 0xB0000}};
   char check[1024] = "593953434558151503.25001801754";
 
   test_debug(decimal, check);
@@ -6188,7 +6188,7 @@ START_TEST(test_debug_ok757) {
 
 START_TEST(test_debug_ok758) {
   // -593953434558151503.25001801754
-  s21_decimal decimal = {{0x8662D01A, 0x84104D03, 0xBFEAAD34, 0x800B0000}};
+  my_decimal decimal = {{0x8662D01A, 0x84104D03, 0xBFEAAD34, 0x800B0000}};
   char check[1024] = "-593953434558151503.25001801754";
 
   test_debug(decimal, check);
@@ -6196,7 +6196,7 @@ START_TEST(test_debug_ok758) {
 
 START_TEST(test_debug_ok759) {
   // 12510192830044.667721361245703
-  s21_decimal decimal = {{0x9CE1C607, 0x3A33A42F, 0x286C3060, 0xF0000}};
+  my_decimal decimal = {{0x9CE1C607, 0x3A33A42F, 0x286C3060, 0xF0000}};
   char check[1024] = "12510192830044.667721361245703";
 
   test_debug(decimal, check);
@@ -6204,7 +6204,7 @@ START_TEST(test_debug_ok759) {
 
 START_TEST(test_debug_ok760) {
   // -12510192830044.667721361245703
-  s21_decimal decimal = {{0x9CE1C607, 0x3A33A42F, 0x286C3060, 0x800F0000}};
+  my_decimal decimal = {{0x9CE1C607, 0x3A33A42F, 0x286C3060, 0x800F0000}};
   char check[1024] = "-12510192830044.667721361245703";
 
   test_debug(decimal, check);
@@ -6212,7 +6212,7 @@ START_TEST(test_debug_ok760) {
 
 START_TEST(test_debug_ok761) {
   // -394888216354110792369663827.27
-  s21_decimal decimal = {{0xC2177C87, 0x4CDE1BD8, 0x7F98633E, 0x80020000}};
+  my_decimal decimal = {{0xC2177C87, 0x4CDE1BD8, 0x7F98633E, 0x80020000}};
   char check[1024] = "-394888216354110792369663827.27";
 
   test_debug(decimal, check);
@@ -6220,7 +6220,7 @@ START_TEST(test_debug_ok761) {
 
 START_TEST(test_debug_ok762) {
   // 394888216354110792369663827.27
-  s21_decimal decimal = {{0xC2177C87, 0x4CDE1BD8, 0x7F98633E, 0x20000}};
+  my_decimal decimal = {{0xC2177C87, 0x4CDE1BD8, 0x7F98633E, 0x20000}};
   char check[1024] = "394888216354110792369663827.27";
 
   test_debug(decimal, check);
@@ -6228,7 +6228,7 @@ START_TEST(test_debug_ok762) {
 
 START_TEST(test_debug_ok763) {
   // 22142496698.827556886549782974
-  s21_decimal decimal = {{0x88E261BE, 0x418F98DB, 0x478BD80F, 0x120000}};
+  my_decimal decimal = {{0x88E261BE, 0x418F98DB, 0x478BD80F, 0x120000}};
   char check[1024] = "22142496698.827556886549782974";
 
   test_debug(decimal, check);
@@ -6236,7 +6236,7 @@ START_TEST(test_debug_ok763) {
 
 START_TEST(test_debug_ok764) {
   // -22142496698.827556886549782974
-  s21_decimal decimal = {{0x88E261BE, 0x418F98DB, 0x478BD80F, 0x80120000}};
+  my_decimal decimal = {{0x88E261BE, 0x418F98DB, 0x478BD80F, 0x80120000}};
   char check[1024] = "-22142496698.827556886549782974";
 
   test_debug(decimal, check);
@@ -6244,7 +6244,7 @@ START_TEST(test_debug_ok764) {
 
 START_TEST(test_debug_ok765) {
   // 565250712.65559445201470864911
-  s21_decimal decimal = {{0x4ADBBE0F, 0x4D062EF1, 0xB6A4716D, 0x140000}};
+  my_decimal decimal = {{0x4ADBBE0F, 0x4D062EF1, 0xB6A4716D, 0x140000}};
   char check[1024] = "565250712.65559445201470864911";
 
   test_debug(decimal, check);
@@ -6252,7 +6252,7 @@ START_TEST(test_debug_ok765) {
 
 START_TEST(test_debug_ok766) {
   // -565250712.65559445201470864911
-  s21_decimal decimal = {{0x4ADBBE0F, 0x4D062EF1, 0xB6A4716D, 0x80140000}};
+  my_decimal decimal = {{0x4ADBBE0F, 0x4D062EF1, 0xB6A4716D, 0x80140000}};
   char check[1024] = "-565250712.65559445201470864911";
 
   test_debug(decimal, check);
@@ -6260,7 +6260,7 @@ START_TEST(test_debug_ok766) {
 
 START_TEST(test_debug_ok767) {
   // -4794680329068369715662.7500503
-  s21_decimal decimal = {{0x83E20DD7, 0x9320D769, 0x9AECAA86, 0x80070000}};
+  my_decimal decimal = {{0x83E20DD7, 0x9320D769, 0x9AECAA86, 0x80070000}};
   char check[1024] = "-4794680329068369715662.7500503";
 
   test_debug(decimal, check);
@@ -6268,7 +6268,7 @@ START_TEST(test_debug_ok767) {
 
 START_TEST(test_debug_ok768) {
   // 4794680329068369715662.7500503
-  s21_decimal decimal = {{0x83E20DD7, 0x9320D769, 0x9AECAA86, 0x70000}};
+  my_decimal decimal = {{0x83E20DD7, 0x9320D769, 0x9AECAA86, 0x70000}};
   char check[1024] = "4794680329068369715662.7500503";
 
   test_debug(decimal, check);
@@ -6276,7 +6276,7 @@ START_TEST(test_debug_ok768) {
 
 START_TEST(test_debug_ok769) {
   // -7068375674488121576568237.3563
-  s21_decimal decimal = {{0xD218C3BB, 0x1CA2AA29, 0xE4643BB3, 0x80040000}};
+  my_decimal decimal = {{0xD218C3BB, 0x1CA2AA29, 0xE4643BB3, 0x80040000}};
   char check[1024] = "-7068375674488121576568237.3563";
 
   test_debug(decimal, check);
@@ -6284,7 +6284,7 @@ START_TEST(test_debug_ok769) {
 
 START_TEST(test_debug_ok770) {
   // 7068375674488121576568237.3563
-  s21_decimal decimal = {{0xD218C3BB, 0x1CA2AA29, 0xE4643BB3, 0x40000}};
+  my_decimal decimal = {{0xD218C3BB, 0x1CA2AA29, 0xE4643BB3, 0x40000}};
   char check[1024] = "7068375674488121576568237.3563";
 
   test_debug(decimal, check);
@@ -6292,7 +6292,7 @@ START_TEST(test_debug_ok770) {
 
 START_TEST(test_debug_ok771) {
   // 71741171459.256625864756341919
-  s21_decimal decimal = {{0x7726AC9F, 0xA3991BDD, 0xE7CEE7F9, 0x120000}};
+  my_decimal decimal = {{0x7726AC9F, 0xA3991BDD, 0xE7CEE7F9, 0x120000}};
   char check[1024] = "71741171459.256625864756341919";
 
   test_debug(decimal, check);
@@ -6300,7 +6300,7 @@ START_TEST(test_debug_ok771) {
 
 START_TEST(test_debug_ok772) {
   // -71741171459.256625864756341919
-  s21_decimal decimal = {{0x7726AC9F, 0xA3991BDD, 0xE7CEE7F9, 0x80120000}};
+  my_decimal decimal = {{0x7726AC9F, 0xA3991BDD, 0xE7CEE7F9, 0x80120000}};
   char check[1024] = "-71741171459.256625864756341919";
 
   test_debug(decimal, check);
@@ -6308,7 +6308,7 @@ START_TEST(test_debug_ok772) {
 
 START_TEST(test_debug_ok773) {
   // -19053780829416342484.472066484
-  s21_decimal decimal = {{0x8F3071B4, 0x773E31A7, 0x3D90EB08, 0x80090000}};
+  my_decimal decimal = {{0x8F3071B4, 0x773E31A7, 0x3D90EB08, 0x80090000}};
   char check[1024] = "-19053780829416342484.472066484";
 
   test_debug(decimal, check);
@@ -6316,7 +6316,7 @@ START_TEST(test_debug_ok773) {
 
 START_TEST(test_debug_ok774) {
   // 19053780829416342484.472066484
-  s21_decimal decimal = {{0x8F3071B4, 0x773E31A7, 0x3D90EB08, 0x90000}};
+  my_decimal decimal = {{0x8F3071B4, 0x773E31A7, 0x3D90EB08, 0x90000}};
   char check[1024] = "19053780829416342484.472066484";
 
   test_debug(decimal, check);
@@ -6324,7 +6324,7 @@ START_TEST(test_debug_ok774) {
 
 START_TEST(test_debug_ok775) {
   // 6406081863262044633.1971339320
-  s21_decimal decimal = {{0x29788438, 0xA264A959, 0xCEFDDE00, 0xA0000}};
+  my_decimal decimal = {{0x29788438, 0xA264A959, 0xCEFDDE00, 0xA0000}};
   char check[1024] = "6406081863262044633.1971339320";
 
   test_debug(decimal, check);
@@ -6332,7 +6332,7 @@ START_TEST(test_debug_ok775) {
 
 START_TEST(test_debug_ok776) {
   // -6406081863262044633.1971339320
-  s21_decimal decimal = {{0x29788438, 0xA264A959, 0xCEFDDE00, 0x800A0000}};
+  my_decimal decimal = {{0x29788438, 0xA264A959, 0xCEFDDE00, 0x800A0000}};
   char check[1024] = "-6406081863262044633.1971339320";
 
   test_debug(decimal, check);
@@ -6340,7 +6340,7 @@ START_TEST(test_debug_ok776) {
 
 START_TEST(test_debug_ok777) {
   // 4059775420291717061.7988249731
-  s21_decimal decimal = {{0xD0C57883, 0x3DE45C09, 0x832DACD9, 0xA0000}};
+  my_decimal decimal = {{0xD0C57883, 0x3DE45C09, 0x832DACD9, 0xA0000}};
   char check[1024] = "4059775420291717061.7988249731";
 
   test_debug(decimal, check);
@@ -6348,7 +6348,7 @@ START_TEST(test_debug_ok777) {
 
 START_TEST(test_debug_ok778) {
   // -4059775420291717061.7988249731
-  s21_decimal decimal = {{0xD0C57883, 0x3DE45C09, 0x832DACD9, 0x800A0000}};
+  my_decimal decimal = {{0xD0C57883, 0x3DE45C09, 0x832DACD9, 0x800A0000}};
   char check[1024] = "-4059775420291717061.7988249731";
 
   test_debug(decimal, check);
@@ -6356,7 +6356,7 @@ START_TEST(test_debug_ok778) {
 
 START_TEST(test_debug_ok779) {
   // 42329986997735627.158516495118
-  s21_decimal decimal = {{0x2435730E, 0x361EB629, 0x88C68B69, 0xC0000}};
+  my_decimal decimal = {{0x2435730E, 0x361EB629, 0x88C68B69, 0xC0000}};
   char check[1024] = "42329986997735627.158516495118";
 
   test_debug(decimal, check);
@@ -6364,7 +6364,7 @@ START_TEST(test_debug_ok779) {
 
 START_TEST(test_debug_ok780) {
   // -42329986997735627.158516495118
-  s21_decimal decimal = {{0x2435730E, 0x361EB629, 0x88C68B69, 0x800C0000}};
+  my_decimal decimal = {{0x2435730E, 0x361EB629, 0x88C68B69, 0x800C0000}};
   char check[1024] = "-42329986997735627.158516495118";
 
   test_debug(decimal, check);
@@ -6372,7 +6372,7 @@ START_TEST(test_debug_ok780) {
 
 START_TEST(test_debug_ok781) {
   // -3384287639039795628.493918822
-  s21_decimal decimal = {{0x6BFA5266, 0x87342255, 0xAEF6AC8, 0x80090000}};
+  my_decimal decimal = {{0x6BFA5266, 0x87342255, 0xAEF6AC8, 0x80090000}};
   char check[1024] = "-3384287639039795628.493918822";
 
   test_debug(decimal, check);
@@ -6380,7 +6380,7 @@ START_TEST(test_debug_ok781) {
 
 START_TEST(test_debug_ok782) {
   // 3384287639039795628.493918822
-  s21_decimal decimal = {{0x6BFA5266, 0x87342255, 0xAEF6AC8, 0x90000}};
+  my_decimal decimal = {{0x6BFA5266, 0x87342255, 0xAEF6AC8, 0x90000}};
   char check[1024] = "3384287639039795628.493918822";
 
   test_debug(decimal, check);
@@ -6388,7 +6388,7 @@ START_TEST(test_debug_ok782) {
 
 START_TEST(test_debug_ok783) {
   // -39.397875316172189294962577429
-  s21_decimal decimal = {{0xF1AE9015, 0x74918C1C, 0x7F4D289C, 0x801B0000}};
+  my_decimal decimal = {{0xF1AE9015, 0x74918C1C, 0x7F4D289C, 0x801B0000}};
   char check[1024] = "-39.397875316172189294962577429";
 
   test_debug(decimal, check);
@@ -6396,7 +6396,7 @@ START_TEST(test_debug_ok783) {
 
 START_TEST(test_debug_ok784) {
   // 39.397875316172189294962577429
-  s21_decimal decimal = {{0xF1AE9015, 0x74918C1C, 0x7F4D289C, 0x1B0000}};
+  my_decimal decimal = {{0xF1AE9015, 0x74918C1C, 0x7F4D289C, 0x1B0000}};
   char check[1024] = "39.397875316172189294962577429";
 
   test_debug(decimal, check);
@@ -6404,7 +6404,7 @@ START_TEST(test_debug_ok784) {
 
 START_TEST(test_debug_ok785) {
   // -6034759423205669715301590589
-  s21_decimal decimal = {{0xA637663D, 0xDA750101, 0x137FD603, 0x80000000}};
+  my_decimal decimal = {{0xA637663D, 0xDA750101, 0x137FD603, 0x80000000}};
   char check[1024] = "-6034759423205669715301590589";
 
   test_debug(decimal, check);
@@ -6412,7 +6412,7 @@ START_TEST(test_debug_ok785) {
 
 START_TEST(test_debug_ok786) {
   // 6034759423205669715301590589
-  s21_decimal decimal = {{0xA637663D, 0xDA750101, 0x137FD603, 0x0}};
+  my_decimal decimal = {{0xA637663D, 0xDA750101, 0x137FD603, 0x0}};
   char check[1024] = "6034759423205669715301590589";
 
   test_debug(decimal, check);
@@ -6420,7 +6420,7 @@ START_TEST(test_debug_ok786) {
 
 START_TEST(test_debug_ok787) {
   // 2327.611635692768350429195325
-  s21_decimal decimal = {{0xF2E32C3D, 0x9B24E809, 0x7855AEF, 0x180000}};
+  my_decimal decimal = {{0xF2E32C3D, 0x9B24E809, 0x7855AEF, 0x180000}};
   char check[1024] = "2327.611635692768350429195325";
 
   test_debug(decimal, check);
@@ -6428,7 +6428,7 @@ START_TEST(test_debug_ok787) {
 
 START_TEST(test_debug_ok788) {
   // -2327.611635692768350429195325
-  s21_decimal decimal = {{0xF2E32C3D, 0x9B24E809, 0x7855AEF, 0x80180000}};
+  my_decimal decimal = {{0xF2E32C3D, 0x9B24E809, 0x7855AEF, 0x80180000}};
   char check[1024] = "-2327.611635692768350429195325";
 
   test_debug(decimal, check);
@@ -6436,7 +6436,7 @@ START_TEST(test_debug_ok788) {
 
 START_TEST(test_debug_ok789) {
   // -322689602.16491973718361438112
-  s21_decimal decimal = {{0x2222F7A0, 0x87483577, 0x6844421E, 0x80140000}};
+  my_decimal decimal = {{0x2222F7A0, 0x87483577, 0x6844421E, 0x80140000}};
   char check[1024] = "-322689602.16491973718361438112";
 
   test_debug(decimal, check);
@@ -6444,7 +6444,7 @@ START_TEST(test_debug_ok789) {
 
 START_TEST(test_debug_ok790) {
   // 322689602.16491973718361438112
-  s21_decimal decimal = {{0x2222F7A0, 0x87483577, 0x6844421E, 0x140000}};
+  my_decimal decimal = {{0x2222F7A0, 0x87483577, 0x6844421E, 0x140000}};
   char check[1024] = "322689602.16491973718361438112";
 
   test_debug(decimal, check);
@@ -6452,7 +6452,7 @@ START_TEST(test_debug_ok790) {
 
 START_TEST(test_debug_ok791) {
   // -491.31300680550654731231588756
-  s21_decimal decimal = {{0xD1127194, 0xBE9CABE6, 0x9EC0759A, 0x801A0000}};
+  my_decimal decimal = {{0xD1127194, 0xBE9CABE6, 0x9EC0759A, 0x801A0000}};
   char check[1024] = "-491.31300680550654731231588756";
 
   test_debug(decimal, check);
@@ -6460,7 +6460,7 @@ START_TEST(test_debug_ok791) {
 
 START_TEST(test_debug_ok792) {
   // 491.31300680550654731231588756
-  s21_decimal decimal = {{0xD1127194, 0xBE9CABE6, 0x9EC0759A, 0x1A0000}};
+  my_decimal decimal = {{0xD1127194, 0xBE9CABE6, 0x9EC0759A, 0x1A0000}};
   char check[1024] = "491.31300680550654731231588756";
 
   test_debug(decimal, check);
@@ -6468,7 +6468,7 @@ START_TEST(test_debug_ok792) {
 
 START_TEST(test_debug_ok793) {
   // 3481122473295054102.2158132402
-  s21_decimal decimal = {{0x4B1C14B2, 0x1E07B3BF, 0x707B2B92, 0xA0000}};
+  my_decimal decimal = {{0x4B1C14B2, 0x1E07B3BF, 0x707B2B92, 0xA0000}};
   char check[1024] = "3481122473295054102.2158132402";
 
   test_debug(decimal, check);
@@ -6476,7 +6476,7 @@ START_TEST(test_debug_ok793) {
 
 START_TEST(test_debug_ok794) {
   // -3481122473295054102.2158132402
-  s21_decimal decimal = {{0x4B1C14B2, 0x1E07B3BF, 0x707B2B92, 0x800A0000}};
+  my_decimal decimal = {{0x4B1C14B2, 0x1E07B3BF, 0x707B2B92, 0x800A0000}};
   char check[1024] = "-3481122473295054102.2158132402";
 
   test_debug(decimal, check);
@@ -6484,7 +6484,7 @@ START_TEST(test_debug_ok794) {
 
 START_TEST(test_debug_ok795) {
   // 134332845798310625573228.33489
-  s21_decimal decimal = {{0xCD06EE51, 0x40E1A7D9, 0x2B67C0A8, 0x50000}};
+  my_decimal decimal = {{0xCD06EE51, 0x40E1A7D9, 0x2B67C0A8, 0x50000}};
   char check[1024] = "134332845798310625573228.33489";
 
   test_debug(decimal, check);
@@ -6492,7 +6492,7 @@ START_TEST(test_debug_ok795) {
 
 START_TEST(test_debug_ok796) {
   // -134332845798310625573228.33489
-  s21_decimal decimal = {{0xCD06EE51, 0x40E1A7D9, 0x2B67C0A8, 0x80050000}};
+  my_decimal decimal = {{0xCD06EE51, 0x40E1A7D9, 0x2B67C0A8, 0x80050000}};
   char check[1024] = "-134332845798310625573228.33489";
 
   test_debug(decimal, check);
@@ -6500,7 +6500,7 @@ START_TEST(test_debug_ok796) {
 
 START_TEST(test_debug_ok797) {
   // 5306276449259.5004085451612801
-  s21_decimal decimal = {{0x50EFE281, 0xC43CB03, 0xAB747D73, 0x100000}};
+  my_decimal decimal = {{0x50EFE281, 0xC43CB03, 0xAB747D73, 0x100000}};
   char check[1024] = "5306276449259.5004085451612801";
 
   test_debug(decimal, check);
@@ -6508,7 +6508,7 @@ START_TEST(test_debug_ok797) {
 
 START_TEST(test_debug_ok798) {
   // -5306276449259.5004085451612801
-  s21_decimal decimal = {{0x50EFE281, 0xC43CB03, 0xAB747D73, 0x80100000}};
+  my_decimal decimal = {{0x50EFE281, 0xC43CB03, 0xAB747D73, 0x80100000}};
   char check[1024] = "-5306276449259.5004085451612801";
 
   test_debug(decimal, check);
@@ -6516,7 +6516,7 @@ START_TEST(test_debug_ok798) {
 
 START_TEST(test_debug_ok799) {
   // -349054.90891906427587598841046
-  s21_decimal decimal = {{0x55BD74D6, 0xD57A433F, 0x70C92534, 0x80170000}};
+  my_decimal decimal = {{0x55BD74D6, 0xD57A433F, 0x70C92534, 0x80170000}};
   char check[1024] = "-349054.90891906427587598841046";
 
   test_debug(decimal, check);
@@ -6524,7 +6524,7 @@ START_TEST(test_debug_ok799) {
 
 START_TEST(test_debug_ok800) {
   // 349054.90891906427587598841046
-  s21_decimal decimal = {{0x55BD74D6, 0xD57A433F, 0x70C92534, 0x170000}};
+  my_decimal decimal = {{0x55BD74D6, 0xD57A433F, 0x70C92534, 0x170000}};
   char check[1024] = "349054.90891906427587598841046";
 
   test_debug(decimal, check);
@@ -6532,7 +6532,7 @@ START_TEST(test_debug_ok800) {
 
 START_TEST(test_debug_ok801) {
   // -2379081685975887.8560671288523
-  s21_decimal decimal = {{0xB504CCCB, 0x3A4EF257, 0x4CDF4D6E, 0x800D0000}};
+  my_decimal decimal = {{0xB504CCCB, 0x3A4EF257, 0x4CDF4D6E, 0x800D0000}};
   char check[1024] = "-2379081685975887.8560671288523";
 
   test_debug(decimal, check);
@@ -6540,7 +6540,7 @@ START_TEST(test_debug_ok801) {
 
 START_TEST(test_debug_ok802) {
   // 2379081685975887.8560671288523
-  s21_decimal decimal = {{0xB504CCCB, 0x3A4EF257, 0x4CDF4D6E, 0xD0000}};
+  my_decimal decimal = {{0xB504CCCB, 0x3A4EF257, 0x4CDF4D6E, 0xD0000}};
   char check[1024] = "2379081685975887.8560671288523";
 
   test_debug(decimal, check);
@@ -6548,7 +6548,7 @@ START_TEST(test_debug_ok802) {
 
 START_TEST(test_debug_ok803) {
   // 9866161.438903573510507501335
-  s21_decimal decimal = {{0x3BF89717, 0x4EBEC222, 0x1FE118F3, 0x150000}};
+  my_decimal decimal = {{0x3BF89717, 0x4EBEC222, 0x1FE118F3, 0x150000}};
   char check[1024] = "9866161.438903573510507501335";
 
   test_debug(decimal, check);
@@ -6556,7 +6556,7 @@ START_TEST(test_debug_ok803) {
 
 START_TEST(test_debug_ok804) {
   // -9866161.438903573510507501335
-  s21_decimal decimal = {{0x3BF89717, 0x4EBEC222, 0x1FE118F3, 0x80150000}};
+  my_decimal decimal = {{0x3BF89717, 0x4EBEC222, 0x1FE118F3, 0x80150000}};
   char check[1024] = "-9866161.438903573510507501335";
 
   test_debug(decimal, check);
@@ -6564,7 +6564,7 @@ START_TEST(test_debug_ok804) {
 
 START_TEST(test_debug_ok805) {
   // -4520363744915042484248869.3979
-  s21_decimal decimal = {{0xE372C4DB, 0x54AF4C2F, 0x920F9290, 0x80040000}};
+  my_decimal decimal = {{0xE372C4DB, 0x54AF4C2F, 0x920F9290, 0x80040000}};
   char check[1024] = "-4520363744915042484248869.3979";
 
   test_debug(decimal, check);
@@ -6572,7 +6572,7 @@ START_TEST(test_debug_ok805) {
 
 START_TEST(test_debug_ok806) {
   // 4520363744915042484248869.3979
-  s21_decimal decimal = {{0xE372C4DB, 0x54AF4C2F, 0x920F9290, 0x40000}};
+  my_decimal decimal = {{0xE372C4DB, 0x54AF4C2F, 0x920F9290, 0x40000}};
   char check[1024] = "4520363744915042484248869.3979";
 
   test_debug(decimal, check);
@@ -6580,7 +6580,7 @@ START_TEST(test_debug_ok806) {
 
 START_TEST(test_debug_ok807) {
   // 39988275074.118625709536458699
-  s21_decimal decimal = {{0x8AEE37CB, 0x77225B51, 0x8135869F, 0x120000}};
+  my_decimal decimal = {{0x8AEE37CB, 0x77225B51, 0x8135869F, 0x120000}};
   char check[1024] = "39988275074.118625709536458699";
 
   test_debug(decimal, check);
@@ -6588,7 +6588,7 @@ START_TEST(test_debug_ok807) {
 
 START_TEST(test_debug_ok808) {
   // -39988275074.118625709536458699
-  s21_decimal decimal = {{0x8AEE37CB, 0x77225B51, 0x8135869F, 0x80120000}};
+  my_decimal decimal = {{0x8AEE37CB, 0x77225B51, 0x8135869F, 0x80120000}};
   char check[1024] = "-39988275074.118625709536458699";
 
   test_debug(decimal, check);
@@ -6596,7 +6596,7 @@ START_TEST(test_debug_ok808) {
 
 START_TEST(test_debug_ok809) {
   // 15280933527.104216793052835964
-  s21_decimal decimal = {{0xA587707C, 0x62785612, 0x3160178A, 0x120000}};
+  my_decimal decimal = {{0xA587707C, 0x62785612, 0x3160178A, 0x120000}};
   char check[1024] = "15280933527.104216793052835964";
 
   test_debug(decimal, check);
@@ -6604,7 +6604,7 @@ START_TEST(test_debug_ok809) {
 
 START_TEST(test_debug_ok810) {
   // -15280933527.104216793052835964
-  s21_decimal decimal = {{0xA587707C, 0x62785612, 0x3160178A, 0x80120000}};
+  my_decimal decimal = {{0xA587707C, 0x62785612, 0x3160178A, 0x80120000}};
   char check[1024] = "-15280933527.104216793052835964";
 
   test_debug(decimal, check);
@@ -6612,7 +6612,7 @@ START_TEST(test_debug_ok810) {
 
 START_TEST(test_debug_ok811) {
   // -4468500505852390731662033825.1
-  s21_decimal decimal = {{0xB12A244B, 0x194F76CE, 0x906291E2, 0x80010000}};
+  my_decimal decimal = {{0xB12A244B, 0x194F76CE, 0x906291E2, 0x80010000}};
   char check[1024] = "-4468500505852390731662033825.1";
 
   test_debug(decimal, check);
@@ -6620,7 +6620,7 @@ START_TEST(test_debug_ok811) {
 
 START_TEST(test_debug_ok812) {
   // 4468500505852390731662033825.1
-  s21_decimal decimal = {{0xB12A244B, 0x194F76CE, 0x906291E2, 0x10000}};
+  my_decimal decimal = {{0xB12A244B, 0x194F76CE, 0x906291E2, 0x10000}};
   char check[1024] = "4468500505852390731662033825.1";
 
   test_debug(decimal, check);
@@ -6628,7 +6628,7 @@ START_TEST(test_debug_ok812) {
 
 START_TEST(test_debug_ok813) {
   // 4749477058558113699682117.3274
-  s21_decimal decimal = {{0x6C21041A, 0x8785C871, 0x9976C0E0, 0x40000}};
+  my_decimal decimal = {{0x6C21041A, 0x8785C871, 0x9976C0E0, 0x40000}};
   char check[1024] = "4749477058558113699682117.3274";
 
   test_debug(decimal, check);
@@ -6636,7 +6636,7 @@ START_TEST(test_debug_ok813) {
 
 START_TEST(test_debug_ok814) {
   // -4749477058558113699682117.3274
-  s21_decimal decimal = {{0x6C21041A, 0x8785C871, 0x9976C0E0, 0x80040000}};
+  my_decimal decimal = {{0x6C21041A, 0x8785C871, 0x9976C0E0, 0x80040000}};
   char check[1024] = "-4749477058558113699682117.3274";
 
   test_debug(decimal, check);
@@ -6644,7 +6644,7 @@ START_TEST(test_debug_ok814) {
 
 START_TEST(test_debug_ok815) {
   // -20707026098623538272047.214167
-  s21_decimal decimal = {{0xACC42E57, 0x1792D0A5, 0x42E87356, 0x80060000}};
+  my_decimal decimal = {{0xACC42E57, 0x1792D0A5, 0x42E87356, 0x80060000}};
   char check[1024] = "-20707026098623538272047.214167";
 
   test_debug(decimal, check);
@@ -6652,7 +6652,7 @@ START_TEST(test_debug_ok815) {
 
 START_TEST(test_debug_ok816) {
   // 20707026098623538272047.214167
-  s21_decimal decimal = {{0xACC42E57, 0x1792D0A5, 0x42E87356, 0x60000}};
+  my_decimal decimal = {{0xACC42E57, 0x1792D0A5, 0x42E87356, 0x60000}};
   char check[1024] = "20707026098623538272047.214167";
 
   test_debug(decimal, check);
@@ -6660,7 +6660,7 @@ START_TEST(test_debug_ok816) {
 
 START_TEST(test_debug_ok817) {
   // 615185080974.44192215807218692
-  s21_decimal decimal = {{0xC392D404, 0x5DA55C86, 0xC6C6EACE, 0x110000}};
+  my_decimal decimal = {{0xC392D404, 0x5DA55C86, 0xC6C6EACE, 0x110000}};
   char check[1024] = "615185080974.44192215807218692";
 
   test_debug(decimal, check);
@@ -6668,7 +6668,7 @@ START_TEST(test_debug_ok817) {
 
 START_TEST(test_debug_ok818) {
   // -615185080974.44192215807218692
-  s21_decimal decimal = {{0xC392D404, 0x5DA55C86, 0xC6C6EACE, 0x80110000}};
+  my_decimal decimal = {{0xC392D404, 0x5DA55C86, 0xC6C6EACE, 0x80110000}};
   char check[1024] = "-615185080974.44192215807218692";
 
   test_debug(decimal, check);
@@ -6676,7 +6676,7 @@ START_TEST(test_debug_ok818) {
 
 START_TEST(test_debug_ok819) {
   // 66430498014144575663164.695097
-  s21_decimal decimal = {{0x2ED12239, 0x4FBCF263, 0xD6A60521, 0x60000}};
+  my_decimal decimal = {{0x2ED12239, 0x4FBCF263, 0xD6A60521, 0x60000}};
   char check[1024] = "66430498014144575663164.695097";
 
   test_debug(decimal, check);
@@ -6684,7 +6684,7 @@ START_TEST(test_debug_ok819) {
 
 START_TEST(test_debug_ok820) {
   // -66430498014144575663164.695097
-  s21_decimal decimal = {{0x2ED12239, 0x4FBCF263, 0xD6A60521, 0x80060000}};
+  my_decimal decimal = {{0x2ED12239, 0x4FBCF263, 0xD6A60521, 0x80060000}};
   char check[1024] = "-66430498014144575663164.695097";
 
   test_debug(decimal, check);
@@ -6692,7 +6692,7 @@ START_TEST(test_debug_ok820) {
 
 START_TEST(test_debug_ok821) {
   // -732542010707.50782240090381965
-  s21_decimal decimal = {{0xAB3A5E8D, 0x3ADA9B17, 0xECB27475, 0x80110000}};
+  my_decimal decimal = {{0xAB3A5E8D, 0x3ADA9B17, 0xECB27475, 0x80110000}};
   char check[1024] = "-732542010707.50782240090381965";
 
   test_debug(decimal, check);
@@ -6700,7 +6700,7 @@ START_TEST(test_debug_ok821) {
 
 START_TEST(test_debug_ok822) {
   // 732542010707.50782240090381965
-  s21_decimal decimal = {{0xAB3A5E8D, 0x3ADA9B17, 0xECB27475, 0x110000}};
+  my_decimal decimal = {{0xAB3A5E8D, 0x3ADA9B17, 0xECB27475, 0x110000}};
   char check[1024] = "732542010707.50782240090381965";
 
   test_debug(decimal, check);
@@ -6708,7 +6708,7 @@ START_TEST(test_debug_ok822) {
 
 START_TEST(test_debug_ok823) {
   // 38128751960634754705.645754634
-  s21_decimal decimal = {{0x6BE5D90A, 0x7E7A8311, 0x7B335D49, 0x90000}};
+  my_decimal decimal = {{0x6BE5D90A, 0x7E7A8311, 0x7B335D49, 0x90000}};
   char check[1024] = "38128751960634754705.645754634";
 
   test_debug(decimal, check);
@@ -6716,7 +6716,7 @@ START_TEST(test_debug_ok823) {
 
 START_TEST(test_debug_ok824) {
   // -38128751960634754705.645754634
-  s21_decimal decimal = {{0x6BE5D90A, 0x7E7A8311, 0x7B335D49, 0x80090000}};
+  my_decimal decimal = {{0x6BE5D90A, 0x7E7A8311, 0x7B335D49, 0x80090000}};
   char check[1024] = "-38128751960634754705.645754634";
 
   test_debug(decimal, check);
@@ -6724,7 +6724,7 @@ START_TEST(test_debug_ok824) {
 
 START_TEST(test_debug_ok825) {
   // -50932806558122830.146140506149
-  s21_decimal decimal = {{0x38220825, 0xE16D6F3, 0xA492A150, 0x800C0000}};
+  my_decimal decimal = {{0x38220825, 0xE16D6F3, 0xA492A150, 0x800C0000}};
   char check[1024] = "-50932806558122830.146140506149";
 
   test_debug(decimal, check);
@@ -6732,7 +6732,7 @@ START_TEST(test_debug_ok825) {
 
 START_TEST(test_debug_ok826) {
   // 50932806558122830.146140506149
-  s21_decimal decimal = {{0x38220825, 0xE16D6F3, 0xA492A150, 0xC0000}};
+  my_decimal decimal = {{0x38220825, 0xE16D6F3, 0xA492A150, 0xC0000}};
   char check[1024] = "50932806558122830.146140506149";
 
   test_debug(decimal, check);
@@ -6740,7 +6740,7 @@ START_TEST(test_debug_ok826) {
 
 START_TEST(test_debug_ok827) {
   // -60538513183207652957763792758
-  s21_decimal decimal = {{0x512DEF76, 0x9D2248DE, 0xC39C48CF, 0x80000000}};
+  my_decimal decimal = {{0x512DEF76, 0x9D2248DE, 0xC39C48CF, 0x80000000}};
   char check[1024] = "-60538513183207652957763792758";
 
   test_debug(decimal, check);
@@ -6748,7 +6748,7 @@ START_TEST(test_debug_ok827) {
 
 START_TEST(test_debug_ok828) {
   // 60538513183207652957763792758
-  s21_decimal decimal = {{0x512DEF76, 0x9D2248DE, 0xC39C48CF, 0x0}};
+  my_decimal decimal = {{0x512DEF76, 0x9D2248DE, 0xC39C48CF, 0x0}};
   char check[1024] = "60538513183207652957763792758";
 
   test_debug(decimal, check);
@@ -6756,7 +6756,7 @@ START_TEST(test_debug_ok828) {
 
 START_TEST(test_debug_ok829) {
   // 28794226455496.466189984474166
-  s21_decimal decimal = {{0x57002436, 0xE7898F0A, 0x5D0A069F, 0xF0000}};
+  my_decimal decimal = {{0x57002436, 0xE7898F0A, 0x5D0A069F, 0xF0000}};
   char check[1024] = "28794226455496.466189984474166";
 
   test_debug(decimal, check);
@@ -6764,7 +6764,7 @@ START_TEST(test_debug_ok829) {
 
 START_TEST(test_debug_ok830) {
   // -28794226455496.466189984474166
-  s21_decimal decimal = {{0x57002436, 0xE7898F0A, 0x5D0A069F, 0x800F0000}};
+  my_decimal decimal = {{0x57002436, 0xE7898F0A, 0x5D0A069F, 0x800F0000}};
   char check[1024] = "-28794226455496.466189984474166";
 
   test_debug(decimal, check);
@@ -6772,7 +6772,7 @@ START_TEST(test_debug_ok830) {
 
 START_TEST(test_debug_ok831) {
   // 9331851834457631884121059.87
-  s21_decimal decimal = {{0x625BC503, 0x2941B7B8, 0x303E9A6, 0x20000}};
+  my_decimal decimal = {{0x625BC503, 0x2941B7B8, 0x303E9A6, 0x20000}};
   char check[1024] = "9331851834457631884121059.87";
 
   test_debug(decimal, check);
@@ -6780,7 +6780,7 @@ START_TEST(test_debug_ok831) {
 
 START_TEST(test_debug_ok832) {
   // -9331851834457631884121059.87
-  s21_decimal decimal = {{0x625BC503, 0x2941B7B8, 0x303E9A6, 0x80020000}};
+  my_decimal decimal = {{0x625BC503, 0x2941B7B8, 0x303E9A6, 0x80020000}};
   char check[1024] = "-9331851834457631884121059.87";
 
   test_debug(decimal, check);
@@ -6788,7 +6788,7 @@ START_TEST(test_debug_ok832) {
 
 START_TEST(test_debug_ok833) {
   // -2089258557261.8254138526571674
-  s21_decimal decimal = {{0xDEDA9C9A, 0x5566DE2F, 0x4381F115, 0x80100000}};
+  my_decimal decimal = {{0xDEDA9C9A, 0x5566DE2F, 0x4381F115, 0x80100000}};
   char check[1024] = "-2089258557261.8254138526571674";
 
   test_debug(decimal, check);
@@ -6796,7 +6796,7 @@ START_TEST(test_debug_ok833) {
 
 START_TEST(test_debug_ok834) {
   // 2089258557261.8254138526571674
-  s21_decimal decimal = {{0xDEDA9C9A, 0x5566DE2F, 0x4381F115, 0x100000}};
+  my_decimal decimal = {{0xDEDA9C9A, 0x5566DE2F, 0x4381F115, 0x100000}};
   char check[1024] = "2089258557261.8254138526571674";
 
   test_debug(decimal, check);
@@ -7695,14 +7695,14 @@ Suite *debug0(void) {
   return s;
 }
 
-void test_debug(s21_decimal decimal, char *check) {
+void test_debug(my_decimal decimal, char *check) {
 #if defined(__DEBUG)
-  s21_print_decimal_bits(decimal);
-  s21_print_decimal_string(decimal);
+  my_print_decimal_bits(decimal);
+  my_print_decimal_string(decimal);
   printf("%s\n", check);
 #endif
 
   char res[1024];
-  s21_decimal_to_string(decimal, res);
+  my_decimal_to_string(decimal, res);
   ck_assert_str_eq(check, res);
 }

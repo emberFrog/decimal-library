@@ -18,8 +18,8 @@ REPORT_DIR = report
 TEST_EXE = test
 GCOV_EXE = gcov_report
 
-MODULES_STATIC_LIBRARY_TEST = s21_decimal_test.a
-MODULES_STATIC_LIBRARY_GCOV = s21_decimal_gcov.a
+MODULES_STATIC_LIBRARY_TEST = my_decimal_test.a
+MODULES_STATIC_LIBRARY_GCOV = my_decimal_gcov.a
 
 LFLAGS= 
 CFLAGS=-Wall -Werror -Wextra -c -std=c11 -pedantic
@@ -52,12 +52,12 @@ ALL_C_H_FILES = $(shell find . -type f | grep "\.(c|h)$$" -E)
 vpath %.c $(ALL_MODULES_DIRS) : $(ALL_TESTS_DIRS)
 vpath %.o $(OBJ_DIR)
 
-all: s21_decimal.a
+all: my_decimal.a
 
-s21_decimal.a: clean
+my_decimal.a: clean
 	$(CC)	$(CFLAGS)	-c	*.c
-	ar	rcs	s21_decimal.a	*.o
-	ranlib	s21_decimal.a
+	ar	rcs	my_decimal.a	*.o
+	ranlib	my_decimal.a
 	rm	*.o
 
 $(TEST_EXE): clean $(OBJ_DIR) $(TESTS_OBJ_DIR) $(MODULES_STATIC_LIBRARY_TEST) $(ALL_TESTS_O)

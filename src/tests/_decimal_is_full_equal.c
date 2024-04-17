@@ -1,9 +1,9 @@
-#include "./../s21_decimal.h"
+#include "./../my_decimal.h"
 #include "./_debug.h"
 
-int test_decimal_is_full_equal(s21_decimal value_1, s21_decimal value_2) {
+int test_decimal_is_full_equal(my_decimal value_1, my_decimal value_2) {
   union {
-    struct s21_decimal d;
+    struct my_decimal d;
     struct {
       uint32_t part0;
       uint32_t part1;
@@ -13,7 +13,7 @@ int test_decimal_is_full_equal(s21_decimal value_1, s21_decimal value_2) {
   } decimal_bytes1;
 
   union {
-    struct s21_decimal d;
+    struct my_decimal d;
     struct {
       uint32_t part0;
       uint32_t part1;

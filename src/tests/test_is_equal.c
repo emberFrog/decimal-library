@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#include "./../s21_decimal.h"
+#include "./../my_decimal.h"
 #include "./test.h"
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -10,9 +10,9 @@
 
 START_TEST(test_is_equal_ok1) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   int check = TEST_COMPARISON_TRUE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -20,9 +20,9 @@ START_TEST(test_is_equal_ok1) {
 
 START_TEST(test_is_equal_ok2) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   int check = TEST_COMPARISON_TRUE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -30,9 +30,9 @@ START_TEST(test_is_equal_ok2) {
 
 START_TEST(test_is_equal_ok3) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -40,9 +40,9 @@ START_TEST(test_is_equal_ok3) {
 
 START_TEST(test_is_equal_ok4) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -50,9 +50,9 @@ START_TEST(test_is_equal_ok4) {
 
 START_TEST(test_is_equal_ok5) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 52818775009509558395695966890
-  s21_decimal decimal2 = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x0}};
+  my_decimal decimal2 = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -60,9 +60,9 @@ START_TEST(test_is_equal_ok5) {
 
 START_TEST(test_is_equal_ok6) {
   // 52818775009509558395695966890
-  s21_decimal decimal1 = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x0}};
+  my_decimal decimal1 = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x0}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -70,9 +70,9 @@ START_TEST(test_is_equal_ok6) {
 
 START_TEST(test_is_equal_ok7) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -52818775009509558395695966890
-  s21_decimal decimal2 = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x80000000}};
+  my_decimal decimal2 = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x80000000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -80,9 +80,9 @@ START_TEST(test_is_equal_ok7) {
 
 START_TEST(test_is_equal_ok8) {
   // -52818775009509558395695966890
-  s21_decimal decimal1 = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x80000000}};
+  my_decimal decimal1 = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x80000000}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -90,9 +90,9 @@ START_TEST(test_is_equal_ok8) {
 
 START_TEST(test_is_equal_ok9) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 52818775009509558395695966891
-  s21_decimal decimal2 = {{0xAAAAAAAB, 0xAAAAAAAA, 0xAAAAAAAA, 0x0}};
+  my_decimal decimal2 = {{0xAAAAAAAB, 0xAAAAAAAA, 0xAAAAAAAA, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -100,9 +100,9 @@ START_TEST(test_is_equal_ok9) {
 
 START_TEST(test_is_equal_ok10) {
   // 52818775009509558395695966891
-  s21_decimal decimal1 = {{0xAAAAAAAB, 0xAAAAAAAA, 0xAAAAAAAA, 0x0}};
+  my_decimal decimal1 = {{0xAAAAAAAB, 0xAAAAAAAA, 0xAAAAAAAA, 0x0}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -110,9 +110,9 @@ START_TEST(test_is_equal_ok10) {
 
 START_TEST(test_is_equal_ok11) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -52818775009509558395695966891
-  s21_decimal decimal2 = {{0xAAAAAAAB, 0xAAAAAAAA, 0xAAAAAAAA, 0x80000000}};
+  my_decimal decimal2 = {{0xAAAAAAAB, 0xAAAAAAAA, 0xAAAAAAAA, 0x80000000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -120,9 +120,9 @@ START_TEST(test_is_equal_ok11) {
 
 START_TEST(test_is_equal_ok12) {
   // -52818775009509558395695966891
-  s21_decimal decimal1 = {{0xAAAAAAAB, 0xAAAAAAAA, 0xAAAAAAAA, 0x80000000}};
+  my_decimal decimal1 = {{0xAAAAAAAB, 0xAAAAAAAA, 0xAAAAAAAA, 0x80000000}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -130,9 +130,9 @@ START_TEST(test_is_equal_ok12) {
 
 START_TEST(test_is_equal_ok13) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 5.281877500950955839569596690
-  s21_decimal decimal2 = {{0x11111112, 0x11111111, 0x11111111, 0x1B0000}};
+  my_decimal decimal2 = {{0x11111112, 0x11111111, 0x11111111, 0x1B0000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -140,9 +140,9 @@ START_TEST(test_is_equal_ok13) {
 
 START_TEST(test_is_equal_ok14) {
   // 5.281877500950955839569596690
-  s21_decimal decimal1 = {{0x11111112, 0x11111111, 0x11111111, 0x1B0000}};
+  my_decimal decimal1 = {{0x11111112, 0x11111111, 0x11111111, 0x1B0000}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -150,9 +150,9 @@ START_TEST(test_is_equal_ok14) {
 
 START_TEST(test_is_equal_ok15) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -5.281877500950955839569596690
-  s21_decimal decimal2 = {{0x11111112, 0x11111111, 0x11111111, 0x801B0000}};
+  my_decimal decimal2 = {{0x11111112, 0x11111111, 0x11111111, 0x801B0000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -160,9 +160,9 @@ START_TEST(test_is_equal_ok15) {
 
 START_TEST(test_is_equal_ok16) {
   // -5.281877500950955839569596690
-  s21_decimal decimal1 = {{0x11111112, 0x11111111, 0x11111111, 0x801B0000}};
+  my_decimal decimal1 = {{0x11111112, 0x11111111, 0x11111111, 0x801B0000}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -170,9 +170,9 @@ START_TEST(test_is_equal_ok16) {
 
 START_TEST(test_is_equal_ok17) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 5281877500950955839569596689
-  s21_decimal decimal2 = {{0x11111111, 0x11111111, 0x11111111, 0x0}};
+  my_decimal decimal2 = {{0x11111111, 0x11111111, 0x11111111, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -180,9 +180,9 @@ START_TEST(test_is_equal_ok17) {
 
 START_TEST(test_is_equal_ok18) {
   // 5281877500950955839569596689
-  s21_decimal decimal1 = {{0x11111111, 0x11111111, 0x11111111, 0x0}};
+  my_decimal decimal1 = {{0x11111111, 0x11111111, 0x11111111, 0x0}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -190,9 +190,9 @@ START_TEST(test_is_equal_ok18) {
 
 START_TEST(test_is_equal_ok19) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -5281877500950955839569596689
-  s21_decimal decimal2 = {{0x11111111, 0x11111111, 0x11111111, 0x80000000}};
+  my_decimal decimal2 = {{0x11111111, 0x11111111, 0x11111111, 0x80000000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -200,9 +200,9 @@ START_TEST(test_is_equal_ok19) {
 
 START_TEST(test_is_equal_ok20) {
   // -5281877500950955839569596689
-  s21_decimal decimal1 = {{0x11111111, 0x11111111, 0x11111111, 0x80000000}};
+  my_decimal decimal1 = {{0x11111111, 0x11111111, 0x11111111, 0x80000000}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -210,9 +210,9 @@ START_TEST(test_is_equal_ok20) {
 
 START_TEST(test_is_equal_ok21) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 5281877500950955839569596689.0
-  s21_decimal decimal2 = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x10000}};
+  my_decimal decimal2 = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x10000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -220,9 +220,9 @@ START_TEST(test_is_equal_ok21) {
 
 START_TEST(test_is_equal_ok22) {
   // 5281877500950955839569596689.0
-  s21_decimal decimal1 = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x10000}};
+  my_decimal decimal1 = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x10000}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -230,9 +230,9 @@ START_TEST(test_is_equal_ok22) {
 
 START_TEST(test_is_equal_ok23) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -5281877500950955839569596689.0
-  s21_decimal decimal2 = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x80010000}};
+  my_decimal decimal2 = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x80010000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -240,9 +240,9 @@ START_TEST(test_is_equal_ok23) {
 
 START_TEST(test_is_equal_ok24) {
   // -5281877500950955839569596689.0
-  s21_decimal decimal1 = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x80010000}};
+  my_decimal decimal1 = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x80010000}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -250,9 +250,9 @@ START_TEST(test_is_equal_ok24) {
 
 START_TEST(test_is_equal_ok25) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 7922816251426433759354395033
-  s21_decimal decimal2 = {{0x99999999, 0x99999999, 0x19999999, 0x0}};
+  my_decimal decimal2 = {{0x99999999, 0x99999999, 0x19999999, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -260,9 +260,9 @@ START_TEST(test_is_equal_ok25) {
 
 START_TEST(test_is_equal_ok26) {
   // 7922816251426433759354395033
-  s21_decimal decimal1 = {{0x99999999, 0x99999999, 0x19999999, 0x0}};
+  my_decimal decimal1 = {{0x99999999, 0x99999999, 0x19999999, 0x0}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -270,9 +270,9 @@ START_TEST(test_is_equal_ok26) {
 
 START_TEST(test_is_equal_ok27) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -7922816251426433759354395033
-  s21_decimal decimal2 = {{0x99999999, 0x99999999, 0x19999999, 0x80000000}};
+  my_decimal decimal2 = {{0x99999999, 0x99999999, 0x19999999, 0x80000000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -280,9 +280,9 @@ START_TEST(test_is_equal_ok27) {
 
 START_TEST(test_is_equal_ok28) {
   // -7922816251426433759354395033
-  s21_decimal decimal1 = {{0x99999999, 0x99999999, 0x19999999, 0x80000000}};
+  my_decimal decimal1 = {{0x99999999, 0x99999999, 0x19999999, 0x80000000}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -290,9 +290,9 @@ START_TEST(test_is_equal_ok28) {
 
 START_TEST(test_is_equal_ok29) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 7922816251426433759354395034
-  s21_decimal decimal2 = {{0x9999999A, 0x99999999, 0x19999999, 0x0}};
+  my_decimal decimal2 = {{0x9999999A, 0x99999999, 0x19999999, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -300,9 +300,9 @@ START_TEST(test_is_equal_ok29) {
 
 START_TEST(test_is_equal_ok30) {
   // 7922816251426433759354395034
-  s21_decimal decimal1 = {{0x9999999A, 0x99999999, 0x19999999, 0x0}};
+  my_decimal decimal1 = {{0x9999999A, 0x99999999, 0x19999999, 0x0}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -310,9 +310,9 @@ START_TEST(test_is_equal_ok30) {
 
 START_TEST(test_is_equal_ok31) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -7922816251426433759354395034
-  s21_decimal decimal2 = {{0x9999999A, 0x99999999, 0x19999999, 0x80000000}};
+  my_decimal decimal2 = {{0x9999999A, 0x99999999, 0x19999999, 0x80000000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -320,9 +320,9 @@ START_TEST(test_is_equal_ok31) {
 
 START_TEST(test_is_equal_ok32) {
   // -7922816251426433759354395034
-  s21_decimal decimal1 = {{0x9999999A, 0x99999999, 0x19999999, 0x80000000}};
+  my_decimal decimal1 = {{0x9999999A, 0x99999999, 0x19999999, 0x80000000}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -330,9 +330,9 @@ START_TEST(test_is_equal_ok32) {
 
 START_TEST(test_is_equal_ok33) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 1.2297829382473034409
-  s21_decimal decimal2 = {{0xAAAAAAA9, 0xAAAAAAAA, 0x0, 0x130000}};
+  my_decimal decimal2 = {{0xAAAAAAA9, 0xAAAAAAAA, 0x0, 0x130000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -340,9 +340,9 @@ START_TEST(test_is_equal_ok33) {
 
 START_TEST(test_is_equal_ok34) {
   // 1.2297829382473034409
-  s21_decimal decimal1 = {{0xAAAAAAA9, 0xAAAAAAAA, 0x0, 0x130000}};
+  my_decimal decimal1 = {{0xAAAAAAA9, 0xAAAAAAAA, 0x0, 0x130000}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -350,9 +350,9 @@ START_TEST(test_is_equal_ok34) {
 
 START_TEST(test_is_equal_ok35) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -1.2297829382473034409
-  s21_decimal decimal2 = {{0xAAAAAAA9, 0xAAAAAAAA, 0x0, 0x80130000}};
+  my_decimal decimal2 = {{0xAAAAAAA9, 0xAAAAAAAA, 0x0, 0x80130000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -360,9 +360,9 @@ START_TEST(test_is_equal_ok35) {
 
 START_TEST(test_is_equal_ok36) {
   // -1.2297829382473034409
-  s21_decimal decimal1 = {{0xAAAAAAA9, 0xAAAAAAAA, 0x0, 0x80130000}};
+  my_decimal decimal1 = {{0xAAAAAAA9, 0xAAAAAAAA, 0x0, 0x80130000}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -370,9 +370,9 @@ START_TEST(test_is_equal_ok36) {
 
 START_TEST(test_is_equal_ok37) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 1.2297829382473034410
-  s21_decimal decimal2 = {{0xAAAAAAAA, 0xAAAAAAAA, 0x0, 0x130000}};
+  my_decimal decimal2 = {{0xAAAAAAAA, 0xAAAAAAAA, 0x0, 0x130000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -380,9 +380,9 @@ START_TEST(test_is_equal_ok37) {
 
 START_TEST(test_is_equal_ok38) {
   // 1.2297829382473034410
-  s21_decimal decimal1 = {{0xAAAAAAAA, 0xAAAAAAAA, 0x0, 0x130000}};
+  my_decimal decimal1 = {{0xAAAAAAAA, 0xAAAAAAAA, 0x0, 0x130000}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -390,9 +390,9 @@ START_TEST(test_is_equal_ok38) {
 
 START_TEST(test_is_equal_ok39) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -1.2297829382473034410
-  s21_decimal decimal2 = {{0xAAAAAAAA, 0xAAAAAAAA, 0x0, 0x80130000}};
+  my_decimal decimal2 = {{0xAAAAAAAA, 0xAAAAAAAA, 0x0, 0x80130000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -400,9 +400,9 @@ START_TEST(test_is_equal_ok39) {
 
 START_TEST(test_is_equal_ok40) {
   // -1.2297829382473034410
-  s21_decimal decimal1 = {{0xAAAAAAAA, 0xAAAAAAAA, 0x0, 0x80130000}};
+  my_decimal decimal1 = {{0xAAAAAAAA, 0xAAAAAAAA, 0x0, 0x80130000}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -410,9 +410,9 @@ START_TEST(test_is_equal_ok40) {
 
 START_TEST(test_is_equal_ok41) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 1.2297829382473034411
-  s21_decimal decimal2 = {{0xAAAAAAAB, 0xAAAAAAAA, 0x0, 0x130000}};
+  my_decimal decimal2 = {{0xAAAAAAAB, 0xAAAAAAAA, 0x0, 0x130000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -420,9 +420,9 @@ START_TEST(test_is_equal_ok41) {
 
 START_TEST(test_is_equal_ok42) {
   // 1.2297829382473034411
-  s21_decimal decimal1 = {{0xAAAAAAAB, 0xAAAAAAAA, 0x0, 0x130000}};
+  my_decimal decimal1 = {{0xAAAAAAAB, 0xAAAAAAAA, 0x0, 0x130000}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -430,9 +430,9 @@ START_TEST(test_is_equal_ok42) {
 
 START_TEST(test_is_equal_ok43) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -1.2297829382473034411
-  s21_decimal decimal2 = {{0xAAAAAAAB, 0xAAAAAAAA, 0x0, 0x80130000}};
+  my_decimal decimal2 = {{0xAAAAAAAB, 0xAAAAAAAA, 0x0, 0x80130000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -440,9 +440,9 @@ START_TEST(test_is_equal_ok43) {
 
 START_TEST(test_is_equal_ok44) {
   // -1.2297829382473034411
-  s21_decimal decimal1 = {{0xAAAAAAAB, 0xAAAAAAAA, 0x0, 0x80130000}};
+  my_decimal decimal1 = {{0xAAAAAAAB, 0xAAAAAAAA, 0x0, 0x80130000}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -450,9 +450,9 @@ START_TEST(test_is_equal_ok44) {
 
 START_TEST(test_is_equal_ok45) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 1
-  s21_decimal decimal2 = {{0x1, 0x0, 0x0, 0x0}};
+  my_decimal decimal2 = {{0x1, 0x0, 0x0, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -460,9 +460,9 @@ START_TEST(test_is_equal_ok45) {
 
 START_TEST(test_is_equal_ok46) {
   // 1
-  s21_decimal decimal1 = {{0x1, 0x0, 0x0, 0x0}};
+  my_decimal decimal1 = {{0x1, 0x0, 0x0, 0x0}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -470,9 +470,9 @@ START_TEST(test_is_equal_ok46) {
 
 START_TEST(test_is_equal_ok47) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -1
-  s21_decimal decimal2 = {{0x1, 0x0, 0x0, 0x80000000}};
+  my_decimal decimal2 = {{0x1, 0x0, 0x0, 0x80000000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -480,9 +480,9 @@ START_TEST(test_is_equal_ok47) {
 
 START_TEST(test_is_equal_ok48) {
   // -1
-  s21_decimal decimal1 = {{0x1, 0x0, 0x0, 0x80000000}};
+  my_decimal decimal1 = {{0x1, 0x0, 0x0, 0x80000000}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -490,9 +490,9 @@ START_TEST(test_is_equal_ok48) {
 
 START_TEST(test_is_equal_ok49) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 1.0
-  s21_decimal decimal2 = {{0xA, 0x0, 0x0, 0x10000}};
+  my_decimal decimal2 = {{0xA, 0x0, 0x0, 0x10000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -500,9 +500,9 @@ START_TEST(test_is_equal_ok49) {
 
 START_TEST(test_is_equal_ok50) {
   // 1.0
-  s21_decimal decimal1 = {{0xA, 0x0, 0x0, 0x10000}};
+  my_decimal decimal1 = {{0xA, 0x0, 0x0, 0x10000}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -510,9 +510,9 @@ START_TEST(test_is_equal_ok50) {
 
 START_TEST(test_is_equal_ok51) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -1.0
-  s21_decimal decimal2 = {{0xA, 0x0, 0x0, 0x80010000}};
+  my_decimal decimal2 = {{0xA, 0x0, 0x0, 0x80010000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -520,9 +520,9 @@ START_TEST(test_is_equal_ok51) {
 
 START_TEST(test_is_equal_ok52) {
   // -1.0
-  s21_decimal decimal1 = {{0xA, 0x0, 0x0, 0x80010000}};
+  my_decimal decimal1 = {{0xA, 0x0, 0x0, 0x80010000}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -530,9 +530,9 @@ START_TEST(test_is_equal_ok52) {
 
 START_TEST(test_is_equal_ok53) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 1.22
-  s21_decimal decimal2 = {{0x7A, 0x0, 0x0, 0x20000}};
+  my_decimal decimal2 = {{0x7A, 0x0, 0x0, 0x20000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -540,9 +540,9 @@ START_TEST(test_is_equal_ok53) {
 
 START_TEST(test_is_equal_ok54) {
   // 1.22
-  s21_decimal decimal1 = {{0x7A, 0x0, 0x0, 0x20000}};
+  my_decimal decimal1 = {{0x7A, 0x0, 0x0, 0x20000}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -550,9 +550,9 @@ START_TEST(test_is_equal_ok54) {
 
 START_TEST(test_is_equal_ok55) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -1.22
-  s21_decimal decimal2 = {{0x7A, 0x0, 0x0, 0x80020000}};
+  my_decimal decimal2 = {{0x7A, 0x0, 0x0, 0x80020000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -560,9 +560,9 @@ START_TEST(test_is_equal_ok55) {
 
 START_TEST(test_is_equal_ok56) {
   // -1.22
-  s21_decimal decimal1 = {{0x7A, 0x0, 0x0, 0x80020000}};
+  my_decimal decimal1 = {{0x7A, 0x0, 0x0, 0x80020000}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -570,9 +570,9 @@ START_TEST(test_is_equal_ok56) {
 
 START_TEST(test_is_equal_ok57) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 1.230001
-  s21_decimal decimal2 = {{0x12C4B1, 0x0, 0x0, 0x60000}};
+  my_decimal decimal2 = {{0x12C4B1, 0x0, 0x0, 0x60000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -580,9 +580,9 @@ START_TEST(test_is_equal_ok57) {
 
 START_TEST(test_is_equal_ok58) {
   // 1.230001
-  s21_decimal decimal1 = {{0x12C4B1, 0x0, 0x0, 0x60000}};
+  my_decimal decimal1 = {{0x12C4B1, 0x0, 0x0, 0x60000}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -590,9 +590,9 @@ START_TEST(test_is_equal_ok58) {
 
 START_TEST(test_is_equal_ok59) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -1.230001
-  s21_decimal decimal2 = {{0x12C4B1, 0x0, 0x0, 0x80060000}};
+  my_decimal decimal2 = {{0x12C4B1, 0x0, 0x0, 0x80060000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -600,9 +600,9 @@ START_TEST(test_is_equal_ok59) {
 
 START_TEST(test_is_equal_ok60) {
   // -1.230001
-  s21_decimal decimal1 = {{0x12C4B1, 0x0, 0x0, 0x80060000}};
+  my_decimal decimal1 = {{0x12C4B1, 0x0, 0x0, 0x80060000}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -610,9 +610,9 @@ START_TEST(test_is_equal_ok60) {
 
 START_TEST(test_is_equal_ok61) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 1.23000
-  s21_decimal decimal2 = {{0x1E078, 0x0, 0x0, 0x50000}};
+  my_decimal decimal2 = {{0x1E078, 0x0, 0x0, 0x50000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -620,9 +620,9 @@ START_TEST(test_is_equal_ok61) {
 
 START_TEST(test_is_equal_ok62) {
   // 1.23000
-  s21_decimal decimal1 = {{0x1E078, 0x0, 0x0, 0x50000}};
+  my_decimal decimal1 = {{0x1E078, 0x0, 0x0, 0x50000}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -630,9 +630,9 @@ START_TEST(test_is_equal_ok62) {
 
 START_TEST(test_is_equal_ok63) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -1.23000
-  s21_decimal decimal2 = {{0x1E078, 0x0, 0x0, 0x80050000}};
+  my_decimal decimal2 = {{0x1E078, 0x0, 0x0, 0x80050000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -640,9 +640,9 @@ START_TEST(test_is_equal_ok63) {
 
 START_TEST(test_is_equal_ok64) {
   // -1.23000
-  s21_decimal decimal1 = {{0x1E078, 0x0, 0x0, 0x80050000}};
+  my_decimal decimal1 = {{0x1E078, 0x0, 0x0, 0x80050000}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -650,9 +650,9 @@ START_TEST(test_is_equal_ok64) {
 
 START_TEST(test_is_equal_ok65) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 1431655765
-  s21_decimal decimal2 = {{0x55555555, 0x0, 0x0, 0x0}};
+  my_decimal decimal2 = {{0x55555555, 0x0, 0x0, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -660,9 +660,9 @@ START_TEST(test_is_equal_ok65) {
 
 START_TEST(test_is_equal_ok66) {
   // 1431655765
-  s21_decimal decimal1 = {{0x55555555, 0x0, 0x0, 0x0}};
+  my_decimal decimal1 = {{0x55555555, 0x0, 0x0, 0x0}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -670,9 +670,9 @@ START_TEST(test_is_equal_ok66) {
 
 START_TEST(test_is_equal_ok67) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -1431655765
-  s21_decimal decimal2 = {{0x55555555, 0x0, 0x0, 0x80000000}};
+  my_decimal decimal2 = {{0x55555555, 0x0, 0x0, 0x80000000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -680,9 +680,9 @@ START_TEST(test_is_equal_ok67) {
 
 START_TEST(test_is_equal_ok68) {
   // -1431655765
-  s21_decimal decimal1 = {{0x55555555, 0x0, 0x0, 0x80000000}};
+  my_decimal decimal1 = {{0x55555555, 0x0, 0x0, 0x80000000}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -690,9 +690,9 @@ START_TEST(test_is_equal_ok68) {
 
 START_TEST(test_is_equal_ok69) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 1431655765.00000
-  s21_decimal decimal2 = {{0x5554D320, 0x8235, 0x0, 0x50000}};
+  my_decimal decimal2 = {{0x5554D320, 0x8235, 0x0, 0x50000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -700,9 +700,9 @@ START_TEST(test_is_equal_ok69) {
 
 START_TEST(test_is_equal_ok70) {
   // 1431655765.00000
-  s21_decimal decimal1 = {{0x5554D320, 0x8235, 0x0, 0x50000}};
+  my_decimal decimal1 = {{0x5554D320, 0x8235, 0x0, 0x50000}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -710,9 +710,9 @@ START_TEST(test_is_equal_ok70) {
 
 START_TEST(test_is_equal_ok71) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -1431655765.00000
-  s21_decimal decimal2 = {{0x5554D320, 0x8235, 0x0, 0x80050000}};
+  my_decimal decimal2 = {{0x5554D320, 0x8235, 0x0, 0x80050000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -720,9 +720,9 @@ START_TEST(test_is_equal_ok71) {
 
 START_TEST(test_is_equal_ok72) {
   // -1431655765.00000
-  s21_decimal decimal1 = {{0x5554D320, 0x8235, 0x0, 0x80050000}};
+  my_decimal decimal1 = {{0x5554D320, 0x8235, 0x0, 0x80050000}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -730,9 +730,9 @@ START_TEST(test_is_equal_ok72) {
 
 START_TEST(test_is_equal_ok73) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 1431655765.000000000000000001
-  s21_decimal decimal2 = {{0xC8340001, 0x8881186E, 0x4A03CE6, 0x120000}};
+  my_decimal decimal2 = {{0xC8340001, 0x8881186E, 0x4A03CE6, 0x120000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -740,9 +740,9 @@ START_TEST(test_is_equal_ok73) {
 
 START_TEST(test_is_equal_ok74) {
   // 1431655765.000000000000000001
-  s21_decimal decimal1 = {{0xC8340001, 0x8881186E, 0x4A03CE6, 0x120000}};
+  my_decimal decimal1 = {{0xC8340001, 0x8881186E, 0x4A03CE6, 0x120000}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -750,9 +750,9 @@ START_TEST(test_is_equal_ok74) {
 
 START_TEST(test_is_equal_ok75) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -1431655765.000000000000000001
-  s21_decimal decimal2 = {{0xC8340001, 0x8881186E, 0x4A03CE6, 0x80120000}};
+  my_decimal decimal2 = {{0xC8340001, 0x8881186E, 0x4A03CE6, 0x80120000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -760,9 +760,9 @@ START_TEST(test_is_equal_ok75) {
 
 START_TEST(test_is_equal_ok76) {
   // -1431655765.000000000000000001
-  s21_decimal decimal1 = {{0xC8340001, 0x8881186E, 0x4A03CE6, 0x80120000}};
+  my_decimal decimal1 = {{0xC8340001, 0x8881186E, 0x4A03CE6, 0x80120000}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -770,9 +770,9 @@ START_TEST(test_is_equal_ok76) {
 
 START_TEST(test_is_equal_ok77) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 1431655764.999999999999999999
-  s21_decimal decimal2 = {{0xC833FFFF, 0x8881186E, 0x4A03CE6, 0x120000}};
+  my_decimal decimal2 = {{0xC833FFFF, 0x8881186E, 0x4A03CE6, 0x120000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -780,9 +780,9 @@ START_TEST(test_is_equal_ok77) {
 
 START_TEST(test_is_equal_ok78) {
   // 1431655764.999999999999999999
-  s21_decimal decimal1 = {{0xC833FFFF, 0x8881186E, 0x4A03CE6, 0x120000}};
+  my_decimal decimal1 = {{0xC833FFFF, 0x8881186E, 0x4A03CE6, 0x120000}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -790,9 +790,9 @@ START_TEST(test_is_equal_ok78) {
 
 START_TEST(test_is_equal_ok79) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -1431655764.999999999999999999
-  s21_decimal decimal2 = {{0xC833FFFF, 0x8881186E, 0x4A03CE6, 0x80120000}};
+  my_decimal decimal2 = {{0xC833FFFF, 0x8881186E, 0x4A03CE6, 0x80120000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -800,9 +800,9 @@ START_TEST(test_is_equal_ok79) {
 
 START_TEST(test_is_equal_ok80) {
   // -1431655764.999999999999999999
-  s21_decimal decimal1 = {{0xC833FFFF, 0x8881186E, 0x4A03CE6, 0x80120000}};
+  my_decimal decimal1 = {{0xC833FFFF, 0x8881186E, 0x4A03CE6, 0x80120000}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -810,9 +810,9 @@ START_TEST(test_is_equal_ok80) {
 
 START_TEST(test_is_equal_ok81) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 0.9999999999999999999999999999
-  s21_decimal decimal2 = {{0xFFFFFFF, 0x3E250261, 0x204FCE5E, 0x1C0000}};
+  my_decimal decimal2 = {{0xFFFFFFF, 0x3E250261, 0x204FCE5E, 0x1C0000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -820,9 +820,9 @@ START_TEST(test_is_equal_ok81) {
 
 START_TEST(test_is_equal_ok82) {
   // 0.9999999999999999999999999999
-  s21_decimal decimal1 = {{0xFFFFFFF, 0x3E250261, 0x204FCE5E, 0x1C0000}};
+  my_decimal decimal1 = {{0xFFFFFFF, 0x3E250261, 0x204FCE5E, 0x1C0000}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -830,9 +830,9 @@ START_TEST(test_is_equal_ok82) {
 
 START_TEST(test_is_equal_ok83) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -0.9999999999999999999999999999
-  s21_decimal decimal2 = {{0xFFFFFFF, 0x3E250261, 0x204FCE5E, 0x801C0000}};
+  my_decimal decimal2 = {{0xFFFFFFF, 0x3E250261, 0x204FCE5E, 0x801C0000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -840,9 +840,9 @@ START_TEST(test_is_equal_ok83) {
 
 START_TEST(test_is_equal_ok84) {
   // -0.9999999999999999999999999999
-  s21_decimal decimal1 = {{0xFFFFFFF, 0x3E250261, 0x204FCE5E, 0x801C0000}};
+  my_decimal decimal1 = {{0xFFFFFFF, 0x3E250261, 0x204FCE5E, 0x801C0000}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -850,9 +850,9 @@ START_TEST(test_is_equal_ok84) {
 
 START_TEST(test_is_equal_ok85) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 0.0000000000000000000000000001
-  s21_decimal decimal2 = {{0x1, 0x0, 0x0, 0x1C0000}};
+  my_decimal decimal2 = {{0x1, 0x0, 0x0, 0x1C0000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -860,9 +860,9 @@ START_TEST(test_is_equal_ok85) {
 
 START_TEST(test_is_equal_ok86) {
   // 0.0000000000000000000000000001
-  s21_decimal decimal1 = {{0x1, 0x0, 0x0, 0x1C0000}};
+  my_decimal decimal1 = {{0x1, 0x0, 0x0, 0x1C0000}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -870,9 +870,9 @@ START_TEST(test_is_equal_ok86) {
 
 START_TEST(test_is_equal_ok87) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -0.0000000000000000000000000001
-  s21_decimal decimal2 = {{0x1, 0x0, 0x0, 0x801C0000}};
+  my_decimal decimal2 = {{0x1, 0x0, 0x0, 0x801C0000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -880,9 +880,9 @@ START_TEST(test_is_equal_ok87) {
 
 START_TEST(test_is_equal_ok88) {
   // -0.0000000000000000000000000001
-  s21_decimal decimal1 = {{0x1, 0x0, 0x0, 0x801C0000}};
+  my_decimal decimal1 = {{0x1, 0x0, 0x0, 0x801C0000}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -890,9 +890,9 @@ START_TEST(test_is_equal_ok88) {
 
 START_TEST(test_is_equal_ok89) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 0
-  s21_decimal decimal2 = {{0x0, 0x0, 0x0, 0x0}};
+  my_decimal decimal2 = {{0x0, 0x0, 0x0, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -900,9 +900,9 @@ START_TEST(test_is_equal_ok89) {
 
 START_TEST(test_is_equal_ok90) {
   // 0
-  s21_decimal decimal1 = {{0x0, 0x0, 0x0, 0x0}};
+  my_decimal decimal1 = {{0x0, 0x0, 0x0, 0x0}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -910,9 +910,9 @@ START_TEST(test_is_equal_ok90) {
 
 START_TEST(test_is_equal_ok91) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -0
-  s21_decimal decimal2 = {{0x0, 0x0, 0x0, 0x80000000}};
+  my_decimal decimal2 = {{0x0, 0x0, 0x0, 0x80000000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -920,9 +920,9 @@ START_TEST(test_is_equal_ok91) {
 
 START_TEST(test_is_equal_ok92) {
   // -0
-  s21_decimal decimal1 = {{0x0, 0x0, 0x0, 0x80000000}};
+  my_decimal decimal1 = {{0x0, 0x0, 0x0, 0x80000000}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -930,9 +930,9 @@ START_TEST(test_is_equal_ok92) {
 
 START_TEST(test_is_equal_ok93) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -0.00000000000000
-  s21_decimal decimal2 = {{0x0, 0x0, 0x0, 0x800E0000}};
+  my_decimal decimal2 = {{0x0, 0x0, 0x0, 0x800E0000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -940,9 +940,9 @@ START_TEST(test_is_equal_ok93) {
 
 START_TEST(test_is_equal_ok94) {
   // -0.00000000000000
-  s21_decimal decimal1 = {{0x0, 0x0, 0x0, 0x800E0000}};
+  my_decimal decimal1 = {{0x0, 0x0, 0x0, 0x800E0000}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -950,9 +950,9 @@ START_TEST(test_is_equal_ok94) {
 
 START_TEST(test_is_equal_ok95) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 0.00000000000000
-  s21_decimal decimal2 = {{0x0, 0x0, 0x0, 0xE0000}};
+  my_decimal decimal2 = {{0x0, 0x0, 0x0, 0xE0000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -960,9 +960,9 @@ START_TEST(test_is_equal_ok95) {
 
 START_TEST(test_is_equal_ok96) {
   // 0.00000000000000
-  s21_decimal decimal1 = {{0x0, 0x0, 0x0, 0xE0000}};
+  my_decimal decimal1 = {{0x0, 0x0, 0x0, 0xE0000}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -970,9 +970,9 @@ START_TEST(test_is_equal_ok96) {
 
 START_TEST(test_is_equal_ok97) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -0.0000000000000000000000000000
-  s21_decimal decimal2 = {{0x0, 0x0, 0x0, 0x801C0000}};
+  my_decimal decimal2 = {{0x0, 0x0, 0x0, 0x801C0000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -980,9 +980,9 @@ START_TEST(test_is_equal_ok97) {
 
 START_TEST(test_is_equal_ok98) {
   // -0.0000000000000000000000000000
-  s21_decimal decimal1 = {{0x0, 0x0, 0x0, 0x801C0000}};
+  my_decimal decimal1 = {{0x0, 0x0, 0x0, 0x801C0000}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -990,9 +990,9 @@ START_TEST(test_is_equal_ok98) {
 
 START_TEST(test_is_equal_ok99) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 0.0000000000000000000000000000
-  s21_decimal decimal2 = {{0x0, 0x0, 0x0, 0x1C0000}};
+  my_decimal decimal2 = {{0x0, 0x0, 0x0, 0x1C0000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1000,9 +1000,9 @@ START_TEST(test_is_equal_ok99) {
 
 START_TEST(test_is_equal_ok100) {
   // 0.0000000000000000000000000000
-  s21_decimal decimal1 = {{0x0, 0x0, 0x0, 0x1C0000}};
+  my_decimal decimal1 = {{0x0, 0x0, 0x0, 0x1C0000}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1010,9 +1010,9 @@ START_TEST(test_is_equal_ok100) {
 
 START_TEST(test_is_equal_ok101) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -305820564510.46084593589468994
-  s21_decimal decimal2 = {{0x64B0BF42, 0x2A3886D9, 0x62D0E25A, 0x80110000}};
+  my_decimal decimal2 = {{0x64B0BF42, 0x2A3886D9, 0x62D0E25A, 0x80110000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1020,9 +1020,9 @@ START_TEST(test_is_equal_ok101) {
 
 START_TEST(test_is_equal_ok102) {
   // -305820564510.46084593589468994
-  s21_decimal decimal1 = {{0x64B0BF42, 0x2A3886D9, 0x62D0E25A, 0x80110000}};
+  my_decimal decimal1 = {{0x64B0BF42, 0x2A3886D9, 0x62D0E25A, 0x80110000}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1030,9 +1030,9 @@ START_TEST(test_is_equal_ok102) {
 
 START_TEST(test_is_equal_ok103) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 305820564510.46084593589468994
-  s21_decimal decimal2 = {{0x64B0BF42, 0x2A3886D9, 0x62D0E25A, 0x110000}};
+  my_decimal decimal2 = {{0x64B0BF42, 0x2A3886D9, 0x62D0E25A, 0x110000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1040,9 +1040,9 @@ START_TEST(test_is_equal_ok103) {
 
 START_TEST(test_is_equal_ok104) {
   // 305820564510.46084593589468994
-  s21_decimal decimal1 = {{0x64B0BF42, 0x2A3886D9, 0x62D0E25A, 0x110000}};
+  my_decimal decimal1 = {{0x64B0BF42, 0x2A3886D9, 0x62D0E25A, 0x110000}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1050,9 +1050,9 @@ START_TEST(test_is_equal_ok104) {
 
 START_TEST(test_is_equal_ok105) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 5077779.6717425679610094186071
-  s21_decimal decimal2 = {{0xA15E6E57, 0xC0C562E8, 0xA41268B3, 0x160000}};
+  my_decimal decimal2 = {{0xA15E6E57, 0xC0C562E8, 0xA41268B3, 0x160000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1060,9 +1060,9 @@ START_TEST(test_is_equal_ok105) {
 
 START_TEST(test_is_equal_ok106) {
   // 5077779.6717425679610094186071
-  s21_decimal decimal1 = {{0xA15E6E57, 0xC0C562E8, 0xA41268B3, 0x160000}};
+  my_decimal decimal1 = {{0xA15E6E57, 0xC0C562E8, 0xA41268B3, 0x160000}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1070,9 +1070,9 @@ START_TEST(test_is_equal_ok106) {
 
 START_TEST(test_is_equal_ok107) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -5077779.6717425679610094186071
-  s21_decimal decimal2 = {{0xA15E6E57, 0xC0C562E8, 0xA41268B3, 0x80160000}};
+  my_decimal decimal2 = {{0xA15E6E57, 0xC0C562E8, 0xA41268B3, 0x80160000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1080,9 +1080,9 @@ START_TEST(test_is_equal_ok107) {
 
 START_TEST(test_is_equal_ok108) {
   // -5077779.6717425679610094186071
-  s21_decimal decimal1 = {{0xA15E6E57, 0xC0C562E8, 0xA41268B3, 0x80160000}};
+  my_decimal decimal1 = {{0xA15E6E57, 0xC0C562E8, 0xA41268B3, 0x80160000}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1090,9 +1090,9 @@ START_TEST(test_is_equal_ok108) {
 
 START_TEST(test_is_equal_ok109) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // 20786105945010.405849433600269
-  s21_decimal decimal2 = {{0x48D7710D, 0x279AE1C0, 0x4329DD25, 0xF0000}};
+  my_decimal decimal2 = {{0x48D7710D, 0x279AE1C0, 0x4329DD25, 0xF0000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1100,9 +1100,9 @@ START_TEST(test_is_equal_ok109) {
 
 START_TEST(test_is_equal_ok110) {
   // 20786105945010.405849433600269
-  s21_decimal decimal1 = {{0x48D7710D, 0x279AE1C0, 0x4329DD25, 0xF0000}};
+  my_decimal decimal1 = {{0x48D7710D, 0x279AE1C0, 0x4329DD25, 0xF0000}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1110,9 +1110,9 @@ START_TEST(test_is_equal_ok110) {
 
 START_TEST(test_is_equal_ok111) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -20786105945010.405849433600269
-  s21_decimal decimal2 = {{0x48D7710D, 0x279AE1C0, 0x4329DD25, 0x800F0000}};
+  my_decimal decimal2 = {{0x48D7710D, 0x279AE1C0, 0x4329DD25, 0x800F0000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1120,9 +1120,9 @@ START_TEST(test_is_equal_ok111) {
 
 START_TEST(test_is_equal_ok112) {
   // -20786105945010.405849433600269
-  s21_decimal decimal1 = {{0x48D7710D, 0x279AE1C0, 0x4329DD25, 0x800F0000}};
+  my_decimal decimal1 = {{0x48D7710D, 0x279AE1C0, 0x4329DD25, 0x800F0000}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1130,9 +1130,9 @@ START_TEST(test_is_equal_ok112) {
 
 START_TEST(test_is_equal_ok113) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1140,9 +1140,9 @@ START_TEST(test_is_equal_ok113) {
 
 START_TEST(test_is_equal_ok114) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
   // -79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1150,9 +1150,9 @@ START_TEST(test_is_equal_ok114) {
 
 START_TEST(test_is_equal_ok115) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   int check = TEST_COMPARISON_TRUE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1160,9 +1160,9 @@ START_TEST(test_is_equal_ok115) {
 
 START_TEST(test_is_equal_ok116) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   int check = TEST_COMPARISON_TRUE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1170,9 +1170,9 @@ START_TEST(test_is_equal_ok116) {
 
 START_TEST(test_is_equal_ok117) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 52818775009509558395695966890
-  s21_decimal decimal2 = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x0}};
+  my_decimal decimal2 = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1180,9 +1180,9 @@ START_TEST(test_is_equal_ok117) {
 
 START_TEST(test_is_equal_ok118) {
   // 52818775009509558395695966890
-  s21_decimal decimal1 = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x0}};
+  my_decimal decimal1 = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x0}};
   // -79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1190,9 +1190,9 @@ START_TEST(test_is_equal_ok118) {
 
 START_TEST(test_is_equal_ok119) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -52818775009509558395695966890
-  s21_decimal decimal2 = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x80000000}};
+  my_decimal decimal2 = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x80000000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1200,9 +1200,9 @@ START_TEST(test_is_equal_ok119) {
 
 START_TEST(test_is_equal_ok120) {
   // -52818775009509558395695966890
-  s21_decimal decimal1 = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x80000000}};
+  my_decimal decimal1 = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x80000000}};
   // -79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1210,9 +1210,9 @@ START_TEST(test_is_equal_ok120) {
 
 START_TEST(test_is_equal_ok121) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 52818775009509558395695966891
-  s21_decimal decimal2 = {{0xAAAAAAAB, 0xAAAAAAAA, 0xAAAAAAAA, 0x0}};
+  my_decimal decimal2 = {{0xAAAAAAAB, 0xAAAAAAAA, 0xAAAAAAAA, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1220,9 +1220,9 @@ START_TEST(test_is_equal_ok121) {
 
 START_TEST(test_is_equal_ok122) {
   // 52818775009509558395695966891
-  s21_decimal decimal1 = {{0xAAAAAAAB, 0xAAAAAAAA, 0xAAAAAAAA, 0x0}};
+  my_decimal decimal1 = {{0xAAAAAAAB, 0xAAAAAAAA, 0xAAAAAAAA, 0x0}};
   // -79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1230,9 +1230,9 @@ START_TEST(test_is_equal_ok122) {
 
 START_TEST(test_is_equal_ok123) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -52818775009509558395695966891
-  s21_decimal decimal2 = {{0xAAAAAAAB, 0xAAAAAAAA, 0xAAAAAAAA, 0x80000000}};
+  my_decimal decimal2 = {{0xAAAAAAAB, 0xAAAAAAAA, 0xAAAAAAAA, 0x80000000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1240,9 +1240,9 @@ START_TEST(test_is_equal_ok123) {
 
 START_TEST(test_is_equal_ok124) {
   // -52818775009509558395695966891
-  s21_decimal decimal1 = {{0xAAAAAAAB, 0xAAAAAAAA, 0xAAAAAAAA, 0x80000000}};
+  my_decimal decimal1 = {{0xAAAAAAAB, 0xAAAAAAAA, 0xAAAAAAAA, 0x80000000}};
   // -79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1250,9 +1250,9 @@ START_TEST(test_is_equal_ok124) {
 
 START_TEST(test_is_equal_ok125) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 5.281877500950955839569596690
-  s21_decimal decimal2 = {{0x11111112, 0x11111111, 0x11111111, 0x1B0000}};
+  my_decimal decimal2 = {{0x11111112, 0x11111111, 0x11111111, 0x1B0000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1260,9 +1260,9 @@ START_TEST(test_is_equal_ok125) {
 
 START_TEST(test_is_equal_ok126) {
   // 5.281877500950955839569596690
-  s21_decimal decimal1 = {{0x11111112, 0x11111111, 0x11111111, 0x1B0000}};
+  my_decimal decimal1 = {{0x11111112, 0x11111111, 0x11111111, 0x1B0000}};
   // -79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1270,9 +1270,9 @@ START_TEST(test_is_equal_ok126) {
 
 START_TEST(test_is_equal_ok127) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -5.281877500950955839569596690
-  s21_decimal decimal2 = {{0x11111112, 0x11111111, 0x11111111, 0x801B0000}};
+  my_decimal decimal2 = {{0x11111112, 0x11111111, 0x11111111, 0x801B0000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1280,9 +1280,9 @@ START_TEST(test_is_equal_ok127) {
 
 START_TEST(test_is_equal_ok128) {
   // -5.281877500950955839569596690
-  s21_decimal decimal1 = {{0x11111112, 0x11111111, 0x11111111, 0x801B0000}};
+  my_decimal decimal1 = {{0x11111112, 0x11111111, 0x11111111, 0x801B0000}};
   // -79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1290,9 +1290,9 @@ START_TEST(test_is_equal_ok128) {
 
 START_TEST(test_is_equal_ok129) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 5281877500950955839569596689
-  s21_decimal decimal2 = {{0x11111111, 0x11111111, 0x11111111, 0x0}};
+  my_decimal decimal2 = {{0x11111111, 0x11111111, 0x11111111, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1300,9 +1300,9 @@ START_TEST(test_is_equal_ok129) {
 
 START_TEST(test_is_equal_ok130) {
   // 5281877500950955839569596689
-  s21_decimal decimal1 = {{0x11111111, 0x11111111, 0x11111111, 0x0}};
+  my_decimal decimal1 = {{0x11111111, 0x11111111, 0x11111111, 0x0}};
   // -79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1310,9 +1310,9 @@ START_TEST(test_is_equal_ok130) {
 
 START_TEST(test_is_equal_ok131) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -5281877500950955839569596689
-  s21_decimal decimal2 = {{0x11111111, 0x11111111, 0x11111111, 0x80000000}};
+  my_decimal decimal2 = {{0x11111111, 0x11111111, 0x11111111, 0x80000000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1320,9 +1320,9 @@ START_TEST(test_is_equal_ok131) {
 
 START_TEST(test_is_equal_ok132) {
   // -5281877500950955839569596689
-  s21_decimal decimal1 = {{0x11111111, 0x11111111, 0x11111111, 0x80000000}};
+  my_decimal decimal1 = {{0x11111111, 0x11111111, 0x11111111, 0x80000000}};
   // -79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1330,9 +1330,9 @@ START_TEST(test_is_equal_ok132) {
 
 START_TEST(test_is_equal_ok133) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 5281877500950955839569596689.0
-  s21_decimal decimal2 = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x10000}};
+  my_decimal decimal2 = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x10000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1340,9 +1340,9 @@ START_TEST(test_is_equal_ok133) {
 
 START_TEST(test_is_equal_ok134) {
   // 5281877500950955839569596689.0
-  s21_decimal decimal1 = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x10000}};
+  my_decimal decimal1 = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x10000}};
   // -79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1350,9 +1350,9 @@ START_TEST(test_is_equal_ok134) {
 
 START_TEST(test_is_equal_ok135) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -5281877500950955839569596689.0
-  s21_decimal decimal2 = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x80010000}};
+  my_decimal decimal2 = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x80010000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1360,9 +1360,9 @@ START_TEST(test_is_equal_ok135) {
 
 START_TEST(test_is_equal_ok136) {
   // -5281877500950955839569596689.0
-  s21_decimal decimal1 = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x80010000}};
+  my_decimal decimal1 = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x80010000}};
   // -79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1370,9 +1370,9 @@ START_TEST(test_is_equal_ok136) {
 
 START_TEST(test_is_equal_ok137) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 7922816251426433759354395033
-  s21_decimal decimal2 = {{0x99999999, 0x99999999, 0x19999999, 0x0}};
+  my_decimal decimal2 = {{0x99999999, 0x99999999, 0x19999999, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1380,9 +1380,9 @@ START_TEST(test_is_equal_ok137) {
 
 START_TEST(test_is_equal_ok138) {
   // 7922816251426433759354395033
-  s21_decimal decimal1 = {{0x99999999, 0x99999999, 0x19999999, 0x0}};
+  my_decimal decimal1 = {{0x99999999, 0x99999999, 0x19999999, 0x0}};
   // -79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1390,9 +1390,9 @@ START_TEST(test_is_equal_ok138) {
 
 START_TEST(test_is_equal_ok139) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -7922816251426433759354395033
-  s21_decimal decimal2 = {{0x99999999, 0x99999999, 0x19999999, 0x80000000}};
+  my_decimal decimal2 = {{0x99999999, 0x99999999, 0x19999999, 0x80000000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1400,9 +1400,9 @@ START_TEST(test_is_equal_ok139) {
 
 START_TEST(test_is_equal_ok140) {
   // -7922816251426433759354395033
-  s21_decimal decimal1 = {{0x99999999, 0x99999999, 0x19999999, 0x80000000}};
+  my_decimal decimal1 = {{0x99999999, 0x99999999, 0x19999999, 0x80000000}};
   // -79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1410,9 +1410,9 @@ START_TEST(test_is_equal_ok140) {
 
 START_TEST(test_is_equal_ok141) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 7922816251426433759354395034
-  s21_decimal decimal2 = {{0x9999999A, 0x99999999, 0x19999999, 0x0}};
+  my_decimal decimal2 = {{0x9999999A, 0x99999999, 0x19999999, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1420,9 +1420,9 @@ START_TEST(test_is_equal_ok141) {
 
 START_TEST(test_is_equal_ok142) {
   // 7922816251426433759354395034
-  s21_decimal decimal1 = {{0x9999999A, 0x99999999, 0x19999999, 0x0}};
+  my_decimal decimal1 = {{0x9999999A, 0x99999999, 0x19999999, 0x0}};
   // -79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1430,9 +1430,9 @@ START_TEST(test_is_equal_ok142) {
 
 START_TEST(test_is_equal_ok143) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -7922816251426433759354395034
-  s21_decimal decimal2 = {{0x9999999A, 0x99999999, 0x19999999, 0x80000000}};
+  my_decimal decimal2 = {{0x9999999A, 0x99999999, 0x19999999, 0x80000000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1440,9 +1440,9 @@ START_TEST(test_is_equal_ok143) {
 
 START_TEST(test_is_equal_ok144) {
   // -7922816251426433759354395034
-  s21_decimal decimal1 = {{0x9999999A, 0x99999999, 0x19999999, 0x80000000}};
+  my_decimal decimal1 = {{0x9999999A, 0x99999999, 0x19999999, 0x80000000}};
   // -79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1450,9 +1450,9 @@ START_TEST(test_is_equal_ok144) {
 
 START_TEST(test_is_equal_ok145) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 1.2297829382473034409
-  s21_decimal decimal2 = {{0xAAAAAAA9, 0xAAAAAAAA, 0x0, 0x130000}};
+  my_decimal decimal2 = {{0xAAAAAAA9, 0xAAAAAAAA, 0x0, 0x130000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1460,9 +1460,9 @@ START_TEST(test_is_equal_ok145) {
 
 START_TEST(test_is_equal_ok146) {
   // 1.2297829382473034409
-  s21_decimal decimal1 = {{0xAAAAAAA9, 0xAAAAAAAA, 0x0, 0x130000}};
+  my_decimal decimal1 = {{0xAAAAAAA9, 0xAAAAAAAA, 0x0, 0x130000}};
   // -79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1470,9 +1470,9 @@ START_TEST(test_is_equal_ok146) {
 
 START_TEST(test_is_equal_ok147) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -1.2297829382473034409
-  s21_decimal decimal2 = {{0xAAAAAAA9, 0xAAAAAAAA, 0x0, 0x80130000}};
+  my_decimal decimal2 = {{0xAAAAAAA9, 0xAAAAAAAA, 0x0, 0x80130000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1480,9 +1480,9 @@ START_TEST(test_is_equal_ok147) {
 
 START_TEST(test_is_equal_ok148) {
   // -1.2297829382473034409
-  s21_decimal decimal1 = {{0xAAAAAAA9, 0xAAAAAAAA, 0x0, 0x80130000}};
+  my_decimal decimal1 = {{0xAAAAAAA9, 0xAAAAAAAA, 0x0, 0x80130000}};
   // -79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1490,9 +1490,9 @@ START_TEST(test_is_equal_ok148) {
 
 START_TEST(test_is_equal_ok149) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 1.2297829382473034410
-  s21_decimal decimal2 = {{0xAAAAAAAA, 0xAAAAAAAA, 0x0, 0x130000}};
+  my_decimal decimal2 = {{0xAAAAAAAA, 0xAAAAAAAA, 0x0, 0x130000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1500,9 +1500,9 @@ START_TEST(test_is_equal_ok149) {
 
 START_TEST(test_is_equal_ok150) {
   // 1.2297829382473034410
-  s21_decimal decimal1 = {{0xAAAAAAAA, 0xAAAAAAAA, 0x0, 0x130000}};
+  my_decimal decimal1 = {{0xAAAAAAAA, 0xAAAAAAAA, 0x0, 0x130000}};
   // -79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1510,9 +1510,9 @@ START_TEST(test_is_equal_ok150) {
 
 START_TEST(test_is_equal_ok151) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -1.2297829382473034410
-  s21_decimal decimal2 = {{0xAAAAAAAA, 0xAAAAAAAA, 0x0, 0x80130000}};
+  my_decimal decimal2 = {{0xAAAAAAAA, 0xAAAAAAAA, 0x0, 0x80130000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1520,9 +1520,9 @@ START_TEST(test_is_equal_ok151) {
 
 START_TEST(test_is_equal_ok152) {
   // -1.2297829382473034410
-  s21_decimal decimal1 = {{0xAAAAAAAA, 0xAAAAAAAA, 0x0, 0x80130000}};
+  my_decimal decimal1 = {{0xAAAAAAAA, 0xAAAAAAAA, 0x0, 0x80130000}};
   // -79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1530,9 +1530,9 @@ START_TEST(test_is_equal_ok152) {
 
 START_TEST(test_is_equal_ok153) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 1.2297829382473034411
-  s21_decimal decimal2 = {{0xAAAAAAAB, 0xAAAAAAAA, 0x0, 0x130000}};
+  my_decimal decimal2 = {{0xAAAAAAAB, 0xAAAAAAAA, 0x0, 0x130000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1540,9 +1540,9 @@ START_TEST(test_is_equal_ok153) {
 
 START_TEST(test_is_equal_ok154) {
   // 1.2297829382473034411
-  s21_decimal decimal1 = {{0xAAAAAAAB, 0xAAAAAAAA, 0x0, 0x130000}};
+  my_decimal decimal1 = {{0xAAAAAAAB, 0xAAAAAAAA, 0x0, 0x130000}};
   // -79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1550,9 +1550,9 @@ START_TEST(test_is_equal_ok154) {
 
 START_TEST(test_is_equal_ok155) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -1.2297829382473034411
-  s21_decimal decimal2 = {{0xAAAAAAAB, 0xAAAAAAAA, 0x0, 0x80130000}};
+  my_decimal decimal2 = {{0xAAAAAAAB, 0xAAAAAAAA, 0x0, 0x80130000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1560,9 +1560,9 @@ START_TEST(test_is_equal_ok155) {
 
 START_TEST(test_is_equal_ok156) {
   // -1.2297829382473034411
-  s21_decimal decimal1 = {{0xAAAAAAAB, 0xAAAAAAAA, 0x0, 0x80130000}};
+  my_decimal decimal1 = {{0xAAAAAAAB, 0xAAAAAAAA, 0x0, 0x80130000}};
   // -79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1570,9 +1570,9 @@ START_TEST(test_is_equal_ok156) {
 
 START_TEST(test_is_equal_ok157) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 1
-  s21_decimal decimal2 = {{0x1, 0x0, 0x0, 0x0}};
+  my_decimal decimal2 = {{0x1, 0x0, 0x0, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1580,9 +1580,9 @@ START_TEST(test_is_equal_ok157) {
 
 START_TEST(test_is_equal_ok158) {
   // 1
-  s21_decimal decimal1 = {{0x1, 0x0, 0x0, 0x0}};
+  my_decimal decimal1 = {{0x1, 0x0, 0x0, 0x0}};
   // -79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1590,9 +1590,9 @@ START_TEST(test_is_equal_ok158) {
 
 START_TEST(test_is_equal_ok159) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -1
-  s21_decimal decimal2 = {{0x1, 0x0, 0x0, 0x80000000}};
+  my_decimal decimal2 = {{0x1, 0x0, 0x0, 0x80000000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1600,9 +1600,9 @@ START_TEST(test_is_equal_ok159) {
 
 START_TEST(test_is_equal_ok160) {
   // -1
-  s21_decimal decimal1 = {{0x1, 0x0, 0x0, 0x80000000}};
+  my_decimal decimal1 = {{0x1, 0x0, 0x0, 0x80000000}};
   // -79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1610,9 +1610,9 @@ START_TEST(test_is_equal_ok160) {
 
 START_TEST(test_is_equal_ok161) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 1.0
-  s21_decimal decimal2 = {{0xA, 0x0, 0x0, 0x10000}};
+  my_decimal decimal2 = {{0xA, 0x0, 0x0, 0x10000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1620,9 +1620,9 @@ START_TEST(test_is_equal_ok161) {
 
 START_TEST(test_is_equal_ok162) {
   // 1.0
-  s21_decimal decimal1 = {{0xA, 0x0, 0x0, 0x10000}};
+  my_decimal decimal1 = {{0xA, 0x0, 0x0, 0x10000}};
   // -79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1630,9 +1630,9 @@ START_TEST(test_is_equal_ok162) {
 
 START_TEST(test_is_equal_ok163) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -1.0
-  s21_decimal decimal2 = {{0xA, 0x0, 0x0, 0x80010000}};
+  my_decimal decimal2 = {{0xA, 0x0, 0x0, 0x80010000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1640,9 +1640,9 @@ START_TEST(test_is_equal_ok163) {
 
 START_TEST(test_is_equal_ok164) {
   // -1.0
-  s21_decimal decimal1 = {{0xA, 0x0, 0x0, 0x80010000}};
+  my_decimal decimal1 = {{0xA, 0x0, 0x0, 0x80010000}};
   // -79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1650,9 +1650,9 @@ START_TEST(test_is_equal_ok164) {
 
 START_TEST(test_is_equal_ok165) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 1.22
-  s21_decimal decimal2 = {{0x7A, 0x0, 0x0, 0x20000}};
+  my_decimal decimal2 = {{0x7A, 0x0, 0x0, 0x20000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1660,9 +1660,9 @@ START_TEST(test_is_equal_ok165) {
 
 START_TEST(test_is_equal_ok166) {
   // 1.22
-  s21_decimal decimal1 = {{0x7A, 0x0, 0x0, 0x20000}};
+  my_decimal decimal1 = {{0x7A, 0x0, 0x0, 0x20000}};
   // -79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1670,9 +1670,9 @@ START_TEST(test_is_equal_ok166) {
 
 START_TEST(test_is_equal_ok167) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -1.22
-  s21_decimal decimal2 = {{0x7A, 0x0, 0x0, 0x80020000}};
+  my_decimal decimal2 = {{0x7A, 0x0, 0x0, 0x80020000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1680,9 +1680,9 @@ START_TEST(test_is_equal_ok167) {
 
 START_TEST(test_is_equal_ok168) {
   // -1.22
-  s21_decimal decimal1 = {{0x7A, 0x0, 0x0, 0x80020000}};
+  my_decimal decimal1 = {{0x7A, 0x0, 0x0, 0x80020000}};
   // -79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1690,9 +1690,9 @@ START_TEST(test_is_equal_ok168) {
 
 START_TEST(test_is_equal_ok169) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 1.230001
-  s21_decimal decimal2 = {{0x12C4B1, 0x0, 0x0, 0x60000}};
+  my_decimal decimal2 = {{0x12C4B1, 0x0, 0x0, 0x60000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1700,9 +1700,9 @@ START_TEST(test_is_equal_ok169) {
 
 START_TEST(test_is_equal_ok170) {
   // 1.230001
-  s21_decimal decimal1 = {{0x12C4B1, 0x0, 0x0, 0x60000}};
+  my_decimal decimal1 = {{0x12C4B1, 0x0, 0x0, 0x60000}};
   // -79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1710,9 +1710,9 @@ START_TEST(test_is_equal_ok170) {
 
 START_TEST(test_is_equal_ok171) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -1.230001
-  s21_decimal decimal2 = {{0x12C4B1, 0x0, 0x0, 0x80060000}};
+  my_decimal decimal2 = {{0x12C4B1, 0x0, 0x0, 0x80060000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1720,9 +1720,9 @@ START_TEST(test_is_equal_ok171) {
 
 START_TEST(test_is_equal_ok172) {
   // -1.230001
-  s21_decimal decimal1 = {{0x12C4B1, 0x0, 0x0, 0x80060000}};
+  my_decimal decimal1 = {{0x12C4B1, 0x0, 0x0, 0x80060000}};
   // -79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1730,9 +1730,9 @@ START_TEST(test_is_equal_ok172) {
 
 START_TEST(test_is_equal_ok173) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 1.23000
-  s21_decimal decimal2 = {{0x1E078, 0x0, 0x0, 0x50000}};
+  my_decimal decimal2 = {{0x1E078, 0x0, 0x0, 0x50000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1740,9 +1740,9 @@ START_TEST(test_is_equal_ok173) {
 
 START_TEST(test_is_equal_ok174) {
   // 1.23000
-  s21_decimal decimal1 = {{0x1E078, 0x0, 0x0, 0x50000}};
+  my_decimal decimal1 = {{0x1E078, 0x0, 0x0, 0x50000}};
   // -79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1750,9 +1750,9 @@ START_TEST(test_is_equal_ok174) {
 
 START_TEST(test_is_equal_ok175) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -1.23000
-  s21_decimal decimal2 = {{0x1E078, 0x0, 0x0, 0x80050000}};
+  my_decimal decimal2 = {{0x1E078, 0x0, 0x0, 0x80050000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1760,9 +1760,9 @@ START_TEST(test_is_equal_ok175) {
 
 START_TEST(test_is_equal_ok176) {
   // -1.23000
-  s21_decimal decimal1 = {{0x1E078, 0x0, 0x0, 0x80050000}};
+  my_decimal decimal1 = {{0x1E078, 0x0, 0x0, 0x80050000}};
   // -79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1770,9 +1770,9 @@ START_TEST(test_is_equal_ok176) {
 
 START_TEST(test_is_equal_ok177) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 1431655765
-  s21_decimal decimal2 = {{0x55555555, 0x0, 0x0, 0x0}};
+  my_decimal decimal2 = {{0x55555555, 0x0, 0x0, 0x0}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1780,9 +1780,9 @@ START_TEST(test_is_equal_ok177) {
 
 START_TEST(test_is_equal_ok178) {
   // 1431655765
-  s21_decimal decimal1 = {{0x55555555, 0x0, 0x0, 0x0}};
+  my_decimal decimal1 = {{0x55555555, 0x0, 0x0, 0x0}};
   // -79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1790,9 +1790,9 @@ START_TEST(test_is_equal_ok178) {
 
 START_TEST(test_is_equal_ok179) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -1431655765
-  s21_decimal decimal2 = {{0x55555555, 0x0, 0x0, 0x80000000}};
+  my_decimal decimal2 = {{0x55555555, 0x0, 0x0, 0x80000000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1800,9 +1800,9 @@ START_TEST(test_is_equal_ok179) {
 
 START_TEST(test_is_equal_ok180) {
   // -1431655765
-  s21_decimal decimal1 = {{0x55555555, 0x0, 0x0, 0x80000000}};
+  my_decimal decimal1 = {{0x55555555, 0x0, 0x0, 0x80000000}};
   // -79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1810,9 +1810,9 @@ START_TEST(test_is_equal_ok180) {
 
 START_TEST(test_is_equal_ok181) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 1431655765.00000
-  s21_decimal decimal2 = {{0x5554D320, 0x8235, 0x0, 0x50000}};
+  my_decimal decimal2 = {{0x5554D320, 0x8235, 0x0, 0x50000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1820,9 +1820,9 @@ START_TEST(test_is_equal_ok181) {
 
 START_TEST(test_is_equal_ok182) {
   // 1431655765.00000
-  s21_decimal decimal1 = {{0x5554D320, 0x8235, 0x0, 0x50000}};
+  my_decimal decimal1 = {{0x5554D320, 0x8235, 0x0, 0x50000}};
   // -79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1830,9 +1830,9 @@ START_TEST(test_is_equal_ok182) {
 
 START_TEST(test_is_equal_ok183) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -1431655765.00000
-  s21_decimal decimal2 = {{0x5554D320, 0x8235, 0x0, 0x80050000}};
+  my_decimal decimal2 = {{0x5554D320, 0x8235, 0x0, 0x80050000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1840,9 +1840,9 @@ START_TEST(test_is_equal_ok183) {
 
 START_TEST(test_is_equal_ok184) {
   // -1431655765.00000
-  s21_decimal decimal1 = {{0x5554D320, 0x8235, 0x0, 0x80050000}};
+  my_decimal decimal1 = {{0x5554D320, 0x8235, 0x0, 0x80050000}};
   // -79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1850,9 +1850,9 @@ START_TEST(test_is_equal_ok184) {
 
 START_TEST(test_is_equal_ok185) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 1431655765.000000000000000001
-  s21_decimal decimal2 = {{0xC8340001, 0x8881186E, 0x4A03CE6, 0x120000}};
+  my_decimal decimal2 = {{0xC8340001, 0x8881186E, 0x4A03CE6, 0x120000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1860,9 +1860,9 @@ START_TEST(test_is_equal_ok185) {
 
 START_TEST(test_is_equal_ok186) {
   // 1431655765.000000000000000001
-  s21_decimal decimal1 = {{0xC8340001, 0x8881186E, 0x4A03CE6, 0x120000}};
+  my_decimal decimal1 = {{0xC8340001, 0x8881186E, 0x4A03CE6, 0x120000}};
   // -79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1870,9 +1870,9 @@ START_TEST(test_is_equal_ok186) {
 
 START_TEST(test_is_equal_ok187) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -1431655765.000000000000000001
-  s21_decimal decimal2 = {{0xC8340001, 0x8881186E, 0x4A03CE6, 0x80120000}};
+  my_decimal decimal2 = {{0xC8340001, 0x8881186E, 0x4A03CE6, 0x80120000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1880,9 +1880,9 @@ START_TEST(test_is_equal_ok187) {
 
 START_TEST(test_is_equal_ok188) {
   // -1431655765.000000000000000001
-  s21_decimal decimal1 = {{0xC8340001, 0x8881186E, 0x4A03CE6, 0x80120000}};
+  my_decimal decimal1 = {{0xC8340001, 0x8881186E, 0x4A03CE6, 0x80120000}};
   // -79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1890,9 +1890,9 @@ START_TEST(test_is_equal_ok188) {
 
 START_TEST(test_is_equal_ok189) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 1431655764.999999999999999999
-  s21_decimal decimal2 = {{0xC833FFFF, 0x8881186E, 0x4A03CE6, 0x120000}};
+  my_decimal decimal2 = {{0xC833FFFF, 0x8881186E, 0x4A03CE6, 0x120000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1900,9 +1900,9 @@ START_TEST(test_is_equal_ok189) {
 
 START_TEST(test_is_equal_ok190) {
   // 1431655764.999999999999999999
-  s21_decimal decimal1 = {{0xC833FFFF, 0x8881186E, 0x4A03CE6, 0x120000}};
+  my_decimal decimal1 = {{0xC833FFFF, 0x8881186E, 0x4A03CE6, 0x120000}};
   // -79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1910,9 +1910,9 @@ START_TEST(test_is_equal_ok190) {
 
 START_TEST(test_is_equal_ok191) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -1431655764.999999999999999999
-  s21_decimal decimal2 = {{0xC833FFFF, 0x8881186E, 0x4A03CE6, 0x80120000}};
+  my_decimal decimal2 = {{0xC833FFFF, 0x8881186E, 0x4A03CE6, 0x80120000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1920,9 +1920,9 @@ START_TEST(test_is_equal_ok191) {
 
 START_TEST(test_is_equal_ok192) {
   // -1431655764.999999999999999999
-  s21_decimal decimal1 = {{0xC833FFFF, 0x8881186E, 0x4A03CE6, 0x80120000}};
+  my_decimal decimal1 = {{0xC833FFFF, 0x8881186E, 0x4A03CE6, 0x80120000}};
   // -79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1930,9 +1930,9 @@ START_TEST(test_is_equal_ok192) {
 
 START_TEST(test_is_equal_ok193) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 0.9999999999999999999999999999
-  s21_decimal decimal2 = {{0xFFFFFFF, 0x3E250261, 0x204FCE5E, 0x1C0000}};
+  my_decimal decimal2 = {{0xFFFFFFF, 0x3E250261, 0x204FCE5E, 0x1C0000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1940,9 +1940,9 @@ START_TEST(test_is_equal_ok193) {
 
 START_TEST(test_is_equal_ok194) {
   // 0.9999999999999999999999999999
-  s21_decimal decimal1 = {{0xFFFFFFF, 0x3E250261, 0x204FCE5E, 0x1C0000}};
+  my_decimal decimal1 = {{0xFFFFFFF, 0x3E250261, 0x204FCE5E, 0x1C0000}};
   // -79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1950,9 +1950,9 @@ START_TEST(test_is_equal_ok194) {
 
 START_TEST(test_is_equal_ok195) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -0.9999999999999999999999999999
-  s21_decimal decimal2 = {{0xFFFFFFF, 0x3E250261, 0x204FCE5E, 0x801C0000}};
+  my_decimal decimal2 = {{0xFFFFFFF, 0x3E250261, 0x204FCE5E, 0x801C0000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1960,9 +1960,9 @@ START_TEST(test_is_equal_ok195) {
 
 START_TEST(test_is_equal_ok196) {
   // -0.9999999999999999999999999999
-  s21_decimal decimal1 = {{0xFFFFFFF, 0x3E250261, 0x204FCE5E, 0x801C0000}};
+  my_decimal decimal1 = {{0xFFFFFFF, 0x3E250261, 0x204FCE5E, 0x801C0000}};
   // -79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1970,9 +1970,9 @@ START_TEST(test_is_equal_ok196) {
 
 START_TEST(test_is_equal_ok197) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // 0.0000000000000000000000000001
-  s21_decimal decimal2 = {{0x1, 0x0, 0x0, 0x1C0000}};
+  my_decimal decimal2 = {{0x1, 0x0, 0x0, 0x1C0000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1980,9 +1980,9 @@ START_TEST(test_is_equal_ok197) {
 
 START_TEST(test_is_equal_ok198) {
   // 0.0000000000000000000000000001
-  s21_decimal decimal1 = {{0x1, 0x0, 0x0, 0x1C0000}};
+  my_decimal decimal1 = {{0x1, 0x0, 0x0, 0x1C0000}};
   // -79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -1990,9 +1990,9 @@ START_TEST(test_is_equal_ok198) {
 
 START_TEST(test_is_equal_ok199) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   // -0.0000000000000000000000000001
-  s21_decimal decimal2 = {{0x1, 0x0, 0x0, 0x801C0000}};
+  my_decimal decimal2 = {{0x1, 0x0, 0x0, 0x801C0000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -2000,9 +2000,9 @@ START_TEST(test_is_equal_ok199) {
 
 START_TEST(test_is_equal_ok200) {
   // -0.0000000000000000000000000001
-  s21_decimal decimal1 = {{0x1, 0x0, 0x0, 0x801C0000}};
+  my_decimal decimal1 = {{0x1, 0x0, 0x0, 0x801C0000}};
   // -79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  my_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
   int check = TEST_COMPARISON_FALSE;
 
   test_is_equal(decimal1, decimal2, check);
@@ -2218,16 +2218,16 @@ Suite *is_equal_suite1(void) {
   return s;
 }
 
-void test_is_equal(s21_decimal decimal1, s21_decimal decimal2, int check) {
-  int code = s21_is_equal(decimal1, decimal2);
+void test_is_equal(my_decimal decimal1, my_decimal decimal2, int check) {
+  int code = my_is_equal(decimal1, decimal2);
 
 #if defined(__DEBUG)
   printf("---------------------------------\n");
   printf("Tests:\n");
-  s21_print_decimal_bits(decimal1);
-  s21_print_decimal_string(decimal1);
-  s21_print_decimal_bits(decimal2);
-  s21_print_decimal_string(decimal2);
+  my_print_decimal_bits(decimal1);
+  my_print_decimal_string(decimal1);
+  my_print_decimal_bits(decimal2);
+  my_print_decimal_string(decimal2);
   printf("Check: %d\n", check);
   printf("Result: %d\n", code);
   printf("---------------------------------\n");

@@ -1,6 +1,6 @@
 #include <stdlib.h>
 
-int s21_random_int(int min, int max) {
+int my_random_int(int min, int max) {
   if (min < 0) {
     min = 0;
   }

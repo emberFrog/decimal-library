@@ -1,19 +1,19 @@
-#include "./../s21_decimal.h"
+#include "./../my_decimal.h"
 #include "./_debug.h"
 
-int test_decimal_get_sign(s21_decimal value) {
+int test_decimal_get_sign(my_decimal value) {
   test_decimal_bytes decimal_bytes;
   decimal_bytes.d = value;
   return decimal_bytes.parts.sign;
 }
 
-int test_decimal_get_power(s21_decimal value) {
+int test_decimal_get_power(my_decimal value) {
   test_decimal_bytes decimal_bytes;
   decimal_bytes.d = value;
   return decimal_bytes.parts.power;
 }
 
-int test_is_correct_decimal(s21_decimal decimal) {
+int test_is_correct_decimal(my_decimal decimal) {
   int code = 1;
   test_decimal_bytes decimal_bytes;
   decimal_bytes.d = decimal;

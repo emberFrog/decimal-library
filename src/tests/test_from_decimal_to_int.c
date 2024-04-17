@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "./../s21_decimal.h"
+#include "./../my_decimal.h"
 #include "./test.h"
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -11,8 +11,8 @@
  * * * * * * * * * * * * * */
 START_TEST(test_from_decimal_to_int_fail_manual1) {
   // 792281625.14264337593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x140000}};
-  int code = s21_from_decimal_to_int(decimal, NULL);
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x140000}};
+  int code = my_from_decimal_to_int(decimal, NULL);
 
   ck_assert_int_eq(code, TEST_CONVERSION_ERROR);
 }
@@ -21,9 +21,9 @@ START_TEST(test_from_decimal_to_int_fail_manual2) {
   // степень 154 (показатель степени должен быть от 0 до 28)
   // биты 0-15 не нули
   // биты 24-30 не нули
-  s21_decimal decimal = {{0, 0, 0, 1000000000}};
+  my_decimal decimal = {{0, 0, 0, 1000000000}};
   int result;
-  int code = s21_from_decimal_to_int(decimal, &result);
+  int code = my_from_decimal_to_int(decimal, &result);
 
   ck_assert_int_eq(code, TEST_CONVERSION_ERROR);
 }
@@ -31,9 +31,9 @@ END_TEST
 
 START_TEST(test_from_decimal_to_int_fail_manual3) {
   // степень 29 (показатель степени должен быть от 0 до 28)
-  s21_decimal decimal = {{-1, 0, 0, 0x1D0000}};
+  my_decimal decimal = {{-1, 0, 0, 0x1D0000}};
   int result;
-  int code = s21_from_decimal_to_int(decimal, &result);
+  int code = my_from_decimal_to_int(decimal, &result);
 
   ck_assert_int_eq(code, TEST_CONVERSION_ERROR);
 }
@@ -41,9 +41,9 @@ END_TEST
 
 START_TEST(test_from_decimal_to_int_fail_manual4) {
   // степень 29 (показатель степени должен быть от 0 до 28)
-  s21_decimal decimal = {{0, 0, 0, 0x1D0000}};
+  my_decimal decimal = {{0, 0, 0, 0x1D0000}};
   int result;
-  int code = s21_from_decimal_to_int(decimal, &result);
+  int code = my_from_decimal_to_int(decimal, &result);
 
   ck_assert_int_eq(code, TEST_CONVERSION_ERROR);
 }
@@ -51,9 +51,9 @@ END_TEST
 
 START_TEST(test_from_decimal_to_int_fail_manual5) {
   // степень 28 (что корректно), но биты 0-15 не нули (младший бит)
-  s21_decimal decimal = {{-1, 0, 0, 0x1C0001}};
+  my_decimal decimal = {{-1, 0, 0, 0x1C0001}};
   int result;
-  int code = s21_from_decimal_to_int(decimal, &result);
+  int code = my_from_decimal_to_int(decimal, &result);
 
   ck_assert_int_eq(code, TEST_CONVERSION_ERROR);
 }
@@ -61,9 +61,9 @@ END_TEST
 
 START_TEST(test_from_decimal_to_int_fail_manual6) {
   // степень 28 (что корректно), но биты 0-15 не нули (старший бит)
-  s21_decimal decimal = {{-1, 0, 0, 0x1C8000}};
+  my_decimal decimal = {{-1, 0, 0, 0x1C8000}};
   int result;
-  int code = s21_from_decimal_to_int(decimal, &result);
+  int code = my_from_decimal_to_int(decimal, &result);
 
   ck_assert_int_eq(code, TEST_CONVERSION_ERROR);
 }
@@ -71,9 +71,9 @@ END_TEST
 
 START_TEST(test_from_decimal_to_int_fail_manual7) {
   // степень 28 (что корректно), но биты 24-30 не нули (младший бит)
-  s21_decimal decimal = {{-1, 0, 0, 0x11C0000}};
+  my_decimal decimal = {{-1, 0, 0, 0x11C0000}};
   int result;
-  int code = s21_from_decimal_to_int(decimal, &result);
+  int code = my_from_decimal_to_int(decimal, &result);
 
   ck_assert_int_eq(code, TEST_CONVERSION_ERROR);
 }
@@ -81,9 +81,9 @@ END_TEST
 
 START_TEST(test_from_decimal_to_int_fail_manual8) {
   // степень 28 (что корректно), но биты 24-30 не нули (старший бит)
-  s21_decimal decimal = {{-1, 0, 0, 0x401C0000}};
+  my_decimal decimal = {{-1, 0, 0, 0x401C0000}};
   int result;
-  int code = s21_from_decimal_to_int(decimal, &result);
+  int code = my_from_decimal_to_int(decimal, &result);
 
   ck_assert_int_eq(code, TEST_CONVERSION_ERROR);
 }
@@ -91,9 +91,9 @@ END_TEST
 
 START_TEST(test_from_decimal_to_int_fail_manual9) {
   // Просто все единицы
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF}};
   int result;
-  int code = s21_from_decimal_to_int(decimal, &result);
+  int code = my_from_decimal_to_int(decimal, &result);
 
   ck_assert_int_eq(code, TEST_CONVERSION_ERROR);
 }
@@ -106,7 +106,7 @@ END_TEST
 
 START_TEST(test_from_decimal_to_int_ok1) {
   // 792281625.14264337593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x140000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x140000}};
   int check = 792281625;
 
   test_from_decimal_to_int(decimal, check);
@@ -114,7 +114,7 @@ START_TEST(test_from_decimal_to_int_ok1) {
 
 START_TEST(test_from_decimal_to_int_ok2) {
   // -792281625.14264337593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80140000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80140000}};
   int check = -792281625;
 
   test_from_decimal_to_int(decimal, check);
@@ -122,7 +122,7 @@ START_TEST(test_from_decimal_to_int_ok2) {
 
 START_TEST(test_from_decimal_to_int_ok3) {
   // 79228162.514264337593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x150000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x150000}};
   int check = 79228162;
 
   test_from_decimal_to_int(decimal, check);
@@ -130,7 +130,7 @@ START_TEST(test_from_decimal_to_int_ok3) {
 
 START_TEST(test_from_decimal_to_int_ok4) {
   // -79228162.514264337593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80150000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80150000}};
   int check = -79228162;
 
   test_from_decimal_to_int(decimal, check);
@@ -138,7 +138,7 @@ START_TEST(test_from_decimal_to_int_ok4) {
 
 START_TEST(test_from_decimal_to_int_ok5) {
   // 7922816.2514264337593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x160000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x160000}};
   int check = 7922816;
 
   test_from_decimal_to_int(decimal, check);
@@ -146,7 +146,7 @@ START_TEST(test_from_decimal_to_int_ok5) {
 
 START_TEST(test_from_decimal_to_int_ok6) {
   // -7922816.2514264337593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80160000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80160000}};
   int check = -7922816;
 
   test_from_decimal_to_int(decimal, check);
@@ -154,7 +154,7 @@ START_TEST(test_from_decimal_to_int_ok6) {
 
 START_TEST(test_from_decimal_to_int_ok7) {
   // 792281.62514264337593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x170000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x170000}};
   int check = 792281;
 
   test_from_decimal_to_int(decimal, check);
@@ -162,7 +162,7 @@ START_TEST(test_from_decimal_to_int_ok7) {
 
 START_TEST(test_from_decimal_to_int_ok8) {
   // -792281.62514264337593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80170000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80170000}};
   int check = -792281;
 
   test_from_decimal_to_int(decimal, check);
@@ -170,7 +170,7 @@ START_TEST(test_from_decimal_to_int_ok8) {
 
 START_TEST(test_from_decimal_to_int_ok9) {
   // 79228.162514264337593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x180000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x180000}};
   int check = 79228;
 
   test_from_decimal_to_int(decimal, check);
@@ -178,7 +178,7 @@ START_TEST(test_from_decimal_to_int_ok9) {
 
 START_TEST(test_from_decimal_to_int_ok10) {
   // -79228.162514264337593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80180000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80180000}};
   int check = -79228;
 
   test_from_decimal_to_int(decimal, check);
@@ -186,7 +186,7 @@ START_TEST(test_from_decimal_to_int_ok10) {
 
 START_TEST(test_from_decimal_to_int_ok11) {
   // 7922.8162514264337593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x190000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x190000}};
   int check = 7922;
 
   test_from_decimal_to_int(decimal, check);
@@ -194,7 +194,7 @@ START_TEST(test_from_decimal_to_int_ok11) {
 
 START_TEST(test_from_decimal_to_int_ok12) {
   // -7922.8162514264337593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80190000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80190000}};
   int check = -7922;
 
   test_from_decimal_to_int(decimal, check);
@@ -202,7 +202,7 @@ START_TEST(test_from_decimal_to_int_ok12) {
 
 START_TEST(test_from_decimal_to_int_ok13) {
   // 792.28162514264337593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x1A0000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x1A0000}};
   int check = 792;
 
   test_from_decimal_to_int(decimal, check);
@@ -210,7 +210,7 @@ START_TEST(test_from_decimal_to_int_ok13) {
 
 START_TEST(test_from_decimal_to_int_ok14) {
   // -792.28162514264337593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x801A0000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x801A0000}};
   int check = -792;
 
   test_from_decimal_to_int(decimal, check);
@@ -218,7 +218,7 @@ START_TEST(test_from_decimal_to_int_ok14) {
 
 START_TEST(test_from_decimal_to_int_ok15) {
   // 79.228162514264337593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x1B0000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x1B0000}};
   int check = 79;
 
   test_from_decimal_to_int(decimal, check);
@@ -226,7 +226,7 @@ START_TEST(test_from_decimal_to_int_ok15) {
 
 START_TEST(test_from_decimal_to_int_ok16) {
   // -79.228162514264337593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x801B0000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x801B0000}};
   int check = -79;
 
   test_from_decimal_to_int(decimal, check);
@@ -234,7 +234,7 @@ START_TEST(test_from_decimal_to_int_ok16) {
 
 START_TEST(test_from_decimal_to_int_ok17) {
   // 7.9228162514264337593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x1C0000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x1C0000}};
   int check = 7;
 
   test_from_decimal_to_int(decimal, check);
@@ -242,7 +242,7 @@ START_TEST(test_from_decimal_to_int_ok17) {
 
 START_TEST(test_from_decimal_to_int_ok18) {
   // -7.9228162514264337593543950335
-  s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x801C0000}};
+  my_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x801C0000}};
   int check = -7;
 
   test_from_decimal_to_int(decimal, check);
@@ -250,7 +250,7 @@ START_TEST(test_from_decimal_to_int_ok18) {
 
 START_TEST(test_from_decimal_to_int_ok19) {
   // 792281625.14264337593543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x140000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x140000}};
   int check = 792281625;
 
   test_from_decimal_to_int(decimal, check);
@@ -258,7 +258,7 @@ START_TEST(test_from_decimal_to_int_ok19) {
 
 START_TEST(test_from_decimal_to_int_ok20) {
   // -792281625.14264337593543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80140000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80140000}};
   int check = -792281625;
 
   test_from_decimal_to_int(decimal, check);
@@ -266,7 +266,7 @@ START_TEST(test_from_decimal_to_int_ok20) {
 
 START_TEST(test_from_decimal_to_int_ok21) {
   // 79228162.514264337593543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x150000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x150000}};
   int check = 79228162;
 
   test_from_decimal_to_int(decimal, check);
@@ -274,7 +274,7 @@ START_TEST(test_from_decimal_to_int_ok21) {
 
 START_TEST(test_from_decimal_to_int_ok22) {
   // -79228162.514264337593543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80150000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80150000}};
   int check = -79228162;
 
   test_from_decimal_to_int(decimal, check);
@@ -282,7 +282,7 @@ START_TEST(test_from_decimal_to_int_ok22) {
 
 START_TEST(test_from_decimal_to_int_ok23) {
   // 7922816.2514264337593543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x160000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x160000}};
   int check = 7922816;
 
   test_from_decimal_to_int(decimal, check);
@@ -290,7 +290,7 @@ START_TEST(test_from_decimal_to_int_ok23) {
 
 START_TEST(test_from_decimal_to_int_ok24) {
   // -7922816.2514264337593543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80160000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80160000}};
   int check = -7922816;
 
   test_from_decimal_to_int(decimal, check);
@@ -298,7 +298,7 @@ START_TEST(test_from_decimal_to_int_ok24) {
 
 START_TEST(test_from_decimal_to_int_ok25) {
   // 792281.62514264337593543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x170000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x170000}};
   int check = 792281;
 
   test_from_decimal_to_int(decimal, check);
@@ -306,7 +306,7 @@ START_TEST(test_from_decimal_to_int_ok25) {
 
 START_TEST(test_from_decimal_to_int_ok26) {
   // -792281.62514264337593543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80170000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80170000}};
   int check = -792281;
 
   test_from_decimal_to_int(decimal, check);
@@ -314,7 +314,7 @@ START_TEST(test_from_decimal_to_int_ok26) {
 
 START_TEST(test_from_decimal_to_int_ok27) {
   // 79228.162514264337593543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x180000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x180000}};
   int check = 79228;
 
   test_from_decimal_to_int(decimal, check);
@@ -322,7 +322,7 @@ START_TEST(test_from_decimal_to_int_ok27) {
 
 START_TEST(test_from_decimal_to_int_ok28) {
   // -79228.162514264337593543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80180000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80180000}};
   int check = -79228;
 
   test_from_decimal_to_int(decimal, check);
@@ -330,7 +330,7 @@ START_TEST(test_from_decimal_to_int_ok28) {
 
 START_TEST(test_from_decimal_to_int_ok29) {
   // 7922.8162514264337593543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x190000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x190000}};
   int check = 7922;
 
   test_from_decimal_to_int(decimal, check);
@@ -338,7 +338,7 @@ START_TEST(test_from_decimal_to_int_ok29) {
 
 START_TEST(test_from_decimal_to_int_ok30) {
   // -7922.8162514264337593543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80190000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x80190000}};
   int check = -7922;
 
   test_from_decimal_to_int(decimal, check);
@@ -346,7 +346,7 @@ START_TEST(test_from_decimal_to_int_ok30) {
 
 START_TEST(test_from_decimal_to_int_ok31) {
   // 792.28162514264337593543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x1A0000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x1A0000}};
   int check = 792;
 
   test_from_decimal_to_int(decimal, check);
@@ -354,7 +354,7 @@ START_TEST(test_from_decimal_to_int_ok31) {
 
 START_TEST(test_from_decimal_to_int_ok32) {
   // -792.28162514264337593543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x801A0000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x801A0000}};
   int check = -792;
 
   test_from_decimal_to_int(decimal, check);
@@ -362,7 +362,7 @@ START_TEST(test_from_decimal_to_int_ok32) {
 
 START_TEST(test_from_decimal_to_int_ok33) {
   // 79.228162514264337593543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x1B0000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x1B0000}};
   int check = 79;
 
   test_from_decimal_to_int(decimal, check);
@@ -370,7 +370,7 @@ START_TEST(test_from_decimal_to_int_ok33) {
 
 START_TEST(test_from_decimal_to_int_ok34) {
   // -79.228162514264337593543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x801B0000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x801B0000}};
   int check = -79;
 
   test_from_decimal_to_int(decimal, check);
@@ -378,7 +378,7 @@ START_TEST(test_from_decimal_to_int_ok34) {
 
 START_TEST(test_from_decimal_to_int_ok35) {
   // 7.9228162514264337593543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x1C0000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x1C0000}};
   int check = 7;
 
   test_from_decimal_to_int(decimal, check);
@@ -386,7 +386,7 @@ START_TEST(test_from_decimal_to_int_ok35) {
 
 START_TEST(test_from_decimal_to_int_ok36) {
   // -7.9228162514264337593543950334
-  s21_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x801C0000}};
+  my_decimal decimal = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x801C0000}};
   int check = -7;
 
   test_from_decimal_to_int(decimal, check);
@@ -394,7 +394,7 @@ START_TEST(test_from_decimal_to_int_ok36) {
 
 START_TEST(test_from_decimal_to_int_ok37) {
   // 528187750.09509558395695966890
-  s21_decimal decimal = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x140000}};
+  my_decimal decimal = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x140000}};
   int check = 528187750;
 
   test_from_decimal_to_int(decimal, check);
@@ -402,7 +402,7 @@ START_TEST(test_from_decimal_to_int_ok37) {
 
 START_TEST(test_from_decimal_to_int_ok38) {
   // -528187750.09509558395695966890
-  s21_decimal decimal = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x80140000}};
+  my_decimal decimal = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x80140000}};
   int check = -528187750;
 
   test_from_decimal_to_int(decimal, check);
@@ -410,7 +410,7 @@ START_TEST(test_from_decimal_to_int_ok38) {
 
 START_TEST(test_from_decimal_to_int_ok39) {
   // 5.2818775009509558395695966890
-  s21_decimal decimal = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x1C0000}};
+  my_decimal decimal = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x1C0000}};
   int check = 5;
 
   test_from_decimal_to_int(decimal, check);
@@ -418,7 +418,7 @@ START_TEST(test_from_decimal_to_int_ok39) {
 
 START_TEST(test_from_decimal_to_int_ok40) {
   // -5.2818775009509558395695966890
-  s21_decimal decimal = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x801C0000}};
+  my_decimal decimal = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x801C0000}};
   int check = -5;
 
   test_from_decimal_to_int(decimal, check);
@@ -426,7 +426,7 @@ START_TEST(test_from_decimal_to_int_ok40) {
 
 START_TEST(test_from_decimal_to_int_ok41) {
   // 528187750.09509558392832655360
-  s21_decimal decimal = {{0x0, 0xAAAAAAAA, 0xAAAAAAAA, 0x140000}};
+  my_decimal decimal = {{0x0, 0xAAAAAAAA, 0xAAAAAAAA, 0x140000}};
   int check = 528187750;
 
   test_from_decimal_to_int(decimal, check);
@@ -434,7 +434,7 @@ START_TEST(test_from_decimal_to_int_ok41) {
 
 START_TEST(test_from_decimal_to_int_ok42) {
   // -528187750.09509558392832655360
-  s21_decimal decimal = {{0x0, 0xAAAAAAAA, 0xAAAAAAAA, 0x80140000}};
+  my_decimal decimal = {{0x0, 0xAAAAAAAA, 0xAAAAAAAA, 0x80140000}};
   int check = -528187750;
 
   test_from_decimal_to_int(decimal, check);
@@ -442,7 +442,7 @@ START_TEST(test_from_decimal_to_int_ok42) {
 
 START_TEST(test_from_decimal_to_int_ok43) {
   // 5.2818775009509558392832655360
-  s21_decimal decimal = {{0x0, 0xAAAAAAAA, 0xAAAAAAAA, 0x1C0000}};
+  my_decimal decimal = {{0x0, 0xAAAAAAAA, 0xAAAAAAAA, 0x1C0000}};
   int check = 5;
 
   test_from_decimal_to_int(decimal, check);
@@ -450,7 +450,7 @@ START_TEST(test_from_decimal_to_int_ok43) {
 
 START_TEST(test_from_decimal_to_int_ok44) {
   // -5.2818775009509558392832655360
-  s21_decimal decimal = {{0x0, 0xAAAAAAAA, 0xAAAAAAAA, 0x801C0000}};
+  my_decimal decimal = {{0x0, 0xAAAAAAAA, 0xAAAAAAAA, 0x801C0000}};
   int check = -5;
 
   test_from_decimal_to_int(decimal, check);
@@ -458,7 +458,7 @@ START_TEST(test_from_decimal_to_int_ok44) {
 
 START_TEST(test_from_decimal_to_int_ok45) {
   // 528187749.97211729016086244010
-  s21_decimal decimal = {{0xAAAAAAAA, 0x0, 0xAAAAAAAA, 0x140000}};
+  my_decimal decimal = {{0xAAAAAAAA, 0x0, 0xAAAAAAAA, 0x140000}};
   int check = 528187749;
 
   test_from_decimal_to_int(decimal, check);
@@ -466,7 +466,7 @@ START_TEST(test_from_decimal_to_int_ok45) {
 
 START_TEST(test_from_decimal_to_int_ok46) {
   // -528187749.97211729016086244010
-  s21_decimal decimal = {{0xAAAAAAAA, 0x0, 0xAAAAAAAA, 0x80140000}};
+  my_decimal decimal = {{0xAAAAAAAA, 0x0, 0xAAAAAAAA, 0x80140000}};
   int check = -528187749;
 
   test_from_decimal_to_int(decimal, check);
@@ -474,7 +474,7 @@ START_TEST(test_from_decimal_to_int_ok46) {
 
 START_TEST(test_from_decimal_to_int_ok47) {
   // 5.2818774997211729016086244010
-  s21_decimal decimal = {{0xAAAAAAAA, 0x0, 0xAAAAAAAA, 0x1C0000}};
+  my_decimal decimal = {{0xAAAAAAAA, 0x0, 0xAAAAAAAA, 0x1C0000}};
   int check = 5;
 
   test_from_decimal_to_int(decimal, check);
@@ -482,7 +482,7 @@ START_TEST(test_from_decimal_to_int_ok47) {
 
 START_TEST(test_from_decimal_to_int_ok48) {
   // -5.2818774997211729016086244010
-  s21_decimal decimal = {{0xAAAAAAAA, 0x0, 0xAAAAAAAA, 0x801C0000}};
+  my_decimal decimal = {{0xAAAAAAAA, 0x0, 0xAAAAAAAA, 0x801C0000}};
   int check = -5;
 
   test_from_decimal_to_int(decimal, check);
@@ -490,7 +490,7 @@ START_TEST(test_from_decimal_to_int_ok48) {
 
 START_TEST(test_from_decimal_to_int_ok49) {
   // 528187749.97211729013222932480
-  s21_decimal decimal = {{0x0, 0x0, 0xAAAAAAAA, 0x140000}};
+  my_decimal decimal = {{0x0, 0x0, 0xAAAAAAAA, 0x140000}};
   int check = 528187749;
 
   test_from_decimal_to_int(decimal, check);
@@ -498,7 +498,7 @@ START_TEST(test_from_decimal_to_int_ok49) {
 
 START_TEST(test_from_decimal_to_int_ok50) {
   // -528187749.97211729013222932480
-  s21_decimal decimal = {{0x0, 0x0, 0xAAAAAAAA, 0x80140000}};
+  my_decimal decimal = {{0x0, 0x0, 0xAAAAAAAA, 0x80140000}};
   int check = -528187749;
 
   test_from_decimal_to_int(decimal, check);
@@ -506,7 +506,7 @@ START_TEST(test_from_decimal_to_int_ok50) {
 
 START_TEST(test_from_decimal_to_int_ok51) {
   // 5.2818774997211729013222932480
-  s21_decimal decimal = {{0x0, 0x0, 0xAAAAAAAA, 0x1C0000}};
+  my_decimal decimal = {{0x0, 0x0, 0xAAAAAAAA, 0x1C0000}};
   int check = 5;
 
   test_from_decimal_to_int(decimal, check);
@@ -514,7 +514,7 @@ START_TEST(test_from_decimal_to_int_ok51) {
 
 START_TEST(test_from_decimal_to_int_ok52) {
   // -5.2818774997211729013222932480
-  s21_decimal decimal = {{0x0, 0x0, 0xAAAAAAAA, 0x801C0000}};
+  my_decimal decimal = {{0x0, 0x0, 0xAAAAAAAA, 0x801C0000}};
   int check = -5;
 
   test_from_decimal_to_int(decimal, check);
@@ -522,7 +522,7 @@ START_TEST(test_from_decimal_to_int_ok52) {
 
 START_TEST(test_from_decimal_to_int_ok53) {
   // 122978293.82473034410
-  s21_decimal decimal = {{0xAAAAAAAA, 0xAAAAAAAA, 0x0, 0xB0000}};
+  my_decimal decimal = {{0xAAAAAAAA, 0xAAAAAAAA, 0x0, 0xB0000}};
   int check = 122978293;
 
   test_from_decimal_to_int(decimal, check);
@@ -530,7 +530,7 @@ START_TEST(test_from_decimal_to_int_ok53) {
 
 START_TEST(test_from_decimal_to_int_ok54) {
   // -122978293.82473034410
-  s21_decimal decimal = {{0xAAAAAAAA, 0xAAAAAAAA, 0x0, 0x800B0000}};
+  my_decimal decimal = {{0xAAAAAAAA, 0xAAAAAAAA, 0x0, 0x800B0000}};
   int check = -122978293;
 
   test_from_decimal_to_int(decimal, check);
@@ -538,7 +538,7 @@ START_TEST(test_from_decimal_to_int_ok54) {
 
 START_TEST(test_from_decimal_to_int_ok55) {
   // 1.2297829382473034410
-  s21_decimal decimal = {{0xAAAAAAAA, 0xAAAAAAAA, 0x0, 0x130000}};
+  my_decimal decimal = {{0xAAAAAAAA, 0xAAAAAAAA, 0x0, 0x130000}};
   int check = 1;
 
   test_from_decimal_to_int(decimal, check);
@@ -546,7 +546,7 @@ START_TEST(test_from_decimal_to_int_ok55) {
 
 START_TEST(test_from_decimal_to_int_ok56) {
   // -1.2297829382473034410
-  s21_decimal decimal = {{0xAAAAAAAA, 0xAAAAAAAA, 0x0, 0x80130000}};
+  my_decimal decimal = {{0xAAAAAAAA, 0xAAAAAAAA, 0x0, 0x80130000}};
   int check = -1;
 
   test_from_decimal_to_int(decimal, check);
@@ -554,7 +554,7 @@ START_TEST(test_from_decimal_to_int_ok56) {
 
 START_TEST(test_from_decimal_to_int_ok57) {
   // 122978293.79609722880
-  s21_decimal decimal = {{0x0, 0xAAAAAAAA, 0x0, 0xB0000}};
+  my_decimal decimal = {{0x0, 0xAAAAAAAA, 0x0, 0xB0000}};
   int check = 122978293;
 
   test_from_decimal_to_int(decimal, check);
@@ -562,7 +562,7 @@ START_TEST(test_from_decimal_to_int_ok57) {
 
 START_TEST(test_from_decimal_to_int_ok58) {
   // -122978293.79609722880
-  s21_decimal decimal = {{0x0, 0xAAAAAAAA, 0x0, 0x800B0000}};
+  my_decimal decimal = {{0x0, 0xAAAAAAAA, 0x0, 0x800B0000}};
   int check = -122978293;
 
   test_from_decimal_to_int(decimal, check);
@@ -570,7 +570,7 @@ START_TEST(test_from_decimal_to_int_ok58) {
 
 START_TEST(test_from_decimal_to_int_ok59) {
   // 1.2297829379609722880
-  s21_decimal decimal = {{0x0, 0xAAAAAAAA, 0x0, 0x130000}};
+  my_decimal decimal = {{0x0, 0xAAAAAAAA, 0x0, 0x130000}};
   int check = 1;
 
   test_from_decimal_to_int(decimal, check);
@@ -578,7 +578,7 @@ START_TEST(test_from_decimal_to_int_ok59) {
 
 START_TEST(test_from_decimal_to_int_ok60) {
   // -1.2297829379609722880
-  s21_decimal decimal = {{0x0, 0xAAAAAAAA, 0x0, 0x80130000}};
+  my_decimal decimal = {{0x0, 0xAAAAAAAA, 0x0, 0x80130000}};
   int check = -1;
 
   test_from_decimal_to_int(decimal, check);
@@ -586,7 +586,7 @@ START_TEST(test_from_decimal_to_int_ok60) {
 
 START_TEST(test_from_decimal_to_int_ok61) {
   // 286331153.0
-  s21_decimal decimal = {{0xAAAAAAAA, 0x0, 0x0, 0x10000}};
+  my_decimal decimal = {{0xAAAAAAAA, 0x0, 0x0, 0x10000}};
   int check = 286331153;
 
   test_from_decimal_to_int(decimal, check);
@@ -594,7 +594,7 @@ START_TEST(test_from_decimal_to_int_ok61) {
 
 START_TEST(test_from_decimal_to_int_ok62) {
   // -286331153.0
-  s21_decimal decimal = {{0xAAAAAAAA, 0x0, 0x0, 0x80010000}};
+  my_decimal decimal = {{0xAAAAAAAA, 0x0, 0x0, 0x80010000}};
   int check = -286331153;
 
   test_from_decimal_to_int(decimal, check);
@@ -602,7 +602,7 @@ START_TEST(test_from_decimal_to_int_ok62) {
 
 START_TEST(test_from_decimal_to_int_ok63) {
   // 286331.1530
-  s21_decimal decimal = {{0xAAAAAAAA, 0x0, 0x0, 0x40000}};
+  my_decimal decimal = {{0xAAAAAAAA, 0x0, 0x0, 0x40000}};
   int check = 286331;
 
   test_from_decimal_to_int(decimal, check);
@@ -610,7 +610,7 @@ START_TEST(test_from_decimal_to_int_ok63) {
 
 START_TEST(test_from_decimal_to_int_ok64) {
   // -286331.1530
-  s21_decimal decimal = {{0xAAAAAAAA, 0x0, 0x0, 0x80040000}};
+  my_decimal decimal = {{0xAAAAAAAA, 0x0, 0x0, 0x80040000}};
   int check = -286331;
 
   test_from_decimal_to_int(decimal, check);
@@ -618,7 +618,7 @@ START_TEST(test_from_decimal_to_int_ok64) {
 
 START_TEST(test_from_decimal_to_int_ok65) {
   // 2.863311530
-  s21_decimal decimal = {{0xAAAAAAAA, 0x0, 0x0, 0x90000}};
+  my_decimal decimal = {{0xAAAAAAAA, 0x0, 0x0, 0x90000}};
   int check = 2;
 
   test_from_decimal_to_int(decimal, check);
@@ -626,7 +626,7 @@ START_TEST(test_from_decimal_to_int_ok65) {
 
 START_TEST(test_from_decimal_to_int_ok66) {
   // -2.863311530
-  s21_decimal decimal = {{0xAAAAAAAA, 0x0, 0x0, 0x80090000}};
+  my_decimal decimal = {{0xAAAAAAAA, 0x0, 0x0, 0x80090000}};
   int check = -2;
 
   test_from_decimal_to_int(decimal, check);
@@ -634,7 +634,7 @@ START_TEST(test_from_decimal_to_int_ok66) {
 
 START_TEST(test_from_decimal_to_int_ok67) {
   // 264093875.04754779197847983445
-  s21_decimal decimal = {{0x55555555, 0x55555555, 0x55555555, 0x140000}};
+  my_decimal decimal = {{0x55555555, 0x55555555, 0x55555555, 0x140000}};
   int check = 264093875;
 
   test_from_decimal_to_int(decimal, check);
@@ -642,7 +642,7 @@ START_TEST(test_from_decimal_to_int_ok67) {
 
 START_TEST(test_from_decimal_to_int_ok68) {
   // -264093875.04754779197847983445
-  s21_decimal decimal = {{0x55555555, 0x55555555, 0x55555555, 0x80140000}};
+  my_decimal decimal = {{0x55555555, 0x55555555, 0x55555555, 0x80140000}};
   int check = -264093875;
 
   test_from_decimal_to_int(decimal, check);
@@ -650,7 +650,7 @@ START_TEST(test_from_decimal_to_int_ok68) {
 
 START_TEST(test_from_decimal_to_int_ok69) {
   // 2.6409387504754779197847983445
-  s21_decimal decimal = {{0x55555555, 0x55555555, 0x55555555, 0x1C0000}};
+  my_decimal decimal = {{0x55555555, 0x55555555, 0x55555555, 0x1C0000}};
   int check = 2;
 
   test_from_decimal_to_int(decimal, check);
@@ -658,7 +658,7 @@ START_TEST(test_from_decimal_to_int_ok69) {
 
 START_TEST(test_from_decimal_to_int_ok70) {
   // -2.6409387504754779197847983445
-  s21_decimal decimal = {{0x55555555, 0x55555555, 0x55555555, 0x801C0000}};
+  my_decimal decimal = {{0x55555555, 0x55555555, 0x55555555, 0x801C0000}};
   int check = -2;
 
   test_from_decimal_to_int(decimal, check);
@@ -666,7 +666,7 @@ START_TEST(test_from_decimal_to_int_ok70) {
 
 START_TEST(test_from_decimal_to_int_ok71) {
   // 264093875.04754779196416327680
-  s21_decimal decimal = {{0x0, 0x55555555, 0x55555555, 0x140000}};
+  my_decimal decimal = {{0x0, 0x55555555, 0x55555555, 0x140000}};
   int check = 264093875;
 
   test_from_decimal_to_int(decimal, check);
@@ -674,7 +674,7 @@ START_TEST(test_from_decimal_to_int_ok71) {
 
 START_TEST(test_from_decimal_to_int_ok72) {
   // -264093875.04754779196416327680
-  s21_decimal decimal = {{0x0, 0x55555555, 0x55555555, 0x80140000}};
+  my_decimal decimal = {{0x0, 0x55555555, 0x55555555, 0x80140000}};
   int check = -264093875;
 
   test_from_decimal_to_int(decimal, check);
@@ -682,7 +682,7 @@ START_TEST(test_from_decimal_to_int_ok72) {
 
 START_TEST(test_from_decimal_to_int_ok73) {
   // 2.6409387504754779196416327680
-  s21_decimal decimal = {{0x0, 0x55555555, 0x55555555, 0x1C0000}};
+  my_decimal decimal = {{0x0, 0x55555555, 0x55555555, 0x1C0000}};
   int check = 2;
 
   test_from_decimal_to_int(decimal, check);
@@ -690,7 +690,7 @@ START_TEST(test_from_decimal_to_int_ok73) {
 
 START_TEST(test_from_decimal_to_int_ok74) {
   // -2.6409387504754779196416327680
-  s21_decimal decimal = {{0x0, 0x55555555, 0x55555555, 0x801C0000}};
+  my_decimal decimal = {{0x0, 0x55555555, 0x55555555, 0x801C0000}};
   int check = -2;
 
   test_from_decimal_to_int(decimal, check);
@@ -698,7 +698,7 @@ START_TEST(test_from_decimal_to_int_ok74) {
 
 START_TEST(test_from_decimal_to_int_ok75) {
   // 264093874.98605864508043122005
-  s21_decimal decimal = {{0x55555555, 0x0, 0x55555555, 0x140000}};
+  my_decimal decimal = {{0x55555555, 0x0, 0x55555555, 0x140000}};
   int check = 264093874;
 
   test_from_decimal_to_int(decimal, check);
@@ -706,7 +706,7 @@ START_TEST(test_from_decimal_to_int_ok75) {
 
 START_TEST(test_from_decimal_to_int_ok76) {
   // -264093874.98605864508043122005
-  s21_decimal decimal = {{0x55555555, 0x0, 0x55555555, 0x80140000}};
+  my_decimal decimal = {{0x55555555, 0x0, 0x55555555, 0x80140000}};
   int check = -264093874;
 
   test_from_decimal_to_int(decimal, check);
@@ -714,7 +714,7 @@ START_TEST(test_from_decimal_to_int_ok76) {
 
 START_TEST(test_from_decimal_to_int_ok77) {
   // 2.6409387498605864508043122005
-  s21_decimal decimal = {{0x55555555, 0x0, 0x55555555, 0x1C0000}};
+  my_decimal decimal = {{0x55555555, 0x0, 0x55555555, 0x1C0000}};
   int check = 2;
 
   test_from_decimal_to_int(decimal, check);
@@ -722,7 +722,7 @@ START_TEST(test_from_decimal_to_int_ok77) {
 
 START_TEST(test_from_decimal_to_int_ok78) {
   // -2.6409387498605864508043122005
-  s21_decimal decimal = {{0x55555555, 0x0, 0x55555555, 0x801C0000}};
+  my_decimal decimal = {{0x55555555, 0x0, 0x55555555, 0x801C0000}};
   int check = -2;
 
   test_from_decimal_to_int(decimal, check);
@@ -730,7 +730,7 @@ START_TEST(test_from_decimal_to_int_ok78) {
 
 START_TEST(test_from_decimal_to_int_ok79) {
   // 264093874.98605864506611466240
-  s21_decimal decimal = {{0x0, 0x0, 0x55555555, 0x140000}};
+  my_decimal decimal = {{0x0, 0x0, 0x55555555, 0x140000}};
   int check = 264093874;
 
   test_from_decimal_to_int(decimal, check);
@@ -738,7 +738,7 @@ START_TEST(test_from_decimal_to_int_ok79) {
 
 START_TEST(test_from_decimal_to_int_ok80) {
   // -264093874.98605864506611466240
-  s21_decimal decimal = {{0x0, 0x0, 0x55555555, 0x80140000}};
+  my_decimal decimal = {{0x0, 0x0, 0x55555555, 0x80140000}};
   int check = -264093874;
 
   test_from_decimal_to_int(decimal, check);
@@ -746,7 +746,7 @@ START_TEST(test_from_decimal_to_int_ok80) {
 
 START_TEST(test_from_decimal_to_int_ok81) {
   // 2.6409387498605864506611466240
-  s21_decimal decimal = {{0x0, 0x0, 0x55555555, 0x1C0000}};
+  my_decimal decimal = {{0x0, 0x0, 0x55555555, 0x1C0000}};
   int check = 2;
 
   test_from_decimal_to_int(decimal, check);
@@ -754,7 +754,7 @@ START_TEST(test_from_decimal_to_int_ok81) {
 
 START_TEST(test_from_decimal_to_int_ok82) {
   // -2.6409387498605864506611466240
-  s21_decimal decimal = {{0x0, 0x0, 0x55555555, 0x801C0000}};
+  my_decimal decimal = {{0x0, 0x0, 0x55555555, 0x801C0000}};
   int check = -2;
 
   test_from_decimal_to_int(decimal, check);
@@ -762,7 +762,7 @@ START_TEST(test_from_decimal_to_int_ok82) {
 
 START_TEST(test_from_decimal_to_int_ok83) {
   // 6148914.691236517205
-  s21_decimal decimal = {{0x55555555, 0x55555555, 0x0, 0xC0000}};
+  my_decimal decimal = {{0x55555555, 0x55555555, 0x0, 0xC0000}};
   int check = 6148914;
 
   test_from_decimal_to_int(decimal, check);
@@ -770,7 +770,7 @@ START_TEST(test_from_decimal_to_int_ok83) {
 
 START_TEST(test_from_decimal_to_int_ok84) {
   // -6148914.691236517205
-  s21_decimal decimal = {{0x55555555, 0x55555555, 0x0, 0x800C0000}};
+  my_decimal decimal = {{0x55555555, 0x55555555, 0x0, 0x800C0000}};
   int check = -6148914;
 
   test_from_decimal_to_int(decimal, check);
@@ -778,7 +778,7 @@ START_TEST(test_from_decimal_to_int_ok84) {
 
 START_TEST(test_from_decimal_to_int_ok85) {
   // 6.148914691236517205
-  s21_decimal decimal = {{0x55555555, 0x55555555, 0x0, 0x120000}};
+  my_decimal decimal = {{0x55555555, 0x55555555, 0x0, 0x120000}};
   int check = 6;
 
   test_from_decimal_to_int(decimal, check);
@@ -786,7 +786,7 @@ START_TEST(test_from_decimal_to_int_ok85) {
 
 START_TEST(test_from_decimal_to_int_ok86) {
   // -6.148914691236517205
-  s21_decimal decimal = {{0x55555555, 0x55555555, 0x0, 0x80120000}};
+  my_decimal decimal = {{0x55555555, 0x55555555, 0x0, 0x80120000}};
   int check = -6;
 
   test_from_decimal_to_int(decimal, check);
@@ -794,7 +794,7 @@ START_TEST(test_from_decimal_to_int_ok86) {
 
 START_TEST(test_from_decimal_to_int_ok87) {
   // 6148914.689804861440
-  s21_decimal decimal = {{0x0, 0x55555555, 0x0, 0xC0000}};
+  my_decimal decimal = {{0x0, 0x55555555, 0x0, 0xC0000}};
   int check = 6148914;
 
   test_from_decimal_to_int(decimal, check);
@@ -802,7 +802,7 @@ START_TEST(test_from_decimal_to_int_ok87) {
 
 START_TEST(test_from_decimal_to_int_ok88) {
   // -6148914.689804861440
-  s21_decimal decimal = {{0x0, 0x55555555, 0x0, 0x800C0000}};
+  my_decimal decimal = {{0x0, 0x55555555, 0x0, 0x800C0000}};
   int check = -6148914;
 
   test_from_decimal_to_int(decimal, check);
@@ -810,7 +810,7 @@ START_TEST(test_from_decimal_to_int_ok88) {
 
 START_TEST(test_from_decimal_to_int_ok89) {
   // 6.148914689804861440
-  s21_decimal decimal = {{0x0, 0x55555555, 0x0, 0x120000}};
+  my_decimal decimal = {{0x0, 0x55555555, 0x0, 0x120000}};
   int check = 6;
 
   test_from_decimal_to_int(decimal, check);
@@ -818,7 +818,7 @@ START_TEST(test_from_decimal_to_int_ok89) {
 
 START_TEST(test_from_decimal_to_int_ok90) {
   // -6.148914689804861440
-  s21_decimal decimal = {{0x0, 0x55555555, 0x0, 0x80120000}};
+  my_decimal decimal = {{0x0, 0x55555555, 0x0, 0x80120000}};
   int check = -6;
 
   test_from_decimal_to_int(decimal, check);
@@ -826,7 +826,7 @@ START_TEST(test_from_decimal_to_int_ok90) {
 
 START_TEST(test_from_decimal_to_int_ok91) {
   // 1431655765
-  s21_decimal decimal = {{0x55555555, 0x0, 0x0, 0x0}};
+  my_decimal decimal = {{0x55555555, 0x0, 0x0, 0x0}};
   int check = 1431655765;
 
   test_from_decimal_to_int(decimal, check);
@@ -834,7 +834,7 @@ START_TEST(test_from_decimal_to_int_ok91) {
 
 START_TEST(test_from_decimal_to_int_ok92) {
   // -1431655765
-  s21_decimal decimal = {{0x55555555, 0x0, 0x0, 0x80000000}};
+  my_decimal decimal = {{0x55555555, 0x0, 0x0, 0x80000000}};
   int check = -1431655765;
 
   test_from_decimal_to_int(decimal, check);
@@ -842,7 +842,7 @@ START_TEST(test_from_decimal_to_int_ok92) {
 
 START_TEST(test_from_decimal_to_int_ok93) {
   // 143165576.5
-  s21_decimal decimal = {{0x55555555, 0x0, 0x0, 0x10000}};
+  my_decimal decimal = {{0x55555555, 0x0, 0x0, 0x10000}};
   int check = 143165576;
 
   test_from_decimal_to_int(decimal, check);
@@ -850,7 +850,7 @@ START_TEST(test_from_decimal_to_int_ok93) {
 
 START_TEST(test_from_decimal_to_int_ok94) {
   // -143165576.5
-  s21_decimal decimal = {{0x55555555, 0x0, 0x0, 0x80010000}};
+  my_decimal decimal = {{0x55555555, 0x0, 0x0, 0x80010000}};
   int check = -143165576;
 
   test_from_decimal_to_int(decimal, check);
@@ -858,7 +858,7 @@ START_TEST(test_from_decimal_to_int_ok94) {
 
 START_TEST(test_from_decimal_to_int_ok95) {
   // 143165.5765
-  s21_decimal decimal = {{0x55555555, 0x0, 0x0, 0x40000}};
+  my_decimal decimal = {{0x55555555, 0x0, 0x0, 0x40000}};
   int check = 143165;
 
   test_from_decimal_to_int(decimal, check);
@@ -866,7 +866,7 @@ START_TEST(test_from_decimal_to_int_ok95) {
 
 START_TEST(test_from_decimal_to_int_ok96) {
   // -143165.5765
-  s21_decimal decimal = {{0x55555555, 0x0, 0x0, 0x80040000}};
+  my_decimal decimal = {{0x55555555, 0x0, 0x0, 0x80040000}};
   int check = -143165;
 
   test_from_decimal_to_int(decimal, check);
@@ -874,7 +874,7 @@ START_TEST(test_from_decimal_to_int_ok96) {
 
 START_TEST(test_from_decimal_to_int_ok97) {
   // 1.431655765
-  s21_decimal decimal = {{0x55555555, 0x0, 0x0, 0x90000}};
+  my_decimal decimal = {{0x55555555, 0x0, 0x0, 0x90000}};
   int check = 1;
 
   test_from_decimal_to_int(decimal, check);
@@ -882,7 +882,7 @@ START_TEST(test_from_decimal_to_int_ok97) {
 
 START_TEST(test_from_decimal_to_int_ok98) {
   // -1.431655765
-  s21_decimal decimal = {{0x55555555, 0x0, 0x0, 0x80090000}};
+  my_decimal decimal = {{0x55555555, 0x0, 0x0, 0x80090000}};
   int check = -1;
 
   test_from_decimal_to_int(decimal, check);
@@ -890,7 +890,7 @@ START_TEST(test_from_decimal_to_int_ok98) {
 
 START_TEST(test_from_decimal_to_int_ok99) {
   // 184467440.78004518913
-  s21_decimal decimal = {{0x1, 0x1, 0x1, 0xB0000}};
+  my_decimal decimal = {{0x1, 0x1, 0x1, 0xB0000}};
   int check = 184467440;
 
   test_from_decimal_to_int(decimal, check);
@@ -898,7 +898,7 @@ START_TEST(test_from_decimal_to_int_ok99) {
 
 START_TEST(test_from_decimal_to_int_ok100) {
   // -184467440.78004518913
-  s21_decimal decimal = {{0x1, 0x1, 0x1, 0x800B0000}};
+  my_decimal decimal = {{0x1, 0x1, 0x1, 0x800B0000}};
   int check = -184467440;
 
   test_from_decimal_to_int(decimal, check);
@@ -906,7 +906,7 @@ START_TEST(test_from_decimal_to_int_ok100) {
 
 START_TEST(test_from_decimal_to_int_ok101) {
   // 1.8446744078004518913
-  s21_decimal decimal = {{0x1, 0x1, 0x1, 0x130000}};
+  my_decimal decimal = {{0x1, 0x1, 0x1, 0x130000}};
   int check = 1;
 
   test_from_decimal_to_int(decimal, check);
@@ -914,7 +914,7 @@ START_TEST(test_from_decimal_to_int_ok101) {
 
 START_TEST(test_from_decimal_to_int_ok102) {
   // -1.8446744078004518913
-  s21_decimal decimal = {{0x1, 0x1, 0x1, 0x80130000}};
+  my_decimal decimal = {{0x1, 0x1, 0x1, 0x80130000}};
   int check = -1;
 
   test_from_decimal_to_int(decimal, check);
@@ -922,7 +922,7 @@ START_TEST(test_from_decimal_to_int_ok102) {
 
 START_TEST(test_from_decimal_to_int_ok103) {
   // 18446744.078004518912
-  s21_decimal decimal = {{0x0, 0x1, 0x1, 0xC0000}};
+  my_decimal decimal = {{0x0, 0x1, 0x1, 0xC0000}};
   int check = 18446744;
 
   test_from_decimal_to_int(decimal, check);
@@ -930,7 +930,7 @@ START_TEST(test_from_decimal_to_int_ok103) {
 
 START_TEST(test_from_decimal_to_int_ok104) {
   // -18446744.078004518912
-  s21_decimal decimal = {{0x0, 0x1, 0x1, 0x800C0000}};
+  my_decimal decimal = {{0x0, 0x1, 0x1, 0x800C0000}};
   int check = -18446744;
 
   test_from_decimal_to_int(decimal, check);
@@ -938,7 +938,7 @@ START_TEST(test_from_decimal_to_int_ok104) {
 
 START_TEST(test_from_decimal_to_int_ok105) {
   // 1.8446744078004518912
-  s21_decimal decimal = {{0x0, 0x1, 0x1, 0x130000}};
+  my_decimal decimal = {{0x0, 0x1, 0x1, 0x130000}};
   int check = 1;
 
   test_from_decimal_to_int(decimal, check);
@@ -946,7 +946,7 @@ START_TEST(test_from_decimal_to_int_ok105) {
 
 START_TEST(test_from_decimal_to_int_ok106) {
   // -1.8446744078004518912
-  s21_decimal decimal = {{0x0, 0x1, 0x1, 0x80130000}};
+  my_decimal decimal = {{0x0, 0x1, 0x1, 0x80130000}};
   int check = -1;
 
   test_from_decimal_to_int(decimal, check);
@@ -954,7 +954,7 @@ START_TEST(test_from_decimal_to_int_ok106) {
 
 START_TEST(test_from_decimal_to_int_ok107) {
   // 1844674.4073709551617
-  s21_decimal decimal = {{0x1, 0x0, 0x1, 0xD0000}};
+  my_decimal decimal = {{0x1, 0x0, 0x1, 0xD0000}};
   int check = 1844674;
 
   test_from_decimal_to_int(decimal, check);
@@ -962,7 +962,7 @@ START_TEST(test_from_decimal_to_int_ok107) {
 
 START_TEST(test_from_decimal_to_int_ok108) {
   // -1844674.4073709551617
-  s21_decimal decimal = {{0x1, 0x0, 0x1, 0x800D0000}};
+  my_decimal decimal = {{0x1, 0x0, 0x1, 0x800D0000}};
   int check = -1844674;
 
   test_from_decimal_to_int(decimal, check);
@@ -970,7 +970,7 @@ START_TEST(test_from_decimal_to_int_ok108) {
 
 START_TEST(test_from_decimal_to_int_ok109) {
   // 1.8446744073709551617
-  s21_decimal decimal = {{0x1, 0x0, 0x1, 0x130000}};
+  my_decimal decimal = {{0x1, 0x0, 0x1, 0x130000}};
   int check = 1;
 
   test_from_decimal_to_int(decimal, check);
@@ -978,7 +978,7 @@ START_TEST(test_from_decimal_to_int_ok109) {
 
 START_TEST(test_from_decimal_to_int_ok110) {
   // -1.8446744073709551617
-  s21_decimal decimal = {{0x1, 0x0, 0x1, 0x80130000}};
+  my_decimal decimal = {{0x1, 0x0, 0x1, 0x80130000}};
   int check = -1;
 
   test_from_decimal_to_int(decimal, check);
@@ -986,7 +986,7 @@ START_TEST(test_from_decimal_to_int_ok110) {
 
 START_TEST(test_from_decimal_to_int_ok111) {
   // 184467.44073709551616
-  s21_decimal decimal = {{0x0, 0x0, 0x1, 0xE0000}};
+  my_decimal decimal = {{0x0, 0x0, 0x1, 0xE0000}};
   int check = 184467;
 
   test_from_decimal_to_int(decimal, check);
@@ -994,7 +994,7 @@ START_TEST(test_from_decimal_to_int_ok111) {
 
 START_TEST(test_from_decimal_to_int_ok112) {
   // -184467.44073709551616
-  s21_decimal decimal = {{0x0, 0x0, 0x1, 0x800E0000}};
+  my_decimal decimal = {{0x0, 0x0, 0x1, 0x800E0000}};
   int check = -184467;
 
   test_from_decimal_to_int(decimal, check);
@@ -1002,7 +1002,7 @@ START_TEST(test_from_decimal_to_int_ok112) {
 
 START_TEST(test_from_decimal_to_int_ok113) {
   // 1.8446744073709551616
-  s21_decimal decimal = {{0x0, 0x0, 0x1, 0x130000}};
+  my_decimal decimal = {{0x0, 0x0, 0x1, 0x130000}};
   int check = 1;
 
   test_from_decimal_to_int(decimal, check);
@@ -1010,7 +1010,7 @@ START_TEST(test_from_decimal_to_int_ok113) {
 
 START_TEST(test_from_decimal_to_int_ok114) {
   // -1.8446744073709551616
-  s21_decimal decimal = {{0x0, 0x0, 0x1, 0x80130000}};
+  my_decimal decimal = {{0x0, 0x0, 0x1, 0x80130000}};
   int check = -1;
 
   test_from_decimal_to_int(decimal, check);
@@ -1018,7 +1018,7 @@ START_TEST(test_from_decimal_to_int_ok114) {
 
 START_TEST(test_from_decimal_to_int_ok115) {
   // 429496729.7
-  s21_decimal decimal = {{0x1, 0x1, 0x0, 0x10000}};
+  my_decimal decimal = {{0x1, 0x1, 0x0, 0x10000}};
   int check = 429496729;
 
   test_from_decimal_to_int(decimal, check);
@@ -1026,7 +1026,7 @@ START_TEST(test_from_decimal_to_int_ok115) {
 
 START_TEST(test_from_decimal_to_int_ok116) {
   // -429496729.7
-  s21_decimal decimal = {{0x1, 0x1, 0x0, 0x80010000}};
+  my_decimal decimal = {{0x1, 0x1, 0x0, 0x80010000}};
   int check = -429496729;
 
   test_from_decimal_to_int(decimal, check);
@@ -1034,7 +1034,7 @@ START_TEST(test_from_decimal_to_int_ok116) {
 
 START_TEST(test_from_decimal_to_int_ok117) {
   // 42949672.97
-  s21_decimal decimal = {{0x1, 0x1, 0x0, 0x20000}};
+  my_decimal decimal = {{0x1, 0x1, 0x0, 0x20000}};
   int check = 42949672;
 
   test_from_decimal_to_int(decimal, check);
@@ -1042,7 +1042,7 @@ START_TEST(test_from_decimal_to_int_ok117) {
 
 START_TEST(test_from_decimal_to_int_ok118) {
   // -42949672.97
-  s21_decimal decimal = {{0x1, 0x1, 0x0, 0x80020000}};
+  my_decimal decimal = {{0x1, 0x1, 0x0, 0x80020000}};
   int check = -42949672;
 
   test_from_decimal_to_int(decimal, check);
@@ -1050,7 +1050,7 @@ START_TEST(test_from_decimal_to_int_ok118) {
 
 START_TEST(test_from_decimal_to_int_ok119) {
   // 429496.7297
-  s21_decimal decimal = {{0x1, 0x1, 0x0, 0x40000}};
+  my_decimal decimal = {{0x1, 0x1, 0x0, 0x40000}};
   int check = 429496;
 
   test_from_decimal_to_int(decimal, check);
@@ -1058,7 +1058,7 @@ START_TEST(test_from_decimal_to_int_ok119) {
 
 START_TEST(test_from_decimal_to_int_ok120) {
   // -429496.7297
-  s21_decimal decimal = {{0x1, 0x1, 0x0, 0x80040000}};
+  my_decimal decimal = {{0x1, 0x1, 0x0, 0x80040000}};
   int check = -429496;
 
   test_from_decimal_to_int(decimal, check);
@@ -1066,7 +1066,7 @@ START_TEST(test_from_decimal_to_int_ok120) {
 
 START_TEST(test_from_decimal_to_int_ok121) {
   // 4.294967297
-  s21_decimal decimal = {{0x1, 0x1, 0x0, 0x90000}};
+  my_decimal decimal = {{0x1, 0x1, 0x0, 0x90000}};
   int check = 4;
 
   test_from_decimal_to_int(decimal, check);
@@ -1074,7 +1074,7 @@ START_TEST(test_from_decimal_to_int_ok121) {
 
 START_TEST(test_from_decimal_to_int_ok122) {
   // -4.294967297
-  s21_decimal decimal = {{0x1, 0x1, 0x0, 0x80090000}};
+  my_decimal decimal = {{0x1, 0x1, 0x0, 0x80090000}};
   int check = -4;
 
   test_from_decimal_to_int(decimal, check);
@@ -1082,7 +1082,7 @@ START_TEST(test_from_decimal_to_int_ok122) {
 
 START_TEST(test_from_decimal_to_int_ok123) {
   // 42.94967297
-  s21_decimal decimal = {{0x1, 0x1, 0x0, 0x80000}};
+  my_decimal decimal = {{0x1, 0x1, 0x0, 0x80000}};
   int check = 42;
 
   test_from_decimal_to_int(decimal, check);
@@ -1090,7 +1090,7 @@ START_TEST(test_from_decimal_to_int_ok123) {
 
 START_TEST(test_from_decimal_to_int_ok124) {
   // -42.94967297
-  s21_decimal decimal = {{0x1, 0x1, 0x0, 0x80080000}};
+  my_decimal decimal = {{0x1, 0x1, 0x0, 0x80080000}};
   int check = -42;
 
   test_from_decimal_to_int(decimal, check);
@@ -1098,7 +1098,7 @@ START_TEST(test_from_decimal_to_int_ok124) {
 
 START_TEST(test_from_decimal_to_int_ok125) {
   // 429496729.6
-  s21_decimal decimal = {{0x0, 0x1, 0x0, 0x10000}};
+  my_decimal decimal = {{0x0, 0x1, 0x0, 0x10000}};
   int check = 429496729;
 
   test_from_decimal_to_int(decimal, check);
@@ -1106,7 +1106,7 @@ START_TEST(test_from_decimal_to_int_ok125) {
 
 START_TEST(test_from_decimal_to_int_ok126) {
   // -429496729.6
-  s21_decimal decimal = {{0x0, 0x1, 0x0, 0x80010000}};
+  my_decimal decimal = {{0x0, 0x1, 0x0, 0x80010000}};
   int check = -429496729;
 
   test_from_decimal_to_int(decimal, check);
@@ -1114,7 +1114,7 @@ START_TEST(test_from_decimal_to_int_ok126) {
 
 START_TEST(test_from_decimal_to_int_ok127) {
   // 42949672.96
-  s21_decimal decimal = {{0x0, 0x1, 0x0, 0x20000}};
+  my_decimal decimal = {{0x0, 0x1, 0x0, 0x20000}};
   int check = 42949672;
 
   test_from_decimal_to_int(decimal, check);
@@ -1122,7 +1122,7 @@ START_TEST(test_from_decimal_to_int_ok127) {
 
 START_TEST(test_from_decimal_to_int_ok128) {
   // -42949672.96
-  s21_decimal decimal = {{0x0, 0x1, 0x0, 0x80020000}};
+  my_decimal decimal = {{0x0, 0x1, 0x0, 0x80020000}};
   int check = -42949672;
 
   test_from_decimal_to_int(decimal, check);
@@ -1130,7 +1130,7 @@ START_TEST(test_from_decimal_to_int_ok128) {
 
 START_TEST(test_from_decimal_to_int_ok129) {
   // 4294967.296
-  s21_decimal decimal = {{0x0, 0x1, 0x0, 0x30000}};
+  my_decimal decimal = {{0x0, 0x1, 0x0, 0x30000}};
   int check = 4294967;
 
   test_from_decimal_to_int(decimal, check);
@@ -1138,7 +1138,7 @@ START_TEST(test_from_decimal_to_int_ok129) {
 
 START_TEST(test_from_decimal_to_int_ok130) {
   // -4294967.296
-  s21_decimal decimal = {{0x0, 0x1, 0x0, 0x80030000}};
+  my_decimal decimal = {{0x0, 0x1, 0x0, 0x80030000}};
   int check = -4294967;
 
   test_from_decimal_to_int(decimal, check);
@@ -1146,7 +1146,7 @@ START_TEST(test_from_decimal_to_int_ok130) {
 
 START_TEST(test_from_decimal_to_int_ok131) {
   // 4.294967296
-  s21_decimal decimal = {{0x0, 0x1, 0x0, 0x90000}};
+  my_decimal decimal = {{0x0, 0x1, 0x0, 0x90000}};
   int check = 4;
 
   test_from_decimal_to_int(decimal, check);
@@ -1154,7 +1154,7 @@ START_TEST(test_from_decimal_to_int_ok131) {
 
 START_TEST(test_from_decimal_to_int_ok132) {
   // -4.294967296
-  s21_decimal decimal = {{0x0, 0x1, 0x0, 0x80090000}};
+  my_decimal decimal = {{0x0, 0x1, 0x0, 0x80090000}};
   int check = -4;
 
   test_from_decimal_to_int(decimal, check);
@@ -1162,7 +1162,7 @@ START_TEST(test_from_decimal_to_int_ok132) {
 
 START_TEST(test_from_decimal_to_int_ok133) {
   // 42.94967296
-  s21_decimal decimal = {{0x0, 0x1, 0x0, 0x80000}};
+  my_decimal decimal = {{0x0, 0x1, 0x0, 0x80000}};
   int check = 42;
 
   test_from_decimal_to_int(decimal, check);
@@ -1170,7 +1170,7 @@ START_TEST(test_from_decimal_to_int_ok133) {
 
 START_TEST(test_from_decimal_to_int_ok134) {
   // -42.94967296
-  s21_decimal decimal = {{0x0, 0x1, 0x0, 0x80080000}};
+  my_decimal decimal = {{0x0, 0x1, 0x0, 0x80080000}};
   int check = -42;
 
   test_from_decimal_to_int(decimal, check);
@@ -1178,7 +1178,7 @@ START_TEST(test_from_decimal_to_int_ok134) {
 
 START_TEST(test_from_decimal_to_int_ok135) {
   // 1
-  s21_decimal decimal = {{0x1, 0x0, 0x0, 0x0}};
+  my_decimal decimal = {{0x1, 0x0, 0x0, 0x0}};
   int check = 1;
 
   test_from_decimal_to_int(decimal, check);
@@ -1186,7 +1186,7 @@ START_TEST(test_from_decimal_to_int_ok135) {
 
 START_TEST(test_from_decimal_to_int_ok136) {
   // -1
-  s21_decimal decimal = {{0x1, 0x0, 0x0, 0x80000000}};
+  my_decimal decimal = {{0x1, 0x0, 0x0, 0x80000000}};
   int check = -1;
 
   test_from_decimal_to_int(decimal, check);
@@ -1194,7 +1194,7 @@ START_TEST(test_from_decimal_to_int_ok136) {
 
 START_TEST(test_from_decimal_to_int_ok137) {
   // 0.1
-  s21_decimal decimal = {{0x1, 0x0, 0x0, 0x10000}};
+  my_decimal decimal = {{0x1, 0x0, 0x0, 0x10000}};
   int check = 0;
 
   test_from_decimal_to_int(decimal, check);
@@ -1202,7 +1202,7 @@ START_TEST(test_from_decimal_to_int_ok137) {
 
 START_TEST(test_from_decimal_to_int_ok138) {
   // -0.1
-  s21_decimal decimal = {{0x1, 0x0, 0x0, 0x80010000}};
+  my_decimal decimal = {{0x1, 0x0, 0x0, 0x80010000}};
   int check = 0;
 
   test_from_decimal_to_int(decimal, check);
@@ -1210,7 +1210,7 @@ START_TEST(test_from_decimal_to_int_ok138) {
 
 START_TEST(test_from_decimal_to_int_ok139) {
   // 0.0000000000001
-  s21_decimal decimal = {{0x1, 0x0, 0x0, 0xD0000}};
+  my_decimal decimal = {{0x1, 0x0, 0x0, 0xD0000}};
   int check = 0;
 
   test_from_decimal_to_int(decimal, check);
@@ -1218,7 +1218,7 @@ START_TEST(test_from_decimal_to_int_ok139) {
 
 START_TEST(test_from_decimal_to_int_ok140) {
   // -0.0000000000001
-  s21_decimal decimal = {{0x1, 0x0, 0x0, 0x800D0000}};
+  my_decimal decimal = {{0x1, 0x0, 0x0, 0x800D0000}};
   int check = 0;
 
   test_from_decimal_to_int(decimal, check);
@@ -1226,7 +1226,7 @@ START_TEST(test_from_decimal_to_int_ok140) {
 
 START_TEST(test_from_decimal_to_int_ok141) {
   // 0.00000000000001
-  s21_decimal decimal = {{0x1, 0x0, 0x0, 0xE0000}};
+  my_decimal decimal = {{0x1, 0x0, 0x0, 0xE0000}};
   int check = 0;
 
   test_from_decimal_to_int(decimal, check);
@@ -1234,7 +1234,7 @@ START_TEST(test_from_decimal_to_int_ok141) {
 
 START_TEST(test_from_decimal_to_int_ok142) {
   // -0.00000000000001
-  s21_decimal decimal = {{0x1, 0x0, 0x0, 0x800E0000}};
+  my_decimal decimal = {{0x1, 0x0, 0x0, 0x800E0000}};
   int check = 0;
 
   test_from_decimal_to_int(decimal, check);
@@ -1242,7 +1242,7 @@ START_TEST(test_from_decimal_to_int_ok142) {
 
 START_TEST(test_from_decimal_to_int_ok143) {
   // 0.000000000000000000000000001
-  s21_decimal decimal = {{0x1, 0x0, 0x0, 0x1B0000}};
+  my_decimal decimal = {{0x1, 0x0, 0x0, 0x1B0000}};
   int check = 0;
 
   test_from_decimal_to_int(decimal, check);
@@ -1250,7 +1250,7 @@ START_TEST(test_from_decimal_to_int_ok143) {
 
 START_TEST(test_from_decimal_to_int_ok144) {
   // -0.000000000000000000000000001
-  s21_decimal decimal = {{0x1, 0x0, 0x0, 0x801B0000}};
+  my_decimal decimal = {{0x1, 0x0, 0x0, 0x801B0000}};
   int check = 0;
 
   test_from_decimal_to_int(decimal, check);
@@ -1258,7 +1258,7 @@ START_TEST(test_from_decimal_to_int_ok144) {
 
 START_TEST(test_from_decimal_to_int_ok145) {
   // 0.0000000000000000000000000001
-  s21_decimal decimal = {{0x1, 0x0, 0x0, 0x1C0000}};
+  my_decimal decimal = {{0x1, 0x0, 0x0, 0x1C0000}};
   int check = 0;
 
   test_from_decimal_to_int(decimal, check);
@@ -1266,7 +1266,7 @@ START_TEST(test_from_decimal_to_int_ok145) {
 
 START_TEST(test_from_decimal_to_int_ok146) {
   // -0.0000000000000000000000000001
-  s21_decimal decimal = {{0x1, 0x0, 0x0, 0x801C0000}};
+  my_decimal decimal = {{0x1, 0x0, 0x0, 0x801C0000}};
   int check = 0;
 
   test_from_decimal_to_int(decimal, check);
@@ -1274,7 +1274,7 @@ START_TEST(test_from_decimal_to_int_ok146) {
 
 START_TEST(test_from_decimal_to_int_ok147) {
   // 396140812.66355540835774234624
-  s21_decimal decimal = {{0x80000000, 0x80000000, 0x80000000, 0x140000}};
+  my_decimal decimal = {{0x80000000, 0x80000000, 0x80000000, 0x140000}};
   int check = 396140812;
 
   test_from_decimal_to_int(decimal, check);
@@ -1282,7 +1282,7 @@ START_TEST(test_from_decimal_to_int_ok147) {
 
 START_TEST(test_from_decimal_to_int_ok148) {
   // -396140812.66355540835774234624
-  s21_decimal decimal = {{0x80000000, 0x80000000, 0x80000000, 0x80140000}};
+  my_decimal decimal = {{0x80000000, 0x80000000, 0x80000000, 0x80140000}};
   int check = -396140812;
 
   test_from_decimal_to_int(decimal, check);
@@ -1290,7 +1290,7 @@ START_TEST(test_from_decimal_to_int_ok148) {
 
 START_TEST(test_from_decimal_to_int_ok149) {
   // 3.9614081266355540835774234624
-  s21_decimal decimal = {{0x80000000, 0x80000000, 0x80000000, 0x1C0000}};
+  my_decimal decimal = {{0x80000000, 0x80000000, 0x80000000, 0x1C0000}};
   int check = 3;
 
   test_from_decimal_to_int(decimal, check);
@@ -1298,7 +1298,7 @@ START_TEST(test_from_decimal_to_int_ok149) {
 
 START_TEST(test_from_decimal_to_int_ok150) {
   // -3.9614081266355540835774234624
-  s21_decimal decimal = {{0x80000000, 0x80000000, 0x80000000, 0x801C0000}};
+  my_decimal decimal = {{0x80000000, 0x80000000, 0x80000000, 0x801C0000}};
   int check = -3;
 
   test_from_decimal_to_int(decimal, check);
@@ -1306,7 +1306,7 @@ START_TEST(test_from_decimal_to_int_ok150) {
 
 START_TEST(test_from_decimal_to_int_ok151) {
   // 39614081.266355540833626750976
-  s21_decimal decimal = {{0x0, 0x80000000, 0x80000000, 0x150000}};
+  my_decimal decimal = {{0x0, 0x80000000, 0x80000000, 0x150000}};
   int check = 39614081;
 
   test_from_decimal_to_int(decimal, check);
@@ -1314,7 +1314,7 @@ START_TEST(test_from_decimal_to_int_ok151) {
 
 START_TEST(test_from_decimal_to_int_ok152) {
   // -39614081.266355540833626750976
-  s21_decimal decimal = {{0x0, 0x80000000, 0x80000000, 0x80150000}};
+  my_decimal decimal = {{0x0, 0x80000000, 0x80000000, 0x80150000}};
   int check = -39614081;
 
   test_from_decimal_to_int(decimal, check);
@@ -1322,7 +1322,7 @@ START_TEST(test_from_decimal_to_int_ok152) {
 
 START_TEST(test_from_decimal_to_int_ok153) {
   // 3.9614081266355540833626750976
-  s21_decimal decimal = {{0x0, 0x80000000, 0x80000000, 0x1C0000}};
+  my_decimal decimal = {{0x0, 0x80000000, 0x80000000, 0x1C0000}};
   int check = 3;
 
   test_from_decimal_to_int(decimal, check);
@@ -1330,7 +1330,7 @@ START_TEST(test_from_decimal_to_int_ok153) {
 
 START_TEST(test_from_decimal_to_int_ok154) {
   // -3.9614081266355540833626750976
-  s21_decimal decimal = {{0x0, 0x80000000, 0x80000000, 0x801C0000}};
+  my_decimal decimal = {{0x0, 0x80000000, 0x80000000, 0x801C0000}};
   int check = -3;
 
   test_from_decimal_to_int(decimal, check);
@@ -1338,7 +1338,7 @@ START_TEST(test_from_decimal_to_int_ok154) {
 
 START_TEST(test_from_decimal_to_int_ok155) {
   // 3961408.1257132168798919458816
-  s21_decimal decimal = {{0x80000000, 0x0, 0x80000000, 0x160000}};
+  my_decimal decimal = {{0x80000000, 0x0, 0x80000000, 0x160000}};
   int check = 3961408;
 
   test_from_decimal_to_int(decimal, check);
@@ -1346,7 +1346,7 @@ START_TEST(test_from_decimal_to_int_ok155) {
 
 START_TEST(test_from_decimal_to_int_ok156) {
   // -3961408.1257132168798919458816
-  s21_decimal decimal = {{0x80000000, 0x0, 0x80000000, 0x80160000}};
+  my_decimal decimal = {{0x80000000, 0x0, 0x80000000, 0x80160000}};
   int check = -3961408;
 
   test_from_decimal_to_int(decimal, check);
@@ -1354,7 +1354,7 @@ START_TEST(test_from_decimal_to_int_ok156) {
 
 START_TEST(test_from_decimal_to_int_ok157) {
   // 3.9614081257132168798919458816
-  s21_decimal decimal = {{0x80000000, 0x0, 0x80000000, 0x1C0000}};
+  my_decimal decimal = {{0x80000000, 0x0, 0x80000000, 0x1C0000}};
   int check = 3;
 
   test_from_decimal_to_int(decimal, check);
@@ -1362,7 +1362,7 @@ START_TEST(test_from_decimal_to_int_ok157) {
 
 START_TEST(test_from_decimal_to_int_ok158) {
   // -3.9614081257132168798919458816
-  s21_decimal decimal = {{0x80000000, 0x0, 0x80000000, 0x801C0000}};
+  my_decimal decimal = {{0x80000000, 0x0, 0x80000000, 0x801C0000}};
   int check = -3;
 
   test_from_decimal_to_int(decimal, check);
@@ -1370,7 +1370,7 @@ START_TEST(test_from_decimal_to_int_ok158) {
 
 START_TEST(test_from_decimal_to_int_ok159) {
   // 396140.81257132168796771975168
-  s21_decimal decimal = {{0x0, 0x0, 0x80000000, 0x170000}};
+  my_decimal decimal = {{0x0, 0x0, 0x80000000, 0x170000}};
   int check = 396140;
 
   test_from_decimal_to_int(decimal, check);
@@ -1378,7 +1378,7 @@ START_TEST(test_from_decimal_to_int_ok159) {
 
 START_TEST(test_from_decimal_to_int_ok160) {
   // -396140.81257132168796771975168
-  s21_decimal decimal = {{0x0, 0x0, 0x80000000, 0x80170000}};
+  my_decimal decimal = {{0x0, 0x0, 0x80000000, 0x80170000}};
   int check = -396140;
 
   test_from_decimal_to_int(decimal, check);
@@ -1386,7 +1386,7 @@ START_TEST(test_from_decimal_to_int_ok160) {
 
 START_TEST(test_from_decimal_to_int_ok161) {
   // 3.9614081257132168796771975168
-  s21_decimal decimal = {{0x0, 0x0, 0x80000000, 0x1C0000}};
+  my_decimal decimal = {{0x0, 0x0, 0x80000000, 0x1C0000}};
   int check = 3;
 
   test_from_decimal_to_int(decimal, check);
@@ -1394,7 +1394,7 @@ START_TEST(test_from_decimal_to_int_ok161) {
 
 START_TEST(test_from_decimal_to_int_ok162) {
   // -3.9614081257132168796771975168
-  s21_decimal decimal = {{0x0, 0x0, 0x80000000, 0x801C0000}};
+  my_decimal decimal = {{0x0, 0x0, 0x80000000, 0x801C0000}};
   int check = -3;
 
   test_from_decimal_to_int(decimal, check);
@@ -1402,7 +1402,7 @@ START_TEST(test_from_decimal_to_int_ok162) {
 
 START_TEST(test_from_decimal_to_int_ok163) {
   // 922337203.9002259456
-  s21_decimal decimal = {{0x80000000, 0x80000000, 0x0, 0xA0000}};
+  my_decimal decimal = {{0x80000000, 0x80000000, 0x0, 0xA0000}};
   int check = 922337203;
 
   test_from_decimal_to_int(decimal, check);
@@ -1410,7 +1410,7 @@ START_TEST(test_from_decimal_to_int_ok163) {
 
 START_TEST(test_from_decimal_to_int_ok164) {
   // -922337203.9002259456
-  s21_decimal decimal = {{0x80000000, 0x80000000, 0x0, 0x800A0000}};
+  my_decimal decimal = {{0x80000000, 0x80000000, 0x0, 0x800A0000}};
   int check = -922337203;
 
   test_from_decimal_to_int(decimal, check);
@@ -1418,7 +1418,7 @@ START_TEST(test_from_decimal_to_int_ok164) {
 
 START_TEST(test_from_decimal_to_int_ok165) {
   // 9.223372039002259456
-  s21_decimal decimal = {{0x80000000, 0x80000000, 0x0, 0x120000}};
+  my_decimal decimal = {{0x80000000, 0x80000000, 0x0, 0x120000}};
   int check = 9;
 
   test_from_decimal_to_int(decimal, check);
@@ -1426,7 +1426,7 @@ START_TEST(test_from_decimal_to_int_ok165) {
 
 START_TEST(test_from_decimal_to_int_ok166) {
   // -9.223372039002259456
-  s21_decimal decimal = {{0x80000000, 0x80000000, 0x0, 0x80120000}};
+  my_decimal decimal = {{0x80000000, 0x80000000, 0x0, 0x80120000}};
   int check = -9;
 
   test_from_decimal_to_int(decimal, check);
@@ -1434,7 +1434,7 @@ START_TEST(test_from_decimal_to_int_ok166) {
 
 START_TEST(test_from_decimal_to_int_ok167) {
   // 92233720.36854775808
-  s21_decimal decimal = {{0x0, 0x80000000, 0x0, 0xB0000}};
+  my_decimal decimal = {{0x0, 0x80000000, 0x0, 0xB0000}};
   int check = 92233720;
 
   test_from_decimal_to_int(decimal, check);
@@ -1442,7 +1442,7 @@ START_TEST(test_from_decimal_to_int_ok167) {
 
 START_TEST(test_from_decimal_to_int_ok168) {
   // -92233720.36854775808
-  s21_decimal decimal = {{0x0, 0x80000000, 0x0, 0x800B0000}};
+  my_decimal decimal = {{0x0, 0x80000000, 0x0, 0x800B0000}};
   int check = -92233720;
 
   test_from_decimal_to_int(decimal, check);
@@ -1450,7 +1450,7 @@ START_TEST(test_from_decimal_to_int_ok168) {
 
 START_TEST(test_from_decimal_to_int_ok169) {
   // 9.223372036854775808
-  s21_decimal decimal = {{0x0, 0x80000000, 0x0, 0x120000}};
+  my_decimal decimal = {{0x0, 0x80000000, 0x0, 0x120000}};
   int check = 9;
 
   test_from_decimal_to_int(decimal, check);
@@ -1458,7 +1458,7 @@ START_TEST(test_from_decimal_to_int_ok169) {
 
 START_TEST(test_from_decimal_to_int_ok170) {
   // -9.223372036854775808
-  s21_decimal decimal = {{0x0, 0x80000000, 0x0, 0x80120000}};
+  my_decimal decimal = {{0x0, 0x80000000, 0x0, 0x80120000}};
   int check = -9;
 
   test_from_decimal_to_int(decimal, check);
@@ -1466,7 +1466,7 @@ START_TEST(test_from_decimal_to_int_ok170) {
 
 START_TEST(test_from_decimal_to_int_ok171) {
   // -2147483648
-  s21_decimal decimal = {{0x80000000, 0x0, 0x0, 0x80000000}};
+  my_decimal decimal = {{0x80000000, 0x0, 0x0, 0x80000000}};
   int check = -2147483648;
 
   test_from_decimal_to_int(decimal, check);
@@ -1474,7 +1474,7 @@ START_TEST(test_from_decimal_to_int_ok171) {
 
 START_TEST(test_from_decimal_to_int_ok172) {
   // 214748364.8
-  s21_decimal decimal = {{0x80000000, 0x0, 0x0, 0x10000}};
+  my_decimal decimal = {{0x80000000, 0x0, 0x0, 0x10000}};
   int check = 214748364;
 
   test_from_decimal_to_int(decimal, check);
@@ -1482,7 +1482,7 @@ START_TEST(test_from_decimal_to_int_ok172) {
 
 START_TEST(test_from_decimal_to_int_ok173) {
   // -214748364.8
-  s21_decimal decimal = {{0x80000000, 0x0, 0x0, 0x80010000}};
+  my_decimal decimal = {{0x80000000, 0x0, 0x0, 0x80010000}};
   int check = -214748364;
 
   test_from_decimal_to_int(decimal, check);
@@ -1490,7 +1490,7 @@ START_TEST(test_from_decimal_to_int_ok173) {
 
 START_TEST(test_from_decimal_to_int_ok174) {
   // 21474836.48
-  s21_decimal decimal = {{0x80000000, 0x0, 0x0, 0x20000}};
+  my_decimal decimal = {{0x80000000, 0x0, 0x0, 0x20000}};
   int check = 21474836;
 
   test_from_decimal_to_int(decimal, check);
@@ -1498,7 +1498,7 @@ START_TEST(test_from_decimal_to_int_ok174) {
 
 START_TEST(test_from_decimal_to_int_ok175) {
   // -21474836.48
-  s21_decimal decimal = {{0x80000000, 0x0, 0x0, 0x80020000}};
+  my_decimal decimal = {{0x80000000, 0x0, 0x0, 0x80020000}};
   int check = -21474836;
 
   test_from_decimal_to_int(decimal, check);
@@ -1506,7 +1506,7 @@ START_TEST(test_from_decimal_to_int_ok175) {
 
 START_TEST(test_from_decimal_to_int_ok176) {
   // 214748.3648
-  s21_decimal decimal = {{0x80000000, 0x0, 0x0, 0x40000}};
+  my_decimal decimal = {{0x80000000, 0x0, 0x0, 0x40000}};
   int check = 214748;
 
   test_from_decimal_to_int(decimal, check);
@@ -1514,7 +1514,7 @@ START_TEST(test_from_decimal_to_int_ok176) {
 
 START_TEST(test_from_decimal_to_int_ok177) {
   // -214748.3648
-  s21_decimal decimal = {{0x80000000, 0x0, 0x0, 0x80040000}};
+  my_decimal decimal = {{0x80000000, 0x0, 0x0, 0x80040000}};
   int check = -214748;
 
   test_from_decimal_to_int(decimal, check);
@@ -1522,7 +1522,7 @@ START_TEST(test_from_decimal_to_int_ok177) {
 
 START_TEST(test_from_decimal_to_int_ok178) {
   // 21.47483648
-  s21_decimal decimal = {{0x80000000, 0x0, 0x0, 0x80000}};
+  my_decimal decimal = {{0x80000000, 0x0, 0x0, 0x80000}};
   int check = 21;
 
   test_from_decimal_to_int(decimal, check);
@@ -1530,7 +1530,7 @@ START_TEST(test_from_decimal_to_int_ok178) {
 
 START_TEST(test_from_decimal_to_int_ok179) {
   // -21.47483648
-  s21_decimal decimal = {{0x80000000, 0x0, 0x0, 0x80080000}};
+  my_decimal decimal = {{0x80000000, 0x0, 0x0, 0x80080000}};
   int check = -21;
 
   test_from_decimal_to_int(decimal, check);
@@ -1538,7 +1538,7 @@ START_TEST(test_from_decimal_to_int_ok179) {
 
 START_TEST(test_from_decimal_to_int_ok180) {
   // 2.147483648
-  s21_decimal decimal = {{0x80000000, 0x0, 0x0, 0x90000}};
+  my_decimal decimal = {{0x80000000, 0x0, 0x0, 0x90000}};
   int check = 2;
 
   test_from_decimal_to_int(decimal, check);
@@ -1546,7 +1546,7 @@ START_TEST(test_from_decimal_to_int_ok180) {
 
 START_TEST(test_from_decimal_to_int_ok181) {
   // -2.147483648
-  s21_decimal decimal = {{0x80000000, 0x0, 0x0, 0x80090000}};
+  my_decimal decimal = {{0x80000000, 0x0, 0x0, 0x80090000}};
   int check = -2;
 
   test_from_decimal_to_int(decimal, check);
@@ -1554,7 +1554,7 @@ START_TEST(test_from_decimal_to_int_ok181) {
 
 START_TEST(test_from_decimal_to_int_ok182) {
   // 1560647.67562212695305426944
-  s21_decimal decimal = {{0x811800, 0x811800, 0x811800, 0x140000}};
+  my_decimal decimal = {{0x811800, 0x811800, 0x811800, 0x140000}};
   int check = 1560647;
 
   test_from_decimal_to_int(decimal, check);
@@ -1562,7 +1562,7 @@ START_TEST(test_from_decimal_to_int_ok182) {
 
 START_TEST(test_from_decimal_to_int_ok183) {
   // -1560647.67562212695305426944
-  s21_decimal decimal = {{0x811800, 0x811800, 0x811800, 0x80140000}};
+  my_decimal decimal = {{0x811800, 0x811800, 0x811800, 0x80140000}};
   int check = -1560647;
 
   test_from_decimal_to_int(decimal, check);
@@ -1570,7 +1570,7 @@ START_TEST(test_from_decimal_to_int_ok183) {
 
 START_TEST(test_from_decimal_to_int_ok184) {
   // 1.56064767562212695305426944
-  s21_decimal decimal = {{0x811800, 0x811800, 0x811800, 0x1A0000}};
+  my_decimal decimal = {{0x811800, 0x811800, 0x811800, 0x1A0000}};
   int check = 1;
 
   test_from_decimal_to_int(decimal, check);
@@ -1578,7 +1578,7 @@ START_TEST(test_from_decimal_to_int_ok184) {
 
 START_TEST(test_from_decimal_to_int_ok185) {
   // -1.56064767562212695305426944
-  s21_decimal decimal = {{0x811800, 0x811800, 0x811800, 0x801A0000}};
+  my_decimal decimal = {{0x811800, 0x811800, 0x811800, 0x801A0000}};
   int check = -1;
 
   test_from_decimal_to_int(decimal, check);
@@ -1586,7 +1586,7 @@ START_TEST(test_from_decimal_to_int_ok185) {
 
 START_TEST(test_from_decimal_to_int_ok186) {
   // 15606476.7562212695296966656
-  s21_decimal decimal = {{0x0, 0x811800, 0x811800, 0x130000}};
+  my_decimal decimal = {{0x0, 0x811800, 0x811800, 0x130000}};
   int check = 15606476;
 
   test_from_decimal_to_int(decimal, check);
@@ -1594,7 +1594,7 @@ START_TEST(test_from_decimal_to_int_ok186) {
 
 START_TEST(test_from_decimal_to_int_ok187) {
   // -15606476.7562212695296966656
-  s21_decimal decimal = {{0x0, 0x811800, 0x811800, 0x80130000}};
+  my_decimal decimal = {{0x0, 0x811800, 0x811800, 0x80130000}};
   int check = -15606476;
 
   test_from_decimal_to_int(decimal, check);
@@ -1602,7 +1602,7 @@ START_TEST(test_from_decimal_to_int_ok187) {
 
 START_TEST(test_from_decimal_to_int_ok188) {
   // 1.56064767562212695296966656
-  s21_decimal decimal = {{0x0, 0x811800, 0x811800, 0x1A0000}};
+  my_decimal decimal = {{0x0, 0x811800, 0x811800, 0x1A0000}};
   int check = 1;
 
   test_from_decimal_to_int(decimal, check);
@@ -1610,7 +1610,7 @@ START_TEST(test_from_decimal_to_int_ok188) {
 
 START_TEST(test_from_decimal_to_int_ok189) {
   // -1.56064767562212695296966656
-  s21_decimal decimal = {{0x0, 0x811800, 0x811800, 0x801A0000}};
+  my_decimal decimal = {{0x0, 0x811800, 0x811800, 0x801A0000}};
   int check = -1;
 
   test_from_decimal_to_int(decimal, check);
@@ -1618,7 +1618,7 @@ START_TEST(test_from_decimal_to_int_ok189) {
 
 START_TEST(test_from_decimal_to_int_ok190) {
   // 156064.767525876035030685696
-  s21_decimal decimal = {{0x811800, 0x0, 0x811800, 0x150000}};
+  my_decimal decimal = {{0x811800, 0x0, 0x811800, 0x150000}};
   int check = 156064;
 
   test_from_decimal_to_int(decimal, check);
@@ -1626,7 +1626,7 @@ START_TEST(test_from_decimal_to_int_ok190) {
 
 START_TEST(test_from_decimal_to_int_ok191) {
   // -156064.767525876035030685696
-  s21_decimal decimal = {{0x811800, 0x0, 0x811800, 0x80150000}};
+  my_decimal decimal = {{0x811800, 0x0, 0x811800, 0x80150000}};
   int check = -156064;
 
   test_from_decimal_to_int(decimal, check);
@@ -1634,7 +1634,7 @@ START_TEST(test_from_decimal_to_int_ok191) {
 
 START_TEST(test_from_decimal_to_int_ok192) {
   // 1.56064767525876035030685696
-  s21_decimal decimal = {{0x811800, 0x0, 0x811800, 0x1A0000}};
+  my_decimal decimal = {{0x811800, 0x0, 0x811800, 0x1A0000}};
   int check = 1;
 
   test_from_decimal_to_int(decimal, check);
@@ -1642,7 +1642,7 @@ START_TEST(test_from_decimal_to_int_ok192) {
 
 START_TEST(test_from_decimal_to_int_ok193) {
   // -1.56064767525876035030685696
-  s21_decimal decimal = {{0x811800, 0x0, 0x811800, 0x801A0000}};
+  my_decimal decimal = {{0x811800, 0x0, 0x811800, 0x801A0000}};
   int check = -1;
 
   test_from_decimal_to_int(decimal, check);
@@ -1650,7 +1650,7 @@ START_TEST(test_from_decimal_to_int_ok193) {
 
 START_TEST(test_from_decimal_to_int_ok194) {
   // 15606.4767525876035022225408
-  s21_decimal decimal = {{0x0, 0x0, 0x811800, 0x160000}};
+  my_decimal decimal = {{0x0, 0x0, 0x811800, 0x160000}};
   int check = 15606;
 
   test_from_decimal_to_int(decimal, check);
@@ -1658,7 +1658,7 @@ START_TEST(test_from_decimal_to_int_ok194) {
 
 START_TEST(test_from_decimal_to_int_ok195) {
   // -15606.4767525876035022225408
-  s21_decimal decimal = {{0x0, 0x0, 0x811800, 0x80160000}};
+  my_decimal decimal = {{0x0, 0x0, 0x811800, 0x80160000}};
   int check = -15606;
 
   test_from_decimal_to_int(decimal, check);
@@ -1666,7 +1666,7 @@ START_TEST(test_from_decimal_to_int_ok195) {
 
 START_TEST(test_from_decimal_to_int_ok196) {
   // 1.56064767525876035022225408
-  s21_decimal decimal = {{0x0, 0x0, 0x811800, 0x1A0000}};
+  my_decimal decimal = {{0x0, 0x0, 0x811800, 0x1A0000}};
   int check = 1;
 
   test_from_decimal_to_int(decimal, check);
@@ -1674,7 +1674,7 @@ START_TEST(test_from_decimal_to_int_ok196) {
 
 START_TEST(test_from_decimal_to_int_ok197) {
   // -1.56064767525876035022225408
-  s21_decimal decimal = {{0x0, 0x0, 0x811800, 0x801A0000}};
+  my_decimal decimal = {{0x0, 0x0, 0x811800, 0x801A0000}};
   int check = -1;
 
   test_from_decimal_to_int(decimal, check);
@@ -1682,7 +1682,7 @@ START_TEST(test_from_decimal_to_int_ok197) {
 
 START_TEST(test_from_decimal_to_int_ok198) {
   // 363366602.83201536
-  s21_decimal decimal = {{0x811800, 0x811800, 0x0, 0x80000}};
+  my_decimal decimal = {{0x811800, 0x811800, 0x0, 0x80000}};
   int check = 363366602;
 
   test_from_decimal_to_int(decimal, check);
@@ -1690,7 +1690,7 @@ START_TEST(test_from_decimal_to_int_ok198) {
 
 START_TEST(test_from_decimal_to_int_ok199) {
   // -363366602.83201536
-  s21_decimal decimal = {{0x811800, 0x811800, 0x0, 0x80080000}};
+  my_decimal decimal = {{0x811800, 0x811800, 0x0, 0x80080000}};
   int check = -363366602;
 
   test_from_decimal_to_int(decimal, check);
@@ -1698,7 +1698,7 @@ START_TEST(test_from_decimal_to_int_ok199) {
 
 START_TEST(test_from_decimal_to_int_ok200) {
   // 3.6336660283201536
-  s21_decimal decimal = {{0x811800, 0x811800, 0x0, 0x100000}};
+  my_decimal decimal = {{0x811800, 0x811800, 0x0, 0x100000}};
   int check = 3;
 
   test_from_decimal_to_int(decimal, check);
@@ -1936,17 +1936,17 @@ Suite *from_decimal_to_int_suite0(void) {
   return s;
 }
 
-void test_from_decimal_to_int(s21_decimal decimal, int check) {
+void test_from_decimal_to_int(my_decimal decimal, int check) {
   int result;
-  int code = s21_from_decimal_to_int(decimal, &result);
+  int code = my_from_decimal_to_int(decimal, &result);
 
   ck_assert_int_eq(result, check);
   ck_assert_int_eq(code, TEST_CONVERSION_OK);
 }
 
-void test_from_decimal_to_int_fail(s21_decimal decimal) {
+void test_from_decimal_to_int_fail(my_decimal decimal) {
   int result;
-  int code = s21_from_decimal_to_int(decimal, &result);
+  int code = my_from_decimal_to_int(decimal, &result);
 
   ck_assert_int_eq(code, TEST_CONVERSION_ERROR);
 }

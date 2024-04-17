@@ -1,4 +1,4 @@
-#include "./../s21_decimal.h"
+#include "./../my_decimal.h"
 
 #include <stdlib.h>
 

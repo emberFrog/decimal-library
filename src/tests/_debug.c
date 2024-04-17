@@ -4,22 +4,22 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "./../s21_decimal.h"
+#include "./../my_decimal.h"
 #include "./test.h"
 
-void s21_print_decimal_bits(s21_decimal decimal) {
-  s21_print_bit(decimal.bits[3], 1);
-  s21_print_bit(decimal.bits[2], 0);
-  s21_print_bit(decimal.bits[1], 0);
-  s21_print_bit(decimal.bits[0], 0);
+void my_print_decimal_bits(my_decimal decimal) {
+  my_print_bit(decimal.bits[3], 1);
+  my_print_bit(decimal.bits[2], 0);
+  my_print_bit(decimal.bits[1], 0);
+  my_print_bit(decimal.bits[0], 0);
   putchar('\n');
 }
 
-void s21_print_bit(int number, int color) {
-  s21_print_bits(sizeof(number), &number, color);
+void my_print_bit(int number, int color) {
+  my_print_bits(sizeof(number), &number, color);
 }
 
-void s21_print_bits(size_t const size, void const *const ptr, int color) {
+void my_print_bits(size_t const size, void const *const ptr, int color) {
   unsigned char *b = (unsigned char *)ptr;
   unsigned char byte;
   int i, j;
@@ -61,11 +61,11 @@ void s21_print_bits(size_t const size, void const *const ptr, int color) {
   putchar(' ');
 }
 
-void s21_print_decimal_string(s21_decimal decimal) {
+void my_print_decimal_string(my_decimal decimal) {
   char res[1024];
   memset(res, '\0', 1024);
 
-  s21_decimal_to_string(decimal, res);
+  my_decimal_to_string(decimal, res);
 
   if (res[0] == '(') {
     printf("%s%s%s\n", RED, res, RESET);
@@ -74,28 +74,28 @@ void s21_print_decimal_string(s21_decimal decimal) {
   }
 }
 
-void s21_decimal_to_string(s21_decimal decimal, char *res) {
+void my_decimal_to_string(my_decimal decimal, char *res) {
   res[0] = '\0';
-  // Не используем s21_check_decimal(), т.к. в тестируемой библиотеке её может
+  // Не используем my_check_decimal(), т.к. в тестируемой библиотеке её может
   // не быть
   if (test_is_correct_decimal(decimal) == 0) {
     strcat(res, "(Incorrect Decimal)");
   } else {
-    s21_format_decimal_to_str(decimal, res);
+    my_format_decimal_to_str(decimal, res);
   }
 }
 
-void s21_format_decimal_to_str(s21_decimal decimal, char *res) {
+void my_format_decimal_to_str(my_decimal decimal, char *res) {
   char *str;
-  // Не используем s21_get_power_of_decimal(), т.к. в тестируемой библиотеке её
+  // Не используем my_get_power_of_decimal(), т.к. в тестируемой библиотеке её
   // может не быть
   int power = test_decimal_get_power(decimal);
-  // Не используем s21_get_sign_decimal(), т.к. в тестируемой библиотеке её
+  // Не используем my_get_sign_decimal(), т.к. в тестируемой библиотеке её
   // может не быть
   int sign = test_decimal_get_sign(decimal);
 
   decimal.bits[3] = 0;
-  str = s21_bin128_to_string(decimal);
+  str = my_bin128_to_string(decimal);
 
   char *ptr = res;
   if (sign == 1 &&
@@ -130,7 +130,7 @@ void s21_format_decimal_to_str(s21_decimal decimal, char *res) {
   *(ptr++) = '\0';
 }
 
-char *s21_bin128_to_string(s21_decimal decimal) {
+char *my_bin128_to_string(my_decimal decimal) {
   static char s[44];
   uint32_t n[4];
   char *p = s;
